@@ -35,3 +35,6 @@ jobs:
         with:
           name: coverage-report
           path: "**/coverage.opencover.xml"
+          
+  outputs:
+    test-result: ${{ job.status }}
