@@ -1,4 +1,4 @@
-name: Run MSTest with Coverlet Profile Default
+name: test
 
 on:
   push:
