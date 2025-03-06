@@ -36,11 +36,11 @@ jobs:
           name: coverage-report
           path: "**/coverage.opencover.xml"
           
-      # 🔥 FORZAR EL STATUS CHECK EXPLÍCITO PARA QUE GITHUB LO RECONOZCA 🔥
-      - name: Mark Workflow as Successful
+      # ✅ FORZAR QUE GITHUB DETECTE EL STATUS CHECK
+      - name: Set Job Status
         if: success()
-        run: echo "✅ Tests passed!" && exit 0
+        run: echo "::set-output name=status::success"
 
-      - name: Mark Workflow as Failed
+      - name: Fail Job if Tests Fail
         if: failure()
-        run: echo "❌ Tests failed!" && exit 1
+        run: echo "::set-output name=status::failure" && exit 1
