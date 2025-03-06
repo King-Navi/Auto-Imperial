@@ -18,7 +18,7 @@
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.IsTrue(true);/
+            Assert.IsTrue(true);//
             //Assert.Fail("This test always fails.");
         }
     }
