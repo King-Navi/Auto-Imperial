@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  test-runner:
+    build: .
+    volumes:
+      - .:/app  # Mapea el código del host al contenedor
+    command: dotnet test --configuration Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
