@@ -35,12 +35,3 @@ jobs:
         with:
           name: coverage-report
           path: "**/coverage.opencover.xml"
-          
-      # ✅ SOLUCIÓN: Reportar un Status Check con Environment File
-      - name: Set Job Status
-        if: success()
-        run: echo "status=success" >> $GITHUB_ENV
-
-      - name: Fail Job if Tests Fail
-        if: failure()
-        run: echo "status=failure" >> $GITHUB_ENV && exit 1
