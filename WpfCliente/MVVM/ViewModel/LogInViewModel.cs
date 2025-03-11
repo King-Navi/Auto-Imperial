@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfCliente.Utilities;
+using WpfCliente.MVVM.Model;
 
 namespace WpfCliente.MVVM.ViewModel
 {
@@ -20,13 +21,26 @@ namespace WpfCliente.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RelayCommand NavegateToHomeViewCommand { get; set; }
-        public LogInViewModel(INavegationService navegationService)
+
+        private readonly UserService _usuarioService;
+        private string _nombreUsuario;
+
+        public string NombreUsuario
         {
+            get => _nombreUsuario;
+            set { _nombreUsuario = value; OnPropertyChanged(); }
+        }
+
+
+        public RelayCommand NavegateToHomeViewCommand { get; set; }
+        public LogInViewModel(INavegationService navegationService, UserService usuarioService)
+        {
+            _usuarioService = usuarioService;
             Navegation = navegationService;
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
+                    _usuarioService.GuardarUsuario(NombreUsuario,"");
                     Mediator.Notify("ShowSideBar", null);
                     Navegation.NavigateTo<HomeViewModel>();
                 },

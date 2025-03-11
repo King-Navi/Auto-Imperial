@@ -5,6 +5,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Navigation;
 using WpfCliente.MVVM.View;
+using WpfCliente.MVVM.Model;
 using WpfCliente.MVVM.ViewModel;
 using WpfCliente.Utilities;
 
@@ -21,12 +22,13 @@ namespace WpfCliente
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            services.AddSingleton<MainViewModel>();
-            services.AddSingleton<HomeViewModel>();
-            services.AddSingleton<LogInViewModel>();
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<HomeViewModel>();
+            services.AddTransient<LogInViewModel>();
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
             services.AddSingleton<SideBarViewModel>();
+            services.AddSingleton<UserService>();
 
 
             services.AddSingleton<INavegationService, NavegationService>();

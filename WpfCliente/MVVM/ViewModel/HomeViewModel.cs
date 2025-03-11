@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfCliente.Utilities;
+using WpfCliente.MVVM.Model;
 
 namespace WpfCliente.MVVM.ViewModel
 {
@@ -33,8 +34,12 @@ namespace WpfCliente.MVVM.ViewModel
         }
 
         public RelayCommand NavegateToLogInViewCommand { get; set; }
-        public HomeViewModel(INavegationService navegationService , INavegationServiceFactory f)
+        private readonly UserService _usuarioService;
+        public string NombreUsuario => _usuarioService.UsuarioAutenticado?.Nombre ?? "Invitado";
+
+        public HomeViewModel(INavegationService navegationService , INavegationServiceFactory f, UserService usuarioService)
         {
+            _usuarioService = usuarioService;
             Navegation = navegationService;
             InternalNavigationService = f.CreateNavigationService();
             InternalNavigationService.NavigateTo<SearchClientViewModel>();
@@ -42,6 +47,7 @@ namespace WpfCliente.MVVM.ViewModel
                 o =>
                 {
                     Navegation.NavigateTo<LogInViewModel>();
+
                 },
                 o => true);
         }
