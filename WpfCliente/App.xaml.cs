@@ -12,7 +12,7 @@ namespace WpfCliente
 {
     public partial class App : Application
     {
-        private readonly ServiceProvider serviceProvider;
+        public static ServiceProvider ServiceProvider { get; private set; }
 
         public App()
         {
@@ -26,6 +26,8 @@ namespace WpfCliente
             services.AddSingleton<LogInViewModel>();
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
+            services.AddSingleton<SideBarViewModel>();
+
 
             services.AddSingleton<INavegationService, NavegationService>();
             services.AddSingleton<Func<Type, ViewModel>>(provider =>
@@ -33,12 +35,12 @@ namespace WpfCliente
 
             services.AddTransient<INavegationServiceFactory, NavegationServiceFactory>();
 
-            serviceProvider = services.BuildServiceProvider();
+            ServiceProvider = services.BuildServiceProvider();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var  logInWindow = serviceProvider.GetRequiredService<MainWindow>();
+            var  logInWindow = ServiceProvider.GetRequiredService<MainWindow>();
             logInWindow.Show();
             base.OnStartup(e);
         }

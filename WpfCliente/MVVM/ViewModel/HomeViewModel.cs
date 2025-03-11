@@ -35,7 +35,6 @@ namespace WpfCliente.MVVM.ViewModel
         public RelayCommand NavegateToLogInViewCommand { get; set; }
         public HomeViewModel(INavegationService navegationService , INavegationServiceFactory f)
         {
-
             Navegation = navegationService;
             InternalNavigationService = f.CreateNavigationService();
             InternalNavigationService.NavigateTo<SearchClientViewModel>();

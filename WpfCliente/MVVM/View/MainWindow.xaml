@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:WpfCliente.MVVM.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid >
-        <ContentControl Content="{Binding Navegation.CurrentView}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ContentControl Content="{Binding SideBar}" Grid.Column="0"/>
+        <ContentControl Content="{Binding Navegation.CurrentView}" Grid.Column="1"/>
     </Grid>
 
 </Window>

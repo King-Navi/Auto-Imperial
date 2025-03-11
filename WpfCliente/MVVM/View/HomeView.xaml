@@ -11,11 +11,7 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="Green">
-            <Button Content="Log out" HorizontalAlignment="Center" Margin="0,304,0,0" VerticalAlignment="Top" Width="90" Height="25" Command="{Binding NavegateToLogInViewCommand}"/>
-        </Grid>
-        <Grid Grid.Column="1" Background="Aqua">
-            <ContentControl Content="{Binding InternalNavigationService.CurrentView}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        </Grid>
+
+        <Grid Background="Aqua" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

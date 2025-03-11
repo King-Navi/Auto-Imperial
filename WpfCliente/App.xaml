@@ -16,5 +16,8 @@
         <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterClientViewModel}">
             <view:RegisterClientView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type TypeName=viewModel:SideBarViewModel}">
+            <view:SideBarView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

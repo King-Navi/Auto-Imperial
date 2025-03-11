@@ -27,6 +27,7 @@ namespace WpfCliente.MVVM.ViewModel
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
+                    Mediator.Notify("ShowSideBar", null);
                     Navegation.NavigateTo<HomeViewModel>();
                 },
                 o => true);
