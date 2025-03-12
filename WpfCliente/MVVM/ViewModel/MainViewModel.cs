@@ -12,13 +12,12 @@ namespace WpfCliente.MVVM.ViewModel
 {
     public class MainViewModel : Services.Navegation.ViewModel
     {
-        private INavegationService navegation;
-
         private UserControl sideBar;
 
         public ICommand ShowSideBarCommand { get; set; }
         public ICommand HideSideBarCommand { get; set; }
 
+        private INavegationService navegation;
         public INavegationService Navegation
         {
             get => navegation;
@@ -44,12 +43,20 @@ namespace WpfCliente.MVVM.ViewModel
             SideBar = null;
             Navegation = navegationService;
             Navegation.NavigateTo<LogInViewModel>();
+            InicializateCommands();
+            RegisterMediator();
+        }
 
-            
+        private void InicializateCommands()
+        {
             ShowSideBarCommand = new RelayCommand(ShowSideBar);
             HideSideBarCommand = new RelayCommand(HideSideBar);
-            Mediator.Register("ShowSideBar", args => ShowSideBarCommand.Execute(null));
-            Mediator.Register("HideSideBar", args => HideSideBarCommand.Execute(null));
+        }
+
+        private void RegisterMediator()
+        {
+            Mediator.Register(MediatorKeys.SHOW_SIDE_BAR, args => ShowSideBarCommand.Execute(null));
+            Mediator.Register(MediatorKeys.HIDE_SIDE_BAR, args => HideSideBarCommand.Execute(null));
         }
 
         private void ShowSideBar()

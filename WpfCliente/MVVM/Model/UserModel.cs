@@ -8,13 +8,13 @@ namespace WpfCliente.MVVM.Model
 {
     public class UserModel
     {
-        public string Nombre { get; set; }
-        public string Contraseña { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
 
-        public UserModel(string nombre, string contraseña)
+        public UserModel(string name, string password)
         {
-            Nombre = nombre;
-            Contraseña = contraseña;
+            Name = name;
+            Password = password;
         }
     }
 }

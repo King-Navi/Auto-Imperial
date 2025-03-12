@@ -11,6 +11,10 @@ namespace WpfCliente.MVVM.ViewModel
 {
     internal class LogInViewModel : Services.Navegation.ViewModel
     {
+
+        private readonly UserService user;
+        public RelayCommand NavegateToHomeViewCommand { get; set; }
+
         private INavegationService navegation;
         public INavegationService Navegation
         {
@@ -22,26 +26,25 @@ namespace WpfCliente.MVVM.ViewModel
             }
         }
 
-        private readonly UserService _usuarioService;
-        private string _nombreUsuario;
+        
+        private string username;
 
-        public string NombreUsuario
+        public string Username
         {
-            get => _nombreUsuario;
-            set { _nombreUsuario = value; OnPropertyChanged(); }
+            get => username;
+            set { username= value; OnPropertyChanged(); }
         }
 
-
-        public RelayCommand NavegateToHomeViewCommand { get; set; }
-        public LogInViewModel(INavegationService navegationService, UserService usuarioService)
+       
+        public LogInViewModel(INavegationService navegationService, UserService newUser)
         {
-            _usuarioService = usuarioService;
+            user = newUser;
             Navegation = navegationService;
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
-                    _usuarioService.GuardarUsuario(NombreUsuario,"");
-                    Mediator.Notify("ShowSideBar", null);
+                    user.SaveUser(Username,""); //TODO this is a hardcode for login user
+                    Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
                     Navegation.NavigateTo<HomeViewModel>();
                 },
                 o => true);

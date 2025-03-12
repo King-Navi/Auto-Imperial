@@ -36,7 +36,7 @@ namespace WpfCliente.MVVM.ViewModel
             NavegateToLoginView = new RelayCommand(
                 o =>
                 {
-                    Mediator.Notify("HideSideBar", null);
+                    Mediator.Notify(MediatorKeys.HIDE_SIDE_BAR, null);
                     Navegation.NavigateTo<LogInViewModel>();
                 },
                 o => true);

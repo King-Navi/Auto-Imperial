@@ -8,20 +8,20 @@ namespace WpfCliente.MVVM.Model
 {
     public class UserService
     {
-        private UserModel _usuarioAutenticado;
+        private UserModel currentUser;
 
-        public UserModel UsuarioAutenticado => _usuarioAutenticado;
+        public UserModel CurrentUser => currentUser;
 
-        public bool IsAuthenticated => _usuarioAutenticado != null;
+        public bool IsAuthenticated => currentUser != null;
 
-        public void GuardarUsuario(string nombre, string contraseña)
+        public void SaveUser(string name, string password)
         {
-            _usuarioAutenticado = new UserModel(nombre, contraseña);
+            currentUser = new UserModel(name, password);
         }
 
-        public void CerrarSesion()
+        public void CloseSesion()
         {
-            _usuarioAutenticado = null;
+            currentUser = null;
         }
     }
 }

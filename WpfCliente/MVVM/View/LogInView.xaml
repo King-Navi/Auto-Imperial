@@ -9,7 +9,7 @@
     <Viewbox Stretch="Fill" Margin="0">
         <Grid Background="Gray">
             <Button Content="Log In" Command="{Binding NavegateToHomeViewCommand}" Margin="81,111,81,27"/>
-            <TextBox Text="{Binding NombreUsuario, UpdateSourceTrigger=PropertyChanged}" Margin="21,48,21,79" />
+            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Margin="21,48,21,79" />
 
         </Grid>
     </Viewbox>

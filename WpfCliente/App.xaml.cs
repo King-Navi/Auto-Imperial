@@ -35,8 +35,6 @@ namespace WpfCliente
             services.AddSingleton<Func<Type, ViewModel>>(provider =>
                 viewModelType => (ViewModel)provider.GetRequiredService(viewModelType));
 
-            services.AddTransient<INavegationServiceFactory, NavegationServiceFactory>();
-
             ServiceProvider = services.BuildServiceProvider();
         }
 

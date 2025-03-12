@@ -11,6 +11,10 @@ namespace WpfCliente.MVVM.ViewModel
 {
     internal class HomeViewModel : Services.Navegation.ViewModel
     {
+        public RelayCommand NavegateToLogInViewCommand { get; set; }
+        private readonly UserService user;
+
+
         private INavegationService navegation;
         public INavegationService Navegation
         {
@@ -22,27 +26,13 @@ namespace WpfCliente.MVVM.ViewModel
             }
         }
 
-        private INavegationService navegation2;
-        public INavegationService InternalNavigationService
-        {
-            get => navegation2;
-            set
-            {
-                navegation2 = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Username => user.CurrentUser?.Name ?? "Invitado";
 
-        public RelayCommand NavegateToLogInViewCommand { get; set; }
-        private readonly UserService _usuarioService;
-        public string NombreUsuario => _usuarioService.UsuarioAutenticado?.Nombre ?? "Invitado";
-
-        public HomeViewModel(INavegationService navegationService , INavegationServiceFactory f, UserService usuarioService)
+        public HomeViewModel(INavegationService navegationService , UserService currentUser)
         {
-            _usuarioService = usuarioService;
+            user = currentUser;
             Navegation = navegationService;
-            InternalNavigationService = f.CreateNavigationService();
-            InternalNavigationService.NavigateTo<SearchClientViewModel>();
+            Navegation.NavigateTo<SearchClientViewModel>();
             NavegateToLogInViewCommand = new RelayCommand(
                 o =>
                 {
