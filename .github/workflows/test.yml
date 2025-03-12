@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore TestProyect/TestProyect.csproj
+        run: dotnet restore TestProject/TestProject.csproj
 
       - name: Build the project
-        run: dotnet build TestProyect/TestProyect.csproj --configuration Release --no-restore
+        run: dotnet build TestProject/TestProject.csproj --configuration Release --no-restore
 
       - name: Run MSTest with Coverlet
-        run: dotnet test TestProyect/TestProyect.csproj --configuration Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+        run: dotnet test TestProject/TestProject.csproj --configuration Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
