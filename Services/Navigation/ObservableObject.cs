@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Navegation
+namespace Services.Navigation
 {
     public class ObservableObject : INotifyPropertyChanged
     {

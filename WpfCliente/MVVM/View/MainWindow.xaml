@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ContentControl Content="{Binding SideBar}" Grid.Column="0" />
-        <ContentControl Content="{Binding Navegation.CurrentView}" Grid.Column="1"/>
+        <ContentControl Content="{Binding Navigation.CurrentView}" Grid.Column="1"/>
     </Grid>
 
 </Window>

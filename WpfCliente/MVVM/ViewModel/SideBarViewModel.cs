@@ -1,4 +1,4 @@
-﻿using Services.Navegation;
+﻿using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +8,28 @@ using WpfCliente.Utilities;
 
 namespace WpfCliente.MVVM.ViewModel
 {
-    class SideBarViewModel : Services.Navegation.ViewModel
+    class SideBarViewModel : Services.Navigation.ViewModel
     {
-        private INavegationService navegation;
-        public INavegationService Navegation
+        private INavigationService navigation;
+        public INavigationService Navigation
         {
-            get => navegation;
+            get => navigation;
             set
             {
-                navegation = value;
+                navigation = value;
                 OnPropertyChanged();
             }
         }
 
         public RelayCommand NavegateToRegisterClientView { get; set; }
         public RelayCommand NavegateToLoginView { get; set; }
-        public SideBarViewModel(INavegationService navegationService)
+        public SideBarViewModel(INavigationService navigationService)
         {
-            Navegation = navegationService;
+            Navigation = navigationService;
             NavegateToRegisterClientView = new RelayCommand(
                 o =>
                 {
-                    Navegation.NavigateTo<RegisterClientViewModel>();
+                    Navigation.NavigateTo<RegisterClientViewModel>();
                 },
                 o => true);
 
@@ -37,7 +37,7 @@ namespace WpfCliente.MVVM.ViewModel
                 o =>
                 {
                     Mediator.Notify(MediatorKeys.HIDE_SIDE_BAR, null);
-                    Navegation.NavigateTo<LogInViewModel>();
+                    Navigation.NavigateTo<LogInViewModel>();
                 },
                 o => true);
         }

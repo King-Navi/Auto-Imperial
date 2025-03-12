@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Navegation
+namespace Services.Navigation
 {
-    public interface INavegationService
+    public interface INavigationService
     {
         ViewModel CurrentView { get; }
         void NavigateTo<T>() where T : ViewModel;

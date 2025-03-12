@@ -1,4 +1,4 @@
-﻿using Services.Navegation;
+﻿using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +10,20 @@ using WpfCliente.Utilities;
 
 namespace WpfCliente.MVVM.ViewModel
 {
-    public class MainViewModel : Services.Navegation.ViewModel
+    public class MainViewModel : Services.Navigation.ViewModel
     {
         private UserControl sideBar;
 
         public ICommand ShowSideBarCommand { get; set; }
         public ICommand HideSideBarCommand { get; set; }
 
-        private INavegationService navegation;
-        public INavegationService Navegation
+        private INavigationService navigation;
+        public INavigationService Navigation
         {
-            get => navegation;
+            get => navigation;
             set
             {
-                navegation = value;
+                navigation = value;
                 OnPropertyChanged();
             }
         }
@@ -38,11 +38,11 @@ namespace WpfCliente.MVVM.ViewModel
             }
         }
 
-        public MainViewModel(INavegationService navegationService)
+        public MainViewModel(INavigationService navigationService)
         {
             SideBar = null;
-            Navegation = navegationService;
-            Navegation.NavigateTo<LogInViewModel>();
+            Navigation = navigationService;
+            Navigation.NavigateTo<LogInViewModel>();
             InicializateCommands();
             RegisterMediator();
         }

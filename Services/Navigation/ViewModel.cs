@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Navegation
+namespace Services.Navigation
 {
     public abstract class ViewModel : ObservableObject
     {

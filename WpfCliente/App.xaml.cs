@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Services.Navegation;
+using Services.Navigation;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -31,7 +31,7 @@ namespace WpfCliente
             services.AddSingleton<UserService>();
 
 
-            services.AddSingleton<INavegationService, NavegationService>();
+            services.AddSingleton<INavigationService, Services.Navigation.NavigationService>();
             services.AddSingleton<Func<Type, ViewModel>>(provider =>
                 viewModelType => (ViewModel)provider.GetRequiredService(viewModelType));
 

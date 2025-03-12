@@ -1,4 +1,4 @@
-﻿using Services.Navegation;
+﻿using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +9,34 @@ using WpfCliente.MVVM.Model;
 
 namespace WpfCliente.MVVM.ViewModel
 {
-    internal class HomeViewModel : Services.Navegation.ViewModel
+    internal class HomeViewModel : Services.Navigation.ViewModel
     {
         public RelayCommand NavegateToLogInViewCommand { get; set; }
         private readonly UserService user;
 
 
-        private INavegationService navegation;
-        public INavegationService Navegation
+        private INavigationService navigation;
+        public INavigationService Navigation
         {
-            get => navegation;
+            get => navigation;
             set
             {
-                navegation = value;
+                navigation = value;
                 OnPropertyChanged();
             }
         }
 
         public string Username => user.CurrentUser?.Name ?? "Invitado";
 
-        public HomeViewModel(INavegationService navegationService , UserService currentUser)
+        public HomeViewModel(INavigationService navigationService , UserService currentUser)
         {
             user = currentUser;
-            Navegation = navegationService;
-            Navegation.NavigateTo<SearchClientViewModel>();
+            Navigation = navigationService;
+            Navigation.NavigateTo<SearchClientViewModel>();
             NavegateToLogInViewCommand = new RelayCommand(
                 o =>
                 {
-                    Navegation.NavigateTo<LogInViewModel>();
+                    Navigation.NavigateTo<LogInViewModel>();
 
                 },
                 o => true);

@@ -1,4 +1,4 @@
-﻿using Services.Navegation;
+﻿using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +9,19 @@ using WpfCliente.MVVM.Model;
 
 namespace WpfCliente.MVVM.ViewModel
 {
-    internal class LogInViewModel : Services.Navegation.ViewModel
+    internal class LogInViewModel : Services.Navigation.ViewModel
     {
 
         private readonly UserService user;
         public RelayCommand NavegateToHomeViewCommand { get; set; }
 
-        private INavegationService navegation;
-        public INavegationService Navegation
+        private INavigationService navigation;
+        public INavigationService Navigation
         {
-            get => navegation;
+            get => navigation;
             set
             {
-                navegation = value;
+                navigation = value;
                 OnPropertyChanged();
             }
         }
@@ -36,16 +36,16 @@ namespace WpfCliente.MVVM.ViewModel
         }
 
        
-        public LogInViewModel(INavegationService navegationService, UserService newUser)
+        public LogInViewModel(INavigationService navigationService, UserService newUser)
         {
             user = newUser;
-            Navegation = navegationService;
+            Navigation = navigationService;
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
                     user.SaveUser(Username,""); //TODO this is a hardcode for login user
                     Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
-                    Navegation.NavigateTo<HomeViewModel>();
+                    Navigation.NavigateTo<HomeViewModel>();
                 },
                 o => true);
         }

@@ -1,4 +1,4 @@
-﻿using Services.Navegation;
+﻿using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,26 +8,26 @@ using WpfCliente.Utilities;
 
 namespace WpfCliente.MVVM.ViewModel
 {
-    internal class RegisterClientViewModel : Services.Navegation.ViewModel
+    internal class RegisterClientViewModel : Services.Navigation.ViewModel
     {
-        private INavegationService navegation;
-        public INavegationService Navegation
+        private INavigationService navigation;
+        public INavigationService Navigation
         {
-            get => navegation;
+            get => navigation;
             set
             {
-                navegation = value;
+                navigation = value;
                 OnPropertyChanged();
             }
         }
         public RelayCommand NavigateToSearchClientView { get; set; }
-        public RegisterClientViewModel(INavegationService navegationService)
+        public RegisterClientViewModel(INavigationService navigationService)
         {
-            Navegation = navegationService;
+            Navigation = navigationService;
             NavigateToSearchClientView = new RelayCommand(
                 o =>
                 {
-                    Navegation.NavigateTo<SearchClientViewModel>();
+                    Navigation.NavigateTo<SearchClientViewModel>();
                 },
                 o => true);
         }

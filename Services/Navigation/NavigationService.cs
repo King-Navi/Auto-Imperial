@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Navegation
+namespace Services.Navigation
 {
-    public class NavegationService : ObservableObject, INavegationService
+    public class NavigationService : ObservableObject, INavigationService
     {
         private readonly Func<Type, ViewModel> viewModelFacory;
         private ViewModel currentView;
@@ -19,7 +19,7 @@ namespace Services.Navegation
                 OnPropertyChanged();
             }
         }
-        public NavegationService(Func<Type, ViewModel> _viewModelFacory)
+        public NavigationService(Func<Type, ViewModel> _viewModelFacory)
         {
             viewModelFacory = _viewModelFacory;
         }
