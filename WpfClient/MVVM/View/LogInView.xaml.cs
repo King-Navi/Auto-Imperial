@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfCliente.MVVM.View
+namespace WpfClient.MVVM.View
 {
     /// <summary>
     /// Interaction logic for LogInViewModel.xaml

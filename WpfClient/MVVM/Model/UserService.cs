@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfCliente.MVVM.Model
+namespace WpfClient.MVVM.Model
 {
     public class UserService
     {

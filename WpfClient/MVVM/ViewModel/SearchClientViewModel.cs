@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfCliente.Utilities;
+using WpfClient.Utilities;
 
-namespace WpfCliente.MVVM.ViewModel
+namespace WpfClient.MVVM.ViewModel
 {
-    class SideBarViewModel : Services.Navigation.ViewModel
+    internal class SearchClientViewModel : Services.Navigation.ViewModel
     {
         private INavigationService navigation;
         public INavigationService Navigation
@@ -20,24 +20,14 @@ namespace WpfCliente.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public RelayCommand NavegateToRegisterClientView { get; set; }
-        public RelayCommand NavegateToLoginView { get; set; }
-        public SideBarViewModel(INavigationService navigationService)
+        public SearchClientViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
             NavegateToRegisterClientView = new RelayCommand(
                 o =>
                 {
                     Navigation.NavigateTo<RegisterClientViewModel>();
-                },
-                o => true);
-
-            NavegateToLoginView = new RelayCommand(
-                o =>
-                {
-                    Mediator.Notify(MediatorKeys.HIDE_SIDE_BAR, null);
-                    Navigation.NavigateTo<LogInViewModel>();
                 },
                 o => true);
         }

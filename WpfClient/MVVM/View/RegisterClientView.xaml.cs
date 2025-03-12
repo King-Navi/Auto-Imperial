@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfCliente.MVVM.View
+namespace WpfClient.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterClientView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterClientView : UserControl
     {
-        public MainWindow()
+        public RegisterClientView()
         {
             InitializeComponent();
         }

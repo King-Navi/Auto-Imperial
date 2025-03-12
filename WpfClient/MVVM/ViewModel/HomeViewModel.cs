@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfCliente.Utilities;
-using WpfCliente.MVVM.Model;
+using WpfClient.Utilities;
+using WpfClient.MVVM.Model;
 
-namespace WpfCliente.MVVM.ViewModel
+namespace WpfClient.MVVM.ViewModel
 {
     internal class HomeViewModel : Services.Navigation.ViewModel
     {

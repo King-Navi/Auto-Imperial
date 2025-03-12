@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfCliente.MVVM.ViewModel;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace WpfCliente.MVVM.View
+namespace WpfClient.MVVM.View
 {
     /// <summary>
-    /// Lógica de interacción para SideBarView.xaml
+    /// Interaction logic for HomeView.xaml
     /// </summary>
-    public partial class SideBarView : UserControl
+    public partial class HomeView : UserControl
     {
-        public SideBarView()
+        public HomeView()
         {
             InitializeComponent();
-            DataContext = App.ServiceProvider.GetRequiredService<SideBarViewModel>();
         }
     }
 }

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfCliente.Utilities;
+using WpfClient.Utilities;
 
-namespace WpfCliente.MVVM.ViewModel
+namespace WpfClient.MVVM.ViewModel
 {
-    internal class SearchClientViewModel : Services.Navigation.ViewModel
+    internal class RegisterClientViewModel : Services.Navigation.ViewModel
     {
         private INavigationService navigation;
         public INavigationService Navigation
@@ -20,14 +20,14 @@ namespace WpfCliente.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RelayCommand NavegateToRegisterClientView { get; set; }
-        public SearchClientViewModel(INavigationService navigationService)
+        public RelayCommand NavigateToSearchClientView { get; set; }
+        public RegisterClientViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
-            NavegateToRegisterClientView = new RelayCommand(
+            NavigateToSearchClientView = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<RegisterClientViewModel>();
+                    Navigation.NavigateTo<SearchClientViewModel>();
                 },
                 o => true);
         }

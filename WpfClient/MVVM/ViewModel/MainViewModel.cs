@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WpfCliente.Utilities;
+using WpfClient.Utilities;
 
-namespace WpfCliente.MVVM.ViewModel
+namespace WpfClient.MVVM.ViewModel
 {
     public class MainViewModel : Services.Navigation.ViewModel
     {

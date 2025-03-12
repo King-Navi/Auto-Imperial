@@ -4,12 +4,12 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using System.Windows.Navigation;
-using WpfCliente.MVVM.View;
-using WpfCliente.MVVM.Model;
-using WpfCliente.MVVM.ViewModel;
-using WpfCliente.Utilities;
+using WpfClient.MVVM.View;
+using WpfClient.MVVM.Model;
+using WpfClient.MVVM.ViewModel;
+using WpfClient.Utilities;
 
-namespace WpfCliente
+namespace WpfClient
 {
     public partial class App : Application
     {

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfCliente.MVVM.View
+namespace WpfClient.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for RegisterClientView.xaml
+    /// Interaction logic for SearchClientView.xaml
     /// </summary>
-    public partial class RegisterClientView : UserControl
+    public partial class SearchClientView : UserControl
     {
-        public RegisterClientView()
+        public SearchClientView()
         {
             InitializeComponent();
         }

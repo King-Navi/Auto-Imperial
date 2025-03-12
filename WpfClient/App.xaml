@@ -1,8 +1,8 @@
-﻿<Application x:Class="WpfCliente.App"
+﻿<Application x:Class="WpfClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfCliente"
-             xmlns:viewModel ="clr-namespace:WpfCliente.MVVM.ViewModel" xmlns:view="clr-namespace:WpfCliente.MVVM.View">
+             xmlns:local="clr-namespace:WpfClient"
+             xmlns:viewModel ="clr-namespace:WpfClient.MVVM.ViewModel" xmlns:view="clr-namespace:WpfClient.MVVM.View">
     <Application.Resources>
         <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
             <view:HomeView/>
