@@ -4,20 +4,27 @@
              xmlns:local="clr-namespace:WpfClient"
              xmlns:viewModel ="clr-namespace:WpfClient.MVVM.ViewModel" xmlns:view="clr-namespace:WpfClient.MVVM.View">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
-            <view:HomeView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:LogInViewModel}">
-            <view:LogInView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:SearchClientViewModel}">
-            <view:SearchClientView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterClientViewModel}">
-            <view:RegisterClientView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:SideBarViewModel}">
-            <view:SideBarView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Animations.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:LogInViewModel}">
+                <view:LogInView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchClientViewModel}">
+                <view:SearchClientView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RegisterClientViewModel}">
+                <view:RegisterClientView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SideBarViewModel}">
+                <view:SideBarView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

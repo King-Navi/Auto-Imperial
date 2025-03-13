@@ -35,7 +35,15 @@ namespace WpfClient.MVVM.ViewModel
             set { username= value; OnPropertyChanged(); }
         }
 
-       
+        private string password;
+
+        public string Password
+        {
+            get => password;
+            set { password = value; OnPropertyChanged(); }
+        }
+
+
         public LogInViewModel(INavigationService navigationService, UserService newUser)
         {
             user = newUser;
@@ -43,7 +51,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
-                    user.SaveUser(Username,""); //TODO this is a hardcode for login user
+                    user.SaveUser(Username,password); //TODO this is a hardcode for login user
                     Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
                     Navigation.NavigateTo<HomeViewModel>();
                 },

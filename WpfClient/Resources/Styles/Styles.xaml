@@ -1,0 +1,105 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WpfClient.Resources.Controls">
+
+    <SolidColorBrush x:Key="PrimaryColor1" Color="#002E34"/>
+    <SolidColorBrush x:Key="PrimaryColor2" Color="#004443"/>
+    <SolidColorBrush x:Key="SecondaryColor1" Color="#00755C"/>
+    <SolidColorBrush x:Key="SecondaryColor2" Color="#00C16C"/>
+    <SolidColorBrush x:Key="BackgroundyColor1" Color="#202c42"/>
+    <SolidColorBrush x:Key="BackgroundyColor2" Color="#3c4354"/>
+    <SolidColorBrush x:Key="ForegroundWhiteColor" Color="#fffcf0"/>
+    <SolidColorBrush x:Key="ForegroundBlackColor" Color="#12110e"/>
+
+    <Style x:Key="NeonLabelStyle" TargetType="Label">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border x:Name="BorderElement"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="40" 
+                        Padding="{TemplateBinding Padding}">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#004443" BlurRadius="25" ShadowDepth="5"/>
+                        </Border.Effect>
+
+                        <ContentPresenter HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
+
+
+    <Style x:Key="SynthwaveTextBoxStyle" TargetType="{x:Type controls:PlaceholderTextBoxControl}">
+        <Setter Property="WritingForegroundColorValue" Value="White" />
+        <Setter Property="PlaceholderForegroundColorValue" Value="LightGray" />
+        <Setter Property="PaddingValue" Value="10,5,10,5" />
+        <Setter Property="FontSizeValue" Value="16" />
+        <Setter Property="BorderThicknessValue" Value="0" />
+        <Setter Property="LabelStyle" Value="{StaticResource NeonLabelStyle}" />
+        <Setter Property="BackgroundColorValue" Value="{StaticResource SecondaryColor1}" />
+    </Style>
+
+    <Style x:Key="SynthwavePasswordBoxStyle" TargetType="{x:Type controls:ShowPasswordPlaceholderControl}">
+        <Setter Property="WritingForegroundColorValue" Value="White" />
+        <Setter Property="PlaceholderForegroundColorValue" Value="LightGray" />
+        <Setter Property="PaddingValue" Value="10,5,10,5" />
+        <Setter Property="FontSizeValue" Value="16" />
+        <Setter Property="BorderThicknessValue" Value="0" />
+        <Setter Property="LabelStyle" Value="{StaticResource NeonLabelStyle}" />
+        <Setter Property="CheckBoxMargin" Value="5,100,0,0" />
+        <Setter Property="BackgroundColorValue" Value="{StaticResource SecondaryColor1}" />  
+    </Style>
+
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="50" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource SecondaryColor2}" />
+        <Setter Property="Padding" Value="15,10" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="30"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#004443" BlurRadius="25" ShadowDepth="5"/>
+                        </Border.Effect>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource SecondaryColor1}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor1}"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="LightGray" BlurRadius="30" Opacity="0.9"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource PrimaryColor2}"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#004443" BlurRadius="10" Opacity="0.6"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    
+
+</ResourceDictionary>

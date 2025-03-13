@@ -5,15 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient.MVVM.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="Gray">
+        Title="Automoviles imperial" Height="1000" Width="1700"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <StaticResource ResourceKey="FadeInAnimation"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <ContentControl Content="{Binding SideBar}" Grid.Column="0" />
-        <ContentControl Content="{Binding Navigation.CurrentView}" Grid.Column="1"/>
+       
+        <ContentControl Content="{Binding Navigation.CurrentView}" />
+        <ContentControl Content="{Binding SideBar}" />
     </Grid>
 
 </Window>

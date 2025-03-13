@@ -4,12 +4,66 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Viewbox Stretch="Fill" Margin="0">
-        <Grid Background="Gray">
-            <Button Content="Log In" Command="{Binding NavegateToHomeViewCommand}" Margin="81,111,81,27"/>
-            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Margin="21,48,21,79" />
+        <Grid  Width="1060" Height="588">
+            <Image Source="pack://application:,,,/Resources/Images/autos-back.jpg" Margin="0,10,0,0" Stretch="Fill"></Image>
+            <Rectangle x:Name="OverlayBlocker"
+                Fill="Black" Opacity="0.8"
+                Stretch="Fill"
+                IsHitTestVisible="True" />
+
+            <Viewbox Stretch="Uniform"  Margin="364,36,309,49">
+                <Grid  Height="1222" Width="933" >
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <StaticResource ResourceKey="SlideInFromTopAnimation"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <Grid.RenderTransform>
+                        <TranslateTransform Y="-1500" />
+                    </Grid.RenderTransform>
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#005050" Offset="0.0"/>
+                            <GradientStop Color="#002020" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Grid.Clip>
+                        <RectangleGeometry RadiusX="100" RadiusY="100" Rect="0,0,933,1222"/>
+                    </Grid.Clip>
+                    <Image Source="/Resources/Images/ImperialLogo.png" Margin="281,15,253,886"></Image>
+                    <Label Content="Iniciar Sesión" Margin="227,294,199,0" Height="98" VerticalAlignment="Top" FontSize="70" FontWeight="Bold" Foreground="#fffff7"></Label>
+
+                    <Label Content="Correo: " Margin="85,466,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
+                    <Label Content="Contraseña: " Margin="85,707,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
+
+                    <Button Content="Iniciar sesión" FontSize="50" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="262,1017,259,109" />
+                    <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
+                    PlaceholderText="Ingrese su correo electrónico"
+                    Style="{StaticResource SynthwaveTextBoxStyle}"                          
+                    Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                    FontSizeValue="30" Margin="85,549,82,562"
+                    />
+                    <controls:ShowPasswordPlaceholderControl
+                        Margin="85,736,82,271"
+                        TextBoxWidth="760"
+                        TextBoxHeight="110"
+                        CheckBoxMargin="5,180,0,0"
+                        Style="{StaticResource SynthwavePasswordBoxStyle}"
+                        PlaceholderText="Ingrese su contraseña"
+                        Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                        FontSizeValue="30"
+                    />
+                </Grid>
+            </Viewbox>
 
         </Grid>
     </Viewbox>
