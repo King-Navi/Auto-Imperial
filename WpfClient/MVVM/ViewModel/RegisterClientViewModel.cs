@@ -10,6 +10,7 @@ namespace WpfClient.MVVM.ViewModel
 {
     internal class RegisterClientViewModel : Services.Navigation.ViewModel
     {
+        private 
         private INavigationService navigation;
         public INavigationService Navigation
         {

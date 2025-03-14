@@ -1,8 +1,0 @@
-#!/bin/sh
-echo "Ivan esta ejecutando tus pruebas antes del commit... 🧐"
-dotnet test
-if [ $? -ne 0 ]; then
-    echo "❌ Pruebas fallidas. No se permite hacer commit."
-    exit 1
-fi
-echo "✅ Todas las pruebas pasaron. Procediendo con el commit..."

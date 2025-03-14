@@ -4,13 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <Label Content="Label" HorizontalAlignment="Left" Margin="161,36,0,0" VerticalAlignment="Top" Width="111"/>
-        <TextBox HorizontalAlignment="Left" Margin="291,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <controls:PlaceholderTextBoxControl x:Name="{Binding Name}"
+            PlaceholderText="Ingrese el nombre"
+            Style="{StaticResource SynthwaveTextBoxStyle}"                          
+            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="16" Width="155" Height="50" Margin="96,35,524,365" />
+        <controls:PlaceholderTextBoxControl x:Name="{Binding PaternalSurname}"
+                PlaceholderText="Apellido paterno"
+                Style="{StaticResource SynthwaveTextBoxStyle}"                          
+                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="16" Width="155" Height="50" Margin="322,35,322,365" />
+        <controls:PlaceholderTextBoxControl x:Name="{Binding MaternalSurname}"
+            PlaceholderText="Apellido materno"
+            Style="{StaticResource SynthwaveTextBoxStyle}"                          
+            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="16" Width="155" Height="50" Margin="572,35,73,365" />
+
         <Button Content="Registrar" HorizontalAlignment="Left" Margin="702,395,0,0" VerticalAlignment="Top"/>
         <Button Content="Cancelar" HorizontalAlignment="Left" Margin="558,395,0,0" VerticalAlignment="Top" Command="{Binding NavigateToSearchClientView}"/>
+        <TextBox HorizontalAlignment="Left" Margin="126,155,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </UserControl>

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WpfClient.Resources.Controls
 {
-    /// <summary>
-    /// Lógica de interacción para PlaceholderTextBoxControl.xaml
-    /// </summary>
     public partial class PlaceholderTextBoxControl : UserControl
     {
         public PlaceholderTextBoxControl()
