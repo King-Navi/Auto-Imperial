@@ -35,8 +35,9 @@ jobs:
         run: dotnet build TestProject/TestProject.csproj --configuration Release --no-restore
       
       - name: Debug Connection String
-        run: echo "Connection String: ${{ env.ConnectionStrings__DefaultConnection }}"
-      
+        run: echo "Connection String:%ConnectionStrings__DefaultConnection%"
+        shell: powershell
+        
       - name: Run MSTest with Coverlet
         env:
           ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=AutoImperial;User Id=sa;Password=${{ secrets.SQLSERVER_PASSWORD }};TrustServerCertificate=True;"
