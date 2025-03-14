@@ -8,6 +8,7 @@ using WpfClient.MVVM.View;
 using WpfClient.MVVM.Model;
 using WpfClient.MVVM.ViewModel;
 using WpfClient.Utilities;
+using Services.Dialogs;
 
 namespace WpfClient
 {
@@ -29,6 +30,9 @@ namespace WpfClient
             services.AddSingleton<RegisterClientViewModel>();
             services.AddSingleton<SideBarViewModel>();
             services.AddSingleton<UserService>();
+
+            services.AddTransient<IDialogService, DialogService>();
+
 
 
             services.AddSingleton<INavigationService, Services.Navigation.NavigationService>();

@@ -32,7 +32,6 @@ namespace WpfClient.MVVM.ViewModel
         {
             user = currentUser;
             Navigation = navigationService;
-            Navigation.NavigateTo<SearchClientViewModel>();
             NavegateToLogInViewCommand = new RelayCommand(
                 o =>
                 {

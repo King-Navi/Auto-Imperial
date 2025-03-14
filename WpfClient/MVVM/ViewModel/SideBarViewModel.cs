@@ -29,7 +29,8 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToRegisterClientView = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<RegisterClientViewModel>();
+                    Mediator.Notify(MediatorKeys.HIDE_SIDE_BAR, null);
+                    Navigation.NavigateTo<SearchClientViewModel>();
                 },
                 o => true);
 

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace WpfClient.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for RegisterClientView.xaml
-    /// </summary>
     public partial class RegisterClientView : UserControl
     {
         public RegisterClientView()

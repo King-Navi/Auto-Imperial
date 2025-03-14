@@ -8,25 +8,82 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
-        <controls:PlaceholderTextBoxControl x:Name="{Binding Name}"
-            PlaceholderText="Ingrese el nombre"
-            Style="{StaticResource SynthwaveTextBoxStyle}"                          
-            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-            FontSizeValue="16" Width="155" Height="50" Margin="96,35,524,365" />
-        <controls:PlaceholderTextBoxControl x:Name="{Binding PaternalSurname}"
-                PlaceholderText="Apellido paterno"
-                Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="16" Width="155" Height="50" Margin="322,35,322,365" />
-        <controls:PlaceholderTextBoxControl x:Name="{Binding MaternalSurname}"
-            PlaceholderText="Apellido materno"
-            Style="{StaticResource SynthwaveTextBoxStyle}"                          
-            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-            FontSizeValue="16" Width="155" Height="50" Margin="572,35,73,365" />
+        <TextBox  x:Name="Name"
+         Text="{Binding ClienteActual.nombre, UpdateSourceTrigger=PropertyChanged}"
+        TextWrapping="Wrap"
+        VerticalAlignment="Top" 
+         Width="129" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="132,43,0,0" Height="22"/>
+        <TextBox x:Name="ParentalSurname"
+         Text="{Binding ClienteActual.apellidoPaterno, UpdateSourceTrigger=PropertyChanged}"
+         TextWrapping="Wrap"
+         VerticalAlignment="Top" 
+         Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="377,43,0,0" Height="22"/>
+        <TextBox x:Name="MaternalSurname"
+          Text="{Binding ClienteActual.apellidoMaterno, UpdateSourceTrigger=PropertyChanged}"
+          TextWrapping="Wrap"
+          VerticalAlignment="Top" 
+          Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="622,40,0,0" Height="22"/>
 
-        <Button Content="Registrar" HorizontalAlignment="Left" Margin="702,395,0,0" VerticalAlignment="Top"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="558,395,0,0" VerticalAlignment="Top" Command="{Binding NavigateToSearchClientView}"/>
-        <TextBox HorizontalAlignment="Left" Margin="126,155,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Phone"
+           Text="{Binding ClienteActual.telefono, UpdateSourceTrigger=PropertyChanged}"
+           TextWrapping="Wrap"
+           VerticalAlignment="Top" 
+           Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="181,116,0,0" Height="22"/>
+        <TextBox x:Name="Email"
+           Text="{Binding ClienteActual.correo, UpdateSourceTrigger=PropertyChanged}"
+           TextWrapping="Wrap"
+           VerticalAlignment="Top" 
+           Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="400,116,0,0" Height="22"/>
+        <TextBox x:Name="Calle"
+           Text="{Binding ClienteActual.calle, UpdateSourceTrigger=PropertyChanged}"
+           TextWrapping="Wrap"
+           VerticalAlignment="Top" 
+           Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="317,190,0,0" Height="22"/>
+        <TextBox x:Name="Numero"
+            Text="{Binding ClienteActual.numero, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="128" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="121,190,0,0" Height="22"/>
+        <TextBox x:Name="Ciudad"
+     Text="{Binding ClienteActual.ciudad, UpdateSourceTrigger=PropertyChanged}"
+     TextWrapping="Wrap"
+     VerticalAlignment="Top" 
+     Width="64" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="498,190,0,0" Height="22"/>
+
+        <TextBox x:Name="CodigoPostal"
+               Text="{Binding ClienteActual.codigoPostal, UpdateSourceTrigger=PropertyChanged}"
+               TextWrapping="Wrap"
+               VerticalAlignment="Top" 
+               Width="72" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="686,190,0,0" Height="22"/>
+
+        <TextBox x:Name="RFC"
+       Text="{Binding ClienteActual.RFC, UpdateSourceTrigger=PropertyChanged}"
+       TextWrapping="Wrap"
+       VerticalAlignment="Top" 
+       Width="72" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="464,283,0,0" Height="22"/>
+
+
+        <TextBox x:Name="CURP"
+       Text="{Binding ClienteActual.CURP, UpdateSourceTrigger=PropertyChanged}"
+       TextWrapping="Wrap"
+       VerticalAlignment="Top" 
+       Width="72" HorizontalAlignment="Left" Padding="10,0,0,0" Margin="640,283,0,0" Height="22"/>
+
+
+
+
+        <Button Content="Registrar cliente" Margin="651,378,50,47"  Command="{Binding RegisterClienetCommand}" />
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="510,378,0,0" VerticalAlignment="Top" Command="{Binding NavigateToSearchClientView}" Height="25" Width="84"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="75,43,0,0" VerticalAlignment="Top"/>
+        <Label Content="Apellido paterno:" HorizontalAlignment="Left" Margin="266,43,0,0" VerticalAlignment="Top"/>
+        <Label Content="Apellido materno:" HorizontalAlignment="Left" Margin="510,38,0,0" VerticalAlignment="Top"/>
+        <Label Content="Correo:" HorizontalAlignment="Left" Margin="340,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="Telefono:" HorizontalAlignment="Left" Margin="92,114,0,0" VerticalAlignment="Top"/>
+        <Label Content="calle:" HorizontalAlignment="Left" Margin="58,188,0,0" VerticalAlignment="Top"/>
+        <Label Content="numero:" HorizontalAlignment="Left" Margin="254,194,0,0" VerticalAlignment="Top"/>
+        <Label Content="C.P." HorizontalAlignment="Left" Margin="442,189,0,0" VerticalAlignment="Top"/>
+        <Label Content="RFC" HorizontalAlignment="Left" Margin="340,283,0,0" VerticalAlignment="Top"/>
+        <Label Content="CURP" HorizontalAlignment="Left" Margin="581,281,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

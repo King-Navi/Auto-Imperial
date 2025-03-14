@@ -9,8 +9,8 @@
 
     <Viewbox Stretch="Fill" Margin="0,0,0,0">
         <Grid Background="Black">
-            <Button Content="Registrar cliente"  Command="{Binding NavegateToRegisterClientView}" Margin="176,10,11,181"/>
-            <Button Content="Cerrar sesión"  Command="{Binding NavegateToLoginView}" Margin="171,60,6,130"/>
+            <Button Content="Registrar cliente"  Command="{Binding NavegateToRegisterClientView}" Margin="1,10,187,181"/>
+            <Button Content="Cerrar sesión"  Command="{Binding NavegateToLoginView}" Margin="0,180,177,10"/>
         </Grid>
     </Viewbox>
 </UserControl>
