@@ -6,10 +6,18 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          SA_PASSWORD: ${{ secrets.SQLSERVER_PASSWORD }}
+          ACCEPT_EULA: "Y"
+        ports:
+          - 1433:1433
+        options: --health-cmd "exit 0" --health-interval=10s --health-timeout=5s --health-retries=10
 
     steps:
       - name: Checkout repository
@@ -27,6 +35,8 @@ jobs:
         run: dotnet build TestProject/TestProject.csproj --configuration Release --no-restore
 
       - name: Run MSTest with Coverlet
+        env:
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=AutoImperial;User Id=sa;Password=${{ secrets.SQLSERVER_PASSWORD }};TrustServerCertificate=True;"
         run: dotnet test TestProject/TestProject.csproj --configuration Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
       - name: Upload Coverage Report
