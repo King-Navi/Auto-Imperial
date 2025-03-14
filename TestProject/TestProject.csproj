@@ -22,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="DAO\Utilities\createuser.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="DAO\Utilities\deletedb.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

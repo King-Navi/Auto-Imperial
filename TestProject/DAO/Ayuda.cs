@@ -17,7 +17,6 @@ namespace TestProject.DAO
     public class Ayuda
     {
         private static MsSqlContainer _msSqlContainer;
-        private static string connectionString;
 
         [ClassInitialize]
         public static async Task Setup(TestContext context)
@@ -28,15 +27,19 @@ namespace TestProject.DAO
                 .WithPassword(Constants.CONTRASENIA_PRUEBA)
                 // .WithImage("mcr.microsoft.com/mssql/server:2022-latest") // (Opcional) para especificar la versión de la imagen
                 .Build();
-
             // Iniciamos el contenedor
 
             await _msSqlContainer.StartAsync();
 
+            // Esperar hasta que SQL Server esté listo
+            await WaitUntilDataBase(_msSqlContainer.GetConnectionString());
+
+            
 
             //  Ejecuta el script de inicialización para crear la base de datos y poblarla
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.deletedbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.initdbScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
 
             var builder = new SqlConnectionStringBuilder(_msSqlContainer.GetConnectionString())
             {
@@ -48,6 +51,26 @@ namespace TestProject.DAO
             await SqlScriptExecutor.ExecuteScriptAsync(autoImperialConnectionString, Constants.initDataScriptPath);
 
         }
+
+        // Método para esperar hasta que SQL Server esté listo
+        private static async Task WaitUntilDataBase(string connectionString)
+        {
+            using var connection = new SqlConnection(connectionString);
+            for (int i = 0; i < 10; i++) // Intentar conectar durante 10 segundos
+            {
+                try
+                {
+                    await connection.OpenAsync();
+                    return;
+                }
+                catch
+                {
+                    await Task.Delay(1000);
+                }
+            }
+            throw new Exception("No se pudo conectar a SQL Server después de 10 intentos.");
+        }
+
 
         [ClassCleanup]
         public static async Task Cleanup()
@@ -70,7 +93,6 @@ namespace TestProject.DAO
             var options = new DbContextOptionsBuilder<AutoImperialContext>()
                 .UseSqlServer(_msSqlContainer.GetConnectionString())
                 .Options;
-
             // 1. Crear el contexto y asegurarnos de que la base de datos esté creada.
             using (var context = new AutoImperialContext(options))
             {
