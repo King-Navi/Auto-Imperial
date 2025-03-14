@@ -22,7 +22,7 @@
     <Grid>
        
         <ContentControl Content="{Binding Navigation.CurrentView}" />
-        <ContentControl Content="{Binding SideBar}" />
+        <ContentControl Content="{Binding SideBar}" Margin="0,0,850,0" />
     </Grid>
 
 </Window>

@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" d:DesignWidth="1700">
+             d:DesignHeight="1000" Width="984">
 
-    <Viewbox Stretch="Fill" Margin="0,0,1518,0">
+    <Viewbox Stretch="Fill" Margin="0,0,0,0">
         <Grid Background="Black">
-            <Button Content="Registrar cliente"  Command="{Binding NavegateToRegisterClientView}" Margin="10,21,17,169"/>
-            <Button Content="Cerrar sesión"  Command="{Binding NavegateToLoginView}" Margin="14,180,14,10"/>
+            <Button Content="Registrar cliente"  Command="{Binding NavegateToRegisterClientView}" Margin="176,10,11,181"/>
+            <Button Content="Cerrar sesión"  Command="{Binding NavegateToLoginView}" Margin="171,60,6,130"/>
         </Grid>
     </Viewbox>
 </UserControl>
