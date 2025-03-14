@@ -17,6 +17,7 @@ namespace TestProject.DAO
     public class Ayuda
     {
         private static MsSqlContainer _msSqlContainer;
+        private static string forcedConnectionString;
 
         [ClassInitialize]
         public static async Task Setup(TestContext context)
@@ -43,12 +44,14 @@ namespace TestProject.DAO
 
             var builder = new SqlConnectionStringBuilder(_msSqlContainer.GetConnectionString())
             {
-                InitialCatalog = "AutoImperial"
+                InitialCatalog = "AutoImperial",
+                UserID = "sa",
+                Password = Constants.CONTRASENIA_PRUEBA
             };
-            string autoImperialConnectionString = builder.ToString();
+            forcedConnectionString = builder.ToString();
 
-            await SqlScriptExecutor.ExecuteScriptAsync(autoImperialConnectionString, Constants.initCatalogdbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(autoImperialConnectionString, Constants.initDataScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(forcedConnectionString, Constants.initCatalogdbScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(forcedConnectionString, Constants.initDataScriptPath);
 
         }
 
