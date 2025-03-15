@@ -35,7 +35,7 @@ namespace TestProject.DAO
             
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.deletedbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.initdbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
+            //await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
 
             var builder = new SqlConnectionStringBuilder(_msSqlContainer.GetConnectionString())
             {
@@ -76,9 +76,18 @@ namespace TestProject.DAO
 
         public async Task Test_UsingEFCoreContext()
         {
+            var builder = new SqlConnectionStringBuilder(_msSqlContainer.GetConnectionString())
+            {
+                InitialCatalog = "AutoImperial",
+                UserID = "sa",
+                Password = Constants.CONTRASENIA_PRUEBA
+            };
+            forcedConnectionString = builder.ToString();
+            Console.WriteLine(forcedConnectionString);
+            Console.WriteLine(_msSqlContainer.GetConnectionString());
             // Configuramos las opciones para el contexto usando la cadena del contenedor.
             var options = new DbContextOptionsBuilder<AutoImperialContext>()
-                .UseSqlServer(_msSqlContainer.GetConnectionString())
+                .UseSqlServer(forcedConnectionString)
                 .Options;
             // 1. Crear el contexto y asegurarnos de que la base de datos esté creada.
             using (var context = new AutoImperialContext(options))
