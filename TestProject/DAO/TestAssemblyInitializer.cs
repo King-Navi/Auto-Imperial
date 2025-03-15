@@ -33,7 +33,7 @@ namespace TestProject.DAO
 
             await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.deletedbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.initdbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
+           // await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
 
             var builder = new SqlConnectionStringBuilder(MsSqlContainer.GetConnectionString())
             {
@@ -45,6 +45,8 @@ namespace TestProject.DAO
 
             await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, Constants.initCatalogdbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, Constants.initDataScriptPath);
+
+            await VerifyTableExists();
             Console.WriteLine("AssemblySetup completed.");
         }
 
@@ -73,6 +75,31 @@ namespace TestProject.DAO
                 }
             }
             throw new Exception("Couldn´t Connect with data base : TestAssemblyInitializer.cs : WaitUntilDataBase() ");
+        }
+        private static async Task VerifyTableExists()
+        {
+            try
+            {
+                using var connection = new SqlConnection(ForcedConnectionString);
+                await connection.OpenAsync();
+
+                string query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Cliente'";
+
+                using var command = new SqlCommand(query, connection);
+                int tableCount = (int)await command.ExecuteScalarAsync();
+
+                if (tableCount == 0)
+                {
+                    throw new Exception("ERROR: La tabla 'Cliente' no fue encontrada en la base de datos.");
+                }
+
+                Console.WriteLine("Tabla 'Cliente' encontrada en la base de datos.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error verificando la tabla 'Clientes': {ex.Message}");
+                throw;
+            }
         }
     }
 }

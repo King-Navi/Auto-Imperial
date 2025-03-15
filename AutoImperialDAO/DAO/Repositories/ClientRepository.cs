@@ -7,6 +7,7 @@ using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using AutoImperialDAO.Utilities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 namespace AutoImperialDAO.DAO.Repositories
 {
@@ -79,8 +80,9 @@ namespace AutoImperialDAO.DAO.Repositories
                 _context.SaveChanges();
                 result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error in Register: {ex.InnerException?.Message ?? ex.Message}");
             }
             return result;
         }
@@ -136,15 +138,14 @@ namespace AutoImperialDAO.DAO.Repositories
             {
                 throw new ArgumentNullException();
             }
-            if (String.IsNullOrEmpty(client.CURP)
-                    && String.IsNullOrWhiteSpace(client.CURP)
-                    && _context.Clientes.Find(client.CURP) != null)
+            if (String.IsNullOrEmpty(client.CURP) || String.IsNullOrWhiteSpace(client.CURP)
+                || _context.Clientes.Any(c => c.CURP == client.CURP))
             {
                 throw new ArgumentNullException("Client error in CURP");
             }
-            if (String.IsNullOrEmpty(client.RFC)
-                && String.IsNullOrWhiteSpace(client.RFC)
-                && _context.Clientes.Find(client.RFC) != null)
+
+            if (String.IsNullOrEmpty(client.RFC) || String.IsNullOrWhiteSpace(client.RFC)
+                || _context.Clientes.Any(c => c.RFC == client.RFC))
             {
                 throw new ArgumentNullException("Client error in RFC");
             }
