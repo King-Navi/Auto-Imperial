@@ -13,16 +13,14 @@ using Microsoft.Extensions.Options;
 
 namespace TestProject.DAO
 {
-    [TestClass]
+    //FIXME: Borrar solo cunado todos los miembros del equipo hayan entendido el funcionamiento
     public class Ayuda
     {
         private static MsSqlContainer _msSqlContainer;
         private static string forcedConnectionString;
 
-        [ClassInitialize]
         public static async Task Setup(TestContext context)
         {
-            // Construimos el contenedor usando MsSqlBuilder
 
             _msSqlContainer = new MsSqlBuilder()
                 .WithPassword(Constants.CONTRASENIA_PRUEBA)
@@ -32,12 +30,9 @@ namespace TestProject.DAO
 
             await _msSqlContainer.StartAsync();
 
-            // Esperar hasta que SQL Server esté listo
             await WaitUntilDataBase(_msSqlContainer.GetConnectionString());
 
             
-
-            //  Ejecuta el script de inicialización para crear la base de datos y poblarla
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.deletedbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.initdbScriptPath);
             await SqlScriptExecutor.ExecuteScriptAsync(_msSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
@@ -55,11 +50,10 @@ namespace TestProject.DAO
 
         }
 
-        // Método para esperar hasta que SQL Server esté listo
         private static async Task WaitUntilDataBase(string connectionString)
         {
             using var connection = new SqlConnection(connectionString);
-            for (int i = 0; i < 10; i++) // Intentar conectar durante 10 segundos
+            for (int i = 0; i < 10; i++) 
             {
                 try
                 {
@@ -75,21 +69,11 @@ namespace TestProject.DAO
         }
 
 
-        [ClassCleanup]
         public static async Task Cleanup()
         {
-            // Detenemos el contenedor cuando finalicen todos los tests de la clase
             await _msSqlContainer.StopAsync();
         }
 
-        [TestMethod]
-        public void TestMethod1()
-        {
-            // Arrange
-            Assert.IsTrue(true);
-        }
-
-        [TestMethod]
         public async Task Test_UsingEFCoreContext()
         {
             // Configuramos las opciones para el contexto usando la cadena del contenedor.
@@ -117,7 +101,7 @@ namespace TestProject.DAO
                 Assert.IsNotNull(entidad);
             }
         }
-        [TestMethod]
+
         public void TestMethod2()
         {
             var options = new DbContextOptionsBuilder<AutoImperialContext>()

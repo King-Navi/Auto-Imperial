@@ -1,7 +1,7 @@
 <Project Sdk="MSTest.Sdk/3.6.4">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoImperialDAO\AutoImperialDAO.csproj" />
+    <ProjectReference Include="..\WpfClient\WpfClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>

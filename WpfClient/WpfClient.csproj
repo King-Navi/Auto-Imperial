@@ -11,10 +11,15 @@
   <ItemGroup>
     <None Remove="Resources\Images\autos-back.jpg" />
     <None Remove="Resources\Images\ImperialLogo.png" />
+    <None Remove="WpfClient.csproj.Backup.tmp" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageReference Include="Moq" Version="4.20.72" />
   </ItemGroup>
 
   <ItemGroup>

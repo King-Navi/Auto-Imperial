@@ -79,3 +79,7 @@ INSERT INTO DescuentoVehiculo
   (idDescuento, idVehiculo)
 VALUES 
   (1, 1);
+
+
+
+  -- Inserciones para pruebas ClientRepositoryTest

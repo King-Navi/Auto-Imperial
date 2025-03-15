@@ -9,6 +9,12 @@ using WpfClient.MVVM.Model;
 using WpfClient.MVVM.ViewModel;
 using WpfClient.Utilities;
 using Services.Dialogs;
+using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.Repositories;
+using AutoImperialDAO.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace WpfClient
 {
@@ -19,6 +25,26 @@ namespace WpfClient
         public App()
         {
             IServiceCollection services = new ServiceCollection();
+            //Si alguien ve esto esta es la manera de inicializar la conexion a bd
+
+            // Cargar la configuración desde appsettings.json
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("AutoImperialDb");
+
+
+            // inyectar AutoImperialContext con la cadena de conexión
+            services.AddDbContext<AutoImperialContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            // Registrar Repositorios
+            services.AddTransient<IClientRepository, ClientRepository>();
+
+
+            //Navigation
             services.AddSingleton<MainWindow>( provider => new MainWindow
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()

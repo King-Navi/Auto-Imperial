@@ -16,61 +16,61 @@ namespace WpfClient.MVVM.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public new int idCliente
+        public new int IdClient
         {
             get => base.idCliente;
             set { base.idCliente = value; OnPropertyChanged(); }
         }
 
-        public new string nombre
+        public new string Name
         {
             get => base.nombre;
             set { base.nombre = value; OnPropertyChanged(); }
         }
 
-        public new string apellidoPaterno
+        public new string PaternalSurname
         {
             get => base.apellidoPaterno;
             set { base.apellidoPaterno = value; OnPropertyChanged(); }
         }
 
-        public new string apellidoMaterno
+        public new string MaternalSurname
         {
             get => base.apellidoMaterno;
             set { base.apellidoMaterno = value; OnPropertyChanged(); }
         }
 
-        public new string? telefono
+        public new string? Phone
         {
             get => base.telefono;
             set { base.telefono = value; OnPropertyChanged(); }
         }
 
-        public new string? correo
+        public new string? Email
         {
             get => base.correo;
             set { base.correo = value; OnPropertyChanged(); }
         }
 
-        public new string? calle
+        public new string? Street
         {
             get => base.calle;
             set { base.calle = value; OnPropertyChanged(); }
         }
 
-        public new int? numero
+        public new int? Number
         {
             get => base.numero;
             set { base.numero = value; OnPropertyChanged(); }
         }
 
-        public new string? codigoPostal
+        public new string? CP
         {
             get => base.codigoPostal;
             set { base.codigoPostal = value; OnPropertyChanged(); }
         }
 
-        public new string? ciudad
+        public new string? City
         {
             get => base.ciudad;
             set { base.ciudad = value; OnPropertyChanged(); }
@@ -88,7 +88,7 @@ namespace WpfClient.MVVM.Model
             set { base.CURP = value; OnPropertyChanged(); }
         }
 
-        public new string estado
+        public new string State
         {
             get => base.estado;
             set { base.estado = value; OnPropertyChanged(); }
