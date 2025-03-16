@@ -52,9 +52,11 @@ namespace WpfClient
             services.AddTransient<MainViewModel>();
             services.AddTransient<HomeViewModel>();
             services.AddTransient<LogInViewModel>();
+
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
             services.AddSingleton<ReserveViewModel>();
+
             services.AddSingleton<SideBarViewModel>();
             services.AddSingleton<AdminSideBarViewModel>();
             services.AddSingleton<UserService>();

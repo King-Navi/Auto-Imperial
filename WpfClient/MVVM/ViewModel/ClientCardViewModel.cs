@@ -43,7 +43,8 @@ namespace WpfClient.MVVM.ViewModel
         public ClientCardViewModel(INavigationService navigationService, Client client)
         {
             ClientActual = client;
-            Navigation = navigationService;
+                Navigation = navigationService;
+            
             NavigateToReserveViewCommand = new RelayCommand(
                 o =>
                 {

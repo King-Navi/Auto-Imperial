@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfClient.MVVM.ViewModel;
 
 namespace WpfClient.MVVM.View
 {
-    /// <summary>
-    /// Interaction logic for ClientCardView.xaml
-    /// </summary>
+
     public partial class ClientCardView : UserControl
     {
         public ClientCardView()
         {
             InitializeComponent();
+
         }
     }
 }

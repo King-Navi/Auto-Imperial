@@ -22,19 +22,17 @@ namespace WpfClient.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Client> clientsList;
-        public ObservableCollection<Client> ClientsList { get => clientsList; set => clientsList = value; }
+        private ObservableCollection<ClientCardViewModel> clientsList;
+        public ObservableCollection<ClientCardViewModel> ClientsList { get => clientsList; set => clientsList = value; }
 
         public RelayCommand NavegateToRegisterClientView { get; set; }
 
         public SearchClientViewModel(INavigationService navigationService)
         {
             //TEST
-            ClientsList = new ObservableCollection<Client>
+            ClientsList = new ObservableCollection<ClientCardViewModel>
             {
-                new Client {Name = "Juan" , apellidoPaterno="JSAD", apellidoMaterno = "Materno"},
-                new Client {Name = "Juan" , apellidoPaterno="JSAD", apellidoMaterno = "Materno"},
-                new Client {Name = "Juan" , apellidoPaterno="JSAD", apellidoMaterno = "Materno"},
+                new ClientCardViewModel(navigationService , new Client {Name = "aGREGADO"}),
              };
             //TEST
 

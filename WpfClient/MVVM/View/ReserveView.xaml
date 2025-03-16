@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid d:Background="Pink">
+    <Grid Background="Pink">
         <Button Content="Regresar" Margin="10,10,691,415"  Command="{Binding NavigateToSearchCommand}" />
         <Button Content="Registrar reserva"   Command="{Binding RegisterReserveCommand}" Margin="662,39,52,374" />
         <Label Content="Cliente " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,22,0,0"/>
