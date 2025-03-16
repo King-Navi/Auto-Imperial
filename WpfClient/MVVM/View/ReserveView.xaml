@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.ReserveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid d:Background="Pink">
+        <Button Content="Regresar" Margin="10,10,691,415"  Command="{Binding NavigateToSearchCommand}" />
+        <Button Content="Registrar reserva"   Command="{Binding RegisterReserveCommand}" Margin="662,39,52,374" />
+        <Label Content="Cliente " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,22,0,0"/>
+        <Label Content="Nombre " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,58,0,0" Width="83"/>
+        <Label d:Content="Juan ramirez peres" Content="{Binding Client.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="222,58,0,0"/>
+    </Grid>
+</UserControl>

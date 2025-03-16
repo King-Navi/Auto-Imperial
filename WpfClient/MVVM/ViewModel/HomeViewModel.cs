@@ -35,6 +35,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToLogInViewCommand = new RelayCommand(
                 o =>
                 {
+                    
                     Navigation.NavigateTo<LogInViewModel>();
 
                 },

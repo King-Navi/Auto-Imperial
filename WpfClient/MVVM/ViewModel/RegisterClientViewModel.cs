@@ -2,6 +2,7 @@
 using WpfClient.Utilities;
 using WpfClient.MVVM.Model;
 using Services.Dialogs;
+using System.Windows.Input;
 
 
 namespace WpfClient.MVVM.ViewModel
@@ -28,9 +29,9 @@ namespace WpfClient.MVVM.ViewModel
         }
         private readonly IDialogService _dialogService;
 
-        public RelayCommand RegisterClienetCommand { get; set; }
+        public ICommand RegisterClienetCommand { get; set; }
 
-        public RelayCommand NavigateToSearchClientView { get; set; }
+        public ICommand NavigateToSearchClientView { get; set; }
         public RegisterClientViewModel(INavigationService navigationService, IDialogService dialogService)
         {
             _dialogService = dialogService;

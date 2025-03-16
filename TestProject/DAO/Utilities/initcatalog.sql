@@ -19,7 +19,9 @@ CREATE TABLE [Administrador] (
   [RFC] varchar(13) NOT NULL,
   [puestoAdministrador] varchar(70) NOT NULL,
   [nombreUsuario] VARCHAR(50) NOT NULL UNIQUE,
-  [password] VARCHAR(50) NOT NULL
+  [password] VARCHAR(50) NOT NULL,
+  [numeroEmpleado] VARCHAR(50) NOT NULL UNIQUE,
+  [surcursal] VARCHAR(50)
 )
 
 CREATE TABLE [Vendedor] (
@@ -38,7 +40,9 @@ CREATE TABLE [Vendedor] (
   [RFC] varchar(13) NOT NULL,
   [puestoVendedor] varchar(70) NOT NULL,
   [nombreUsuario] VARCHAR(50) NOT NULL UNIQUE,
-  [password] VARCHAR(50) NOT NULL
+  [password] VARCHAR(50) NOT NULL,
+  [numeroEmpleado] VARCHAR(50) NOT NULL UNIQUE,
+  [surcursal] VARCHAR(50) NOT NULL
 )
 
 

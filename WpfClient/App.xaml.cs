@@ -54,13 +54,12 @@ namespace WpfClient
             services.AddTransient<LogInViewModel>();
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
+            services.AddSingleton<ReserveViewModel>();
             services.AddSingleton<SideBarViewModel>();
             services.AddSingleton<AdminSideBarViewModel>();
             services.AddSingleton<UserService>();
 
             services.AddTransient<IDialogService, DialogService>();
-
-
 
             services.AddSingleton<INavigationService, Services.Navigation.NavigationService>();
             services.AddSingleton<Func<Type, ViewModel>>(provider =>
