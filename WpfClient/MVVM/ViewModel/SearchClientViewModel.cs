@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
@@ -27,7 +28,15 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToRegisterClientView = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<RegisterClientViewModel>();
+                    if (true)
+                    {
+                        Client selected  = new Client {Name = "Juan" };
+                        Navigation.NavigateTo<RegisterClientViewModel>(selected);
+                    }
+                    else
+                    {
+                        Navigation.NavigateTo<RegisterClientViewModel>();
+                    }
                 },
                 o => true);
         }

@@ -6,9 +6,9 @@ using Services.Dialogs;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    internal class RegisterClientViewModel : Services.Navigation.ViewModel
+    internal class RegisterClientViewModel : Services.Navigation.ViewModel , IParameterReceiver
     {
-        private Client _clienteActual;
+        private Client _clienteActual =  new Client();
 
         public Client ClienteActual
         {
@@ -45,15 +45,24 @@ namespace WpfClient.MVVM.ViewModel
             RegisterClienetCommand = new RelayCommand(
                 o =>
                 {
-                    var confirmationVM = new ConfirmationViewModel("¿Deseas registrar al cliente?");
+                    var confirmationVM = new ConfirmationViewModel($"¿Deseas registrar al cliente {ClienteActual.Name}?");
                     var result = _dialogService.ShowDialog(confirmationVM);
 
                     if (result == true)
                     {
                         //TODO: Lógica para guardar ClienteActual en base de datos
+
                     }
                 },
                 o => true);
+        }
+
+        public void ReceiveParameter(object parameter)
+        {
+            if (parameter is Client client)
+            {
+                ClienteActual = client;
+            }
         }
     }
 }

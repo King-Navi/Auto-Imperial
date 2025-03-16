@@ -10,5 +10,7 @@ namespace Services.Navigation
     {
         ViewModel CurrentView { get; }
         void NavigateTo<T>() where T : ViewModel;
+        void NavigateTo<T>(object parameter) where T : ViewModel;
+
     }
 }

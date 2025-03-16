@@ -29,5 +29,17 @@ namespace Services.Navigation
             ViewModel viewModel = viewModelFacory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
         }
+
+        public void NavigateTo<TViewModel>(object parameter) where TViewModel : ViewModel
+        {
+            ViewModel viewModel = viewModelFacory.Invoke(typeof(TViewModel));
+
+            if (viewModel is IParameterReceiver parameterReceiver)
+            {
+                parameterReceiver.ReceiveParameter(parameter);
+            }
+
+            CurrentView = viewModel;
+        }
     }
 }
