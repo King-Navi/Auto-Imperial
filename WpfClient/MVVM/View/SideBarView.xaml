@@ -4,13 +4,107 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="1000" Width="984">
+             d:DesignHeight="850" Width="481">
 
     <Viewbox Stretch="Fill" Margin="0,0,0,0">
-        <Grid Background="Black">
-            <Button Content="Registrar cliente"  Command="{Binding NavegateToRegisterClientView}" Margin="1,10,187,181"/>
-            <Button Content="Cerrar sesión"  Command="{Binding NavegateToLoginView}" Margin="0,180,177,10"/>
+
+
+        <Grid Background="{StaticResource PrimaryColor2}" x:Name="SidebarGrid"  Width="481" Height="850">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="SidebarTransform" X="-325" />
+            </Grid.RenderTransform>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SidebarGrid"
+                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                             To="0" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SidebarGrid"
+                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                             To="-325" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/Menu-bar.png"
+                Margin="359,44,36,732"/>
+
+            <controls:AnimatedImageButton 
+                 ImageSource="pack://application:,,,/Resources/Images/Icons/Home.png"
+                 ClickCommand="{Binding NavegateToHomeView}" 
+                 Margin="364,168,42,615"/>
+
+            <controls:AnimatedLabelButton 
+                 LabelText="Volver a inicio"
+                 LabelFontSize="32"
+                 ForegroundColor="White"
+                 ClickCommand="{Binding NavegateToHomeView}" 
+                 Margin="10,165,129,601"/>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/Clients.png"
+                ClickCommand="{Binding NavegateToClientsView}" 
+                Margin="352,289,36,480"/>
+
+            <controls:AnimatedLabelButton 
+                LabelText="Gestionar clientes"
+                LabelFontSize="32"
+                ForegroundColor="White"
+                ClickCommand="{Binding NavegateToClientsView}" 
+                Margin="10,289,134,480"/>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/vehicles.png"
+                ClickCommand="{Binding NavegateToVehiclesView}" 
+                Margin="352,431,29,332"/>
+
+            <controls:AnimatedLabelButton 
+                LabelText="Gestionar vehículos"
+                LabelFontSize="32"
+                ForegroundColor="White"
+                ClickCommand="{Binding NavegateToVehiclesView}" 
+                Margin="2,431,142,332"/>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/Sell.png"
+                ClickCommand="{Binding NavegateToSellView}" 
+                Margin="347,567,32,194"/>
+
+            <controls:AnimatedLabelButton 
+                LabelText="Vender vehículos"
+                LabelFontSize="32"
+                ForegroundColor="White"
+                ClickCommand="{Binding NavegateToSellView}" 
+                Margin="10,567,134,194"/>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/Log-Out.png"
+                ClickCommand="{Binding NavegateToLoginView}" 
+                Margin="369,762,54,36"/>
+
+            <controls:AnimatedLabelButton 
+                LabelText="Salir"
+                LabelFontSize="32"
+                ForegroundColor="White"
+                ClickCommand="{Binding NavegateToLoginView}" 
+                Margin="169,753,133,27"/>
+
+
+
+
         </Grid>
     </Viewbox>
+
+
 </UserControl>

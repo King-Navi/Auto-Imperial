@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    class SideBarViewModel : Services.Navigation.ViewModel
+    class AdminSideBarViewModel : Services.Navigation.ViewModel
     {
         private INavigationService navigation;
         public INavigationService Navigation
@@ -22,11 +23,12 @@ namespace WpfClient.MVVM.ViewModel
         }
 
         public RelayCommand NavegateToHomeView { get; set; }
-        public RelayCommand NavegateToClientsView { get; set; }
-        public RelayCommand NavegateToVehiclesView { get; set; }
-        public RelayCommand NavegateToSellView { get; set; }
+        public RelayCommand NavegateToEployesView { get; set; }
+        public RelayCommand NavegateToSellsView { get; set; }
+        public RelayCommand NavegateToSupliersView { get; set; }
+        public RelayCommand NavegateToReportsView { get; set; }
         public RelayCommand NavegateToLoginView { get; set; }
-        public SideBarViewModel(INavigationService navigationService)
+        public AdminSideBarViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
             NavegateToHomeView = new RelayCommand(
@@ -36,24 +38,27 @@ namespace WpfClient.MVVM.ViewModel
                 },
                 o => true);
 
-            Navigation = navigationService;
-            NavegateToClientsView = new RelayCommand(
+            NavegateToEployesView = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<SearchClientViewModel>();
+                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
                 },
                 o => true);
-
-            Navigation = navigationService;
-            NavegateToVehiclesView = new RelayCommand(
+            NavegateToSellsView = new RelayCommand(
                 o =>
                 {
                     //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
                 },
                 o => true);
 
-            Navigation = navigationService;
-            NavegateToSellView = new RelayCommand(
+            NavegateToSupliersView = new RelayCommand(
+                o =>
+                {
+                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
+                },
+                o => true);
+
+            NavegateToReportsView = new RelayCommand(
                 o =>
                 {
                     //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient.MVVM.View"
         mc:Ignorable="d"
-        Title="Automoviles imperial" Height="1000" Width="1700"
+        Title="Automoviles imperial" Height="850" Width="1445"
         WindowStartupLocation="CenterScreen"
-        Background="Black">
+        Background="{StaticResource BackgroundyColor2}">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -19,10 +19,11 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid>
-       
-        <ContentControl Content="{Binding Navigation.CurrentView}" />
-        <ContentControl Content="{Binding SideBar}" Margin="0,0,1367,0" />
-    </Grid>
+    <Viewbox Stretch="Fill">
+        <Grid>
+        <ContentControl Content="{Binding Navigation.CurrentView}" Margin="0"/>
+        <ContentControl Content="{Binding SideBar}" Margin="0,0,1134,0" />
+        </Grid>
+    </Viewbox>
 
 </Window>

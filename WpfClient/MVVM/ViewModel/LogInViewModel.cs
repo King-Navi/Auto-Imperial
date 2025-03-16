@@ -52,7 +52,15 @@ namespace WpfClient.MVVM.ViewModel
                 o =>
                 {
                     user.SaveUser(Username,password); //TODO this is a hardcode for login user
-                    Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
+
+                    if (Username == null || !Username.Equals("Admin")) //TODO do a good validation
+                    {
+                        Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
+                    }
+                    else
+                    {
+                        Mediator.Notify(MediatorKeys.SHOW_ADMIN_SIDE_BAR, null);
+                    }
                     Navigation.NavigateTo<HomeViewModel>();
                 },
                 o => true);

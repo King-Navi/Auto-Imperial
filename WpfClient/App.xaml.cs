@@ -55,6 +55,7 @@ namespace WpfClient
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
             services.AddSingleton<SideBarViewModel>();
+            services.AddSingleton<AdminSideBarViewModel>();
             services.AddSingleton<UserService>();
 
             services.AddTransient<IDialogService, DialogService>();
