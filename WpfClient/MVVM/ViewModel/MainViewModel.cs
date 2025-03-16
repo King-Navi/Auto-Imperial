@@ -16,6 +16,7 @@ namespace WpfClient.MVVM.ViewModel
 
         public ICommand ShowSideBarCommand { get; set; }
         public ICommand HideSideBarCommand { get; set; }
+        public ICommand ShowAdminSideBarCommand { get; set; }
 
         private INavigationService navigation;
         public INavigationService Navigation
@@ -51,17 +52,24 @@ namespace WpfClient.MVVM.ViewModel
         {
             ShowSideBarCommand = new RelayCommand(ShowSideBar);
             HideSideBarCommand = new RelayCommand(HideSideBar);
+            ShowAdminSideBarCommand = new RelayCommand(ShowAdminSideBar);
         }
 
         private void RegisterMediator()
         {
             Mediator.Register(MediatorKeys.SHOW_SIDE_BAR, args => ShowSideBarCommand.Execute(null));
             Mediator.Register(MediatorKeys.HIDE_SIDE_BAR, args => HideSideBarCommand.Execute(null));
+            Mediator.Register(MediatorKeys.SHOW_ADMIN_SIDE_BAR, args => ShowAdminSideBarCommand.Execute(null));
         }
 
         private void ShowSideBar()
         {
             SideBar = new View.SideBarView();
+        }
+
+        private void ShowAdminSideBar()
+        {
+            SideBar = new View.AdminSideBarView();
         }
 
         private void HideSideBar()

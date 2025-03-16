@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.AdminSideBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" Width="481">
+    
+    <Viewbox Stretch="Fill" Margin="0,0,0,0">
+
+
+        <Grid Background="{StaticResource PrimaryColor2}" x:Name="SidebarGrid"  Width="481" Height="850">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="SidebarTransform" X="-345" />
+            </Grid.RenderTransform>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SidebarGrid"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                         To="0" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="SidebarGrid"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                         To="-345" Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <controls:AnimatedImageButton 
+            ImageSource="pack://application:,,,/Resources/Images/Icons/Menu-bar.png"
+            Margin="359,44,36,732"/>
+
+            <controls:AnimatedImageButton 
+             ImageSource="pack://application:,,,/Resources/Images/Icons/Home.png"
+             ClickCommand="{Binding NavegateToHomeView}" 
+             Margin="370,164,36,619"/>
+
+            <controls:AnimatedLabelButton 
+             LabelText="Volver a inicio"
+             LabelFontSize="32"
+             ForegroundColor="White"
+             ClickCommand="{Binding NavegateToHomeView}" 
+             Margin="10,159,129,607"/>
+
+            <controls:AnimatedImageButton 
+            ImageSource="pack://application:,,,/Resources/Images/Icons/Employees.png"
+            ClickCommand="{Binding NavegateToEployesView}" 
+            Margin="362,265,26,504"/>
+
+            <controls:AnimatedLabelButton 
+            LabelText="Gestionar empleados"
+            LabelFontSize="32"
+            ForegroundColor="White"
+            ClickCommand="{Binding NavegateToEployesView}" 
+            Margin="10,267,134,502"/>
+
+            <controls:AnimatedImageButton 
+            ImageSource="pack://application:,,,/Resources/Images/Icons/Sell.png"
+            ClickCommand="{Binding NavegateToSellsView}" 
+            Margin="358,375,23,388"/>
+
+            <controls:AnimatedLabelButton 
+            LabelText="Gestionar ventas"
+            LabelFontSize="32"
+            ForegroundColor="White"
+            ClickCommand="{Binding NavegateToSellsView}" 
+            Margin="2,377,142,386"/>
+
+            <controls:AnimatedImageButton 
+            ImageSource="pack://application:,,,/Resources/Images/Icons/Supliers.png"
+            ClickCommand="{Binding NavegateToSupliersView}" 
+            Margin="357,491,22,270"/>
+
+            <controls:AnimatedLabelButton 
+            LabelText="Gestonar provedores"
+            LabelFontSize="32"
+            ForegroundColor="White"
+            ClickCommand="{Binding NavegateToSupliersView}" 
+            Margin="10,491,134,270"/>
+
+            <controls:AnimatedImageButton 
+                ImageSource="pack://application:,,,/Resources/Images/Icons/Reports.png"
+                ClickCommand="{Binding NavegateToReportsView}" 
+                Margin="357,613,22,148"/>
+
+            <controls:AnimatedLabelButton 
+                LabelText="Ver reportes"
+                LabelFontSize="32"
+                ForegroundColor="White"
+                ClickCommand="{Binding NavegateToReportsView}" 
+                Margin="8,613,136,148"/>
+
+            <controls:AnimatedImageButton 
+            ImageSource="pack://application:,,,/Resources/Images/Icons/Log-Out.png"
+            ClickCommand="{Binding NavegateToLoginView}" 
+            Margin="369,762,54,36"/>
+
+            <controls:AnimatedLabelButton 
+            LabelText="Salir"
+            LabelFontSize="32"
+            ForegroundColor="White"
+            ClickCommand="{Binding NavegateToLoginView}" 
+            Margin="169,753,133,27"/>
+
+        </Grid>
+    </Viewbox>
+</UserControl>

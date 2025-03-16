@@ -22,9 +22,6 @@
             <DataTemplate DataType="{x:Type viewModel:RegisterClientViewModel}">
                 <view:RegisterClientView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:SideBarViewModel}">
-                <view:SideBarView/>
-            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="WpfClient.Resources.Controls.AnimatedLabelButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.Resources.Controls"
+             x:Name="AnimatedLabel"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="150">
+    <Grid>
+        <Label Content="{Binding LabelText, ElementName=AnimatedLabel}"
+               FontSize="{Binding LabelFontSize, ElementName=AnimatedLabel}"
+               FontWeight="Bold"
+               Foreground="{Binding ForegroundColor, ElementName=AnimatedLabel}"
+               Cursor="Hand"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               MouseDown="Label_MouseDown"
+               RenderTransformOrigin="0.5,0.5">
+
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="LabelTranslate"/>
+                    <ScaleTransform x:Name="LabelScale"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+
+            <Label.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="LabelTranslate"
+                                             Storyboard.TargetProperty="Y"
+                                             To="-3" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="LabelTranslate"
+                                             Storyboard.TargetProperty="Y"
+                                             To="0" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Label.Triggers>
+        </Label>
+    </Grid>
+
+    <UserControl.Resources>
+        <Storyboard x:Key="ClickAnimation">
+            <DoubleAnimation Storyboard.TargetName="LabelScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             To="0.9" Duration="0:0:0.1" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="LabelScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             To="0.9" Duration="0:0:0.1" AutoReverse="True"/>
+        </Storyboard>
+    </UserControl.Resources>
+</UserControl>

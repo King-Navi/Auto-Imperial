@@ -10,7 +10,29 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\autos-back.jpg" />
+    <None Remove="Resources\Images\Icons\Cars.png" />
+    <None Remove="Resources\Images\Icons\Clients.png" />
+    <None Remove="Resources\Images\Icons\Employees.png" />
+    <None Remove="Resources\Images\Icons\home.png" />
+    <None Remove="Resources\Images\Icons\Log-out.png" />
+    <None Remove="Resources\Images\Icons\Menu-bar.png" />
+    <None Remove="Resources\Images\Icons\Reports.png" />
+    <None Remove="Resources\Images\Icons\Sell.png" />
+    <None Remove="Resources\Images\Icons\Supliers.png" />
+    <None Remove="Resources\Images\Icons\vehicles.png" />
     <None Remove="Resources\Images\ImperialLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\Icons\Sell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Supliers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\vehicles.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +45,27 @@
 
   <ItemGroup>
     <Content Include="Resources\Images\autos-back.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Cars.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Clients.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Employees.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Log-out.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Menu-bar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\Reports.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\ImperialLogo.png">

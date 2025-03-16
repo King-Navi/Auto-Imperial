@@ -61,4 +61,23 @@
          From="0" To="-800" Duration="0:0:1"/>
     </Storyboard>
 
+
+    <Storyboard x:Key="LiftUpAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                         To="-5" Duration="0:0:0.2" />
+    </Storyboard>
+
+    <Storyboard x:Key="LiftDownAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                         To="0" Duration="0:0:0.2" />
+    </Storyboard>
+
+
+    <Storyboard x:Key="ClickAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                         To="0.9" Duration="0:0:0.1" AutoReverse="True"/>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                         To="0.9" Duration="0:0:0.1" AutoReverse="True"/>
+    </Storyboard>
+
 </ResourceDictionary>
