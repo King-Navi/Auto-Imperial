@@ -21,7 +21,7 @@ namespace TestProject.DAO
         {
             Console.WriteLine("Initializing AssemblySetup...");
             MsSqlContainer = new MsSqlBuilder()
-                .WithPassword(Constants.CONTRASENIA_PRUEBA)
+                .WithPassword(ConstantsTestDAO.CONTRASENIA_PRUEBA)
                 .Build();
 
             await MsSqlContainer.StartAsync();
@@ -31,20 +31,20 @@ namespace TestProject.DAO
             await WaitUntilDataBase(MsSqlContainer.GetConnectionString());
             Console.WriteLine("Database connection established.");
 
-            await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.deletedbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.initdbScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), ConstantsTestDAO.deletedbScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), ConstantsTestDAO.initdbScriptPath);
            // await SqlScriptExecutor.ExecuteScriptAsync(MsSqlContainer.GetConnectionString(), Constants.createUserbScriptPath);
 
             var builder = new SqlConnectionStringBuilder(MsSqlContainer.GetConnectionString())
             {
                 InitialCatalog = "AutoImperial",
                 UserID = "sa",
-                Password = Constants.CONTRASENIA_PRUEBA
+                Password = ConstantsTestDAO.CONTRASENIA_PRUEBA
             };
             ForcedConnectionString = builder.ToString();
 
-            await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, Constants.initCatalogdbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, Constants.initDataScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, ConstantsTestDAO.initCatalogdbScriptPath);
+            await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, ConstantsTestDAO.initDataScriptPath);
 
             await VerifyTableExists();
             Console.WriteLine("AssemblySetup completed.");

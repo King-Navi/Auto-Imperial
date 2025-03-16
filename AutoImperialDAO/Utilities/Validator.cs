@@ -16,7 +16,7 @@ namespace AutoImperialDAO.Utilities
         /// <exception cref="ArgumentException"></exception>
         public static bool IsIdValid(int value)
         {
-            if (value > 0)
+            if (value <= 0)
             {
                 throw new ArgumentException("Cant be 0 or lower");
             }

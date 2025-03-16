@@ -13,7 +13,9 @@ namespace AutoImperialDAO.DAO.Repositories
 {
     public class ClientRepository : BaseRepository<Cliente>, IClientRepository
     {
-        const int MAX_PAGE_SIZE = 100;
+        const int MAX_PAGES = 20;
+
+        const int MAX_SEARCH = 100;
         public ClientRepository(AutoImperialContext context) : base(context)
         {
         }
@@ -40,7 +42,7 @@ namespace AutoImperialDAO.DAO.Repositories
             return result;
         }
 
-        public bool EditById(Cliente client)
+        public bool Edit(Cliente client)
         {
             bool result = false;
             try
@@ -55,7 +57,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("Client is not valid");
                 }
-                _context.Clientes.Add(client);
+                _context.Entry(searchedClient).CurrentValues.SetValues(client);
                 _context.SaveChanges();
                 result = true;
             }
@@ -87,17 +89,44 @@ namespace AutoImperialDAO.DAO.Repositories
             return result;
         }
 
-        public Cliente SearchById(int id)
+        public async Task<Cliente> SearchByCURPAsync(string CURP, AccountStatusEnum statusEnum)
+        {
+            Cliente? result = null;
+            try
+            {
+                if (String.IsNullOrEmpty(CURP)
+                    || String.IsNullOrWhiteSpace(CURP))
+                {
+                    throw new ArgumentException("CURP null");
+                }
+                result = await _context.Clientes.FirstOrDefaultAsync(c => c.CURP == CURP && c.estado == statusEnum.ToString());
+                if (result == null)
+                {
+                    throw new KeyNotFoundException($"No se encontró un cliente con ID {CURP}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SearchByCURP: {ex.Message}");
+                result = new Cliente { idCliente = -1 };
+            }
+            return result;
+        }
+
+        public async Task<Cliente> SearchByIdAsync(int id ,AccountStatusEnum statusEnum)
         {
             Cliente? result = new Cliente();
             try
             {
                 Validator.IsIdValid(id);
-                result = _context.Clientes.Find(id);
+                result = await _context.Clientes.FirstOrDefaultAsync(c => c.idCliente == id && c.estado == statusEnum.ToString());
+
                 if (result == null)
                 {
                     throw new KeyNotFoundException($"No se encontró un cliente con ID {id}");
                 }
+
+                return result;
             }
             catch (Exception)
             {
@@ -106,29 +135,35 @@ namespace AutoImperialDAO.DAO.Repositories
             return result;
         }
 
-        public List<Cliente> SearchById(List<int> ids, int page, int pageSize = 50)
+        public async Task<List<Cliente>> SearchByPagesAsync(int startPage, int totalPages, AccountStatusEnum status, int pageSize = 50)
         {
-            pageSize = Math.Min(pageSize, MAX_PAGE_SIZE);
+            totalPages = Math.Min(totalPages, MAX_PAGES);
+            pageSize = Math.Min(pageSize, MAX_SEARCH);
+
             List<Cliente> result = new List<Cliente>();
+
             try
             {
-                if (ids == null || ids.Count == 0)
-                    throw new ArgumentException("La lista de IDs no puede estar vacía.");
+                for (int i = 0; i < totalPages; i++)
+                {
+                    int currentPage = startPage + i;
+                    var clientes = await _context.Clientes
+                        .Where(c => c.estado == status.ToString())
+                        .Skip((currentPage - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToListAsync();
 
-                if (ids.Count > 1000)
-                    throw new ArgumentException("No se pueden buscar más de 1000 IDs a la vez.");
+                    if (clientes.Count == 0)
+                        break;
 
-                result = _context.Clientes
-                    .Where(c => ids.Contains(c.idCliente))
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToList();
-
+                    result.AddRange(clientes);
+                }
             }
             catch (Exception)
             {
                 result = new List<Cliente>();
             }
+
             return result;
         }
 
@@ -138,16 +173,14 @@ namespace AutoImperialDAO.DAO.Repositories
             {
                 throw new ArgumentNullException();
             }
-            if (String.IsNullOrEmpty(client.CURP) || String.IsNullOrWhiteSpace(client.CURP)
-                || _context.Clientes.Any(c => c.CURP == client.CURP))
+            if (!ValidateCURP(client))
             {
-                throw new ArgumentNullException("Client error in CURP");
+                throw new ArgumentException("Client error in CURP", nameof(client.CURP));
             }
 
-            if (String.IsNullOrEmpty(client.RFC) || String.IsNullOrWhiteSpace(client.RFC)
-                || _context.Clientes.Any(c => c.RFC == client.RFC))
+            if (!ValidateRFC(client))
             {
-                throw new ArgumentNullException("Client error in RFC");
+                throw new ArgumentException("Client error in RFC", nameof(client.RFC));
             }
             return !string.IsNullOrEmpty(client.nombre)
                 && !string.IsNullOrEmpty(client.apellidoMaterno)
@@ -155,6 +188,20 @@ namespace AutoImperialDAO.DAO.Repositories
                 && !string.IsNullOrEmpty(client.codigoPostal)
                 && !string.IsNullOrEmpty(client.telefono)
                 && !string.IsNullOrEmpty(client.correo);
+        }
+
+        private bool ValidateCURP(Cliente client)
+        {
+            return !String.IsNullOrEmpty(client.CURP)
+                && !String.IsNullOrWhiteSpace(client.CURP)
+                && !_context.Clientes.Any(c => c.CURP == client.CURP && c.idCliente != client.idCliente);
+        }
+
+        private bool ValidateRFC(Cliente client)
+        {
+            return !String.IsNullOrEmpty(client.RFC)
+                && !String.IsNullOrWhiteSpace(client.RFC)
+                && !_context.Clientes.Any(c => c.RFC == client.RFC && c.idCliente != client.idCliente);
         }
     }
 }

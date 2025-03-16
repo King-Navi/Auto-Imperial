@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestProject.DAO.Utilities
 {
-    internal static class Constants
+    internal static class ConstantsTestDAO
     {
         internal const string CONTRASENIA_PRUEBA = "Pass@word123";
         internal static readonly string initDataScriptPath = Path.Combine(Directory.GetCurrentDirectory(), "DAO", "Utilities", "initdata.sql");

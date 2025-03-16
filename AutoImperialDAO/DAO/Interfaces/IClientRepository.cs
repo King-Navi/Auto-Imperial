@@ -1,4 +1,5 @@
-﻿using AutoImperialDAO.Models;
+﻿using AutoImperialDAO.Enums;
+using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace AutoImperialDAO.DAO.Interfaces
     {
         bool Register(Cliente client);
         bool DeleteById(int id);
-        bool EditById(Cliente client);
-        Cliente SearchById(int id);
-        List<Cliente> SearchById(List<int> ids, int page, int pageSize = 50);
+        bool Edit(Cliente client);
+        Task<Cliente> SearchByIdAsync(int id, AccountStatusEnum statusEnum);
+        Task<Cliente> SearchByCURPAsync(string CURP, AccountStatusEnum statusEnum);
+        Task<List<Cliente>> SearchByPagesAsync(int startPage, int totalPages, AccountStatusEnum status, int pageSize = 50);
     }
 }

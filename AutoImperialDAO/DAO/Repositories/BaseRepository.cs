@@ -40,35 +40,35 @@ namespace AutoImperialDAO.DAO.Repositories
         }
 
         // Agrega una nueva entidad
-        public virtual void Add(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-            _dbSet.Add(entity);
+        //public virtual void Add(T entity)
+        //{
+        //    if (entity == null)
+        //    {
+        //        throw new ArgumentNullException("null");
+        //    }
+        //    _dbSet.Add(entity);
 
-        }
+        //}
 
         // Actualiza una entidad existente
-        public virtual void Update(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-            _dbSet.Update(entity);
-        }
+        //public virtual void Update(T entity)
+        //{
+        //    if (entity == null)
+        //    {
+        //        throw new ArgumentNullException("null");
+        //    }
+        //    _dbSet.Update(entity);
+        //}
 
         // Elimina una entidad
-        public virtual void Delete(T entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-            _dbSet.Remove(entity);
-        }
+        //public virtual void Delete(T entity)
+        //{
+        //    if (entity == null)
+        //    {
+        //        throw new ArgumentNullException("null");
+        //    }
+        //    _dbSet.Remove(entity);
+        //}
 
         // Guarda los cambios en la base de datos
         public virtual bool Save()
