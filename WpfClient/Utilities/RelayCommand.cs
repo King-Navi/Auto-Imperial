@@ -23,6 +23,7 @@ namespace WpfClient.Utilities
             this.canExecute = canExecute;
         }
 
+
         public RelayCommand(Action<object> execute) : this(execute, null)
         {
 

@@ -10,6 +10,8 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Animations.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/SimplePlaceHolderTexboxStyle.xaml" />
+                <ResourceDictionary Source="Resources/Styles/NumericIntPlaceHolderTextBoxStyle.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

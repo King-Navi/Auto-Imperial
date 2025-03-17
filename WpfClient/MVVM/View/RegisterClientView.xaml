@@ -87,7 +87,8 @@
                          Height="22"/>
 
                 <Label Content="Número:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <controls:SimplePlaceHolderTextBox x:Name="Numero"
+                <controls:NumericIntPlaceHolderTextBox x:Name="Numero"
+                                                       
                          Text="{Binding ClienteActual.Number, UpdateSourceTrigger=PropertyChanged}"
                          Width="128" 
                          Height="22"/>
@@ -99,7 +100,7 @@
                          Height="22"/>
 
                 <Label Content="C.P." HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <controls:SimplePlaceHolderTextBox x:Name="CodigoPostal"
+                <controls:NumericIntPlaceHolderTextBox x:Name="CodigoPostal"
                          Text="{Binding ClienteActual.CP, UpdateSourceTrigger=PropertyChanged}"
                          Width="72" 
                          Height="22"/>
@@ -127,7 +128,7 @@
                 Height="25" 
                 Width="84" 
                 Margin="651,378,50,47"  
-                Command="{Binding RegisterClienetCommand}" />
+                Command="{Binding RegisterClientCommand}" />
 
         <Button Content="Cancelar" 
                 HorizontalAlignment="Left"  

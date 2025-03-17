@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WpfClient.MVVM.Model
 {
-    public class Client : AutoImperialDAO.Models.Cliente , INotifyPropertyChanged
+    public class Client : AutoImperialDAO.Models.Cliente , INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -93,5 +94,24 @@ namespace WpfClient.MVVM.Model
             get => base.estado;
             set { base.estado = value; OnPropertyChanged(); }
         }
+        /// <summary>
+        /// Implementation of the Prototype pattern to clone the object.
+        /// </summary>
+        /// <returns>A new Client instance with the same values.</returns>
+        public object Clone()
+        {
+            var clone = (Client)Activator.CreateInstance(typeof(Client));
+
+            foreach (PropertyInfo prop in typeof(Client).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (prop.CanRead && prop.CanWrite)
+                {
+                    prop.SetValue(clone, prop.GetValue(this));
+                }
+            }
+
+            return clone;
+        }
+
     }
 }
