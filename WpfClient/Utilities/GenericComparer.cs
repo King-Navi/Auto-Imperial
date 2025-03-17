@@ -43,3 +43,4 @@ namespace WpfClient.Utilities
             return hash;
         }
     }
+}
