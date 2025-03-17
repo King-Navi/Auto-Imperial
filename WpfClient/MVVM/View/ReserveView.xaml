@@ -7,10 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Pink">
-        <Button Content="Regresar" Margin="10,10,691,415"  Command="{Binding NavigateToSearchCommand}" />
-        <Button Content="Registrar reserva"   Command="{Binding RegisterReserveCommand}" Margin="662,39,52,374" />
-        <Label Content="Cliente " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,22,0,0"/>
-        <Label Content="Nombre " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,58,0,0" Width="83"/>
-        <Label d:Content="Juan ramirez peres" Content="{Binding Client.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="222,58,0,0"/>
+        <!-- Botón de Regresar a la izquierda -->
+        <Button Content="Regresar" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="180,10,0,0"  
+                Command="{Binding NavigateToSearchCommand}" />
+
+        <!-- Botón de Registrar Reserva alineado a la derecha -->
+        <Button Content="Registrar reserva"   
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                Margin="0,10,10,0"
+                Command="{Binding RegisterReserveCommand}" />
+
+        <Label Content="Cliente: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,25,0,0"/>
+        <Label d:Content="Nombre " Content="{Binding CurrentClient.Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,60,0,0"/>
+        <Label Content="CURP "  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,300,0"/>
+        <Label d:Content="CURP " Content="{Binding CurrentClient.CURP}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,300,0"/>
+        <Grid d:Background="Green" HorizontalAlignment="Left" Margin="250,150,0,0" VerticalAlignment="Top" Width="450" Height="270">
+            
+        </Grid> 
     </Grid>
 </UserControl>

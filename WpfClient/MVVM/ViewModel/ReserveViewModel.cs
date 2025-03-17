@@ -5,18 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WpfClient.MVVM.Model;
+using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
 {
     internal class ReserveViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
-        private Client _clienteActual = new Client();
+        private Client _currentClient = new Client();
 
-        public Client ClienteActual
+        public Client CurrentClient
         {
-            get => _clienteActual;
-            set { _clienteActual = value; OnPropertyChanged(); }
+            get => _currentClient;
+            set { _currentClient = value; OnPropertyChanged(); }
         }
 
         private INavigationService navigation;
@@ -31,17 +33,26 @@ namespace WpfClient.MVVM.ViewModel
         }
         private readonly IDialogService _dialogService;
 
+        public ICommand NavigateToSearchCommand { get; set; }
+        public ICommand RegisterReserveCommand { get; set; }
+
         public ReserveViewModel(INavigationService navigation, IDialogService dialogService)
         {
             Navigation = navigation;
             _dialogService = dialogService;
+            NavigateToSearchCommand = new RelayCommand(
+                o =>
+                {
+                    Navigation.NavigateTo<SearchClientViewModel>();
+                },
+                o => true);
         }
 
         public void ReceiveParameter(object parameter)
         {
             if (parameter is Client client)
             {
-                ClienteActual = client;
+                CurrentClient = client;
             }
         }
     }

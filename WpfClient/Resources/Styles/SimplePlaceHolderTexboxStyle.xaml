@@ -1,0 +1,60 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfClient.Resources.Controls"
+    xmlns:converter="clr-namespace:WpfClient.Resources.Coverter"
+    >
+
+    <SolidColorBrush x:Key="SuperDarkGreenColor" Color="#002E34"/>
+    <SolidColorBrush x:Key="DarkGreenColor" Color="#004443"/>
+    <SolidColorBrush x:Key="GreenGrassColor" Color="#00755C"/>
+    <SolidColorBrush x:Key="LightGreenColor" Color="#00C16C"/>
+    <SolidColorBrush x:Key="DarkBlueColor" Color="#202c42"/>
+    <SolidColorBrush x:Key="BlueGreyColor" Color="#3c4354"/>
+    <SolidColorBrush x:Key="WhiteColor" Color="#fffcf0"/>
+    <SolidColorBrush x:Key="BlackColor" Color="#12110e"/>
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:AddLeftPaddingConverter x:Key="AddLeftPaddingConverter" /> 
+    <Style TargetType="{x:Type local:SimplePlaceHolderTextBox}" BasedOn="{StaticResource {x:Type  local:SimplePlaceHolderTextBox}}">
+
+        <Setter Property="Placeholder" Value="Escribe aquí..." />
+
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Arial" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+
+        <Setter Property="Background" Value="{StaticResource SuperDarkGreenColor}" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundWhiteColor}" />
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SimplePlaceHolderTextBox}">
+                    <Grid>
+                        <!-- Placeholder -->
+                        <Border 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <TextBlock 
+                                      IsHitTestVisible="False" 
+                                      Panel.ZIndex="1"
+                                      Opacity="0.5"
+                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Padding="{TemplateBinding Padding, Converter={StaticResource AddLeftPaddingConverter} , ConverterParameter=3 }" 
+                                      Text="{Binding Placeholder, RelativeSource={RelativeSource TemplatedParent}}"  
+                                      Visibility="{Binding IsEmpty, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </Grid>
+                        </Border>
+                        <!-- Contenido de texto real -->
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

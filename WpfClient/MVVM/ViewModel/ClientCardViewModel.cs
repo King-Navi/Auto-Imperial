@@ -48,7 +48,7 @@ namespace WpfClient.MVVM.ViewModel
             NavigateToReserveViewCommand = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<ReserveViewModel>();
+                    Navigation.NavigateTo<ReserveViewModel>(_clientActual);
                 },
                 o => true);
         }

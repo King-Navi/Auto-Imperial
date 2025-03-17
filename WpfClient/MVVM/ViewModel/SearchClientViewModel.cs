@@ -24,6 +24,16 @@ namespace WpfClient.MVVM.ViewModel
         }
         private ObservableCollection<ClientCardViewModel> clientsList;
         public ObservableCollection<ClientCardViewModel> ClientsList { get => clientsList; set => clientsList = value; }
+        private ClientCardViewModel _selected;
+        public ClientCardViewModel Selected
+        {
+            get => _selected;
+            set
+            {
+                _selected = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand NavegateToRegisterClientView { get; set; }
 
@@ -32,7 +42,7 @@ namespace WpfClient.MVVM.ViewModel
             //TEST
             ClientsList = new ObservableCollection<ClientCardViewModel>
             {
-                new ClientCardViewModel(navigationService , new Client {Name = "aGREGADO"}),
+                new ClientCardViewModel(navigationService , new Client {Name = "aGREGADO"  , PaternalSurname = "P", MaternalSurname = "M" }),
              };
             //TEST
 
@@ -42,7 +52,7 @@ namespace WpfClient.MVVM.ViewModel
                 {
                     if (true)
                     {
-                        Client selected  = new Client {Name = "Juan" };
+                        Client selected  = new Client {Name = "Juan" , PaternalSurname = "P", MaternalSurname = "M" };
                         Navigation.NavigateTo<RegisterClientViewModel>(selected);
                     }
                     else

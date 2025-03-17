@@ -7,14 +7,18 @@ using System.Windows.Input;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    internal class RegisterClientViewModel : Services.Navigation.ViewModel , IParameterReceiver
+    internal class RegisterClientViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
-        private Client _clienteActual =  new Client();
+        private Client _clienteActual = new Client();
 
         public Client ClienteActual
         {
             get => _clienteActual;
-            set { _clienteActual = value; OnPropertyChanged(); }
+            set
+            {
+                _clienteActual = value;
+                OnPropertyChanged();
+            }
         }
 
         private INavigationService navigation;
@@ -52,7 +56,6 @@ namespace WpfClient.MVVM.ViewModel
                     if (result == true)
                     {
                         //TODO: Lógica para guardar ClienteActual en base de datos
-
                     }
                 },
                 o => true);

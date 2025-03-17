@@ -14,13 +14,14 @@
         <Button Content="Registrar cliente" HorizontalAlignment="Left" Margin="662,13,0,0" VerticalAlignment="Top" Height="32" Width="91" Command="{Binding NavegateToRegisterClientView}"/>
         <Grid Background="Aqua" Width="600" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding ClientsList}">
-                    <ItemsControl.ItemTemplate>
+                <ListBox ItemsSource="{Binding ClientsList}" 
+                         SelectedItem="{Binding Selected, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
                             <local:ClientCardView />
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </ScrollViewer>
         </Grid>
     </Grid>
