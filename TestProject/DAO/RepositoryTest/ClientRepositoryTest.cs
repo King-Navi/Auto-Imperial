@@ -130,11 +130,11 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro@example.com",
                 CURP = "GARP900101HDFRLR04",
                 RFC = "GARP900101MN0",
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             _repository.Register(client);
-            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activa);
+            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activo);
 
             bool result = _repository.DeleteById(savedClient.idCliente);
 
@@ -175,11 +175,11 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro@example.com",
                 CURP = NEW_CURP,
                 RFC = NEW_RFC,
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             _repository.Register(client);
-            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activa);
+            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activo);
 
             var updatedClient = new Cliente
             {
@@ -192,7 +192,7 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro.editado@example.com",
                 CURP = NEW_CURP,
                 RFC = NEW_RFC,
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             bool result = _repository.Edit(updatedClient);
@@ -213,11 +213,11 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro@example.com",
                 CURP = "GARP900101HDFRLR05",
                 RFC = "GARP900101MN1",
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             _repository.Register(client);
-            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activa);
+            var savedClient = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activo);
 
             var updatedClient = new Cliente
             {
@@ -230,7 +230,7 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro.editado@example.com",
                 CURP = "", 
                 RFC = "",  
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             bool result = _repository.Edit(updatedClient);
@@ -252,7 +252,7 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro.editado@example.com",
                 CURP = "GARP900101HDFRLR05",
                 RFC = "GARP900101MN1",
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             bool result = _repository.Edit(updatedClient);
@@ -273,13 +273,13 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro@example.com",
                 CURP = "GARP900101HDFRLR05",
                 RFC = "GARP900101MN1",
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             _repository.Register(client);
 
-            var resultCurp = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activa);
-            var result = await _repository.SearchByIdAsync(resultCurp.idCliente, AccountStatusEnum.Activa);
+            var resultCurp = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activo);
+            var result = await _repository.SearchByIdAsync(resultCurp.idCliente, AccountStatusEnum.Activo);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(resultCurp.idCliente, result.idCliente);
@@ -288,7 +288,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByIdAsync_InvalidId_ReturnsDefaultClient()
         {
-            var result = await _repository.SearchByIdAsync(-1, AccountStatusEnum.Activa);
+            var result = await _repository.SearchByIdAsync(-1, AccountStatusEnum.Activo);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(-1, result.idCliente);
@@ -297,7 +297,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByIdAsync_ValidButNonExistentId_ReturnsDefaultClient()
         {
-            var result = await _repository.SearchByIdAsync(99999, AccountStatusEnum.Activa);
+            var result = await _repository.SearchByIdAsync(99999, AccountStatusEnum.Activo);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(-1, result.idCliente);
@@ -316,12 +316,12 @@ namespace TestProject.DAO.RepositoryTest
                 correo = "pedro@example.com",
                 CURP = "GARP900101HDFRLR05",
                 RFC = "GARP900101MN1",
-                estado = AccountStatusEnum.Activa.ToString()
+                estado = AccountStatusEnum.Activo.ToString()
             };
 
             _repository.Register(client);
 
-            var result = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activa);
+            var result = await _repository.SearchByCURPAsync(client.CURP, AccountStatusEnum.Activo);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(client.CURP, result.CURP);
@@ -330,7 +330,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByCURPAsync_NonExistentCURP_ReturnsDefaultClient()
         {
-            var result = await _repository.SearchByCURPAsync("NONEXISTENTCURP123", AccountStatusEnum.Activa);
+            var result = await _repository.SearchByCURPAsync("NONEXISTENTCURP123", AccountStatusEnum.Activo);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(-1, result.idCliente);
@@ -339,7 +339,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByCURPAsync_InvalidCURP_ThrowsArgumentException()
         {
-            var result = await _repository.SearchByCURPAsync("", AccountStatusEnum.Activa); 
+            var result = await _repository.SearchByCURPAsync("", AccountStatusEnum.Activo); 
 
             Assert.IsNotNull(result);
             Assert.AreEqual(-1, result.idCliente);
@@ -360,11 +360,11 @@ namespace TestProject.DAO.RepositoryTest
                     correo = $"cliente{i}@example.com",
                     CURP = $"CURP{i}12345678",
                     RFC = $"RFC{i}12345678",
-                    estado = AccountStatusEnum.Activa.ToString()
+                    estado = AccountStatusEnum.Activo.ToString()
                 });
             }
 
-            var result = await _repository.SearchByPagesAsync(1, 3, AccountStatusEnum.Activa, 5);
+            var result = await _repository.SearchByPagesAsync(1, 3, AccountStatusEnum.Activo, 5);
 
             foreach (var actualClient in result)
             {
@@ -377,7 +377,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByPagesAsync_PageTooFar_ReturnsEmptyList()
         {
-            var result = await _repository.SearchByPagesAsync(99999, 1, AccountStatusEnum.Activa, 5);
+            var result = await _repository.SearchByPagesAsync(99999, 1, AccountStatusEnum.Activo, 5);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count);
@@ -386,7 +386,7 @@ namespace TestProject.DAO.RepositoryTest
         [TestMethod]
         public async Task SearchByPagesAsync_ZeroValues_ReturnsEmptyList()
         {
-            var result = await _repository.SearchByPagesAsync(0, 0, AccountStatusEnum.Activa, 0);
+            var result = await _repository.SearchByPagesAsync(0, 0, AccountStatusEnum.Activo, 0);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count);

@@ -7,16 +7,25 @@ using System.Windows.Input;
 
 namespace WpfClient.Utilities
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : ICommand , IRelayCommand
     {
         private readonly Action<object> execute;
         private readonly Predicate<object> canExecute;
+        private event EventHandler CanExecuteChangedInternal; 
+
         public event EventHandler CanExecuteChanged
         {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
+            add
+            {
+                CommandManager.RequerySuggested += value;
+                CanExecuteChangedInternal += value; 
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+                CanExecuteChangedInternal -= value;
+            }
         }
-
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             this.execute = execute;
@@ -41,6 +50,13 @@ namespace WpfClient.Utilities
         public void Execute(object? parameter)
         {
             execute(parameter);
+        }
+
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChangedInternal?.Invoke(this, EventArgs.Empty);
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

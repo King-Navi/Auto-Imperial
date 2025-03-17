@@ -77,7 +77,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("Client is not valid");
                 }
-                client.estado = AccountStatusEnum.Activa.ToString();
+                client.estado = AccountStatusEnum.Activo.ToString();
                 _context.Clientes.Add(client);
                 _context.SaveChanges();
                 result = true;
@@ -99,7 +99,9 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("CURP null");
                 }
-                result = await _context.Clientes.FirstOrDefaultAsync(c => c.CURP == CURP && c.estado == statusEnum.ToString());
+                result = await _context.Clientes.FirstOrDefaultAsync(
+                    c => c.CURP.ToLower() == CURP.ToLower() 
+                    && c.estado == statusEnum.ToString());
                 if (result == null)
                 {
                     throw new KeyNotFoundException($"No se encontró un cliente con ID {CURP}");
@@ -113,7 +115,39 @@ namespace AutoImperialDAO.DAO.Repositories
             return result;
         }
 
-        public async Task<Cliente> SearchByIdAsync(int id ,AccountStatusEnum statusEnum)
+        public async Task<List<Cliente>> SearchByCurpRfcNameAsync(string parameter, AccountStatusEnum statusEnum)
+        {
+            List<Cliente> result = new List<Cliente>();
+            try
+            {
+                if (String.IsNullOrEmpty(parameter)
+                    || String.IsNullOrWhiteSpace(parameter))
+                {
+                    throw new ArgumentException("parameter null");
+                }
+                result = await _context.Clientes
+                           .Where(c =>
+                            c.estado == statusEnum.ToString() &&
+                            (c.CURP.ToLower() == parameter ||
+                             (c.RFC ?? string.Empty).ToLower() == parameter ||
+                             c.nombre.ToLower() == parameter ||
+                             c.apellidoPaterno.ToLower() == parameter ||
+                             c.apellidoMaterno.ToLower() == parameter))
+                           .ToListAsync();
+                if (result == null || result.Count == 0)
+                {
+                    throw new KeyNotFoundException($"No se encontró un clientes");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SearchByCurpRfcNameAsync: {ex.Message}");
+                return new List<Cliente> { new Cliente { idCliente = -1 } };
+            }
+            return result;
+        }
+
+        public async Task<Cliente> SearchByIdAsync(int id, AccountStatusEnum statusEnum)
         {
             Cliente? result = new Cliente();
             try
@@ -144,11 +178,15 @@ namespace AutoImperialDAO.DAO.Repositories
 
             try
             {
+                if (startPage <= 0)
+                {
+                    throw new ArgumentException("El parámetro startPage debe ser mayor o igual a 1.");
+                }
                 for (int i = 0; i < totalPages; i++)
                 {
                     int currentPage = startPage + i;
                     var clientes = await _context.Clientes
-                        .Where(c => c.estado == status.ToString())
+                        .Where(c => c.estado.ToLower() == status.ToString().ToLower())
                         .Skip((currentPage - 1) * pageSize)
                         .Take(pageSize)
                         .ToListAsync();

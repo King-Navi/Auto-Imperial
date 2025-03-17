@@ -8,7 +8,7 @@ namespace AutoImperialDAO.Enums
 {
     public enum AccountStatusEnum
     {
-        Activa,
+        Activo,
         Eliminado
     }
 }
