@@ -69,7 +69,7 @@ CREATE TABLE [Cliente] (
   [codigoPostal] varchar(10),
   [ciudad] varchar(10),
   [RFC] char(13),
-  [CURP] varchar(50) NOT NULL,
+  [CURP] varchar(50) NOT NULL UNIQUE,
   [estado] varchar(40) NOT NULL
 )
 

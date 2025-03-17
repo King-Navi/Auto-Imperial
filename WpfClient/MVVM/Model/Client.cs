@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoImperialDAO.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -17,6 +18,28 @@ namespace WpfClient.MVVM.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public Client()
+        {
+        }
+
+        public Client(Cliente dataBaseModelClient)
+        {
+            IdClient = dataBaseModelClient.idCliente;
+            Name = dataBaseModelClient.nombre;
+            PaternalSurname = dataBaseModelClient.apellidoPaterno;
+            MaternalSurname = dataBaseModelClient.apellidoMaterno;
+            Phone = dataBaseModelClient.telefono;
+            Email = dataBaseModelClient.correo;
+            Street = dataBaseModelClient.calle;
+            Number = dataBaseModelClient.numero;
+            CP = dataBaseModelClient.codigoPostal;
+            City = dataBaseModelClient.ciudad;
+            RFC = dataBaseModelClient.RFC;
+            CURP = dataBaseModelClient.CURP;
+            State = dataBaseModelClient.estado;
+        }
+
         public new int IdClient
         {
             get => base.idCliente;

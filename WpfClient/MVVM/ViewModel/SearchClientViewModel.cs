@@ -1,10 +1,13 @@
-﻿using Services.Navigation;
+﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.Models;
+using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 
@@ -12,6 +15,9 @@ namespace WpfClient.MVVM.ViewModel
 {
     internal class SearchClientViewModel : Services.Navigation.ViewModel
     {
+        private const int FIRST_SEARCH_INIT = 1;
+        private const int FIRST_SEARCH_PAGE_SIZE = 5;
+        private const int PAGE_SIZE = 100;
         private INavigationService navigation;
         public INavigationService Navigation
         {
@@ -22,45 +28,141 @@ namespace WpfClient.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<ClientCardViewModel> clientsList;
+        private IClientRepository _clientRepository;
+        private ObservableCollection<ClientCardViewModel> clientsList = new ObservableCollection<ClientCardViewModel>();
         public ObservableCollection<ClientCardViewModel> ClientsList { get => clientsList; set => clientsList = value; }
-        private ClientCardViewModel _selected;
-        public ClientCardViewModel Selected
+        private ClientCardViewModel? _selected;
+        public ClientCardViewModel? Selected
         {
             get => _selected;
             set
             {
-                _selected = value;
+                if (_selected != value)
+                {
+                    _selected = value;
+                    OnPropertyChanged(nameof(Selected));
+                }
+            }
+        }
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
                 OnPropertyChanged();
+                SearchCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public RelayCommand NavegateToRegisterClientView { get; set; }
+        public ICommand NavegateToRegisterClientViewCommand { get; set; }
+        public ICommand DeleteClientCommand { get; set; }
+        public ICommand EditClientCommand { get; set; }
+        public IRelayCommand SearchCommand { get; set; }
 
-        public SearchClientViewModel(INavigationService navigationService)
+        public SearchClientViewModel(INavigationService navigationService, IClientRepository clientRepository)
         {
-            //TEST
-            ClientsList = new ObservableCollection<ClientCardViewModel>
-            {
-                new ClientCardViewModel(navigationService , new Client {Name = "aGREGADO"  , PaternalSurname = "P", MaternalSurname = "M" }),
-             };
-            //TEST
-
+            _clientRepository = clientRepository;
+            _ = InitializeAsync();
             Navigation = navigationService;
-            NavegateToRegisterClientView = new RelayCommand(
+            NavegateToRegisterClientViewCommand = new RelayCommand(
                 o =>
                 {
-                    if (true)
-                    {
-                        Client selected  = new Client {Name = "Juan" , PaternalSurname = "P", MaternalSurname = "M" };
-                        Navigation.NavigateTo<RegisterClientViewModel>(selected);
-                    }
-                    else
-                    {
-                        Navigation.NavigateTo<RegisterClientViewModel>();
-                    }
+                    Navigation.NavigateTo<RegisterClientViewModel>();
                 },
                 o => true);
+            DeleteClientCommand = new RelayCommand(
+                o =>
+                {
+                    if (Selected != null)
+                    {
+                        _clientRepository.DeleteById(Selected.ClientActual.IdClient);
+                        ClientsList.Remove(Selected);
+                        Selected = null;
+                    }
+                },
+                o => Selected != null);
+            EditClientCommand = new RelayCommand(
+                o =>
+                {
+                    if (Selected != null)
+                    {
+                        Navigation.NavigateTo<RegisterClientViewModel>(Selected.ClientActual);
+                        Selected = null;
+                    }
+                },
+                o => Selected != null);
+            SearchCommand = new RelayCommand(
+                async o =>
+                {
+                    if (!String.IsNullOrWhiteSpace(SearchText))
+                    {
+                        var clientes = await SearchClientCurpRfcNameAsync();
+                        FillList(ConvertToClientCardViewModel(clientes));
+                        Selected = null;
+                    }
+                },
+                o => !String.IsNullOrWhiteSpace(SearchText));
+        }
+        private async Task<List<Cliente>> SearchClientCurpRfcNameAsync()
+        {
+            Selected = null;
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(SearchText))
+                {
+                    var result = await _clientRepository.SearchByCurpRfcNameAsync(
+                        SearchText, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return new List<Cliente>();
+        }
+        private async Task InitializeAsync()
+        {
+            try
+            {
+                var resultado = await SearchClientsAsync(FIRST_SEARCH_INIT, FIRST_SEARCH_PAGE_SIZE, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
+                FillList(ConvertToClientCardViewModel(resultado));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching clients: {ex.Message}");
+            }
+        }
+
+        public async Task<List<Cliente>> SearchClientsAsync(int startPage, int totalPage, AutoImperialDAO.Enums.AccountStatusEnum status)
+        {
+            try
+            {
+                return await _clientRepository.SearchByPagesAsync(startPage, totalPage, status, PAGE_SIZE);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private ObservableCollection<ClientCardViewModel> ConvertToClientCardViewModel(List<Cliente> list)
+        {
+            ClientsList.Clear();
+            foreach (var clientedbModel in list)
+            {
+                ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
+            }
+
+            return ClientsList;
+        }
+        public void FillList(ObservableCollection<ClientCardViewModel> clientCardViews)
+        {
+            //TODO: No client found message   (list.count == 0)
+            ClientsList = clientCardViews;
         }
     }
 }
