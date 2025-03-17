@@ -60,6 +60,7 @@ namespace WpfClient
             services.AddSingleton<SideBarViewModel>();
             services.AddSingleton<AdminSideBarViewModel>();
             services.AddSingleton<UserService>();
+            services.AddSingleton<SearchEmployeeViewModel>();
 
             services.AddTransient<IDialogService, DialogService>();
 

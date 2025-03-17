@@ -41,7 +41,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToEployesView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
+                    Navigation.NavigateTo<SearchEmployeeViewModel>(); 
                 },
                 o => true);
             NavegateToSellsView = new RelayCommand(
