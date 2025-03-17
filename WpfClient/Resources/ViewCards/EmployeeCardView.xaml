@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" Height="182" Width="738">
-    <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" >
+    <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" Margin="0,0,-163,0" >
         <Image HorizontalAlignment="Left" Height="137" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="{Binding ImageSource}"/>
         <TextBlock
             Margin="26,19,175,119"
-            Text="Maria del Carmen Josefa U Nay Ávila del Rosario"
+            Text="{Binding EmployeeName}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="27"
@@ -32,8 +32,8 @@
 
         <Button Content="Ver" 
             Style="{StaticResource PrimaryButtonStyle}"
-            Margin="575,46,22,40"
-            Command="{Binding VoteKickCommand}"
+            Margin="645,40,120,45"
+            Command="{Binding NavigateToViewEmployeeViewCommand}"
         />
     </Grid>
 </UserControl>

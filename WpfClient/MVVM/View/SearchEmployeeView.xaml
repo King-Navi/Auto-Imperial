@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+             xmlns:viewcards="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1445">
     <Viewbox >
@@ -34,13 +35,13 @@
             <Button Content="Filtro" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1180,154,71,583" />
             <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1103,693,34,45" />
 
-            <ListBox ItemsSource="{Binding OnlinePlayersList}" Margin="206,304,384,64"
+            <ListBox ItemsSource="{Binding EmployeesList}" Height="450" Width="850"
                  Background="Transparent"
                  Foreground="White"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-
+                        <viewcards:EmployeeCardView/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
