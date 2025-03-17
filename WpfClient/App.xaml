@@ -22,6 +22,9 @@
             <DataTemplate DataType="{x:Type viewModel:RegisterClientViewModel}">
                 <view:RegisterClientView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchEmployeeViewModel}">
+                <view:SearchEmployeeView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

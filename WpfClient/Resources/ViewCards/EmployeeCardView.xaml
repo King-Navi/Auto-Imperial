@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="WpfClient.Resources.ViewCards.EmployeeCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.Resources.ViewCards"
+             mc:Ignorable="d" Height="182" Width="738">
+    <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" >
+        <Image HorizontalAlignment="Left" Height="137" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="{Binding ImageSource}"/>
+        <TextBlock
+            Margin="26,19,175,119"
+            Text="Maria del Carmen Josefa U Nay Ávila del Rosario"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="27"
+        />
+        <TextBlock
+            Margin="22,75,168,63"
+            Text="Número: SAGM051024"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="20"
+        />
+        <TextBlock
+            Margin="25,118,165,20"
+            Text="Puesto: Especialista en financiamiento"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="27"
+        />
+
+
+        <Button Content="Ver" 
+            Style="{StaticResource PrimaryButtonStyle}"
+            Margin="575,46,22,40"
+            Command="{Binding VoteKickCommand}"
+        />
+    </Grid>
+</UserControl>
