@@ -48,7 +48,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToVehiclesView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
+                    //Navigation.NavigateTo<SearchVehicleViewModel>(); TODO Change page
                 },
                 o => true);
 
@@ -56,7 +56,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToSellView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
+                    Navigation.NavigateTo<SearchSellViewModel>();
                 },
                 o => true);
 

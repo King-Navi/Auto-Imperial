@@ -32,6 +32,12 @@
             <DataTemplate DataType="{x:Type viewModel:ReserveViewModel}">
                 <view:ReserveView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchSellViewModel}">
+                <view:SearchSellView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RegisterSellViewModel}">
+                <view:RegisterSellView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

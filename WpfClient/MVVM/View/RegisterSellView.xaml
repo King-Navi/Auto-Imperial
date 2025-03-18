@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.RegisterSellView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+
+        <Grid Background="{StaticResource BackgroundyColor2}" 
+                Margin="180,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" 
+                Grid.Row="0" Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Nombre -->
+                    <Label Content="Nombre:" 
+           Grid.Row="0" Grid.Column="0" 
+           VerticalAlignment="Center" Margin="5"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="Name"
+                 Text="{Binding ClienteActual.Name, UpdateSourceTrigger=PropertyChanged}"
+                 Width="225" Height="40"
+                 Grid.Row="0" Grid.Column="1"
+                 Margin="5"/>
+
+                    <!-- Apellido Paterno -->
+                    <Label Content="Apellido Paterno:" 
+           Grid.Row="1" Grid.Column="0" 
+           VerticalAlignment="Center" Margin="5"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="ParentalSurname"
+                 Text="{Binding ClienteActual.PaternalSurname, UpdateSourceTrigger=PropertyChanged}"
+                 Width="225" Height="40"
+                 Grid.Row="1" Grid.Column="1"
+                 Margin="5"/>
+
+                    <!-- Apellido Materno -->
+                    <Label Content="Apellido Materno:" 
+           Grid.Row="2" Grid.Column="0" 
+           VerticalAlignment="Center" Margin="5"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="MaternalSurname"
+                 Text="{Binding ClienteActual.MaternalSurname, UpdateSourceTrigger=PropertyChanged}"
+                 Width="225" Height="40"
+                 Grid.Row="2" Grid.Column="1"
+                 Margin="5"/>
+                </Grid>
+
+                <!-- Phone y Email-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="Teléfono:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="Phone"
+                         Text="{Binding ClienteActual.Phone, UpdateSourceTrigger=PropertyChanged}"
+                         Width="128" 
+                         Height="22"/>
+
+                    <Label Content="Correo:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="Email"
+                         Text="{Binding ClienteActual.Email, UpdateSourceTrigger=PropertyChanged}"
+                         Width="128" 
+                         Height="22"/>
+                </StackPanel>
+
+                <!-- Adress -->
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Calle:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="Calle"
+                         Text="{Binding ClienteActual.Street, UpdateSourceTrigger=PropertyChanged}"
+                         Width="128" 
+                         Height="22"/>
+
+                    <Label Content="Número:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:NumericIntPlaceHolderTextBox x:Name="Numero"
+                                                       
+                         Text="{Binding ClienteActual.Number, UpdateSourceTrigger=PropertyChanged}"
+                         Width="128" 
+                         Height="22"/>
+
+                    <Label Content="Ciudad:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="Ciudad"
+                         Text="{Binding ClienteActual.City, UpdateSourceTrigger=PropertyChanged}"
+                         Width="64" 
+                         Height="22"/>
+
+                    <Label Content="C.P." HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:NumericIntPlaceHolderTextBox x:Name="CodigoPostal"
+                         Text="{Binding ClienteActual.CP, UpdateSourceTrigger=PropertyChanged}"
+                         Width="72" 
+                         Height="22"/>
+                </StackPanel>
+
+                <!-- RFC y CURP -->
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="RFC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="RFC"
+                         Text="{Binding ClienteActual.RFC, UpdateSourceTrigger=PropertyChanged}"
+                         Width="72" 
+                         Height="22"/>
+
+                    <Label Content="CURP" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <controls:SimplePlaceHolderTextBox x:Name="CURP"
+                         Text="{Binding ClienteActual.CURP, UpdateSourceTrigger=PropertyChanged}"
+                         Width="166" 
+                         Height="73"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <!-- Buttons -->
+            <Button Content="Registrar cliente" 
+                Height="25" 
+                Width="84" 
+                Margin="651,378,50,47"  
+                Command="{Binding RegisterClientCommand}" />
+
+            <Button Content="Cancelar" 
+                HorizontalAlignment="Left"  
+                VerticalAlignment="Top" 
+                Command="{Binding NavigateToSearchClientView}" 
+                Height="25" 
+                Width="84" 
+                Margin="485,378,0,0"/>
+
+        </Grid>
+    </UserControl>
