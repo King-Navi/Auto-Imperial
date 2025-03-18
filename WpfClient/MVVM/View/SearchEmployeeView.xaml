@@ -23,16 +23,16 @@
             <Grid.RenderTransform>
                 <TranslateTransform Y="-1000" />
             </Grid.RenderTransform>
-            
+
             <Label Content="Buscar Empleado" Margin="416,26,593,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PaddingValue="40,0,0,0"
                 PlaceholderText="Ingrese el nombre o la clave del empleado"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                 FontSizeValue="25" Margin="167,144,490,573"
                 />
-            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
+            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="978,154,267,583" />
             <Button Content="Filtro" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1180,154,71,583" />
             <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
 
@@ -46,6 +46,17 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
+            <TextBlock Text="{Binding ErrorMessage}"
+               Foreground="Red"
+               FontWeight="Bold"
+               FontSize="20"
+               Margin="1066,444,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" Width="284" Height="180"
+               TextWrapping="Wrap"
+               TextAlignment="Center"
+              />
 
         </Grid>
     </Viewbox>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Interfaces
 {
-    interface IEmployeeRepository : IBaseRepository<Vendedor>
+    public interface IEmployeeRepository : IBaseRepository<Vendedor>
     {
         bool Register(Vendedor vendedor);
         bool DeleteById(int id);

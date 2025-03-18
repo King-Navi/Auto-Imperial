@@ -1,4 +1,6 @@
-﻿using Services.Navigation;
+﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.Models;
+using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -135,9 +137,12 @@ namespace WpfClient.MVVM.ViewModel
         public ICommand NavigateToSearchEmployeeView { get; set; }
         public ICommand RegisterEmployeeCommand { get; set; }
 
-        public RegisterEmployeeViewModel(INavigationService navigationService, UserService currentUser)
+        private readonly IEmployeeRepository _employeeRepository;
+
+        public RegisterEmployeeViewModel(INavigationService navigationService, UserService currentUser, IEmployeeRepository employeeRepository)
         {
             Navigation = navigationService;
+            _employeeRepository = employeeRepository;
             InicializateOptionsList();
             NavigateToSearchEmployeeView = new RelayCommand(NavigateToSearchEmployee);
             RegisterEmployeeCommand = new RelayCommand(RegisterEmployee);
@@ -160,42 +165,44 @@ namespace WpfClient.MVVM.ViewModel
         private void RegisterEmployee()
         {
             // Crear un nuevo empleado usando las propiedades actuales
-            Employee employee = new Employee
+            Vendedor employee = new Vendedor
             {
-                Name = this.EmployeeName,
-                PaternalSurname = this.PaternalSurname,
-                MaternalSurname = this.MaternalSurname,
-                Street = this.Street,
-                Number = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
-                CP = this.CP,
-                City = this.City,
-                Phone = this.Phone,
-                Email = this.Mail,
+                nombre = this.EmployeeName,
+                apellidoPaterno = this.PaternalSurname,
+                apellidoMaterno = this.MaternalSurname,
+                calle = this.Street,
+                numero = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
+                codigoPostal = this.CP,
+                ciudad = this.City,
+                telefono = this.Phone,
+                correo = this.Mail,
                 CURP = this.Curp,
                 RFC = this.RFC,
-                EmployeeNumber = this.EmployeeNumber,
-                Branch = this.Branch,
+                numeroEmpleado = this.EmployeeNumber,
+                surcursal = this.Branch,
                 nombreUsuario = this.Username,
-                Password = this.Password,
-                PositionVendor = this.SelectedOption
+                password = this.Password,
+                puestoVendedor = this.SelectedOption
             };
 
-            // Construir el mensaje a mostrar
-            string message = $"Empleado creado:\n" +
-                             $"Nombre: {employee.Name} {employee.PaternalSurname} {employee.MaternalSurname}\n" +
-                             $"Número de empleado: {employee.EmployeeNumber}\n" +
-                             $"Dirección: {employee.Street} {employee.Number}, CP: {employee.CP}, Ciudad: {employee.City}\n" +
-                             $"Teléfono: {employee.Phone}\n" +
-                             $"Correo: {employee.Email}\n" +
-                             $"CURP: {employee.CURP}\n" +
-                             $"RFC: {employee.RFC}\n" +
-                             $"Puesto: {employee.PositionVendor}\n" +
-                             $"Sucursal: {employee.Branch}\n" +
-                             $"Usuario: {employee.Username}\n" +
-                             $"Contraseña: {employee.Password}";
+            try{
+                if (_employeeRepository.Register(employee))
+                {
+                    MessageBox.Show("Empleado registrado correctamente");
+                    Navigation.NavigateTo<SearchEmployeeViewModel>();
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar el empleado");
 
-            // Mostrar el empleado en un MessageBox
-            MessageBox.Show(message, "Empleado Registrado", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error al registrar el empleado: " + e.StackTrace);
+            }
+
+            
         }
     }
 }

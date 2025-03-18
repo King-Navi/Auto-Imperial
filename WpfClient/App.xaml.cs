@@ -43,6 +43,7 @@ namespace WpfClient
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<ISellRepository, SellRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
 
             //Navigation
@@ -60,12 +61,13 @@ namespace WpfClient
             services.AddSingleton<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
 
-            services.AddSingleton<SideBarViewModel>();
-            services.AddSingleton<AdminSideBarViewModel>();
+            services.AddTransient<SideBarViewModel>();
+            services.AddTransient<AdminSideBarViewModel>();
             services.AddSingleton<UserService>();
-            services.AddSingleton<SearchEmployeeViewModel>();
-            services.AddSingleton<InfoEmployeeViewModel>();
-            services.AddSingleton<RegisterEmployeeViewModel>();
+            services.AddTransient<SearchEmployeeViewModel>();
+            services.AddTransient<InfoEmployeeViewModel>();
+            services.AddTransient<RegisterEmployeeViewModel>();
+            services.AddTransient<EditEmployeeViewModel>();
 
             services.AddTransient<IDialogService, DialogService>();
 

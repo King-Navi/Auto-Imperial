@@ -1,4 +1,5 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.Repositories;
 using Services.Dialogs;
 using Services.Navigation;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
@@ -58,18 +60,20 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
         private readonly IDialogService _dialogService;
-        //private readonly IClientRepository _clientRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
 
         public ICommand NavigateToSearchEmployeeView { get; set; }
-        public InfoEmployeeViewModel(INavigationService navigationService, IDialogService dialogService)//, IClientRepository clientRepository)
+        public ICommand DeleteEmployeeCommand { get; set; }
+        public InfoEmployeeViewModel(INavigationService navigationService, IDialogService dialogService, IEmployeeRepository employeeRepository)
         {
             _dialogService = dialogService;
-            //_clientRepository = clientRepository; //TODO Employee repository
+            _employeeRepository = employeeRepository;
             Navigation = navigationService;
 
             
             NavigateToSearchEmployeeView = new RelayCommand(NavigateToSearchEmployee);
+            DeleteEmployeeCommand = new RelayCommand(DeleteEmployee);
         }
         public void ReceiveParameter(object parameter)
         {
@@ -91,6 +95,18 @@ namespace WpfClient.MVVM.ViewModel
             Navigation.NavigateTo<SearchEmployeeViewModel>();
         }
 
+        void DeleteEmployee()
+        {
+            var confirmationVM = new ConfirmationViewModel("Confimracion de eliminación", $"¿Desea eliminar este empleado?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var result = _dialogService.ShowDialog(confirmationVM);
+            if (false == result)
+            {
+                return;
+            }
+            DeleteEmployeeOnDB(ActualEmployee.IdEmployee);
+        }
+
+
         private void InitProperties()
         {
             EmployeeName = ActualEmployee.Name + " " + ActualEmployee.PaternalSurname + " " + ActualEmployee.MaternalSurname;
@@ -107,7 +123,20 @@ namespace WpfClient.MVVM.ViewModel
             Branch = ActualEmployee.Branch;
         }
 
-        
+        private void DeleteEmployeeOnDB(int IdEmployee)
+        {
+            if (_employeeRepository.DeleteById(IdEmployee))
+            {
+                MessageBox.Show("Empleado eliminado correctamente");
+                Navigation.NavigateTo<SearchEmployeeViewModel>();
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar el empleado");
+            }
+        }
+
+
 
 
     }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Repositories
 {
-    class EmployeeRepository : BaseRepository<Vendedor>, IEmployeeRepository
+    public class EmployeeRepository : BaseRepository<Vendedor>, IEmployeeRepository
     {
         const int MAX_PAGES = 20;
         const int MAX_SEARCH = 100;
@@ -119,23 +119,27 @@ namespace AutoImperialDAO.DAO.Repositories
             List<Vendedor> result = new List<Vendedor>();
             try
             {
-                if (String.IsNullOrEmpty(parameter)
-                    || String.IsNullOrWhiteSpace(parameter))
+                if (string.IsNullOrEmpty(parameter) || string.IsNullOrWhiteSpace(parameter))
                 {
                     throw new ArgumentException("parameter null");
                 }
+
+                parameter = parameter.ToLower();
+
                 result = await _context.Vendedors
-                           .Where(c =>
-                            c.estadoCuenta == statusEnum.ToString() &&
-                            (c.CURP.ToLower() == parameter ||
-                             (c.RFC ?? string.Empty).ToLower() == parameter ||
-                             c.nombre.ToLower() == parameter ||
-                             c.apellidoPaterno.ToLower() == parameter ||
-                             c.apellidoMaterno.ToLower() == parameter))
-                           .ToListAsync();
+                    .Where(c =>
+                        c.estadoCuenta == statusEnum.ToString() &&
+                        (
+                            c.CURP.ToLower() == parameter ||
+                            (c.RFC ?? string.Empty).ToLower() == parameter ||
+                            ((c.nombre + " " + c.apellidoPaterno + " " + c.apellidoMaterno).ToLower()).Contains(parameter)
+                        )
+                    )
+                    .ToListAsync();
+
                 if (result == null || result.Count == 0)
                 {
-                    throw new KeyNotFoundException($"No se encontró un empleado");
+                    throw new KeyNotFoundException("No se encontró un empleado");
                 }
             }
             catch (Exception ex)
@@ -231,14 +235,14 @@ namespace AutoImperialDAO.DAO.Repositories
         {
             return !String.IsNullOrEmpty(employee.CURP)
                 && !String.IsNullOrWhiteSpace(employee.CURP)
-                && !_context.Clientes.Any(c => c.CURP == employee.CURP && c.idCliente != employee.idVendedor);
+                && !_context.Vendedors.Any(c => c.CURP == employee.CURP && c.idVendedor != employee.idVendedor);
         }
 
         private bool ValidateRFC(Vendedor employee)
         {
             return !String.IsNullOrEmpty(employee.RFC)
                 && !String.IsNullOrWhiteSpace(employee.RFC)
-                && !_context.Clientes.Any(c => c.RFC == employee.RFC && c.idCliente != employee.idVendedor);
+                && !_context.Vendedors.Any(c => c.RFC == employee.RFC && c.idVendedor != employee.idVendedor);
         }
     }
 }
