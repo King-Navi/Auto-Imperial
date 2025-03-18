@@ -31,7 +31,7 @@ namespace AutoImperialDAO.DAO.Repositories
             throw new NotImplementedException();
         }
 
-        Task<Venta> ISellRepository.SearchByIdAsync(int id)
+        public Task<Venta> SearchByIdAsync(int id)
         {
             //TODO
             throw new NotImplementedException();

@@ -176,7 +176,10 @@ namespace WpfClient.MVVM.ViewModel
         private ObservableCollection<ClientCardViewModel> ConvertToClientCardViewModel(List<Cliente> list)
         {
             ClientsList.Clear();
-            foreach (var clientedbModel in list)
+
+            var validClients = list.Where(client => client.idCliente != -1);
+
+            foreach (var clientedbModel in validClients)
             {
                 ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
             }

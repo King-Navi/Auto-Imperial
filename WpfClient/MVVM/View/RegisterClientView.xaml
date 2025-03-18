@@ -11,128 +11,123 @@
 
     <Grid Background="{StaticResource BackgroundyColor2}" Margin="180,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- Sección: Datos personales -->
-        <GroupBox Header="Datos Personales" Grid.Row="0" Padding="10" Margin="10">
+        <!-- Sección: Datos Personales -->
+        <GroupBox Style="{StaticResource AnimatedGroupBoxStyle}" Header="Datos Personales" Grid.Row="0" Grid.Column="0" Padding="10" Margin="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="Nombre:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Nombre:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
                 <controls:SimplePlaceHolderTextBox x:Name="Name"  
-                    Text="{Binding ClienteActual.Name, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="225" Height="40" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            Text="{Binding ClienteActual.Name, UpdateSourceTrigger=PropertyChanged}" 
+            Width="225" Height="40" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
-                <Label Content="Apellido Paterno:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Apellido Paterno:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
                 <controls:SimplePlaceHolderTextBox x:Name="ParentalSurname" 
-                    Text="{Binding ClienteActual.PaternalSurname, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="225" Height="40" Grid.Row="1" Grid.Column="1" Margin="5"/>
+            Text="{Binding ClienteActual.PaternalSurname, UpdateSourceTrigger=PropertyChanged}" 
+            Width="225" Height="40" Grid.Row="1" Grid.Column="1" Margin="5"/>
 
-                <Label Content="Apellido Materno:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Apellido Materno:" Grid.Row="2" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
                 <controls:SimplePlaceHolderTextBox x:Name="MaternalSurname" 
-                    Text="{Binding ClienteActual.MaternalSurname, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="225" Height="40" Grid.Row="2" Grid.Column="1" Margin="5"/>
+            Text="{Binding ClienteActual.MaternalSurname, UpdateSourceTrigger=PropertyChanged}" 
+            Width="225" Height="40" Grid.Row="2" Grid.Column="1" Margin="5"/>
             </Grid>
         </GroupBox>
 
         <!-- Sección: Contacto -->
-        <GroupBox Header="Contacto" Grid.Row="1" Padding="10" Margin="10">
+        <GroupBox Style="{StaticResource AnimatedGroupBoxStyle}" Header="Contacto" Grid.Row="0" Grid.Column="1" Padding="10" Margin="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <Label Content="Teléfono:" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Teléfono: " Grid.Row="0" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="Phone" 
                     Text="{Binding ClienteActual.Phone, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="150" Height="30" Grid.Column="1" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="0" Margin="5"/>
 
-                <Label Content="Correo:" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Correo:" Grid.Row="1" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="Email" 
                     Text="{Binding ClienteActual.Email, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="200" Height="30" Grid.Column="3" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="1" Margin="5"/>
             </Grid>
         </GroupBox>
 
         <!-- Sección: Dirección -->
-        <GroupBox Header="Dirección" Grid.Row="2" Padding="10" Margin="10">
+        <GroupBox Style="{StaticResource AnimatedGroupBoxStyle}" Header="Dirección" Grid.Row="1" Grid.Column="0" Padding="10" Margin="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <Label Content="Calle:" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Calle:" Grid.Row="0" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="Calle" 
                     Text="{Binding ClienteActual.Street, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="150" Height="30" Grid.Column="1" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="0" Margin="5"/>
 
-                <Label Content="Número:" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Número:" Grid.Row="1" Margin="5"/>
                 <controls:NumericIntPlaceHolderTextBox x:Name="Numero" 
                     Text="{Binding ClienteActual.Number, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="80" Height="30" Grid.Column="3" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="1" Margin="5"/>
 
-                <Label Content="Ciudad:" Grid.Column="4" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="Ciudad:" Grid.Row="2" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="Ciudad" 
                     Text="{Binding ClienteActual.City, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="120" Height="30" Grid.Column="5" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="2" Margin="5"/>
 
-                <Label Content="C.P.:" Grid.Column="6" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}"  Content="C.P.:" Grid.Row="3" Margin="5"/>
                 <controls:NumericIntPlaceHolderTextBox x:Name="CodigoPostal" 
                     Text="{Binding ClienteActual.CP, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="100" Height="30" Grid.Column="7" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="3" Margin="5"/>
             </Grid>
         </GroupBox>
 
-        <!-- Sección: RFC y CURP -->
-        <GroupBox Header="Identificación" Grid.Row="3" Padding="10" Margin="10">
+        <!-- Sección: Identificación -->
+        <GroupBox Style="{StaticResource AnimatedGroupBoxStyle}" Header="Identificación" Grid.Row="1" Grid.Column="1" Padding="10" Margin="10">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <Label Content="RFC:" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="RFC:" Grid.Row="0" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="RFC" 
                     Text="{Binding ClienteActual.RFC, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="150" Height="30" Grid.Column="1" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="0" Margin="5"/>
 
-                <Label Content="CURP:" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+                <Label Style="{StaticResource WhiteNormalLabelStyle}" Content="CURP:" Grid.Row="1" Margin="5"/>
                 <controls:SimplePlaceHolderTextBox x:Name="CURP" 
                     Text="{Binding ClienteActual.CURP, UpdateSourceTrigger=PropertyChanged}" 
-                    Width="200" Height="30" Grid.Column="3" Margin="5"/>
+                    Width="225" Height="40" Grid.Row="1" Margin="5"/>
             </Grid>
         </GroupBox>
 
         <!-- Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Margin="20">
-            <Button Content="Registrar Cliente"  Margin="10" Style="{StaticResource PrimaryButtonStyle}"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" Margin="20">
+            <Button FontSize="30" Height="60" Content="Registrar Cliente"  Margin="10" Style="{StaticResource PrimaryButtonStyle}"
                     Command="{Binding RegisterClientCommand}"/>
-            <Button Content="Cancelar"  Margin="10" Style="{StaticResource PrimaryButtonStyle}" Background="Red"
+            <Button FontSize="30" Height="60" Content="Cancelar"  Margin="10" Style="{StaticResource PrimaryButtonStyle}" Background="Red"
                     Command="{Binding NavigateToSearchClientView}"/>
         </StackPanel>
     </Grid>

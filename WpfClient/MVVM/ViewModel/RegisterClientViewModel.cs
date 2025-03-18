@@ -87,18 +87,6 @@ namespace WpfClient.MVVM.ViewModel
             var confirmationVM = new ConfirmationViewModel( TextKeys.Confirmation, TextKeys.Confirm_Register_Client, Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
 
-            //HARDCODED
-            //ClienteActual.Email = "juan@example.com";
-            //ClienteActual.Phone = "1234567890";
-            //ClienteActual.Street = "Calle 1";
-            //ClienteActual.Number = 123;
-            //ClienteActual.PaternalSurname = "P";
-            //ClienteActual.MaternalSurname = "M";
-            //ClienteActual.CP = "12345";
-            //ClienteActual.City = "CDMX";
-            //ClienteActual.RFC = "GOMJ850123MNE";
-            //ClienteActual.CURP = "GOMJ850123HDFRLR05";
-            //HARDCODED
 
             if (result == true )
             {

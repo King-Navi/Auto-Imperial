@@ -116,6 +116,7 @@ namespace AutoImperialDAO.DAO.Repositories
 
         public async Task<List<Cliente>> SearchByCurpRfcNameAsync(string parameter, AccountStatusEnum statusEnum)
         {
+            string estadoStr = statusEnum.ToString(); 
             List<Cliente> result = new List<Cliente>();
             try
             {
@@ -125,14 +126,14 @@ namespace AutoImperialDAO.DAO.Repositories
                     throw new ArgumentException("parameter null");
                 }
                 result = await _context.Clientes
-                           .Where(c =>
-                            c.estado == statusEnum.ToString() &&
-                            (c.CURP.ToLower() == parameter ||
-                             (c.RFC ?? string.Empty).ToLower() == parameter ||
-                             c.nombre.ToLower() == parameter ||
-                             c.apellidoPaterno.ToLower() == parameter ||
-                             c.apellidoMaterno.ToLower() == parameter))
-                           .ToListAsync();
+                                    .Where(c =>
+                                        c.estado.ToUpper() == estadoStr.ToUpper() &&
+                                        (
+                                            EF.Functions.Like(c.CURP.Trim().ToUpper(), $"%{parameter.Trim().ToUpper()}%") ||
+                                            EF.Functions.Like((c.RFC ?? string.Empty).Trim().ToUpper(), $"%{parameter.Trim().ToUpper()}%") ||
+                                            EF.Functions.Like((c.nombre + " " + c.apellidoPaterno + " " + c.apellidoMaterno).ToUpper(), $"%{parameter.Trim().ToUpper()}%")
+                                        ))
+                                    .ToListAsync();
                 if (result == null || result.Count == 0)
                 {
                     throw new KeyNotFoundException($"No se encontró un clientes");

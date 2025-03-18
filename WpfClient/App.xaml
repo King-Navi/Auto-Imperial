@@ -11,6 +11,8 @@
                 <ResourceDictionary Source="Resources/Styles/Animations.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/SimplePlaceHolderTexboxStyle.xaml" />
                 <ResourceDictionary Source="Resources/Styles/NumericIntPlaceHolderTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Labels.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/GroupBoxStyle.xaml"/>
 
                 <!--Idioms  It should be one lenguage dictionary at the time-->
                 <ResourceDictionary Source="Idioms/strings.es_mx.xaml"/>
