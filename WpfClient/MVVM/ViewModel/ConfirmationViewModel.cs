@@ -6,7 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 using WpfClient.Utilities;
+using WpfClient.Utilities.Enum;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -14,6 +16,7 @@ namespace WpfClient.MVVM.ViewModel
     {
         private string _message;
         private string _tittle;
+        private string _imageSource;
 
         public string Message
         {
@@ -34,6 +37,16 @@ namespace WpfClient.MVVM.ViewModel
                 OnPropertyChanged(nameof(Tittle));
             }
         }
+        public string ImageIcon
+        {
+            get => _imageSource;
+            set
+            {
+                _imageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand ConfirmCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
@@ -43,10 +56,11 @@ namespace WpfClient.MVVM.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ConfirmationViewModel(string tittle,string message)
+        public ConfirmationViewModel(string tittle,string message, ConfirmationIconType iconType)
         {
             Message = message;
             Tittle = tittle;
+            ImageIcon = PathsIcons.GetIconPath(iconType);
             ConfirmCommand = new RelayCommand(o => CloseRequested?.Invoke(true));
             CancelCommand = new RelayCommand(o => CloseRequested?.Invoke(false));
         }

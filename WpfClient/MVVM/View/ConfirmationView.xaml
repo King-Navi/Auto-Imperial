@@ -11,13 +11,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" d:Text="Titulo" Text="{Binding Tittle}" FontSize="16" Margin="10" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundWhiteColor}"/>
-
-        <TextBlock Grid.Row="1" d:Text="Contenido del mensaje" Text="{Binding Message}" FontSize="16" Margin="10" Foreground="White"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Aceptar" Command="{Binding ConfirmCommand}" Width="75" Margin="5,5,50,5"/>
-            <Button Content="Cancelar" Command="{Binding CancelCommand}" Width="75" Margin="5,5,50,5"/>
+        <Border d:Background="Pink" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Height="150">
+            <Image Source="{Binding ImageIcon}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" />
+        </Border>
+        <Label Grid.Row="1" d:Content="Titulo" Content="{Binding Tittle}" FontSize="32" Margin="10" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundWhiteColor}"/>
+        <Label Grid.Row="2" d:Content="Contenido del mensaje" Content="{Binding Message}" FontSize="16" Margin="10" Foreground="White"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Aceptar" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding ConfirmCommand}" FontSize="32" Height="70" Margin="5,5,50,5"/>
+            <Button Content="Cancelar" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding CancelCommand}" FontSize="32" Height="70"  Margin="5,5,50,5"/>
         </StackPanel>
     </Grid>
 </Window>

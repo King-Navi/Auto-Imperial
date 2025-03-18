@@ -1,5 +1,6 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Models;
+using Services.Dialogs;
 using Services.Navigation;
 using System;
 using System.Collections.Generic;
@@ -72,9 +73,11 @@ namespace WpfClient.MVVM.ViewModel
         public ICommand DeleteClientCommand { get; set; }
         public ICommand EditClientCommand { get; set; }
         public IRelayCommand SearchCommand { get; set; }
+        private IDialogService _dialogService;
 
-        public SearchClientViewModel(INavigationService navigationService, IClientRepository clientRepository)
+        public SearchClientViewModel(INavigationService navigationService, IClientRepository clientRepository, IDialogService dialogService)
         {
+            _dialogService = dialogService;
             _clientRepository = clientRepository;
             _ = InitializeAsync();
             Navigation = navigationService;
@@ -87,6 +90,12 @@ namespace WpfClient.MVVM.ViewModel
             DeleteClientCommand = new RelayCommand(
                 o =>
                 {
+                    var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Deseas registrar al cliente?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+                    var result = _dialogService.ShowDialog(confirmationVM);
+                    if (false == result)
+                    {
+                        return;
+                    }
                     if (Selected != null)
                     {
                         _clientRepository.DeleteById(Selected.ClientActual.IdClient);

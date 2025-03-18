@@ -26,8 +26,6 @@ namespace WpfClient.Resources.Controls
         public static readonly DependencyProperty PlaceholderProperty =
             DependencyProperty.Register("Placeholder", typeof(string), typeof(SimplePlaceHolderTextBox), new PropertyMetadata(string.Empty));
 
-
-
         public bool IsEmpty
         {
             get { return (bool)GetValue(IsEmptyProperty); }

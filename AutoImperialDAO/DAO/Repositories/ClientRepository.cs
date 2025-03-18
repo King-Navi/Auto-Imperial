@@ -14,7 +14,6 @@ namespace AutoImperialDAO.DAO.Repositories
     public class ClientRepository : BaseRepository<Cliente>, IClientRepository
     {
         const int MAX_PAGES = 20;
-
         const int MAX_SEARCH = 100;
         public ClientRepository(AutoImperialContext context) : base(context)
         {

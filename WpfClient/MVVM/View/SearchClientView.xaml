@@ -23,7 +23,7 @@
                        FontSize="40" 
                        Foreground="{DynamicResource ForegroundWhiteColor}" 
                        FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center" Width="285" Height="65"/>
             </StackPanel>
         </Border>
 
@@ -33,7 +33,7 @@
                 <Label Content="Buscar" 
                        FontSize="32" 
                        Foreground="{DynamicResource ForegroundWhiteColor}" 
-                       Margin="0,0,10,0"/>
+                       Margin="0,0,10,0" Width="100" Height="60"/>
 
                 <custom:SimplePlaceHolderTextBox Text="{Binding SearchText , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                  Height="60" 
@@ -50,8 +50,8 @@
                 <Button Command="{Binding SearchCommand}" 
                         FontSize="32" 
                         Content="Buscar" 
-                        Width="187" 
-                        Style="{StaticResource PrimaryButtonStyle}"/>
+                        Width="185" 
+                        Style="{StaticResource PrimaryButtonStyle}" Height="65"/>
 
                 <Button Content="Registrar cliente"  
                         FontSize="32"  
@@ -59,7 +59,7 @@
                         Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding NavegateToRegisterClientViewCommand}" 
                         Foreground="{DynamicResource ForegroundWhiteColor}"
-                        Margin="50,0,10,0"/>
+                        Margin="50,0,10,0" Height="65"/>
             </StackPanel>
         </Border>
 
@@ -72,7 +72,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundyColor1}">
                     <ListBox ItemsSource="{Binding ClientsList}" 
                              SelectedItem="{Binding Selected, Mode=TwoWay}" 
-                             Background="{StaticResource BackgroundyColor1}">
+                             Background="{StaticResource BackgroundyColor1}" Width="900" Height="400">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <local:ClientCardView />
@@ -90,7 +90,7 @@
                        FontSize="40"
                        HorizontalAlignment="Center"
                        TextAlignment="Center"
-                       Visibility="{Binding ErrorMessageVisibility}"/>
+                       Visibility="{Binding ErrorMessageVisibility}" Width="470" Height="50"/>
         </Border>
 
         <!-- BOTONES DE ACCIÓN -->
@@ -100,13 +100,13 @@
                         FontSize="30"
                         Command="{Binding DeleteClientCommand}" 
                         Style="{StaticResource PrimaryButtonStyle}" 
-                        Margin="20,0,20,0" HorizontalAlignment="Right"/>
+                        Margin="20,0,20,0" HorizontalAlignment="Right" Width="250" Height="60"/>
 
                 <Button Content="Editar cliente" 
                         Style="{StaticResource PrimaryButtonStyle}" 
                         FontSize="30"
                         Command="{Binding EditClientCommand}" 
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right" Width="215" Height="60"/>
             </StackPanel>
         </Border>
     </Grid>
