@@ -21,7 +21,7 @@
 
     <Viewbox Stretch="Fill">
         <Grid>
-        <ContentControl Content="{Binding Navigation.CurrentView}" Margin="0"/>
+            <ContentControl Content="{Binding Navigation.CurrentView}" Height="850" Margin="0,0,0,0"/>
         <ContentControl Content="{Binding SideBar}" Margin="0,0,1134,0" />
         </Grid>
     </Viewbox>

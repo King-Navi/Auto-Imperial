@@ -8,7 +8,8 @@
              xmlns:viewcards="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1445">
-    <Viewbox >
+
+    <Viewbox Stretch="Fill">
         <Grid x:Name="animatedGrid" Background="{StaticResource BackgroundyColor2}" >
             <Grid.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
@@ -33,7 +34,7 @@
                 />
             <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
             <Button Content="Filtro" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1180,154,71,583" />
-            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1103,693,34,45" />
+            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
 
             <ListBox ItemsSource="{Binding EmployeesList}" Height="450" Width="850"
                  Background="Transparent"

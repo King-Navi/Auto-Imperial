@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,53 @@ namespace WpfClient.MVVM.Model
         {
             get => base.estadoCuenta;
             set { base.estadoCuenta = value; OnPropertyChanged(); }
+        }
+        
+
+        public new string PositionVendor
+        {
+            get => base.puestoVendedor;
+            set { base.puestoVendedor = value; OnPropertyChanged(); }
+        }
+
+        public new string EmployeeNumber
+        {
+            get => base.numeroEmpleado;
+            set { base.numeroEmpleado = value; OnPropertyChanged(); }
+        }
+
+        public new string Branch
+        {
+            get => base.surcusal;
+            set { base.surcusal = value; OnPropertyChanged(); }
+        }
+
+        public new string Username
+        {
+            get => base.nombreUsuario;
+            set { base.nombreUsuario = value; OnPropertyChanged(); }
+        }
+
+        public new string Password
+        {
+            get => base.password;
+            set { base.password = value; OnPropertyChanged(); }
+        }
+
+
+        public object Clone()
+        {
+            var clone = (Employee)Activator.CreateInstance(typeof(Employee));
+
+            foreach (PropertyInfo prop in typeof(Employee).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (prop.CanRead && prop.CanWrite)
+                {
+                    prop.SetValue(clone, prop.GetValue(this));
+                }
+            }
+
+            return clone;
         }
     }
 }

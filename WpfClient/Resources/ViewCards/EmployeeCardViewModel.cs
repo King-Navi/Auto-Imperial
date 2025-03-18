@@ -48,7 +48,7 @@ namespace WpfClient.Resources.ViewCards
         NavigateToViewEmployeeViewCommand = new RelayCommand(
             o =>
             {
-               Navigation.NavigateTo<HomeViewModel>();  //TODO Change this
+               Navigation.NavigateTo<InfoEmployeeViewModel>(Employee);  //TODO Change this
             },
             o => true);
     }

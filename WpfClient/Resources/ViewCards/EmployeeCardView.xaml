@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" Height="182" Width="738">
     <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" Margin="0,0,-163,0" >
-        <Image HorizontalAlignment="Left" Height="137" Margin="22,10,0,0" VerticalAlignment="Top" Width="136" Source="{Binding ImageSource}"/>
         <TextBlock
             Margin="26,19,175,119"
             Text="{Binding EmployeeName}"
