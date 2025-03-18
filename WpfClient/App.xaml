@@ -47,6 +47,7 @@
             <DataTemplate DataType="{x:Type viewModel:RegisterSellViewModel}">
                 <view:RegisterSellView/>
             </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

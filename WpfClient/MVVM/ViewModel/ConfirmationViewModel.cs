@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfClient.Idioms;
 using WpfClient.Utilities;
 using WpfClient.Utilities.Enum;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    public class ConfirmationViewModel : INotifyPropertyChanged
+    public class ConfirmationViewModel : INotifyPropertyChanged, ICloseable
     {
         private string _message;
         private string _tittle;
@@ -56,10 +57,18 @@ namespace WpfClient.MVVM.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ConfirmationViewModel(string tittle,string message, ConfirmationIconType iconType)
+        public ConfirmationViewModel(TextKeys tittle, TextKeys message, ConfirmationIconType iconType)
         {
-            Message = message;
-            Tittle = tittle;
+            Message = Language.GetLocalizedString(tittle) ;
+            Tittle = Language.GetLocalizedString(message) ;
+            ImageIcon = PathsIcons.GetIconPath(iconType);
+            ConfirmCommand = new RelayCommand(o => CloseRequested?.Invoke(true));
+            CancelCommand = new RelayCommand(o => CloseRequested?.Invoke(false));
+        }
+        public ConfirmationViewModel(string tittle, string message, ConfirmationIconType iconType)
+        {
+            Message = tittle;
+            Tittle = message;
             ImageIcon = PathsIcons.GetIconPath(iconType);
             ConfirmCommand = new RelayCommand(o => CloseRequested?.Invoke(true));
             CancelCommand = new RelayCommand(o => CloseRequested?.Invoke(false));

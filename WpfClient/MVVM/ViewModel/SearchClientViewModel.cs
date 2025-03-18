@@ -91,7 +91,10 @@ namespace WpfClient.MVVM.ViewModel
             DeleteClientCommand = new RelayCommand(
                 o =>
                 {
-                    var confirmationVM = new ConfirmationViewModel(Language.GetLocalizedString(TextKeys.Delete_Register), $"¿Deseas eliminar al cliente? No se puede deshacer", Utilities.Enum.ConfirmationIconType.WarningIcon);
+                    var confirmationVM = new ConfirmationViewModel(
+                       TextKeys.Delete_Register, 
+                        TextKeys.Confirm_Delete_Client, 
+                        Utilities.Enum.ConfirmationIconType.WarningIcon);
                     var result = _dialogService.ShowDialog(confirmationVM);
                     if (false == result)
                     {

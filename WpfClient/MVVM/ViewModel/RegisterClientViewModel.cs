@@ -6,6 +6,7 @@ using System.Windows.Input;
 using WpfClient.Utilities.Validation;
 using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Models;
+using WpfClient.Idioms;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -44,6 +45,7 @@ namespace WpfClient.MVVM.ViewModel
         public ICommand NavigateToSearchClientView { get; set; }
         public RegisterClientViewModel(INavigationService navigationService, IDialogService dialogService , IClientRepository clientRepository)
         {
+            DisposeData();
             _dialogService = dialogService;
             _clientRepository = clientRepository;
             Navigation = navigationService;
@@ -52,8 +54,25 @@ namespace WpfClient.MVVM.ViewModel
             RegisterClientCommand = new RelayCommand(RegisterClient, CanRegisterClient);
         }
 
+        private void DisposeData()
+        {
+            ClienteActual = new Client();  
+            _clienteOriginal = null;
+        }
+
         private void NavigateToSearchClient()
         {
+            if (HasChanges())
+            {
+                var confirmCancel = new ConfirmationViewModel(TextKeys.Cancel_Edit, TextKeys.Discard_Changes, Utilities.Enum.ConfirmationIconType.WarningIcon);
+                var result = _dialogService.ShowDialog(confirmCancel);
+
+                if (result == false)
+                    return;
+            }
+
+            ClienteActual = new Client();
+            _clienteOriginal = null;
             Navigation.NavigateTo<SearchClientViewModel>();
         }
 
@@ -61,24 +80,24 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (IsEditMode() && !HasChanges())
             {
-                var alertNoChanges = new AlertViewModel("" ,"No hay cambios para guardar", Utilities.Enum.AlertIconType.AlertIcon);
+                var alertNoChanges = new AlertViewModel(TextKeys.No_Changes_Made, TextKeys.No_Changes_To_Save, Utilities.Enum.AlertIconType.AlertIcon);
                 _dialogService.ShowDialog(alertNoChanges);
                 return;
             }
-            var confirmationVM = new ConfirmationViewModel( "Confimracion de registro",$"¿Deseas registrar al cliente {ClienteActual.Name}?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var confirmationVM = new ConfirmationViewModel( TextKeys.Confirmation, TextKeys.Confirm_Register_Client, Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
 
             //HARDCODED
-            ClienteActual.Email = "juan@example.com";
-            ClienteActual.Phone = "1234567890";
-            ClienteActual.Street = "Calle 1";
-            ClienteActual.Number = 123;
-            ClienteActual.PaternalSurname = "P";
-            ClienteActual.MaternalSurname = "M";
-            ClienteActual.CP = "12345";
-            ClienteActual.City = "CDMX";
-            ClienteActual.RFC = "GOMJ850123MNE";
-            ClienteActual.CURP = "GOMJ850123HDFRLR05";
+            //ClienteActual.Email = "juan@example.com";
+            //ClienteActual.Phone = "1234567890";
+            //ClienteActual.Street = "Calle 1";
+            //ClienteActual.Number = 123;
+            //ClienteActual.PaternalSurname = "P";
+            //ClienteActual.MaternalSurname = "M";
+            //ClienteActual.CP = "12345";
+            //ClienteActual.City = "CDMX";
+            //ClienteActual.RFC = "GOMJ850123MNE";
+            //ClienteActual.CURP = "GOMJ850123HDFRLR05";
             //HARDCODED
 
             if (result == true )
@@ -86,20 +105,20 @@ namespace WpfClient.MVVM.ViewModel
                 var validationErrors = ValidateClient();
                 if (validationErrors.Count > 0)
                 {
-                    var alertVM = new AlertViewModel("","Errores de validación",Utilities.Enum.AlertIconType.AlertIcon, validationErrors);
+                    var alertVM = new AlertViewModel(TextKeys.Validation_Errors,TextKeys.Validation_Errors,Utilities.Enum.AlertIconType.AlertIcon, validationErrors);
                     _ = _dialogService.ShowDialog(alertVM);
                     return;
                 }
 
                 if (SaveClientChanges())
                 {
-                    var alertVM = new AlertViewModel("", $"Se registrar al cliente {ClienteActual.Name}!!!", Utilities.Enum.AlertIconType.AlertIcon);
+                    var alertVM = new AlertViewModel(TextKeys.Client_Registered, TextKeys.Client_Will_Be_Registered, Utilities.Enum.AlertIconType.AlertIcon);
                     _ = _dialogService.ShowDialog(alertVM);
 
                 }
                 else
                 {
-                    var errorVM = new AlertViewModel("", "Error al guardar el cliente.", Utilities.Enum.AlertIconType.AlertIcon);
+                    var errorVM = new AlertViewModel(TextKeys.Save_Error, TextKeys.Save_Error, Utilities.Enum.AlertIconType.AlertIcon);
                     _ = _dialogService.ShowDialog(errorVM);
                 }
             }
@@ -131,6 +150,9 @@ namespace WpfClient.MVVM.ViewModel
         }
         private bool HasChanges()
         {
+            if (_clienteOriginal == null)
+                return !_clientComparer.Equals(new Client(), ClienteActual); 
+
             return !_clientComparer.Equals(_clienteOriginal, ClienteActual);
         }
         private bool CanRegisterClient(object obj)
@@ -159,6 +181,10 @@ namespace WpfClient.MVVM.ViewModel
             {
                 ClienteActual = client;
                 _clienteOriginal = (Client)client.Clone(); 
+            }
+            else
+            {
+                DisposeData();
             }
         }
     }

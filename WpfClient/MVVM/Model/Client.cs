@@ -117,6 +117,7 @@ namespace WpfClient.MVVM.Model
             get => base.estado;
             set { base.estado = value; OnPropertyChanged(); }
         }
+
         /// <summary>
         /// Implementation of the Prototype pattern to clone the object.
         /// </summary>
