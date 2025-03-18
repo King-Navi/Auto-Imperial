@@ -31,7 +31,7 @@ public partial class Vehiculo
 
     public virtual ICollection<Foto> Fotos { get; set; } = new List<Foto>();
 
-    public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
+    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 
     public virtual CompraProveedor idCompraProveedorNavigation { get; set; } = null!;
 

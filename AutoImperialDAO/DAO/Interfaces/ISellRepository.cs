@@ -13,6 +13,6 @@ namespace AutoImperialDAO.DAO.Interfaces
         bool Register(Cliente client);
         bool DeleteById(int id);
         bool Edit(Cliente client);
-        Task<Ventum> SearchByIdAsync(int id);
+        Task<Venta> SearchByIdAsync(int id);
     }
 }

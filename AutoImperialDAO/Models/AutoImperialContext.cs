@@ -37,7 +37,7 @@ public partial class AutoImperialContext : DbContext
 
     public virtual DbSet<Vendedor> Vendedores { get; set; }
 
-    public virtual DbSet<Ventum> Venta { get; set; }
+    public virtual DbSet<Venta> Venta { get; set; }
 
     public virtual DbSet<Version> Versions { get; set; }
 
@@ -385,7 +385,7 @@ public partial class AutoImperialContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Ventum>(entity =>
+        modelBuilder.Entity<Venta>(entity =>
         {
             entity.HasKey(e => e.idVenta).HasName("PK__Venta__077D5614C258B6A8");
 
