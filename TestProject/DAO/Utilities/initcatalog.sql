@@ -13,15 +13,15 @@ CREATE TABLE [Administrador] (
   [calle] varchar(50),
   [numero] int,
   [codigoPostal] varchar(10),
-  [ciudad] varchar(10),
+  [ciudad] varchar(50),
   [estadoCuenta] varchar(50) NOT NULL,
   [CURP] varchar(50) NOT NULL,
-  [RFC] varchar(13) NOT NULL,
+  [RFC] varchar(15) NOT NULL,
   [puestoAdministrador] varchar(70) NOT NULL,
   [nombreUsuario] VARCHAR(50) NOT NULL UNIQUE,
   [password] VARCHAR(50) NOT NULL,
   [numeroEmpleado] VARCHAR(50) NOT NULL UNIQUE,
-  [surcursal] VARCHAR(50)
+  [sucursal] VARCHAR(50)
 )
 
 CREATE TABLE [Vendedor] (
@@ -34,15 +34,15 @@ CREATE TABLE [Vendedor] (
   [calle] varchar(50),
   [numero] int,
   [codigoPostal] varchar(10),
-  [ciudad] varchar(10),
+  [ciudad] varchar(50),
   [estadoCuenta] varchar(50) NOT NULL,
   [CURP] varchar(50) NOT NULL,
-  [RFC] varchar(13) NOT NULL,
+  [RFC] varchar(15) NOT NULL,
   [puestoVendedor] varchar(70) NOT NULL,
   [nombreUsuario] VARCHAR(50) NOT NULL UNIQUE,
   [password] VARCHAR(50) NOT NULL,
   [numeroEmpleado] VARCHAR(50) NOT NULL UNIQUE,
-  [surcursal] VARCHAR(50) NOT NULL
+  [sucursal] VARCHAR(50) NOT NULL
 )
 
 
@@ -50,7 +50,7 @@ CREATE TABLE [Reserva] (
   [idReserva] int PRIMARY KEY IDENTITY(1, 1),
   [fechaReserva] datetime NOT NULL,
   [montoEnganche] decimal(38,0),
-  [notasAdicionales] varchar(50),
+  [notasAdicionales] varchar(100),
   [idVendedor] int NOT NULL,
   [idCliente] int NOT NULL,
   [idVersion] int NOT NULL
@@ -67,8 +67,8 @@ CREATE TABLE [Cliente] (
   [calle] varchar(50),
   [numero] int,
   [codigoPostal] varchar(10),
-  [ciudad] varchar(10),
-  [RFC] char(13),
+  [ciudad] varchar(50),
+  [RFC] char(15),
   [CURP] varchar(50) NOT NULL UNIQUE,
   [estado] varchar(40) NOT NULL
 )
@@ -79,7 +79,7 @@ CREATE TABLE [Venta] (
   [fechaVenta] date NOT NULL,
   [precioVehiculo] decimal(30,0),
   [formaPago] varchar(40),
-  [notasAdicionales] varchar(60),
+  [notasAdicionales] varchar(100),
   [idReserva] int NOT NULL,
   [idVehiculo] int NOT NULL
 )

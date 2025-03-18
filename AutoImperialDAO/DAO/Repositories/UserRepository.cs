@@ -30,7 +30,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 };
             }
 
-            var vendedor = _context.Vendedors
+            var vendedor = _context.Vendedores
                 .FirstOrDefault(v => v.nombreUsuario.ToLower() == username.ToLower()
                                   && v.password == password);
             if (vendedor != null)

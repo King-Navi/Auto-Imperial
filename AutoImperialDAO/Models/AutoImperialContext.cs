@@ -35,7 +35,7 @@ public partial class AutoImperialContext : DbContext
 
     public virtual DbSet<Vehiculo> Vehiculos { get; set; }
 
-    public virtual DbSet<Vendedor> Vendedors { get; set; }
+    public virtual DbSet<Vendedor> Vendedores { get; set; }
 
     public virtual DbSet<Ventum> Venta { get; set; }
 
