@@ -6,7 +6,117 @@
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Ver información del vendedor: " Height="60" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#fffff7" Margin="74,12,280,0"></Label>
+            <TextBlock
+                Margin="522,25,13,391"
+                Text="{Binding EmployeeNumber}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Nombre: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="74,102,612,0"></Label>
+            <TextBlock
+                Margin="193,104,263,312"
+                Text="{Binding EmployeeName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Dirección: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="74,153,612,0"></Label>
+            <TextBlock
+                Margin="182,154,390,262"
+                Text="{Binding Street}" 
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <TextBlock
+                Margin="423,154,313,262"
+                Text="{Binding Number}" 
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20" RenderTransformOrigin="4.684,0.157"
+            >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.151"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock
+                Margin="145,203,559,213"
+                Text="{Binding CP}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <TextBlock
+                Margin="262,203,270,213"
+                Text="{Binding City}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="74,248,612,0"></Label>
+            <TextBlock
+                Margin="191,253,340,163"
+                Text="{Binding Phone}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Correo: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="74,306,612,0"></Label>
+            <TextBlock
+                Margin="185,308,319,108"
+                Text="{Binding Mail}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Curp: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="541,95,181,0"></Label>
+            <TextBlock
+                Margin="621,99,10,317"
+                Text="{Binding Curp}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="RFC: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="543,147,179,0"></Label>
+            <TextBlock
+                Margin="621,153,13,263"
+                Text="{Binding RFC}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Puesto: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="541,200,145,0"></Label>
+            <TextBlock
+                Margin="475,255,12,161"
+                Text="{Binding Position}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Surcursal: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="485,306,192,0"></Label>
+            <TextBlock
+                Margin="590,308,13,108"
+                Text="{Binding Branch}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />  
+
+            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchEmployeeView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Editar empleado" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="606,383,25,25" />
+            <Button Background="DarkRed" Content="Eliminar empleado" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="413,382,217,26" />
+        </Grid>
+    </Viewbox>
+
 </UserControl>

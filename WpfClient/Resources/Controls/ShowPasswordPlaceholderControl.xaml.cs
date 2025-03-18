@@ -150,6 +150,14 @@ namespace WpfClient.Resources.Controls
             get { return (Thickness)GetValue(CheckBoxMarginProperty); }
             set { SetValue(CheckBoxMarginProperty, value); }
         }
+        public double CheckBoxFontSize
+        {
+            get { return (double)GetValue(CheckBoxFontSizeProperty); }
+            set { SetValue(CheckBoxFontSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty CheckBoxFontSizeProperty =
+            DependencyProperty.Register(nameof(CheckBoxFontSize), typeof(double), typeof(ShowPasswordPlaceholderControl), new PropertyMetadata(20.0));
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {

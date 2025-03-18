@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Resources.ViewCards;
 using WpfClient.Utilities;
@@ -27,9 +28,12 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
+        public ICommand NavigateToRegisterEmployeeView { get; set; }
+
         public SearchEmployeeViewModel(INavigationService navigationService, UserService currentUser)
         {
             Navigation = navigationService;
+            NavigateToRegisterEmployeeView = new RelayCommand(NavigateToRegisterEmployee);
 
             //TODO Omg so much hard code
             EmployeesList.Add(new EmployeeCardViewModel(navigationService, new Employee
@@ -55,7 +59,12 @@ namespace WpfClient.MVVM.ViewModel
             }));
         }
 
+        private void NavigateToRegisterEmployee()
+        {
+            Navigation.NavigateTo<RegisterEmployeeViewModel>();
+        }
 
-       
+
+
     }
 }
