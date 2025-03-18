@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
@@ -18,6 +19,7 @@ namespace WpfClient.MVVM.ViewModel
         private const int FIRST_SEARCH_INIT = 1;
         private const int FIRST_SEARCH_PAGE_SIZE = 5;
         private const int PAGE_SIZE = 100;
+        private const int SECONDS_ERROR_MSG = 6;
         private INavigationService navigation;
         public INavigationService Navigation
         {
@@ -53,6 +55,16 @@ namespace WpfClient.MVVM.ViewModel
                 _searchText = value;
                 OnPropertyChanged();
                 SearchCommand.RaiseCanExecuteChanged();
+            }
+        }
+        private Visibility _errorMessageVisibility = Visibility.Collapsed;
+        public Visibility ErrorMessageVisibility
+        {
+            get => _errorMessageVisibility;
+            set
+            {
+                _errorMessageVisibility = value;
+                OnPropertyChanged(nameof(ErrorMessageVisibility));
             }
         }
 
@@ -162,10 +174,16 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (clientCardViews.Count == 1 && clientCardViews[0].ClientActual.IdClient == -1)
             {
-
+                ShowErrorMessage();
                 return;
             }
             ClientsList = clientCardViews;
+        }
+        private async void ShowErrorMessage()
+        {
+            ErrorMessageVisibility = Visibility.Visible;
+            await Task.Delay(TimeSpan.FromSeconds(SECONDS_ERROR_MSG)); 
+            ErrorMessageVisibility = Visibility.Collapsed;
         }
     }
 }

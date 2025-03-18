@@ -8,26 +8,106 @@
              xmlns:custom="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1445" >
-    <Grid Background="{StaticResource BackgroundyColor2}" Margin="180,0,0,0">
-        <custom:SimplePlaceHolderTextBox Text="{Binding SearchText , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Margin="114,20,0,0" Height="50" Width="477" VerticalAlignment="Top" FontSize="30" Placeholder="Buscar por nombre o CURP o RFC"/>
-        <Button Command="{Binding SearchCommand}" Content="Buscar" HorizontalAlignment="Left" Margin="632,29,0,0" VerticalAlignment="Top" Height="32" Width="90"/>
-        <Label Content="Buscar" HorizontalAlignment="Left" Margin="25,38,0,0" VerticalAlignment="Top" Width="67"/>
-        <Button Content="Registrar cliente" HorizontalAlignment="Left" Margin="748,24,0,0" VerticalAlignment="Top" Height="32" Width="90" Command="{Binding NavegateToRegisterClientViewCommand}"/>
-        
-        <Button Content="Elimianr cliente" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="32" Width="90" Command="{Binding DeleteClientCommand}" Margin="1104,735,0,0"/>
-        <Button Content="Editar cliente" HorizontalAlignment="Left" Margin="904,735,0,0" VerticalAlignment="Top" Height="32" Width="90" Command="{Binding EditClientCommand}"/>
-        
-        <Grid Background="Aqua" Width="600" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ListBox ItemsSource="{Binding ClientsList}" 
-                         SelectedItem="{Binding Selected, Mode=TwoWay}" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <local:ClientCardView />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
-        </Grid>
+    <Grid Background="{StaticResource BackgroundyColor2}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- TÍTULO -->
+        <Border Grid.Row="0" Margin="0,20,0,20">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <Label Content="Buscar clientes" 
+                       FontSize="40" 
+                       Foreground="{DynamicResource ForegroundWhiteColor}" 
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- BARRA DE BÚSQUEDA -->
+        <Border Grid.Row="1" Margin="0,20,0,20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Buscar" 
+                       FontSize="32" 
+                       Foreground="{DynamicResource ForegroundWhiteColor}" 
+                       Margin="0,0,10,0"/>
+
+                <custom:SimplePlaceHolderTextBox Text="{Binding SearchText , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                 Height="60" 
+                                                 Width="477" 
+                                                 FontSize="30" 
+                                                 Placeholder="Buscar por nombre o CURP o RFC"
+                                                 Margin="0,0,30,0"
+                                                 >
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                    </TextBox.InputBindings>
+                </custom:SimplePlaceHolderTextBox>
+
+                <Button Command="{Binding SearchCommand}" 
+                        FontSize="32" 
+                        Content="Buscar" 
+                        Width="187" 
+                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                <Button Content="Registrar cliente"  
+                        FontSize="32"  
+                        Width="300" 
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding NavegateToRegisterClientViewCommand}" 
+                        Foreground="{DynamicResource ForegroundWhiteColor}"
+                        Margin="50,0,10,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- LISTA DE CLIENTES -->
+        <Border Grid.Row="2" Margin="0,20,0,20" Padding="20">
+            <Grid HorizontalAlignment="Center" MinWidth="900" MinHeight="400">
+                <Grid.Background>
+                    <SolidColorBrush Color="Aqua"/>
+                </Grid.Background>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundyColor1}">
+                    <ListBox ItemsSource="{Binding ClientsList}" 
+                             SelectedItem="{Binding Selected, Mode=TwoWay}" 
+                             Background="{StaticResource BackgroundyColor1}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <local:ClientCardView />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- MENSAJE DE ERROR -->
+        <Border Grid.Row="3" Margin="0,20,0,20">
+            <TextBlock Text="No se encontraron clientes"
+                       Foreground="Red"
+                       FontSize="40"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"
+                       Visibility="{Binding ErrorMessageVisibility}"/>
+        </Border>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <Border Grid.Row="4" Margin="0,20,0,20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Eliminar cliente" 
+                        FontSize="30"
+                        Command="{Binding DeleteClientCommand}" 
+                        Style="{StaticResource PrimaryButtonStyle}" 
+                        Margin="20,0,20,0" HorizontalAlignment="Right"/>
+
+                <Button Content="Editar cliente" 
+                        Style="{StaticResource PrimaryButtonStyle}" 
+                        FontSize="30"
+                        Command="{Binding EditClientCommand}" 
+                        HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
