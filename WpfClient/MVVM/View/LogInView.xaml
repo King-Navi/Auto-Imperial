@@ -45,6 +45,7 @@
                     <Label Content="Correo: " Margin="85,466,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
                     <Label Content="Contraseña: " Margin="85,707,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
 
+
                     <Button Content="Iniciar sesión" FontSize="50" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="262,1017,259,109" />
                     <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                     PlaceholderText="Ingrese su correo electrónico"
@@ -62,6 +63,15 @@
                         Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                         FontSizeValue="30"
                     />
+
+                    <Label Content="{Binding ErrorMessage}"
+                       Foreground="Red"
+                       FontWeight="Bold"
+                       FontSize="20"
+                       Margin="85,950,82,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+
                 </Grid>
             </Viewbox>
 

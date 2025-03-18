@@ -1,6 +1,7 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.Repositories;
 using AutoImperialDAO.Models;
-using Services.Dialogs;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Services.Navigation;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    internal class SearchClientViewModel : Services.Navigation.ViewModel
+    internal class SearchSellViewModel : Services.Navigation.ViewModel
     {
         private const int FIRST_SEARCH_INIT = 1;
         private const int FIRST_SEARCH_PAGE_SIZE = 5;
         private const int PAGE_SIZE = 100;
-        private const int SECONDS_ERROR_MSG = 6;
         private INavigationService navigation;
         public INavigationService Navigation
         {
@@ -58,26 +58,14 @@ namespace WpfClient.MVVM.ViewModel
                 SearchCommand.RaiseCanExecuteChanged();
             }
         }
-        private Visibility _errorMessageVisibility = Visibility.Collapsed;
-        public Visibility ErrorMessageVisibility
-        {
-            get => _errorMessageVisibility;
-            set
-            {
-                _errorMessageVisibility = value;
-                OnPropertyChanged(nameof(ErrorMessageVisibility));
-            }
-        }
 
         public ICommand NavegateToRegisterClientViewCommand { get; set; }
         public ICommand DeleteClientCommand { get; set; }
         public ICommand EditClientCommand { get; set; }
         public IRelayCommand SearchCommand { get; set; }
-        private IDialogService _dialogService;
 
-        public SearchClientViewModel(INavigationService navigationService, IClientRepository clientRepository, IDialogService dialogService)
+        public SearchSellViewModel(INavigationService navigationService, IClientRepository clientRepository)
         {
-            _dialogService = dialogService;
             _clientRepository = clientRepository;
             _ = InitializeAsync();
             Navigation = navigationService;
@@ -88,43 +76,37 @@ namespace WpfClient.MVVM.ViewModel
                 },
                 o => true);
             DeleteClientCommand = new RelayCommand(
-                o =>
+            o =>
+            {
+                if (Selected != null)
                 {
-                    var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Deseas registrar al cliente?", Utilities.Enum.ConfirmationIconType.WarningIcon);
-                    var result = _dialogService.ShowDialog(confirmationVM);
-                    if (false == result)
-                    {
-                        return;
-                    }
-                    if (Selected != null)
-                    {
                         _clientRepository.DeleteById(Selected.ClientActual.IdClient);
                         ClientsList.Remove(Selected);
                         Selected = null;
                     }
-                },
+            },
                 o => Selected != null);
             EditClientCommand = new RelayCommand(
-                o =>
-                {
+            o =>
+            {
                     if (Selected != null)
-                    {
+                {
                         Navigation.NavigateTo<RegisterClientViewModel>(Selected.ClientActual);
                         Selected = null;
                     }
                 },
                 o => Selected != null);
-            SearchCommand = new RelayCommand(
-                async o =>
-                {
-                    if (!String.IsNullOrWhiteSpace(SearchText))
-                    {
-                        var clientes = await SearchClientCurpRfcNameAsync();
-                        FillList(ConvertToClientCardViewModel(clientes));
-                        Selected = null;
-                    }
-                },
-                o => !String.IsNullOrWhiteSpace(SearchText));
+            //SearchCommand = new RelayCommand(
+            //    async o =>
+            //    {
+            //        if (!String.IsNullOrWhiteSpace(SearchText))
+            //        {
+            //            var clientes = await SearchClientCurpRfcNameAsync();
+            //            FillList(ConvertToClientCardViewModel(clientes));
+            //            Selected = null;
+            //        }
+            //    },
+            //    o => !String.IsNullOrWhiteSpace(SearchText));
         }
         private async Task<List<Cliente>> SearchClientCurpRfcNameAsync()
         {
@@ -152,8 +134,9 @@ namespace WpfClient.MVVM.ViewModel
                 var resultado = await SearchClientsAsync(FIRST_SEARCH_INIT, FIRST_SEARCH_PAGE_SIZE, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
                 FillList(ConvertToClientCardViewModel(resultado));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error fetching clients: {ex.Message}");
             }
         }
 
@@ -174,25 +157,15 @@ namespace WpfClient.MVVM.ViewModel
             ClientsList.Clear();
             foreach (var clientedbModel in list)
             {
-                ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
+                //ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
             }
 
             return ClientsList;
         }
         public void FillList(ObservableCollection<ClientCardViewModel> clientCardViews)
         {
-            if (clientCardViews.Count == 1 && clientCardViews[0].ClientActual.IdClient == -1)
-            {
-                ShowErrorMessage();
-                return;
-            }
+            //TODO: No client found message   (list.count == 0)
             ClientsList = clientCardViews;
-        }
-        private async void ShowErrorMessage()
-        {
-            ErrorMessageVisibility = Visibility.Visible;
-            await Task.Delay(TimeSpan.FromSeconds(SECONDS_ERROR_MSG)); 
-            ErrorMessageVisibility = Visibility.Collapsed;
         }
     }
 }

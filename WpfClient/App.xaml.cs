@@ -41,6 +41,8 @@ namespace WpfClient
 
             // Registrar Repositorios
             services.AddTransient<IClientRepository, ClientRepository>();
+            services.AddTransient<ISellRepository, SellRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
 
             //Navigation
@@ -54,6 +56,8 @@ namespace WpfClient
 
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
+            services.AddSingleton<SearchSellViewModel>();
+            services.AddSingleton<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
 
             services.AddSingleton<SideBarViewModel>();

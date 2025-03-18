@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfClient.Utilities;
 using WpfClient.MVVM.Model;
+using AutoImperialDAO.DAO.Interfaces;
 
 namespace WpfClient.MVVM.ViewModel
 {
     internal class LogInViewModel : Services.Navigation.ViewModel
     {
-
         private readonly UserService user;
         public RelayCommand NavegateToHomeViewCommand { get; set; }
+        private readonly IUserRepository _userRepository;
 
         private INavigationService navigation;
         public INavigationService Navigation
@@ -26,13 +27,13 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        
+
         private string username;
 
         public string Username
         {
             get => username;
-            set { username= value; OnPropertyChanged(); }
+            set { username = value; OnPropertyChanged(); }
         }
 
         private string password;
@@ -43,27 +44,57 @@ namespace WpfClient.MVVM.ViewModel
             set { password = value; OnPropertyChanged(); }
         }
 
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public LogInViewModel(INavigationService navigationService, UserService newUser)
+        public LogInViewModel(INavigationService navigationService, UserService newUser, IUserRepository newUserRepository)
         {
             user = newUser;
             Navigation = navigationService;
+            _userRepository = newUserRepository;
+
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
-                    user.SaveUser(Username,password); //TODO this is a hardcode for login user
+                    ErrorMessage = string.Empty;
 
-                    if (Username == null || !Username.Equals("Admin")) //TODO do a good validation
+                    if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
                     {
-                        Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
+                        ErrorMessage = "Por favor, ingresa usuario y contraseña.";
+                        return;
                     }
-                    else
+
+                    var authenticatedUser = _userRepository.Authenticate(Username, Password);
+
+                    if (authenticatedUser == null)
+                    {
+                        ErrorMessage = "Credenciales inválidas. Intenta de nuevo.";
+                        return;
+                    }
+
+                    user.SaveUser(authenticatedUser.Username, authenticatedUser.Password, authenticatedUser.Role);
+
+                    if (authenticatedUser.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                     {
                         Mediator.Notify(MediatorKeys.SHOW_ADMIN_SIDE_BAR, null);
                     }
+                    else
+                    {
+                        Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
+                    }
+
                     Navigation.NavigateTo<HomeViewModel>();
                 },
                 o => true);
         }
+
     }
 }
