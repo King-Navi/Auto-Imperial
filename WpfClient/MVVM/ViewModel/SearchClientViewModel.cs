@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WpfClient.Idioms;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 
@@ -90,7 +91,7 @@ namespace WpfClient.MVVM.ViewModel
             DeleteClientCommand = new RelayCommand(
                 o =>
                 {
-                    var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Deseas registrar al cliente?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+                    var confirmationVM = new ConfirmationViewModel(Language.GetLocalizedString(TextKeys.Delete_Register), $"¿Deseas eliminar al cliente? No se puede deshacer", Utilities.Enum.ConfirmationIconType.WarningIcon);
                     var result = _dialogService.ShowDialog(confirmationVM);
                     if (false == result)
                     {

@@ -15,6 +15,8 @@ using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using WpfClient.Idioms;
+using System.Globalization;
 
 namespace WpfClient
 {
@@ -78,9 +80,40 @@ namespace WpfClient
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var  logInWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            //ChangeLanguage(IdiomsKeys.es_mx.ToString());
+            var logInWindow = ServiceProvider.GetRequiredService<MainWindow>();
             logInWindow.Show();
             base.OnStartup(e);
         }
+        public static void ChangeLanguage(string langCode)
+        {
+            const string RESOURCE_FOLDER = "Idioms";
+            const string BASE_NAME = "strings";
+            const string EXTENSION_FILE = "xalm";
+            //string resourcePath = $"{RESOURCE_FOLDER}/{BASE_NAME}.{langCode}.{EXTENSION_FILE}";
+            string resourcePath = $"Idioms/strings.{langCode}.xalm";
+
+            var newDict = new ResourceDictionary
+            {
+                Source = new Uri(resourcePath, UriKind.Relative)
+            };
+
+            var existingDict = Application.Current.Resources.MergedDictionaries
+                                 .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains($"{RESOURCE_FOLDER}."));
+
+            if (existingDict != null)
+            {
+                int index = Application.Current.Resources.MergedDictionaries.IndexOf(existingDict);
+                Application.Current.Resources.MergedDictionaries[index] = newDict;
+            }
+            else
+            {
+                Application.Current.Resources.MergedDictionaries.Add(newDict);
+            }
+            CultureInfo culture = new CultureInfo(langCode);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
     }
 }

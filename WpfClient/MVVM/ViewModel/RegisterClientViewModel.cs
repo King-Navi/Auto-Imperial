@@ -61,7 +61,7 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (IsEditMode() && !HasChanges())
             {
-                var alertNoChanges = new AlertViewModel($"No hay cambios para guardar");
+                var alertNoChanges = new AlertViewModel("" ,"No hay cambios para guardar", Utilities.Enum.AlertIconType.AlertIcon);
                 _dialogService.ShowDialog(alertNoChanges);
                 return;
             }
@@ -86,20 +86,20 @@ namespace WpfClient.MVVM.ViewModel
                 var validationErrors = ValidateClient();
                 if (validationErrors.Count > 0)
                 {
-                    var alertVM = new AlertViewModel("Errores de validación", validationErrors);
+                    var alertVM = new AlertViewModel("","Errores de validación",Utilities.Enum.AlertIconType.AlertIcon, validationErrors);
                     _ = _dialogService.ShowDialog(alertVM);
                     return;
                 }
 
                 if (SaveClientChanges())
                 {
-                    var alertVM = new AlertViewModel($"Se registrar al cliente {ClienteActual.Name}!!!");
+                    var alertVM = new AlertViewModel("", $"Se registrar al cliente {ClienteActual.Name}!!!", Utilities.Enum.AlertIconType.AlertIcon);
                     _ = _dialogService.ShowDialog(alertVM);
 
                 }
                 else
                 {
-                    var errorVM = new AlertViewModel("Error al guardar el cliente.");
+                    var errorVM = new AlertViewModel("", "Error al guardar el cliente.", Utilities.Enum.AlertIconType.AlertIcon);
                     _ = _dialogService.ShowDialog(errorVM);
                 }
             }
