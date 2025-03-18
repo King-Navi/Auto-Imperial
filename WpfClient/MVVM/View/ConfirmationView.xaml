@@ -5,12 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfClient.MVVM.View"
         mc:Ignorable="d"
-        Title="ConfirmationView" Height="450" Width="800">
-    <StackPanel Margin="20">
-        <TextBlock Text="{Binding Message}" FontSize="16" Margin="10"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Aceptar" Command="{Binding ConfirmCommand}" Width="75" Margin="5"/>
-            <Button Content="Cancelar" Command="{Binding CancelCommand}" Width="75" Margin="5"/>
+        Title="ConfirmationView" Height="450" Width="800" Background="{DynamicResource ForegroundWhiteColor}">
+    <Grid Margin="20" Background="{DynamicResource SuperDarkGreenColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" d:Text="Titulo" Text="{Binding Tittle}" FontSize="16" Margin="10" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundWhiteColor}"/>
+
+        <TextBlock Grid.Row="1" d:Text="Contenido del mensaje" Text="{Binding Message}" FontSize="16" Margin="10" Foreground="White"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Aceptar" Command="{Binding ConfirmCommand}" Width="75" Margin="5,5,50,5"/>
+            <Button Content="Cancelar" Command="{Binding CancelCommand}" Width="75" Margin="5,5,50,5"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

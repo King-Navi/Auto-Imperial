@@ -65,7 +65,7 @@ namespace WpfClient.MVVM.ViewModel
                 _dialogService.ShowDialog(alertNoChanges);
                 return;
             }
-            var confirmationVM = new ConfirmationViewModel($"¿Deseas registrar al cliente {ClienteActual.Name}?");
+            var confirmationVM = new ConfirmationViewModel( "Confimracion de registro",$"¿Deseas registrar al cliente {ClienteActual.Name}?");
             var result = _dialogService.ShowDialog(confirmationVM);
 
             //HARDCODED

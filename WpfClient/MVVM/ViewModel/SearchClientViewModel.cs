@@ -131,9 +131,8 @@ namespace WpfClient.MVVM.ViewModel
                 var resultado = await SearchClientsAsync(FIRST_SEARCH_INIT, FIRST_SEARCH_PAGE_SIZE, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
                 FillList(ConvertToClientCardViewModel(resultado));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error fetching clients: {ex.Message}");
             }
         }
 
@@ -161,7 +160,11 @@ namespace WpfClient.MVVM.ViewModel
         }
         public void FillList(ObservableCollection<ClientCardViewModel> clientCardViews)
         {
-            //TODO: No client found message   (list.count == 0)
+            if (clientCardViews.Count == 1 && clientCardViews[0].ClientActual.IdClient == -1)
+            {
+
+                return;
+            }
             ClientsList = clientCardViews;
         }
     }

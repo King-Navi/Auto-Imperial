@@ -6,10 +6,20 @@
         xmlns:local="clr-namespace:WpfClient.MVVM.View"
         mc:Ignorable="d"
         Title="AlertView" Height="450" Width="800">
-    <StackPanel Margin="20">
-        <TextBlock d:Text="Mensaje de ejemplo" Text="{Binding Message}" FontSize="16" Margin="10"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Aceptar" Command="{Binding ConfirmCommand}" Width="75" Margin="5"/>
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" d:Text="TItulo" Text="{Binding Tittle}" FontSize="16" Margin="10" HorizontalAlignment="Center"/>
+
+        <TextBlock Grid.Row="1" d:Text="Contenido del mensaje" Text="{Binding Message}" FontSize="16" Margin="10" HorizontalAlignment="Left"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Aceptar" Command="{Binding ConfirmCommand}" Width="75"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>
