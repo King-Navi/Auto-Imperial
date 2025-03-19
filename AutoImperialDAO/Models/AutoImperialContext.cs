@@ -15,11 +15,11 @@ public partial class AutoImperialContext : DbContext
     {
     }
 
-    public virtual DbSet<Administrador> Administradors { get; set; }
+    public virtual DbSet<Administrador> Administradores { get; set; }
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
-    public virtual DbSet<CompraProveedor> CompraProveedors { get; set; }
+    public virtual DbSet<CompraProveedor> CompraProveedores { get; set; }
 
     public virtual DbSet<Descuento> Descuentos { get; set; }
 
@@ -29,7 +29,7 @@ public partial class AutoImperialContext : DbContext
 
     public virtual DbSet<Modelo> Modelos { get; set; }
 
-    public virtual DbSet<Proveedor> Proveedors { get; set; }
+    public virtual DbSet<Proveedor> Proveedores { get; set; }
 
     public virtual DbSet<Reserva> Reservas { get; set; }
 
@@ -39,7 +39,7 @@ public partial class AutoImperialContext : DbContext
 
     public virtual DbSet<Venta> Venta { get; set; }
 
-    public virtual DbSet<Version> Versions { get; set; }
+    public virtual DbSet<Version> Versiones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
