@@ -23,7 +23,7 @@ namespace WpfClient.MVVM.ViewModel
         }
 
         public RelayCommand NavegateToHomeView { get; set; }
-        public RelayCommand NavegateToEployesView { get; set; }
+        public RelayCommand NavegateToEployeesView { get; set; }
         public RelayCommand NavegateToSellsView { get; set; }
         public RelayCommand NavegateToSupliersView { get; set; }
         public RelayCommand NavegateToReportsView { get; set; }
@@ -38,7 +38,7 @@ namespace WpfClient.MVVM.ViewModel
                 },
                 o => true);
 
-            NavegateToEployesView = new RelayCommand(
+            NavegateToEployeesView = new RelayCommand(
                 o =>
                 {
                     Navigation.NavigateTo<SearchEmployeeViewModel>(); 
