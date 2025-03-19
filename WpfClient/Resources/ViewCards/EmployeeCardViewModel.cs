@@ -17,6 +17,8 @@ namespace WpfClient.Resources.ViewCards
         private Employee _employee = new Employee();
 
         public string EmployeeName { get; set; }
+        public string EmployeeNumber { get; set; }
+        public string EmployeePosition { get; set; }
 
         public Employee Employee
     {
@@ -43,7 +45,9 @@ namespace WpfClient.Resources.ViewCards
     public EmployeeCardViewModel(INavigationService navigationService, Employee employee)
     {
         Employee = employee;
-        EmployeeName = employee.Name;
+        EmployeeName = employee.Name + " " + employee.PaternalSurname + " " + employee.MaternalSurname;
+        EmployeeNumber = "Número de empleado: " + employee.Number;
+        EmployeePosition = "Puesto: " + employee.PositionVendor;
         Navigation = navigationService;
         NavigateToViewEmployeeViewCommand = new RelayCommand(
             o =>

@@ -15,14 +15,14 @@
         />
         <TextBlock
             Margin="22,75,168,63"
-            Text="Número: SAGM051024"
+            Text="{Binding EmployeeNumber}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="20"
         />
         <TextBlock
             Margin="25,118,165,20"
-            Text="Puesto: Especialista en financiamiento"
+            Text="{Binding EmployeePosition}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="27"
