@@ -30,10 +30,11 @@
                 PlaceholderText="Ingrese el nombre o la clave del empleado"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="25" Margin="167,144,490,573"
+                FontSizeValue="25"  Height="100" Width="850"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" Margin="172,158,0,0"
                 />
-            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="978,154,267,583" />
-            <Button Content="Filtro" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="1180,154,71,583" />
+            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
             <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
 
             <ListBox ItemsSource="{Binding EmployeesList}" Height="450" Width="850"
