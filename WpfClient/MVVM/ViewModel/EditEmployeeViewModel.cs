@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
+using Services.Dialogs;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -150,10 +151,12 @@ namespace WpfClient.MVVM.ViewModel
         public ICommand EditEmployeeCommand { get; set; }
 
         private readonly IEmployeeRepository _employeeRepository;
-        
+        private readonly IDialogService _dialogService;
 
-        public EditEmployeeViewModel(INavigationService navigationService, UserService currentUser, IEmployeeRepository employeeRepository)
+
+        public EditEmployeeViewModel(INavigationService navigationService, UserService currentUser, IEmployeeRepository employeeRepository, IDialogService dialogService)
         {
+            _dialogService = dialogService;
             Navigation = navigationService;
             _employeeRepository = employeeRepository;
             InicializateOptionsList();
@@ -211,46 +214,50 @@ namespace WpfClient.MVVM.ViewModel
         }
         private void EditEmployee()
         {
-            // Crear un nuevo empleado usando las propiedades actuales
-            Vendedor employee = new Vendedor
+            var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Esta seguro que desea registrar a este nuevo empleado?", Utilities.Enum.ConfirmationIconType.RegisterIcon);
+            var result = _dialogService.ShowDialog(confirmationVM);
+            if (result == true)
             {
-                nombre = this.EmployeeName,
-                apellidoPaterno = this.PaternalSurname,
-                apellidoMaterno = this.MaternalSurname,
-                calle = this.Street,
-                numero = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
-                codigoPostal = this.CP,
-                ciudad = this.City,
-                telefono = this.Phone,
-                correo = this.Mail,
-                CURP = this.Curp,
-                RFC = this.RFC,
-                numeroEmpleado = this.EmployeeNumber,
-                sucursal = this.Branch,
-                nombreUsuario = this.Username,
-                puestoVendedor = this.SelectedOption,
-                idVendedor = ActualEmployee.IdEmployee,
-                Reservas = ActualEmployee.Reservas
-            };
-
-            
-
-            try
-            {
-                if (_employeeRepository.Edit(employee))
+                Vendedor employee = new Vendedor
                 {
-                    MessageBox.Show("Empleado editado correctamente");
-                    Navigation.NavigateTo<SearchEmployeeViewModel>();
-                }
-                else
-                {
-                    MessageBox.Show("Error al editar el empleado");
+                    nombre = this.EmployeeName,
+                    apellidoPaterno = this.PaternalSurname,
+                    apellidoMaterno = this.MaternalSurname,
+                    calle = this.Street,
+                    numero = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
+                    codigoPostal = this.CP,
+                    ciudad = this.City,
+                    telefono = this.Phone,
+                    correo = this.Mail,
+                    CURP = this.Curp,
+                    RFC = this.RFC,
+                    numeroEmpleado = this.EmployeeNumber,
+                    sucursal = this.Branch,
+                    nombreUsuario = this.Username,
+                    puestoVendedor = this.SelectedOption,
+                    idVendedor = ActualEmployee.IdEmployee,
+                    Reservas = ActualEmployee.Reservas
+                };
 
+
+
+                try
+                {
+                    if (_employeeRepository.Edit(employee))
+                    {
+                        MessageBox.Show("Empleado editado correctamente");
+                        Navigation.NavigateTo<SearchEmployeeViewModel>();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al editar el empleado");
+
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error al registrar el empleado: " + e.StackTrace);
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error al registrar el empleado: " + e.StackTrace);
+                }
             }
 
 
