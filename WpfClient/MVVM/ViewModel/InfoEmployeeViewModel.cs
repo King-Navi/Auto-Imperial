@@ -65,6 +65,7 @@ namespace WpfClient.MVVM.ViewModel
 
         public ICommand NavigateToSearchEmployeeView { get; set; }
         public ICommand DeleteEmployeeCommand { get; set; }
+        public ICommand EditEmployeeCommand { get; set; }
         public InfoEmployeeViewModel(INavigationService navigationService, IDialogService dialogService, IEmployeeRepository employeeRepository)
         {
             _dialogService = dialogService;
@@ -74,6 +75,7 @@ namespace WpfClient.MVVM.ViewModel
             
             NavigateToSearchEmployeeView = new RelayCommand(NavigateToSearchEmployee);
             DeleteEmployeeCommand = new RelayCommand(DeleteEmployee);
+            EditEmployeeCommand = new RelayCommand(EditEmployee);
         }
         public void ReceiveParameter(object parameter)
         {
@@ -93,6 +95,11 @@ namespace WpfClient.MVVM.ViewModel
         private void NavigateToSearchEmployee()
         {
             Navigation.NavigateTo<SearchEmployeeViewModel>();
+        }
+
+        private void EditEmployee()
+        {
+            Navigation.NavigateTo<EditEmployeeViewModel>(ActualEmployee);
         }
 
         void DeleteEmployee()

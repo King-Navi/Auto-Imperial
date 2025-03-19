@@ -112,9 +112,9 @@
                 FontSize="20"
             />  
 
-            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
+        
             <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchEmployeeView}" Margin="101,383,605,25" />
-            <Button Background="{StaticResource SecondaryColor1}" Content="Editar empleado" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="606,383,25,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Editar empleado" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditEmployeeCommand}" Margin="606,383,25,25" />
             <Button Background="DarkRed" Content="Eliminar empleado" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding DeleteEmployeeCommand}" Margin="413,382,217,26" />
         </Grid>
     </Viewbox>

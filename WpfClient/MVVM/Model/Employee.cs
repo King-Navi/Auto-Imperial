@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoImperialDAO.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -127,6 +128,8 @@ namespace WpfClient.MVVM.Model
             get => base.password;
             set { base.password = value; OnPropertyChanged(); }
         }
+
+        public ICollection<Reserva> Reservas;
 
 
         public object Clone()

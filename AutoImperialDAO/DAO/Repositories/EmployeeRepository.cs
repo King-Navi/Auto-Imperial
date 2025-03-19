@@ -57,11 +57,15 @@ namespace AutoImperialDAO.DAO.Repositories
                     throw new ArgumentException("Employee is not valid");
                 }
                 _context.Entry(searchedEmployee).CurrentValues.SetValues(employee);
+                _context.Entry(searchedEmployee).Property(x => x.password).IsModified = false;
+                _context.Entry(searchedEmployee).Property(x => x.estadoCuenta).IsModified = false;
+                _context.Entry(searchedEmployee).Property(x => x.idVendedor).IsModified = false;
                 _context.SaveChanges();
                 result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error in Edit: {ex.Message}");
             }
 
             return result;

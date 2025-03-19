@@ -4,9 +4,87 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="1445">
+    
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Editar Vendedor: " Height="36" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="319,10,258,0"></Label>
+
+
+            <Label Content="Nombre: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,72,608,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding EmployeeName, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="167,72,372,344" RenderTransformOrigin="0.333,-0.199"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding PaternalSurname, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="433,73,202,343" RenderTransformOrigin="0.333,-0.199"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding MaternalSurname, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="601,75,34,341" RenderTransformOrigin="0.333,-0.199"/>
+
+            <Label Content="Dirección: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,114,608,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="166,112,370,304"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="435,112,258,304"/>
+
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding CP, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="136,154,550,262"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="255,154,274,262"/>
+
+            <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,196,608,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="171,196,299,220"/>
+
+            <Label Content="Correo: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,235,652,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="139,234,331,182"/>
+
+            <Label Content="CURP: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="539,119,183,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Curp, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="593,119,15,297"/>
+
+            <Label Content="RFC: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="543,165,179,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding RFC, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="594,165,17,251"/>
+
+            <Label Content="Puesto: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="535,216,151,0"/>
+            <ComboBox ItemsSource="{Binding OptionsList}"
+            SelectedItem="{Binding SelectedOption}"
+            Width="189" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="601,217,0,0" FontSize="10" 
+        />
+
+            <Label Content="Sucursal: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,274,600,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Branch, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="153,276,331,140"/>
+
+            <Label Content="Número de empleado: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="78,313,546,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding EmployeeNumber, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="243,314,331,102"/>
+
+            <Label Content="Usuario: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="487,272,235,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+            Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+            FontSizeValue="12" Margin="565,271,19,145"/>
+
+           
+
+            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchEmployeeView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Guardar cambios" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditEmployeeCommand}" Margin="592,383,25,25" />
+        </Grid>
+    </Viewbox>
 </UserControl>
