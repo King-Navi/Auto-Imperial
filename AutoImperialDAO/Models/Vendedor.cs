@@ -38,7 +38,7 @@ public partial class Vendedor
     public string password { get; set; } = null!;
     public string numeroEmpleado { get; set; } = null!;
 
-    public string surcursal { get; set; } = null!;
+    public string sucursal { get; set; } = null!;
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
 }
