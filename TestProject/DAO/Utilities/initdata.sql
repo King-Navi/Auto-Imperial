@@ -1,4 +1,4 @@
--- INSERTAR 2 ADMINISTRADORES
+                                                                                  -- INSERTAR 2 ADMINISTRADORES
 INSERT INTO [Administrador]
     ([nombre], [apellidoPaterno], [apellidoMaterno], [telefono], [correo], [calle], [numero], [codigoPostal], [ciudad],
      [estadoCuenta], [CURP], [RFC], [puestoAdministrador], [nombreUsuario], [password], [numeroEmpleado], [sucursal])

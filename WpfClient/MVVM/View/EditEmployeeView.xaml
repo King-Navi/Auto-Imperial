@@ -80,9 +80,6 @@
             Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
             FontSizeValue="12" Margin="565,271,19,145"/>
 
-           
-
-            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavegateToHomeViewCommand}" Margin="978,154,267,583" />
             <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchEmployeeView}" Margin="101,383,605,25" />
             <Button Background="{StaticResource SecondaryColor1}" Content="Guardar cambios" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditEmployeeCommand}" Margin="592,383,25,25" />
         </Grid>
