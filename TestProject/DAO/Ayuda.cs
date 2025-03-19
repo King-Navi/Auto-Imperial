@@ -119,7 +119,7 @@ namespace TestProject.DAO
 
             using (var context = new AutoImperialContext(options))
             {
-                var entidad = context.Administradors.Where(admin => admin.nombreUsuario.Equals("a1", StringComparison.OrdinalIgnoreCase));
+                var entidad = context.Administradores.Where(admin => admin.nombreUsuario.Equals("a1", StringComparison.OrdinalIgnoreCase));
                 Assert.IsNotNull(entidad);
             }
         }

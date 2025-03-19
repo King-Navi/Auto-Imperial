@@ -64,32 +64,32 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
-                    ErrorMessage = string.Empty;
+                ErrorMessage = string.Empty;
 
-                    if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
-                    {
-                        ErrorMessage = "Por favor, ingresa usuario y contraseña.";
-                        return;
-                    }
+                if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+                {
+                    ErrorMessage = "Por favor, ingresa usuario y contraseña.";
+                    return;
+                }
 
-                    var authenticatedUser = _userRepository.Authenticate(Username, Password);
+                var authenticatedUser = _userRepository.Authenticate(Username, Password);
 
-                    if (authenticatedUser == null)
-                    {
-                        ErrorMessage = "Credenciales inválidas. Intenta de nuevo.";
-                        return;
-                    }
+                if (authenticatedUser == null)
+                {
+                    ErrorMessage = "Credenciales inválidas. Intenta de nuevo.";
+                    return;
+                }
 
-                    user.SaveUser(authenticatedUser.Username, authenticatedUser.Password, authenticatedUser.Role);
+                user.SaveUser(authenticatedUser.Username, authenticatedUser.Password, authenticatedUser.Role);
 
-                    if (authenticatedUser.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
-                    {
-                        Mediator.Notify(MediatorKeys.SHOW_ADMIN_SIDE_BAR, null);
-                    }
-                    else
-                    {
-                        Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
-                    }
+                if (authenticatedUser.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    Mediator.Notify(MediatorKeys.SHOW_ADMIN_SIDE_BAR, null);
+                }
+                else
+                {
+                    Mediator.Notify(MediatorKeys.SHOW_SIDE_BAR, null);
+                }
 
                     Navigation.NavigateTo<HomeViewModel>();
                 },

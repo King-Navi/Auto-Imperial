@@ -54,14 +54,14 @@
 
             <controls:AnimatedImageButton 
             ImageSource="pack://application:,,,/Resources/Images/Icons/Employees.png"
-            ClickCommand="{Binding NavegateToEployesView}" 
+            ClickCommand="{Binding NavegateToEmployeesView}" 
             Margin="362,265,26,504"/>
 
             <controls:AnimatedLabelButton 
             LabelText="Gestionar empleados"
             LabelFontSize="32"
             ForegroundColor="White"
-            ClickCommand="{Binding NavegateToEployesView}" 
+            ClickCommand="{Binding NavegateToEmployeesView}" 
             Margin="10,267,134,502"/>
 
             <controls:AnimatedImageButton 

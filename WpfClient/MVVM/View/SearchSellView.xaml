@@ -8,13 +8,13 @@
              xmlns:viewmodel="clr-namespace:WpfClient.MVVM.ViewModel"
              xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              d:DesignHeight="850" d:DesignWidth="1445" >
-    <Viewbox Stretch="Fill" Height="850"  Width="1445">
-        <Grid Height="850"  Width="1445" Background="Blue" Margin="0,0,0,0">
+    <Viewbox Stretch="Fill">
+        <Grid Background="Blue" Margin="0,0,0,0">
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                         PlaceholderText="Ingrese su correo electrónico"
                         Style="{StaticResource SynthwaveTextBoxStyle}"                          
                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                        FontSizeValue="20" Margin="92,24,857,771" RenderTransformOrigin="0.5,0.5">
+                        FontSizeValue="20" Margin="255,29,696,766" RenderTransformOrigin="0.5,0.5">
                 <controls:PlaceholderTextBoxControl.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -25,7 +25,7 @@
                 </controls:PlaceholderTextBoxControl.RenderTransform>
             </controls:PlaceholderTextBoxControl>
             <Button Command="{Binding SearchCommand}" Content="Buscar" HorizontalAlignment="Left" Margin="632,29,0,0" VerticalAlignment="Top" Height="32" Width="90"/>
-            <Label Content="Buscar" HorizontalAlignment="Left" Margin="25,38,0,0" VerticalAlignment="Top" Width="67"/>
+            <Label Content="Buscar" HorizontalAlignment="Left" Margin="188,43,0,0" VerticalAlignment="Top" Width="67"/>
             <Button Content="Registrar cliente" HorizontalAlignment="Left" Margin="749,29,0,0" VerticalAlignment="Top" Height="32" Width="90" Command="{Binding NavegateToRegisterClientViewCommand}"/>
 
             <Button Content="Elimianr cliente" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="32" Width="90" Command="{Binding DeleteClientCommand}" Margin="1104,735,0,0"/>
