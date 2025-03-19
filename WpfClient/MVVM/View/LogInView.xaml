@@ -40,9 +40,9 @@
                         <RectangleGeometry RadiusX="100" RadiusY="100" Rect="0,0,933,1222"/>
                     </Grid.Clip>
                     <Image Source="/Resources/Images/ImperialLogo.png" Margin="281,15,253,886"></Image>
-                    <Label Content="Iniciar Sesión" Margin="227,294,199,0" Height="98" VerticalAlignment="Top" FontSize="70" FontWeight="Bold" Foreground="#fffff7"></Label>
+                    <Label Content="Iniciar sesión" Margin="227,294,199,0" Height="98" VerticalAlignment="Top" FontSize="70" FontWeight="Bold" Foreground="#fffff7"></Label>
 
-                    <Label Content="Correo: " Margin="85,466,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
+                    <Label Content="Usuario: " Margin="85,466,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
                     <Label Content="Contraseña: " Margin="85,707,341,0" Height="70" VerticalAlignment="Top" FontSize="40" FontWeight="Bold" Foreground="#fffff7"></Label>
 
 
