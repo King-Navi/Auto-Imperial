@@ -163,7 +163,12 @@ namespace WpfClient.MVVM.ViewModel
         }
         private void NavigateToSearchEmployee()
         {
-            Navigation.NavigateTo<SearchEmployeeViewModel>();
+            var confirmationVM = new ConfirmationViewModel("Cancerlar registro", $"¿Esta seguro que desea salir del registro? Se perderán todos los cambios no guardados", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var result = _dialogService.ShowDialog(confirmationVM);
+            if (result == true)
+            {
+                Navigation.NavigateTo<SearchEmployeeViewModel>();
+            }
         }
         private void RegisterEmployee()
         {
