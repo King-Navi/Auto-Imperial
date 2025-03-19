@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="Delete_Register">Eliminar registro</sys:String>
+    <sys:String x:Key="Search_Clients">Buscar clientes</sys:String>
+    <sys:String x:Key="Confirm_Delete_Client">¿Deseas eliminar al cliente?</sys:String>
+    <sys:String x:Key="Action_Cannot_Be_Undone">La acción no se puede deshacer</sys:String>
+    <sys:String x:Key="No_Changes_To_Save">No hay cambios para guardar</sys:String>
+    <sys:String x:Key="No_Changes_Made">No has hecho cambios</sys:String>
+    <sys:String x:Key="Confirmation">Confirmación</sys:String>
+    <sys:String x:Key="Confirm_Register_Client">¿Deseas registrar al cliente?</sys:String>
+    <sys:String x:Key="Name">Nombre</sys:String>
+    <sys:String x:Key="Validation_Errors">Errores de validación</sys:String>
+    <sys:String x:Key="Client_Will_Be_Registered">Se registrará al cliente</sys:String>
+    <sys:String x:Key="Save_Error">Error al guardar</sys:String>
+    <sys:String x:Key="Client_Registered">Se registró al cliente</sys:String>
+    <sys:String x:Key="Cancel_Edit">Cancelar edición</sys:String>
+    <sys:String x:Key="Confirm_Cancel_Edit">¿Seguro que quieres cancelar la edición?</sys:String>
+    <sys:String x:Key="Discard_Changes">Descartar cambios</sys:String>
+</ResourceDictionary>

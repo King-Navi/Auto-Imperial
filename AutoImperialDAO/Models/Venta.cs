@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AutoImperialDAO.Models;
 
-public partial class Ventum
+public partial class Venta
 {
     public int idVenta { get; set; }
 

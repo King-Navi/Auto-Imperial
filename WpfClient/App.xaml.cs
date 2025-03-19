@@ -15,6 +15,8 @@ using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using WpfClient.Idioms;
+using System.Globalization;
 
 namespace WpfClient
 {
@@ -80,9 +82,12 @@ namespace WpfClient
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var  logInWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            Language.ChangeLanguage(IdiomsKeys.es_mx.ToString());
+            var logInWindow = ServiceProvider.GetRequiredService<MainWindow>();
             logInWindow.Show();
             base.OnStartup(e);
         }
+        
+
     }
 }

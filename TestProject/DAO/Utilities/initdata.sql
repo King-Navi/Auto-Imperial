@@ -1,11 +1,30 @@
--- 1. Insertar en Administrador
+-- INSERTAR 2 ADMINISTRADORES
+INSERT INTO [Administrador]
+    ([nombre], [apellidoPaterno], [apellidoMaterno], [telefono], [correo], [calle], [numero], [codigoPostal], [ciudad],
+     [estadoCuenta], [CURP], [RFC], [puestoAdministrador], [nombreUsuario], [password], [numeroEmpleado], [sucursal])
+VALUES
+('Juan', 'Perez', 'Lopez', '5551234', 'juan.perez@example.com', 'Av. Principal', 101, '12345', 'CDMX',
+ 'Activo', 'CURPJP1111', 'RFCJP1111', 'Gerente General', 'AdminJuan', 'admin123', 'AD001', 'Matriz'),
+('Maria', 'Garcia', 'Hernandez', '5555678', 'maria.garcia@example.com', 'Calle Secundaria', 202, '67890', 'Monterrey',
+ 'Activo', 'CURPMG1111', 'RFCMG1111', 'Subgerente', 'AdminMaria', 'admin456', 'AD002', 'SucursalNorte');
+
+-- INSERTAR 2 VENDEDORES
+INSERT INTO [Vendedor]
+    ([nombre], [apellidoPaterno], [apellidoMaterno], [telefono], [correo], [calle], [numero], [codigoPostal], [ciudad],
+     [estadoCuenta], [CURP], [RFC], [puestoVendedor], [nombreUsuario], [password], [numeroEmpleado], [sucursal])
+VALUES
+('Carlos', 'Ramirez', 'Sanchez', '5559876', 'carlos.ramirez@example.com', 'Av. Ventas', 11, '34567', 'CDMX',
+ 'Activo', 'CURPCR1111', 'RFCCR1111', 'Vendedor Senior', 'VendedorCarlos', 'vendedor123', 'VD001', 'SucursalCentro'),
+('Ana', 'Lopez', 'Martinez', '5556543', 'ana.lopez@example.com', 'Calle Ventas', 22, '98765', 'Puebla',
+ 'Activo', 'CURPAL1111', 'RFCLL1111', 'Vendedor Junior', 'VendedorAna', 'vendedor456', 'VD002', 'SucursalSur');
+ -- 1. Insertar en Administrador
 INSERT INTO Administrador 
-  (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, calle, numero, codigoPostal, ciudad, estadoCuenta, CURP, RFC, puestoAdministrador, nombreUsuario, password, numeroEmpleado, surcursal)
+  (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, calle, numero, codigoPostal, ciudad, estadoCuenta, CURP, RFC, puestoAdministrador, nombreUsuario, password, numeroEmpleado, sucursal)
 VALUES 
   ('Juan', 'Pérez', 'Gómez', '1234567890', 'juan.perez@example.com', 'Calle Falsa', 123, '12345', 'CiudadX', 'Activo', 'CURP123456', 'RFC1234567890', 'Gerente',  'a1', 'a1', 'EMP001', 'Sucursal1');
 -- 2. Insertar en Vendedor
 INSERT INTO Vendedor 
-  (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, calle, numero, codigoPostal, ciudad, estadoCuenta, CURP, RFC, puestoVendedor, nombreUsuario, password, numeroEmpleado, surcursal)
+  (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, calle, numero, codigoPostal, ciudad, estadoCuenta, CURP, RFC, puestoVendedor, nombreUsuario, password, numeroEmpleado, sucursal)
 VALUES 
   ('Carlos', 'Martínez', 'Lopez', '0987654321', 'carlos.martinez@example.com', 'Av Siempre Viva', 456, '54321', 'CiudadX', 'Activo', 'CURP654321', 'RFC6543217890', 'Vendedor', 'v1', 'v1', 'EMP002', 'Sucursal1');
 

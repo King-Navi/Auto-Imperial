@@ -4,14 +4,70 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="70" d:DesignWidth="600">
-    <Border BorderBrush="Black" d:Background="Green" BorderThickness="1" Padding="10" Margin="5" CornerRadius="10" VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock d:Text="Mauricio" Text="{Binding ClientActual.Name}" FontWeight="Bold" FontSize="14" Margin="10,0,50,0"/>
-            <TextBlock d:Text="Sala" Text="{Binding ClientActual.PaternalSurname}" FontWeight="Bold" FontSize="14" Margin="10,0,10,0" />
-            <TextBlock d:Text="Ramirez" Text="{Binding ClientActual.MaternalSurname}" FontWeight="Bold" FontSize="14" Margin="10,0,10,0" />
-            <Button Content="Ver reservas" Command="{Binding NavigateToReserveViewCommand}" Padding="10,0,10,0" Margin="100,0,20,0" />
-        </StackPanel>
+             mc:Ignorable="d" MinWidth="800">
+
+    <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Padding="5">
+        <Grid Background="{StaticResource BackgroundyColor1}" MinWidth="800">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20">
+
+                <!-- Nombre -->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,5">
+                    <TextBlock Text="Nombre: " 
+                   Style="{StaticResource PrimaryTextBlockStyle}" 
+                   Foreground="White" 
+                   FontSize="30"/>
+                    <TextBlock Text="{Binding ClientActual.Name}" 
+                   d:Text="Mauricio"
+                   Style="{StaticResource PrimaryTextBlockStyle}"
+                   Foreground="White"
+                   FontSize="30"/>
+                </StackPanel>
+
+                <!-- Apellido Paterno -->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                    <TextBlock Text="Apellido Paterno: " 
+                   Style="{StaticResource PrimaryTextBlockStyle}" 
+                   Foreground="White" 
+                   FontSize="23"/>
+                    <TextBlock Text="{Binding ClientActual.PaternalSurname}" 
+                   d:Text="Sánchez"
+                   Style="{StaticResource PrimaryTextBlockStyle}"
+                   Foreground="White"
+                   FontSize="23"/>
+                </StackPanel>
+
+                <!-- Apellido Materno -->
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                    <TextBlock Text="Apellido Materno: " 
+                   Style="{StaticResource PrimaryTextBlockStyle}" 
+                   Foreground="White" 
+                   FontSize="23"/>
+                    <TextBlock Text="{Binding ClientActual.MaternalSurname}" 
+                   d:Text="Ramírez"
+                   Style="{StaticResource PrimaryTextBlockStyle}"
+                   Foreground="White"
+                   FontSize="23"/>
+                </StackPanel>
+
+            </StackPanel>
+
+            <!-- Botón -->
+            <Button Content="Ver reservas" 
+            Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding NavigateToReserveViewCommand}"
+            d:IsEnabled="True"
+            Grid.Column="1"
+            VerticalAlignment="Stretch"
+            FontSize="34"
+                    Height="70"
+            Margin="0,0,10,0"
+        />
+        </Grid>
     </Border>
 </UserControl>

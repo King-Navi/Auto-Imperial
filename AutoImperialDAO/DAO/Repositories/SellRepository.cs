@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Repositories
 {
-    public class SellRepository : BaseRepository<Ventum>, ISellRepository
+    public class SellRepository : BaseRepository<Venta>, ISellRepository
     {
         public SellRepository(AutoImperialContext context) : base(context)
         {
@@ -31,7 +31,7 @@ namespace AutoImperialDAO.DAO.Repositories
             throw new NotImplementedException();
         }
 
-        Task<Ventum> ISellRepository.SearchByIdAsync(int id)
+        public Task<Venta> SearchByIdAsync(int id)
         {
             //TODO
             throw new NotImplementedException();

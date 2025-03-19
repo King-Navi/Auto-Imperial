@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using WpfClient.Idioms;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 
@@ -90,7 +91,10 @@ namespace WpfClient.MVVM.ViewModel
             DeleteClientCommand = new RelayCommand(
                 o =>
                 {
-                    var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Deseas registrar al cliente?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+                    var confirmationVM = new ConfirmationViewModel(
+                       TextKeys.Delete_Register, 
+                        TextKeys.Confirm_Delete_Client, 
+                        Utilities.Enum.ConfirmationIconType.WarningIcon);
                     var result = _dialogService.ShowDialog(confirmationVM);
                     if (false == result)
                     {
@@ -172,7 +176,10 @@ namespace WpfClient.MVVM.ViewModel
         private ObservableCollection<ClientCardViewModel> ConvertToClientCardViewModel(List<Cliente> list)
         {
             ClientsList.Clear();
-            foreach (var clientedbModel in list)
+
+            var validClients = list.Where(client => client.idCliente != -1);
+
+            foreach (var clientedbModel in validClients)
             {
                 ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
             }

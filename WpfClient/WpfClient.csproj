@@ -21,6 +21,9 @@
     <None Remove="Resources\Images\Icons\Supliers.png" />
     <None Remove="Resources\Images\Icons\vehicles.png" />
     <None Remove="Resources\Images\ImperialLogo.png" />
+    <None Remove="Resources\Images\red_siren_icon.png" />
+    <None Remove="Resources\Images\Red_triangle_alert_icon.png" />
+    <None Remove="Resources\Images\register_icon.png" />
     <None Remove="WpfClient.csproj.Backup.tmp" />
   </ItemGroup>
 
@@ -79,6 +82,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\red_siren_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Red_triangle_alert_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\register_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -91,6 +106,12 @@
     <None Update="Resources\Images\Icons\register_icon-removebg-preview.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Idioms\strings.es_mx.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>
