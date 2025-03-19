@@ -23,6 +23,8 @@ namespace WpfClient.Idioms
         Client_Registered,
         Confirm_Cancel_Edit,
         Cancel_Edit,       
-        Discard_Changes    
+        Discard_Changes,
+        Register_Client, 
+        Edit_Client     
     }
 }

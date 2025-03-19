@@ -18,4 +18,6 @@
     <sys:String x:Key="Cancel_Edit">Cancelar edición</sys:String>
     <sys:String x:Key="Confirm_Cancel_Edit">¿Seguro que quieres cancelar la edición?</sys:String>
     <sys:String x:Key="Discard_Changes">Descartar cambios</sys:String>
+    <sys:String x:Key="Register_Client">Registrar cliente</sys:String>
+    <sys:String x:Key="Edit_Client">Editar cliente</sys:String>
 </ResourceDictionary>
