@@ -147,7 +147,7 @@ namespace WpfClient.MVVM.ViewModel
                 newEmployee.PositionVendor = emp.puestoVendedor;
                 newEmployee.Username = emp.nombreUsuario;
                 newEmployee.EmployeeNumber = emp.numeroEmpleado;
-                newEmployee.Branch = emp.surcursal;
+                newEmployee.Branch = emp.sucursal;
                 newEmployee.Reservas = emp.Reservas;
 
                 employees.Add(newEmployee);

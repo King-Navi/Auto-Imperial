@@ -226,7 +226,7 @@ namespace WpfClient.MVVM.ViewModel
                 CURP = this.Curp,
                 RFC = this.RFC,
                 numeroEmpleado = this.EmployeeNumber,
-                surcursal = this.Branch,
+                sucursal = this.Branch,
                 nombreUsuario = this.Username,
                 puestoVendedor = this.SelectedOption,
                 idVendedor = ActualEmployee.IdEmployee,

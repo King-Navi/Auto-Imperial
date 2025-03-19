@@ -113,8 +113,8 @@ namespace WpfClient.MVVM.Model
 
         public new string Branch
         {
-            get => base.surcursal;
-            set { base.surcursal = value; OnPropertyChanged(); }
+            get => base.sucursal;
+            set { base.sucursal = value; OnPropertyChanged(); }
         }
 
         public new string Username

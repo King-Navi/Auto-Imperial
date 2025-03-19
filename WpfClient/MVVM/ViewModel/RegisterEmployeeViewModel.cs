@@ -179,7 +179,7 @@ namespace WpfClient.MVVM.ViewModel
                 CURP = this.Curp,
                 RFC = this.RFC,
                 numeroEmpleado = this.EmployeeNumber,
-                surcursal = this.Branch,
+                sucursal = this.Branch,
                 nombreUsuario = this.Username,
                 password = this.Password,
                 puestoVendedor = this.SelectedOption
