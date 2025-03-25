@@ -65,7 +65,9 @@ namespace WpfClient.MVVM.ViewModel
                 o =>
                 {
                 ErrorMessage = string.Empty;
-
+                //TODO quitar esto
+                Username = "adminJuan";
+                Password = "admin123";
                 if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
                 {
                     ErrorMessage = "Por favor, ingresa usuario y contraseña.";

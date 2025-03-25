@@ -82,7 +82,7 @@
             Margin="357,491,22,270"/>
 
             <controls:AnimatedLabelButton 
-            LabelText="Gestonar provedores"
+            LabelText="Gestionar provedores"
             LabelFontSize="32"
             ForegroundColor="White"
             ClickCommand="{Binding NavegateToSupliersView}" 
