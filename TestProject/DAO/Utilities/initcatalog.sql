@@ -184,6 +184,7 @@ ALTER TABLE [DescuentoVehiculo] ADD FOREIGN KEY ([idVehiculo]) REFERENCES [Vehic
 ALTER TABLE [CompraProveedor] ADD FOREIGN KEY ([idAdministrador]) REFERENCES [Administrador] ([idAdministrador])
 ALTER TABLE [CompraProveedor] ADD FOREIGN KEY ([idProveedor]) REFERENCES [Proveedor] ([idProveedor])
 
+ALTER TABLE [Proveedor] ADD [ciudad] VARCHAR(50);
 
 CREATE INDEX idx_idVendedor ON Reserva(idVendedor);
 CREATE INDEX idx_idCliente ON Reserva(idCliente);

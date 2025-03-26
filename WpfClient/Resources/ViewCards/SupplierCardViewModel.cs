@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
+using WpfClient.MVVM.ViewModel;
 using WpfClient.Utilities;
 
 namespace WpfClient.Resources.ViewCards
@@ -15,6 +16,7 @@ namespace WpfClient.Resources.ViewCards
         private Supplier _supplier = new Supplier();
 
         public string SupplierName { get; set; }
+        public string SupplierCity { get; set; }
         public string SupplierPrimaryContact { get; set; }
 
         public Supplier Supplier
@@ -43,6 +45,7 @@ namespace WpfClient.Resources.ViewCards
         {
             Supplier = supplier;
             SupplierName = supplier.SupplierName;
+            SupplierCity = supplier.City ?? "Ciudad no especificada";
             SupplierPrimaryContact = "Contacto principal: " + supplier.PrimaryContact;
             Navigation = navigationService;
             NavigateToViewSupplierViewCommand = new RelayCommand(

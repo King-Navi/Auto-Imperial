@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    class InfoSupplierViewModel
+    class InfoSupplierViewModel : Services.Navigation.ViewModel
     {
     }
 }

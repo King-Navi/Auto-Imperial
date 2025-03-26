@@ -59,26 +59,26 @@ namespace WpfClient.MVVM.ViewModel
 
         public ICommand NavigateToRegisterSupplierView { get; set; }
 
-        public SearchSupplierViewModel(INavigationService navigationService, UserService currentUser, IEmployeeRepository employeeRepository)
+        public SearchSupplierViewModel(INavigationService navigationService, UserService currentUser, ISupplierRepository supplierRepository)
         {
-            //_supplierRepository = supplierRepository;
-            //Navigation = navigationService;
+            _supplierRepository = supplierRepository;
+            Navigation = navigationService;
 
-            //SearchCommand = new RelayCommand(
-            //    async o =>
-            //    {
-            //        SuppliersList.Clear();
-            //        if (!String.IsNullOrWhiteSpace(SearchText))
-            //        {
-            //            var suppliers = await SearchSuppliersAsync();
+            SearchCommand = new RelayCommand(
+                async o =>
+                {
+                    SuppliersList.Clear();
+                    if (!String.IsNullOrWhiteSpace(SearchText))
+                    {
+                        var suppliers = await SearchSuppliersAsync();
 
-            //            foreach (var newSupplier in suppliers)
-            //            {
-            //                SuppliersList.Add(new EmployeeCardViewModel(navigationService, newEmployee));
-            //            }
-            //        }
-            //    },
-            //    o => !String.IsNullOrWhiteSpace(SearchText));
+                        foreach (var newSupplier in suppliers)
+                        {
+                            SuppliersList.Add(new SupplierCardViewModel(navigationService, newSupplier));
+                        }
+                    }
+                },
+                o => !String.IsNullOrWhiteSpace(SearchText));
 
 
             Navigation = navigationService;
@@ -95,8 +95,8 @@ namespace WpfClient.MVVM.ViewModel
             Navigation.NavigateTo<RegisterSupplierViewModel>();
         }
 
-        //private async Task<List<Supplier>> SearchEmployeesAsync()
-        //{
+        private async Task<List<Supplier>> SearchSuppliersAsync()
+        {
         //    try
         //    {
         //        if (!String.IsNullOrWhiteSpace(SearchText))
@@ -118,8 +118,8 @@ namespace WpfClient.MVVM.ViewModel
         //    {
         //        Console.WriteLine($"Error en la búsqueda de empleados: {ex.Message}");
         //    }
-        //    return new List<Employee>();
-        //}
+            return new List<Supplier>();
+        }
 
         //private List<Employee> ConvertToEmployeeList(List<Vendedor> list)
         //{

@@ -55,6 +55,9 @@
             <DataTemplate DataType="{x:Type viewModel:SearchSupplierViewModel}">
                 <view:SearchSupplierView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InfoSupplierViewModel}">
+                <view:InfoSupplierView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RegisterSupplierViewModel}">
                 <view:RegisterSupplierView/>
             </DataTemplate>

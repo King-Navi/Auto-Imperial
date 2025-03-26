@@ -9,24 +9,17 @@
     <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" Margin="0,0,-163,0" >
         <TextBlock
             Margin="26,19,175,119"
-            Text="{Binding EmployeeName}"
+            Text="{Binding SupplierName}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="27"
         />
         <TextBlock
             Margin="22,75,168,63"
-            Text="{Binding EmployeeNumber}"
+            Text="{Binding SupplierPrimeryContact}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="20"
-        />
-        <TextBlock
-            Margin="25,118,165,20"
-            Text="{Binding EmployeePosition}"
-            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
-            Foreground="White"
-            FontSize="27"
         />
 
 

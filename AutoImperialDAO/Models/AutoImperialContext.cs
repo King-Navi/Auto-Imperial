@@ -235,6 +235,9 @@ public partial class AutoImperialContext : DbContext
             entity.Property(e => e.calle)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.ciudad)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.codigoPostal)
                 .HasMaxLength(10)
                 .IsUnicode(false);

@@ -23,5 +23,7 @@ public partial class Proveedor
 
     public string? estado { get; set; }
 
+    public string? ciudad { get; set; }
+
     public virtual ICollection<CompraProveedor> CompraProveedores { get; set; } = new List<CompraProveedor>();
 }

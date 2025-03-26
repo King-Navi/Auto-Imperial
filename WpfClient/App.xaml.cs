@@ -46,6 +46,7 @@ namespace WpfClient
             services.AddTransient<ISellRepository, SellRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<ISupplierRepository, SupplierRepository>();
 
 
             //Navigation
@@ -72,6 +73,7 @@ namespace WpfClient
             services.AddTransient<EditEmployeeViewModel>();
 
             services.AddTransient<SearchSupplierViewModel>();
+            services.AddTransient<InfoSupplierViewModel>();
             services.AddTransient<RegisterSupplierViewModel>();
             services.AddTransient<RegisterSupplierPaymentViewModel>();
 

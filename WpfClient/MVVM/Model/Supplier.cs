@@ -73,6 +73,12 @@ namespace WpfClient.MVVM.Model
             set { base.estado = value; OnPropertyChanged(); }
         }
 
+        public new string? City
+        {
+            get => base.ciudad;
+            set { base.ciudad = value; OnPropertyChanged(); }
+        }
+
         public new ICollection<CompraProveedor> ComprasProveedor
         {
             get => base.CompraProveedores;
