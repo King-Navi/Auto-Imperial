@@ -18,7 +18,29 @@ namespace AutoImperialDAO.DAO.Repositories
 
         public bool Register(Proveedor proveedor)
         {
-            throw new NotImplementedException();
+            if (proveedor == null)
+                throw new ArgumentNullException(nameof(proveedor));
+
+            try
+            {
+                bool exists = _context.Proveedores
+                    .Any(p => p.nombreProveedor.ToLower() == proveedor.nombreProveedor.Trim().ToLower());
+                if (exists)
+                    throw new InvalidOperationException($"El proveedor '{proveedor.nombreProveedor}' ya existe.");
+
+                proveedor.nombreProveedor = proveedor.nombreProveedor.Trim();
+                proveedor.estado = proveedor.estado ?? AccountStatusEnum.Activo.ToString();
+
+                _context.Proveedores.Add(proveedor);
+                int rows = _context.SaveChanges();
+
+                return rows > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en SupplierRepository.Register: {ex.Message}");
+                return false;
+            }
         }
 
         public async Task<List<Proveedor>> SearchByNameCityAsync(string parameter, AccountStatusEnum statusEnum)

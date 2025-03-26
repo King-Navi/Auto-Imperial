@@ -35,7 +35,7 @@
                 HorizontalAlignment="Left" Margin="172,158,0,0"
                 />
             <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
-            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
+            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterSupplierView}" Margin="1103,693,34,45" />
 
             <ListBox ItemsSource="{Binding SuppliersList}" Height="450" Width="850"
                  Background="Transparent"
@@ -43,7 +43,7 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <viewcards:EmployeeCardView/>
+                        <viewcards:SupplierCardView/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
