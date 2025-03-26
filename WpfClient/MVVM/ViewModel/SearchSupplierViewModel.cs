@@ -97,60 +97,52 @@ namespace WpfClient.MVVM.ViewModel
 
         private async Task<List<Supplier>> SearchSuppliersAsync()
         {
-        //    try
-        //    {
-        //        if (!String.IsNullOrWhiteSpace(SearchText))
-        //        {
-        //            var result = await _supplierRepository.SearchByCurpRfcNameAsync(
-        //                SearchText, AccountStatusEnum.Activo);
-        //            if (result.FirstOrDefault().idVendedor == -1)
-        //            {
-        //                ErrorMessage = "No se encontraron empleados con los datos proporcionados";
-        //            }
-        //            else
-        //            {
-        //                ErrorMessage = string.Empty;
-        //                return ConvertToEmployeeList(result);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error en la búsqueda de empleados: {ex.Message}");
-        //    }
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(SearchText))
+                {
+                    var result = await _supplierRepository.SearchByNameCityAsync(
+                        SearchText, AccountStatusEnum.Activo);
+                    if (result.FirstOrDefault().idProveedor == -1)
+                    {
+                        ErrorMessage = "No se encontraron empleados con los datos proporcionados";
+                    }
+                    else
+                    {
+                        ErrorMessage = string.Empty;
+                        return ConvertToEmployeeList(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en la búsqueda de empleados: {ex.Message}");
+            }
             return new List<Supplier>();
         }
 
-        //private List<Employee> ConvertToEmployeeList(List<Vendedor> list)
-        //{
-        //    List<Employee> employees = new List<Employee>();
+        private List<Supplier> ConvertToEmployeeList(List<Proveedor> list)
+        {
+            List<Supplier> suppliers = new List<Supplier>();
 
-        //    foreach (var emp in list)
-        //    {
-        //        Employee newEmployee = new Employee();
-        //        newEmployee.IdEmployee = emp.idVendedor;
-        //        newEmployee.CURP = emp.CURP;
-        //        newEmployee.CP = emp.codigoPostal;
-        //        newEmployee.City = emp.ciudad;
-        //        newEmployee.Password = emp.password;
-        //        newEmployee.State = emp.estadoCuenta;
-        //        newEmployee.Name = emp.nombre;
-        //        newEmployee.PaternalSurname = emp.apellidoPaterno;
-        //        newEmployee.MaternalSurname = emp.apellidoMaterno;
-        //        newEmployee.Phone = emp.telefono;
-        //        newEmployee.Email = emp.correo;
-        //        newEmployee.Street = emp.calle;
-        //        newEmployee.Number = emp.numero;
-        //        newEmployee.RFC = emp.RFC;
-        //        newEmployee.PositionVendor = emp.puestoVendedor;
-        //        newEmployee.Username = emp.nombreUsuario;
-        //        newEmployee.EmployeeNumber = emp.numeroEmpleado;
-        //        newEmployee.Branch = emp.sucursal;
-        //        newEmployee.Reservas = emp.Reservas;
+            foreach (var supp in list)
+            {
+                Supplier newSupplier = new Supplier();
+                newSupplier.SupplierId = supp.idProveedor;
+                newSupplier.SupplierName = supp.nombreProveedor;
+                newSupplier.City = supp.ciudad;
+                newSupplier.Street = supp.calle;
+                newSupplier.Number = supp.numero;
+                newSupplier.State = supp.estado;
+                newSupplier.ZipCode = supp.codigoPostal;
+                newSupplier.Phone = supp.telefono;
+                newSupplier.Email = supp.correo;
+                newSupplier.PrimaryContact = supp.contactoPrincipal;
+                newSupplier.ComprasProveedor = supp.ComprasProveedor;
 
-        //        employees.Add(newEmployee);
-        //    }
-        //    return employees;
-        //}
+                suppliers.Add(newSupplier);
+            }
+            return suppliers;
+        }
     }
 }

@@ -155,7 +155,7 @@ public partial class AutoImperialContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__CompraPro__idAdm__5BE2A6F2");
 
-            entity.HasOne(d => d.idProveedorNavigation).WithMany(p => p.CompraProveedores)
+            entity.HasOne(d => d.idProveedorNavigation).WithMany(p => p.ComprasProveedor)
                 .HasForeignKey(d => d.idProveedor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__CompraPro__idPro__5CD6CB2B");

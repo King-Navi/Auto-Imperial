@@ -81,8 +81,8 @@ namespace WpfClient.MVVM.Model
 
         public new ICollection<CompraProveedor> ComprasProveedor
         {
-            get => base.CompraProveedores;
-            set { base.CompraProveedores = value; OnPropertyChanged(); }
+            get => base.ComprasProveedor;
+            set { base.ComprasProveedor = value; OnPropertyChanged(); }
         }
 
         public object Clone()

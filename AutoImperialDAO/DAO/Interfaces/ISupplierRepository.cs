@@ -12,7 +12,6 @@ namespace AutoImperialDAO.DAO.Interfaces
     {
         bool Register(Proveedor proveedor);
         Task<Proveedor> SearchByIdAsync(int id, AccountStatusEnum statusEnum);
-        Task<Proveedor> SearchByCURPAsync(string CURP, AccountStatusEnum statusEnum);
-        Task<List<Proveedor>> SearchByCurpRfcNameAsync(string parameter, AccountStatusEnum statusEnum);
+        Task<List<Proveedor>> SearchByNameCityAsync(string parameter, AccountStatusEnum statusEnum);
     }
 }
