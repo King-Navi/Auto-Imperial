@@ -18,9 +18,9 @@ namespace WpfClient.MVVM.View
     /// <summary>
     /// Lógica de interacción para SearchSupplier.xaml
     /// </summary>
-    public partial class SearchSupplier : UserControl
+    public partial class SearchSupplierView : UserControl
     {
-        public SearchSupplier()
+        public SearchSupplierView()
         {
             InitializeComponent();
         }

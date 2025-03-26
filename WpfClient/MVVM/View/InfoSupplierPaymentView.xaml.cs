@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WpfClient.MVVM.View
 {
     /// <summary>
-    /// Lógica de interacción para RegisterSupplier.xaml
+    /// Lógica de interacción para InfoSupplierPaymentView.xaml
     /// </summary>
-    public partial class RegisterSupplierView : UserControl
+    public partial class InfoSupplierPaymentView : UserControl
     {
-        public RegisterSupplierView()
+        public InfoSupplierPaymentView()
         {
             InitializeComponent();
         }

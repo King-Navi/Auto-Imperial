@@ -78,14 +78,14 @@
 
             <controls:AnimatedImageButton 
             ImageSource="pack://application:,,,/Resources/Images/Icons/Supliers.png"
-            ClickCommand="{Binding NavegateToSupliersView}" 
+            ClickCommand="{Binding NavegateToSuppliersView}" 
             Margin="357,491,22,270"/>
 
             <controls:AnimatedLabelButton 
             LabelText="Gestionar provedores"
             LabelFontSize="32"
             ForegroundColor="White"
-            ClickCommand="{Binding NavegateToSupliersView}" 
+            ClickCommand="{Binding NavegateToSuppliersView}" 
             Margin="10,491,134,270"/>
 
             <controls:AnimatedImageButton 

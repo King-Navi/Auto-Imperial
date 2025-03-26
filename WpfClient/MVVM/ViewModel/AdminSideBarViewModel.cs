@@ -25,7 +25,7 @@ namespace WpfClient.MVVM.ViewModel
         public RelayCommand NavegateToHomeView { get; set; }
         public RelayCommand NavegateToEmployeesView { get; set; }
         public RelayCommand NavegateToSellsView { get; set; }
-        public RelayCommand NavegateToSupliersView { get; set; }
+        public RelayCommand NavegateToSuppliersView { get; set; }
         public RelayCommand NavegateToReportsView { get; set; }
         public RelayCommand NavegateToLoginView { get; set; }
         public AdminSideBarViewModel(INavigationService navigationService)
@@ -51,10 +51,10 @@ namespace WpfClient.MVVM.ViewModel
                 },
                 o => true);
 
-            NavegateToSupliersView = new RelayCommand(
+            NavegateToSuppliersView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchClientViewModel>(); TODO Change page
+                    Navigation.NavigateTo<SearchSupplierViewModel>();
                 },
                 o => true);
 

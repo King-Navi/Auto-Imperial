@@ -53,13 +53,13 @@
                 <view:EditEmployeeView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:SearchSupplierViewModel}">
-                <view:EditEmployeeView/>
+                <view:SearchSupplierView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RegisterSupplierViewModel}">
-                <view:EditEmployeeView/>
+                <view:RegisterSupplierView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RegisterSupplierPaymentViewModel}">
-                <view:EditEmployeeView/>
+                <view:RegisterSupplierPaymentView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

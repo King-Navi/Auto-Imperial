@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfClient.MVVM.View
+namespace WpfClient.Resources.ViewCards
 {
     /// <summary>
-    /// Lógica de interacción para RegisterSupplier.xaml
+    /// Lógica de interacción para SupplierCardView.xaml
     /// </summary>
-    public partial class RegisterSupplierView : UserControl
+    public partial class SupplierCardView : UserControl
     {
-        public RegisterSupplierView()
+        public SupplierCardView()
         {
             InitializeComponent();
         }
