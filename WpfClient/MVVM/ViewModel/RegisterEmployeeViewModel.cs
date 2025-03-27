@@ -7,11 +7,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using WpfClient.Idioms;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
+using WpfClient.Utilities.Enum;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -170,8 +174,79 @@ namespace WpfClient.MVVM.ViewModel
                 Navigation.NavigateTo<SearchEmployeeViewModel>();
             }
         }
+
+        private bool ValidateFields()
+        {
+            if (string.IsNullOrWhiteSpace(EmployeeName) ||
+                string.IsNullOrWhiteSpace(PaternalSurname) ||
+                string.IsNullOrWhiteSpace(MaternalSurname) ||
+                string.IsNullOrWhiteSpace(Street) ||
+                string.IsNullOrWhiteSpace(Number) ||
+                string.IsNullOrWhiteSpace(CP) ||
+                string.IsNullOrWhiteSpace(City) ||
+                string.IsNullOrWhiteSpace(Phone) ||
+                string.IsNullOrWhiteSpace(Mail) ||
+                string.IsNullOrWhiteSpace(Curp) ||
+                string.IsNullOrWhiteSpace(RFC) ||
+                string.IsNullOrWhiteSpace(EmployeeNumber) ||
+                string.IsNullOrWhiteSpace(Branch) ||
+                string.IsNullOrWhiteSpace(Username) ||
+                string.IsNullOrWhiteSpace(Password) ||
+                string.IsNullOrWhiteSpace(SelectedOption))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Campos vacíos", "Se han dejado campos vacíos, todos los campos son obligatorios.",AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Mail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un correo no válido", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Curp, @"^[A-Z]{4}\d{6}[A-Z]{6}\d{2}$", RegexOptions.IgnoreCase))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un CURP no válido", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(RFC, @"^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$", RegexOptions.IgnoreCase))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un RFC no válido", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(CP, @"^\d{5}$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un código postal no válido", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Phone, @"^\d{10}$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un número de teléfono no válido, debe de tener 10 dígitos", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!int.TryParse(Number, out _))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un número de calle no válido", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Password, @"^(?=.*[A-Z])(?=.*\d).+$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "La contraseña debe contener por lo menos una mayúscula y un número", AlertIconType.AlertIcon));
+                return false;
+            }
+
+            return true;
+        }
         private void RegisterEmployee()
         {
+            if (!ValidateFields())
+                return;
+
             var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Esta seguro que desea registrar a este nuevo empleado?", Utilities.Enum.ConfirmationIconType.RegisterIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
@@ -198,7 +273,6 @@ namespace WpfClient.MVVM.ViewModel
 
                 try
                 {
-
                     if (_employeeRepository.Register(employee))
                     {
                         MessageBox.Show("Empleado registrado correctamente");
@@ -207,14 +281,13 @@ namespace WpfClient.MVVM.ViewModel
                     else
                     {
                         MessageBox.Show("Error al registrar el empleado");
-
                     }
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Error al registrar el empleado: " + e.StackTrace);
                 }
-            }            
+            }
         }
     }
 }
