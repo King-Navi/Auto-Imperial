@@ -24,23 +24,14 @@
                 <TranslateTransform Y="-1000" />
             </Grid.RenderTransform>
 
-            <Label Content="Buscar compra a proveedor" Margin="416,26,359,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
-            <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-                PaddingValue="40,0,0,0"
-                PlaceholderText="Ingrese el folio"
-                Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="25"  Height="100" Width="850"
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Left" Margin="172,158,0,0"
-                />
-            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
-            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Margin="1103,693,34,45" />
+            <Label Content="Ver compras al proveedor" Margin="416,26,381,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
 
+            <Button Background="Red" Content="Salir" FontSize="19" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="638,726,604,49" />
+            
             <ListBox ItemsSource="{Binding SupplierPaymentsList}" Height="450" Width="850"
                  Background="Transparent"
                  Foreground="White"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="308,187,272,186">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <viewcards:SupplierPaymentCardView/>
@@ -52,7 +43,7 @@
                Foreground="Red"
                FontWeight="Bold"
                FontSize="20"
-               Margin="1066,444,0,0"
+               Margin="1038,354,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top" Width="284" Height="180"
                TextWrapping="Wrap"

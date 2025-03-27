@@ -24,16 +24,38 @@ namespace WpfClient.MVVM.ViewModel
         private readonly ISupplierPaymentRepository _supplierPaymentRepository;
         private readonly INavigationService _navigation;
 
+        private Supplier actualSupplier;
+        public Supplier ActualSupplier
+        {
+            get => actualSupplier;
+            set
+            {
+                actualSupplier = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string errorMessage;
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
         public int SupplierId { get; set; }
         public ObservableCollection<SupplierPaymentCardViewModel> SupplierPaymentsList { get; } = new();
 
         public RelayCommand SearchCommand { get; }
+        public RelayCommand NavigateToInfoSupplierView { get; }
 
         public SearchSupplierPaymentViewModel(INavigationService navigationService, ISupplierPaymentRepository supplierPaymentRepository)
         {
             _navigation = navigationService;
             _supplierPaymentRepository = supplierPaymentRepository;
-
+            NavigateToInfoSupplierView = new RelayCommand(() => _navigation.NavigateTo<InfoSupplierViewModel>(ActualSupplier));
             SearchCommand = new RelayCommand(async () => await LoadPaymentsAsync());
         }
 
@@ -41,6 +63,7 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (parameter is Supplier supplier)
             {
+                ActualSupplier = supplier;
                 SupplierId = supplier.SupplierId;
                 _ = LoadPaymentsAsync();
             }
@@ -57,6 +80,15 @@ namespace WpfClient.MVVM.ViewModel
             try
             {
                 var payments = await _supplierPaymentRepository.GetPaymentsBySupplierIdAsync(SupplierId);
+                if (payments.Count() == 0)
+                {
+                    ErrorMessage = "No se encontraron compras asociadas a este proveedor";
+                }
+                else
+                {
+                    ErrorMessage = string.Empty;
+                }
+
                 foreach (var pago in payments)
                 {
                     SupplierPaymentsList.Add(new SupplierPaymentCardViewModel(_navigation, Convert(pago)));

@@ -49,6 +49,11 @@ INSERT INTO Proveedor
   (nombreProveedor, calle, numero, codigoPostal, correo, telefono, contactoPrincipal, estado)
 VALUES 
   ('Proveedor Ejemplo', 'Av Principal', 100, '11111', 'proveedor@example.com', '5566778899', 'Contacto Principal', 'Activo');
+INSERT INTO Proveedor 
+  (nombreProveedor, calle, numero, codigoPostal, correo, telefono, contactoPrincipal, estado)
+VALUES 
+  ('Aston Elite Motors', 'Boulevard Prestige', 777, '11223', 'contact@astonelite.com', '5599001122', 'Richard Langston', 'Activo');
+
 
 -- 7. Insertar en CompraProveedor (requiere idAdministrador = 1 y idProveedor = 1)
 INSERT INTO CompraProveedor 

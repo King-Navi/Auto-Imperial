@@ -26,9 +26,6 @@ namespace AutoImperialDAO.DAO.Repositories
                     .Where(c => c.idProveedor == supplierId)
                     .ToListAsync();
 
-                if (purchases == null || purchases.Count == 0)
-                    throw new KeyNotFoundException($"No se encontraron compras para el proveedor con ID {supplierId}.");
-
                 return purchases;
             }
             catch (Exception ex)
