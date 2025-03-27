@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WpfClient.MVVM.View.SearchSupplierView"
+﻿<UserControl x:Class="WpfClient.MVVM.View.SearchSupplierPaymentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              xmlns:viewcards="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1445">  
+             d:DesignHeight="850" d:DesignWidth="1445">
 
     <Viewbox Stretch="Fill">
         <Grid x:Name="animatedGrid" Background="{StaticResource BackgroundyColor2}" >
@@ -24,10 +24,10 @@
                 <TranslateTransform Y="-1000" />
             </Grid.RenderTransform>
 
-            <Label Content="Buscar proveedor" Margin="416,26,593,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
+            <Label Content="Buscar compra a proveedor" Margin="416,26,593,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PaddingValue="40,0,0,0"
-                PlaceholderText="Ingrese el nombre o la ciudad del proveedor"
+                PlaceholderText="Ingrese el folio"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                 FontSizeValue="25"  Height="100" Width="850"
@@ -35,15 +35,15 @@
                 HorizontalAlignment="Left" Margin="172,158,0,0"
                 />
             <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
-            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterSupplierView}" Margin="1103,693,34,45" />
+            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
 
-            <ListBox ItemsSource="{Binding SuppliersList}" Height="450" Width="850"
+            <ListBox ItemsSource="{Binding SupplierPaymentList}" Height="450" Width="850"
                  Background="Transparent"
                  Foreground="White"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <viewcards:SupplierCardView/>
+                        <viewcards:SupplierPaymentCardView/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

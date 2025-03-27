@@ -87,9 +87,9 @@ namespace WpfClient.MVVM.Model
 
         public object Clone()
         {
-            var clone = (Employee)Activator.CreateInstance(typeof(Employee));
+            var clone = (Supplier)Activator.CreateInstance(typeof(Supplier));
 
-            foreach (PropertyInfo prop in typeof(Employee).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (PropertyInfo prop in typeof(Supplier).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (prop.CanRead && prop.CanWrite)
                 {

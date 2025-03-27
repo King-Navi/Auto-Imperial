@@ -5,8 +5,93 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+                          d:DesignHeight="450" d:DesignWidth="800">
+
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Ver información del proveedor: " Height="60" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#fffff7" Margin="110,12,234,0"></Label>
+            <Label Content="Nombre: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="79,102,607,0"></Label>
+            <TextBlock
+                Margin="198,104,258,312"
+                Text="{Binding SupplierName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Ciudad: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="79,153,607,0"></Label>
+            <TextBlock
+                Margin="187,154,385,262"
+                Text="{Binding City}" 
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <TextBlock
+                Margin="689,205,47,211"
+                Text="{Binding Number}" 
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20" RenderTransformOrigin="4.684,0.157"
+            >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.151"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Label Content="Nombre: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="77,248,609,0"></Label>
+            <TextBlock
+                Margin="194,253,337,163"
+                Text="{Binding PrimaryContact}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Correo: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="77,306,609,0"></Label>
+            <TextBlock
+                Margin="188,308,316,108"
+                Text="{Binding Email}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Calle: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="542,98,180,0" RenderTransformOrigin="0.474,0.35"></Label>
+            <TextBlock
+                Margin="625,99,6,317"
+                Text="{Binding Street}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Código postal: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="488,147,164,0"></Label>
+            <TextBlock
+                Margin="646,149,6,267"
+                Text="{Binding ZipCode}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+            <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="488,306,189,0"></Label>
+            <TextBlock
+                Margin="625,308,0,108"
+                Text="{Binding Phone}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Ver compras" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="606,383,25,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar nueva compra" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterSupplierPaymentCommand}" Margin="365,382,217,26" />
+            <Label Content="Contacto principal:" Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="109,198,490,0"/>
+            <Label Content="Número:" Height="40" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="529,0,123,0"/>
+        </Grid>
+    </Viewbox>
+
 </UserControl>
+

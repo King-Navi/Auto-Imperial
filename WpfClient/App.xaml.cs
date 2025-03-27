@@ -72,10 +72,13 @@ namespace WpfClient
             services.AddTransient<RegisterEmployeeViewModel>();
             services.AddTransient<EditEmployeeViewModel>();
 
+            services.AddTransient<RegisterSupplierViewModel>();
             services.AddTransient<SearchSupplierViewModel>();
             services.AddTransient<InfoSupplierViewModel>();
-            services.AddTransient<RegisterSupplierViewModel>();
+
             services.AddTransient<RegisterSupplierPaymentViewModel>();
+            services.AddTransient<SearchSupplierPaymentViewModel>();
+            services.AddTransient<InfoSupplierPaymentViewModel>();
 
             services.AddTransient<IDialogService, DialogService>();
 
