@@ -64,6 +64,12 @@
             <DataTemplate DataType="{x:Type viewModel:RegisterSupplierPaymentViewModel}">
                 <view:RegisterSupplierPaymentView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchVehicleViewModel}">
+                <view:SearchVehicleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InfoVehicleViewModel}">
+                <view:InfoVehicleView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

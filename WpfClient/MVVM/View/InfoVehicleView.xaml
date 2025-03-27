@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.InfoVehicleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Ver información del vehículo: " Height="42" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="237,10,237,0"></Label>
+
+            <Label Content="Marca: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,75,652,0"></Label>
+            <TextBlock
+            Margin="153,75,447,345"
+            Text="{Binding Branch}"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="15"
+        />
+            <Label Content="Modelo: " Height="29" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,112,642,0"></Label>
+            <TextBlock
+            Margin="158,111,447,309"
+            Text="{Binding Model}" 
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="15"
+        />
+
+
+            <Label Content="Versión: " Height="27" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,147,652,0"></Label>
+            <TextBlock
+            Margin="151,146,447,275"
+            Text="{Binding Version}"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="20"
+        />
+            <Label Content="Año: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="614,181,137,0" ></Label>
+            <TextBlock
+            Margin="667,182,48,237"
+            Text="{Binding Year}"
+            Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            Foreground="White"
+            FontSize="15"
+        />
+
+            <Label Content="Color: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,185,669,0"></Label>
+            <TextBlock
+    Margin="136,183,470,237"
+    Text="{Binding Color}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+            <Label Content="Precio de compra: " Height="29" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="371,219,284,0"></Label>
+            <TextBlock
+    Margin="513,223,182,197"
+    Text="{Binding PurchasePrice}" 
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+
+            <Label Content="Precio de venta: " Height="27" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="374,253,298,0"></Label>
+            <TextBlock
+    Margin="502,253,182,168"
+    Text="{Binding SellPrice}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="20"
+/>
+            <Label Content="Tipo: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="374,285,380,0" ></Label>
+            <TextBlock
+    Margin="425,285,264,134"
+    Text="{Binding Type}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+            <Label Content="Puertas: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="618,285,107,0" ></Label>
+            <TextBlock
+    Margin="695,286,27,133"
+    Text="{Binding Doors}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+            <Label Content="Número de chasis: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,76,280,0"></Label>
+            <TextBlock
+    Margin="521,76,30,344"
+    Text="{Binding ChassisNumber}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+            <Label Content="Numero de motor: " Height="30" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,110,291,0"></Label>
+            <TextBlock
+    Margin="524,109,30,311"
+    Text="{Binding EngineNumber}" 
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+
+            <Label Content="VIN: " Height="26" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="371,145,380,0"></Label>
+            <TextBlock
+    Margin="424,144,30,277"
+    Text="{Binding VIN}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="20"
+/>
+            <Label Content="Descuento: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="371,183,338,0" ></Label>
+            <TextBlock
+    Margin="465,184,196,235"
+    Text="{Binding Discount}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+            <Label Content="Motor: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="374,316,362,0"></Label>
+            <TextBlock
+    Margin="438,316,30,104"
+    Text="{Binding Engine}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+            <Label Content="Transmisión: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,218,622,0"></Label>
+            <TextBlock
+    Margin="180,217,443,203"
+    Text="{Binding Transmission}"
+    Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+    Foreground="White"
+    FontSize="15"
+/>
+
+            <Label Content="Foto: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="74,266,661,0"></Label>
+
+
+
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Editar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditVehicleCommand}" Margin="606,383,25,25" />
+            <Button Background="DarkRed" Content="Eliminar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding DeleteVehicleeCommand}" Margin="413,382,217,26" />
+        </Grid>
+    </Viewbox>
+</UserControl>
