@@ -38,7 +38,7 @@
             <Button Content="Filtro" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding AdvancedFilterCommand}" Margin="1108,165,123,572" />
 
 
-            <ListBox ItemsSource="{Binding VehicleList}" Height="450" Width="850"
+            <ListBox ItemsSource="{Binding VehiclesList}" Height="450" Width="850"
              Background="Transparent"
              Foreground="White"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">

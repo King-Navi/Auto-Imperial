@@ -48,7 +48,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToVehiclesView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchVehicleViewModel>(); TODO Change page
+                    Navigation.NavigateTo<SearchVehicleViewModel>();
                 },
                 o => true);
 
