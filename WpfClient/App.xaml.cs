@@ -47,6 +47,7 @@ namespace WpfClient
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<ISupplierPaymentRepository, SupplierPaymentRepository>();
 
 
             //Navigation

@@ -24,7 +24,7 @@
                 <TranslateTransform Y="-1000" />
             </Grid.RenderTransform>
 
-            <Label Content="Buscar compra a proveedor" Margin="416,26,593,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
+            <Label Content="Buscar compra a proveedor" Margin="416,26,359,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PaddingValue="40,0,0,0"
                 PlaceholderText="Ingrese el folio"
@@ -35,9 +35,9 @@
                 HorizontalAlignment="Left" Margin="172,158,0,0"
                 />
             <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
-            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToRegisterEmployeeView}" Margin="1103,693,34,45" />
+            <Button Content="Registrar nuevo" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Margin="1103,693,34,45" />
 
-            <ListBox ItemsSource="{Binding SupplierPaymentList}" Height="450" Width="850"
+            <ListBox ItemsSource="{Binding SupplierPaymentsList}" Height="450" Width="850"
                  Background="Transparent"
                  Foreground="White"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">

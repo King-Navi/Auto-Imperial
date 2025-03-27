@@ -98,6 +98,15 @@ INSERT INTO DescuentoVehiculo
 VALUES 
   (1, 1);
 
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (15000.50, 'CP-20250301', '2025-03-01', 1, 2);
+
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (8450.75, 'CP-20250315', '2025-03-15', 1, 2);
+
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (23000.00, 'CP-20250320', '2025-03-20', 1, 2);
+
 
 
   -- Inserciones para pruebas ClientRepositoryTest

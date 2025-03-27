@@ -65,8 +65,8 @@ namespace WpfClient.MVVM.ViewModel
             Navigation = navigationService;
 
             NavigateToSearchSupplierView = new RelayCommand(NavigateToSearchSupplier);
-            NavigateToRegisterSupplierPaymentCommand = new RelayCommand(RegisterSupplierPayment);
-            NavigateToSearchSupplierPaymentCommand = new RelayCommand(SearchSupplierPayment);
+            NavigateToRegisterSupplierPaymentCommand = new RelayCommand(NavigateToRegisterSupplierPayment);
+            NavigateToSearchSupplierPaymentCommand = new RelayCommand(NavigateToSearchSupplierPayment);
         }
         public void ReceiveParameter(object parameter)
         {
@@ -88,12 +88,12 @@ namespace WpfClient.MVVM.ViewModel
             Navigation.NavigateTo<SearchSupplierViewModel>();
         }
 
-        private void RegisterSupplierPayment()
+        private void NavigateToRegisterSupplierPayment()
         {
             Navigation.NavigateTo<RegisterSupplierPaymentViewModel>(ActualSupplier);
         }
 
-        void SearchSupplierPayment()
+        void NavigateToSearchSupplierPayment()
         {
             Navigation.NavigateTo<SearchSupplierPaymentViewModel>(ActualSupplier);
         }

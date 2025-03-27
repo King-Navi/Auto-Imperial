@@ -1,6 +1,7 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
+using AutoImperialDAO.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -74,9 +75,26 @@ namespace AutoImperialDAO.DAO.Repositories
             }
         }
 
-        public Task<Proveedor> SearchByIdAsync(int id, AccountStatusEnum statusEnum)
+        public async Task<Proveedor> SearchByIdAsync(int id, AccountStatusEnum statusEnum)
         {
-            throw new NotImplementedException();
+            Proveedor? result = new Proveedor();
+            try
+            {
+                Validator.IsIdValid(id);
+                result = await _context.Proveedores.FirstOrDefaultAsync(c => c.idProveedor == id && c.estado == statusEnum.ToString());
+
+                if (result == null)
+                {
+                    throw new KeyNotFoundException($"No se encontró un empleado con ID {id}");
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                result = new Proveedor { idProveedor = -1 };
+            }
+            return result;
         }
     }
 }
