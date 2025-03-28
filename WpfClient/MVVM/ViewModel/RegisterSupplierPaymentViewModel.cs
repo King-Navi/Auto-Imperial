@@ -31,8 +31,8 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        private decimal? totalAmount;
-        public decimal? TotalAmount
+        private string? totalAmount;
+        public string? TotalAmount
         {
             get => totalAmount;
             set
@@ -53,8 +53,8 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        private int? vehiclesNumber;
-        public int? VehiclesNumber
+        private string? vehiclesNumber;
+        public string? VehiclesNumber
         {
             get => vehiclesNumber;
             set
@@ -105,9 +105,9 @@ namespace WpfClient.MVVM.ViewModel
         private async void RegisterSupplierPayment()
         {
             var confirmationVM = new ConfirmationViewModel(
-            "Confirmación de registro",
-            "¿Está seguro que desea registrar esta nueva compra?",
-            Utilities.Enum.ConfirmationIconType.RegisterIcon);
+                "Confirmación de registro",
+                "¿Está seguro que desea registrar esta nueva compra?",
+                Utilities.Enum.ConfirmationIconType.RegisterIcon);
 
             var result = _dialogService.ShowDialog(confirmationVM);
 
@@ -115,13 +115,31 @@ namespace WpfClient.MVVM.ViewModel
             {
                 try
                 {
+                    if (!decimal.TryParse(TotalAmount, out var monto))
+                    {
+                        MessageBox.Show("El monto total ingresado no es válido.");
+                        return;
+                    }
+
+                    if (!int.TryParse(VehiclesNumber, out var numeroVehiculos))
+                    {
+                        MessageBox.Show("El número total de vehículos ingresado no es válido.");
+                        return;
+                    }
+
+                    if (PurchaseDate == null)
+                    {
+                        MessageBox.Show("Debe seleccionar una fecha de compra.");
+                        return;
+                    }
+
                     var compra = new CompraProveedor
                     {
                         idProveedor = ActualSupplier.SupplierId,
                         idAdministrador = user.CurrentUser.Id,
-                        montoTotal = TotalAmount ?? 0,
+                        montoTotal = monto,
                         folio = $"COMP-{DateTime.Now:yyyyMMddHHmmss}",
-                        fechaCompra = DateOnly.FromDateTime(PurchaseDate ?? DateTime.Now)
+                        fechaCompra = DateOnly.FromDateTime(PurchaseDate.Value)
                     };
 
                     bool success = await _supplierPaymentRepository.RegisterSupplierPaymentAsync(compra);
@@ -142,6 +160,7 @@ namespace WpfClient.MVVM.ViewModel
                 }
             }
         }
+
 
         public void ReceiveParameter(object parameter)
         {
