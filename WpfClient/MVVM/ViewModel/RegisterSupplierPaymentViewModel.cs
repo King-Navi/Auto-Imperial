@@ -14,63 +14,56 @@ using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    class RegisterSupplierPaymentViewModel : Services.Navigation.ViewModel
+    class RegisterSupplierPaymentViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
-        private string supplierName;
-        public string SupplierName
+        public Supplier ActualSupplier { get; set; } = new Supplier();
+        private readonly UserService user;
+        public string AdminName => user.CurrentUser?.Name ?? "Invitado";
+
+        private string? supplierName;
+        public string? SupplierName
         {
             get => supplierName;
-            set { supplierName = value; OnPropertyChanged(); }
+            set
+            {
+                supplierName = value;
+                OnPropertyChanged();
+            }
         }
 
-        private string street;
-        public string Street
+        private decimal? totalAmount;
+        public decimal? TotalAmount
         {
-            get => street;
-            set { street = value; OnPropertyChanged(); }
+            get => totalAmount;
+            set
+            {
+                totalAmount = value;
+                OnPropertyChanged();
+            }
         }
 
-        private string number;
-        public string Number
+        private DateTime? purchaseDate;
+        public DateTime? PurchaseDate
         {
-            get => number;
-            set { number = value; OnPropertyChanged(); }
+            get => purchaseDate;
+            set
+            {
+                purchaseDate = value;
+                OnPropertyChanged();
+            }
         }
 
-        private string zipCode;
-        public string ZipCode
+        private int? vehiclesNumber;
+        public int? VehiclesNumber
         {
-            get => zipCode;
-            set { zipCode = value; OnPropertyChanged(); }
+            get => vehiclesNumber;
+            set
+            {
+                vehiclesNumber = value;
+                OnPropertyChanged();
+            }
         }
 
-        private string city;
-        public string City
-        {
-            get => city;
-            set { city = value; OnPropertyChanged(); }
-        }
-
-        private string phone;
-        public string Phone
-        {
-            get => phone;
-            set { phone = value; OnPropertyChanged(); }
-        }
-
-        private string email;
-        public string Email
-        {
-            get => email;
-            set { email = value; OnPropertyChanged(); }
-        }
-
-        private string primaryContact;
-        public string PrimaryContact
-        {
-            get => primaryContact;
-            set { primaryContact = value; OnPropertyChanged(); }
-        }
 
 
         private INavigationService navigation;
@@ -84,67 +77,82 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        public ICommand NavigateToSearchSupplierView { get; set; }
-        public ICommand RegisterSupplierCommand { get; set; }
+        public ICommand NavigateToInfoSupplierView { get; set; }
+        public ICommand RegisterSupplierPaymentCommand { get; set; }
 
-        private readonly ISupplierRepository _supplierRepository;
+        private readonly ISupplierPaymentRepository _supplierPaymentRepository;
         private readonly IDialogService _dialogService;
 
-        public RegisterSupplierPaymentViewModel(INavigationService navigationService, UserService currentUser, ISupplierRepository supplierRepository, IDialogService dialogService)
+        public RegisterSupplierPaymentViewModel(INavigationService navigationService, UserService currentUser, ISupplierPaymentRepository supplierPaymentRepository, IDialogService dialogService)
         {
             _dialogService = dialogService;
             Navigation = navigationService;
-            _supplierRepository = supplierRepository;
-            NavigateToSearchSupplierView = new RelayCommand(NavigateToSearchSupplier);
-            RegisterSupplierCommand = new RelayCommand(RegisterEmployee);
-
+            _supplierPaymentRepository = supplierPaymentRepository;
+            NavigateToInfoSupplierView = new RelayCommand(NavigateToInfoSupplier);
+            RegisterSupplierPaymentCommand = new RelayCommand(RegisterSupplierPayment);
+            user = currentUser;
         }
 
-        private void NavigateToSearchSupplier()
+        private void NavigateToInfoSupplier()
         {
             var confirmationVM = new ConfirmationViewModel("Cancerlar registro", $"¿Esta seguro que desea salir del registro? Se perderán todos los cambios no guardados", Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
             {
-                Navigation.NavigateTo<SearchSupplierViewModel>();
+                Navigation.NavigateTo<InfoSupplierViewModel>(ActualSupplier);
             }
         }
-        private void RegisterEmployee()
+        private async void RegisterSupplierPayment()
         {
-            var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Esta seguro que desea registrar a este nuevo empleado?", Utilities.Enum.ConfirmationIconType.RegisterIcon);
+            var confirmationVM = new ConfirmationViewModel(
+            "Confirmación de registro",
+            "¿Está seguro que desea registrar esta nueva compra?",
+            Utilities.Enum.ConfirmationIconType.RegisterIcon);
+
             var result = _dialogService.ShowDialog(confirmationVM);
+
             if (result == true)
             {
-                Proveedor employee = new Proveedor
-                {
-                    nombreProveedor = this.SupplierName,
-                    calle = this.Street,
-                    numero = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
-                    codigoPostal = this.ZipCode,
-                    ciudad = this.City,
-                    telefono = this.Phone,
-                    correo = this.Email,
-                    contactoPrincipal = this.PrimaryContact
-                };
-
                 try
                 {
-
-                    if (_supplierRepository.Register(employee))
+                    var compra = new CompraProveedor
                     {
-                        MessageBox.Show("Proveedor registrado correctamente");
-                        Navigation.NavigateTo<SearchSupplierViewModel>();
+                        idProveedor = ActualSupplier.SupplierId,
+                        idAdministrador = user.CurrentUser.Id,
+                        montoTotal = TotalAmount ?? 0,
+                        folio = $"COMP-{DateTime.Now:yyyyMMddHHmmss}",
+                        fechaCompra = DateOnly.FromDateTime(PurchaseDate ?? DateTime.Now)
+                    };
+
+                    bool success = await _supplierPaymentRepository.RegisterSupplierPaymentAsync(compra);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Compra registrada correctamente.");
+                        Navigation.NavigateTo<InfoSupplierViewModel>(ActualSupplier);
                     }
                     else
                     {
-                        MessageBox.Show("Error al registrar el proveedor");
-
+                        MessageBox.Show("Error al registrar la compra.");
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Error al registrar el proveedor: " + e.StackTrace);
+                    MessageBox.Show("Ocurrió un error: " + ex.Message);
                 }
+            }
+        }
+
+        public void ReceiveParameter(object parameter)
+        {
+            if (parameter is Supplier supplier)
+            {
+                ActualSupplier = supplier;
+                SupplierName = supplier.SupplierName;
+            }
+            else
+            {
+                MessageBox.Show("Error al cargar el proveedor");
             }
         }
     }

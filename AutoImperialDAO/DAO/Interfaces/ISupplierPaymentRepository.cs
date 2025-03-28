@@ -9,6 +9,7 @@ namespace AutoImperialDAO.DAO.Interfaces
 {
     public interface ISupplierPaymentRepository
     {
+        Task<bool> RegisterSupplierPaymentAsync(CompraProveedor nuevaCompra);
         Task<List<CompraProveedor>> GetPaymentsBySupplierIdAsync(int supplierId);
     }
 }

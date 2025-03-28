@@ -15,9 +15,9 @@ namespace WpfClient.MVVM.Model
 
         public bool IsAuthenticated => currentUser != null;
 
-        public void SaveUser(string name, string password, string role)
+        public void SaveUser(string name, string password, string role, int id)
         {
-            currentUser = new UserModel(name, password, role);
+            currentUser = new UserModel(name, password, role, id);
         }
 
         public void CloseSesion()

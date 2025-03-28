@@ -16,6 +16,27 @@ namespace AutoImperialDAO.DAO.Repositories
         {
         }
 
+        public async Task<bool> RegisterSupplierPaymentAsync(CompraProveedor nuevaCompra)
+        {
+            try
+            {
+                Validator.IsIdValid(nuevaCompra.idProveedor);
+                Validator.IsIdValid(nuevaCompra.idAdministrador);
+                nuevaCompra.fechaCompra = DateOnly.FromDateTime(DateTime.Now);
+
+                await _context.CompraProveedores.AddAsync(nuevaCompra);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al registrar compra: {ex.Message}");
+                return false;
+            }
+        }
+
+
         public async Task<List<CompraProveedor>> GetPaymentsBySupplierIdAsync(int supplierId)
         {
             try

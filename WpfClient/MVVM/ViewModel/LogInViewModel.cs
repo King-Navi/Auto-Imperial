@@ -82,7 +82,7 @@ namespace WpfClient.MVVM.ViewModel
                     return;
                 }
 
-                user.SaveUser(authenticatedUser.Username, authenticatedUser.Password, authenticatedUser.Role);
+                user.SaveUser(authenticatedUser.Username, authenticatedUser.Password, authenticatedUser.Role, authenticatedUser.Id);
 
                 if (authenticatedUser.Role.Equals("Admin", StringComparison.OrdinalIgnoreCase))
                 {

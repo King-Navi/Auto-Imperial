@@ -12,44 +12,37 @@
             <Label Content="Registrar compra a proveedor: " Height="36" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="240,10,240,0"></Label>
 
 
-            <Label Content="Nombre del proveedor: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="126,72,480,0"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Nombre"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding SupplierName, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="331,72,208,344" RenderTransformOrigin="0.333,-0.199"/>
+            <Label Content="Nombre del proveedor: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,83,491,0"/>
+            <TextBlock
+                Margin="327,86,190,330"
+                Text="{Binding SupplierName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
 
-            <Label Content="Dirección: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="124,114,562,0"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Calle"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="212,112,324,304"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Número"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="481,112,212,304"/>
+            <Label Content="Nombre del administrador:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,125,481,0" RenderTransformOrigin="1.709,0.731"/>
 
-            <controls:PlaceholderTextBoxControl PlaceholderText="Código Postal"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="208,154,478,262"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Ciudad"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="327,154,202,262"/>
+            <Label Content="Monto total de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,258,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Monto total"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="366,255,220,161"/>
 
-            <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="249,290,437,0"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Teléfono"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="367,284,103,132"/>
-
-            <Label Content="Correo: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="249,328,481,0" RenderTransformOrigin="1.709,0.731"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Correo electrónico"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="365,334,105,82"/>
-
-            <Label Content="Nombre del contacto principal:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="124,236,422,0"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Nombre del contacto principal"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding PrimaryContact, UpdateSourceTrigger=PropertyChanged}"
-                FontSizeValue="12" Margin="375,233,109,183"/>
-
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierView}" Margin="101,383,605,25" />
-            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar proveedor" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierCommand}" Margin="592,383,25,25" />
-            <Label Content="Contacto principal" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="127,196,506,0"/>
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar compra" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierPaymentCommand}" Margin="592,383,25,25" />
+            <Label Content="Fecha de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="116,191,517,0"/>
+            <DatePicker  HorizontalAlignment="Left" Margin="303,199,0,0" VerticalAlignment="Top" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBlock
+                Margin="327,128,190,288"
+                Text="{Binding AdminName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Número total de vehículos:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,301,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Número de vehículos"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VehiclesNumber, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="366,298,220,118"/>
         </Grid>
     </Viewbox>
 </UserControl>
