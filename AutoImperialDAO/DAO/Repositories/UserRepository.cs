@@ -30,6 +30,7 @@ namespace AutoImperialDAO.DAO.Repositories
                         Username = admin.nombreUsuario,
                         Password = admin.password,
                         Role = "Admin",
+                        Id = admin.idAdministrador
                     };
                 }
 

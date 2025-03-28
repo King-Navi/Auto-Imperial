@@ -13,19 +13,19 @@ namespace AutoImperialDAO.DAO.Repositories
         public SellRepository(AutoImperialContext context) : base(context)
         {
         }
-        bool ISellRepository.DeleteById(int id)
+        public bool DeleteById(int id)
         {
             //TODO
             throw new NotImplementedException();
         }
 
-        bool ISellRepository.Edit(Cliente client)
+        public bool Edit(Cliente client)
         {
             //TODO
             throw new NotImplementedException();
         }
 
-        bool ISellRepository.Register(Cliente client)
+        public bool Register(Cliente client)
         {
             //TODO
             throw new NotImplementedException();
