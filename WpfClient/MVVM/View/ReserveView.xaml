@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:cards="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" 
              d:DesignHeight="850" 
              d:DesignWidth="1445">
     <UserControl.Resources>
-        <!-- Define un estilo para los Label -->
         <Style x:Key="UniformLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="Height" Value="50"/>
@@ -59,6 +59,23 @@
                Margin="0,60,300,0" />
 
 
-        <Grid d:Background="{StaticResource BackgroundyColor1}" Margin="5,150,5,0" VerticalAlignment="Center" Height="600"/>
+        <Grid d:Background="{StaticResource BackgroundyColor1}" Margin="0,150,0,0" VerticalAlignment="Center" Height="600" Width="1200" HorizontalAlignment="Center">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+
+               <ItemsControl ItemsSource="{Binding ReserveCards}" Margin="5,5,5,5" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <cards:ReserveCardView />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+        </Grid>
     </Grid>
 </UserControl>

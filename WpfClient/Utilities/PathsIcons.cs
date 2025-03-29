@@ -9,6 +9,7 @@ namespace WpfClient.Utilities
 {
     public static class PathsIcons
     {
+        public const string DEFAULT_CAR = "pack://application:,,,/Resources/Images/default_car.jpg";
         private static readonly Dictionary<ConfirmationIconType, string> IconPaths = new()
         {
             { ConfirmationIconType.WarningIcon, Warning},

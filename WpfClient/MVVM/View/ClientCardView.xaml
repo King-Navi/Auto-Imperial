@@ -16,7 +16,6 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="20">
 
-                <!-- Nombre -->
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,5">
                     <TextBlock Text="Nombre: " 
                    Style="{StaticResource PrimaryTextBlockStyle}" 
@@ -29,7 +28,6 @@
                    FontSize="30"/>
                 </StackPanel>
 
-                <!-- Apellido Paterno -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
                     <TextBlock Text="Apellido Paterno: " 
                    Style="{StaticResource PrimaryTextBlockStyle}" 
@@ -42,7 +40,6 @@
                    FontSize="23"/>
                 </StackPanel>
 
-                <!-- Apellido Materno -->
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
                     <TextBlock Text="Apellido Materno: " 
                    Style="{StaticResource PrimaryTextBlockStyle}" 
@@ -57,7 +54,6 @@
 
             </StackPanel>
 
-            <!-- Botón -->
             <Button Content="Ver reservas" 
             Style="{StaticResource PrimaryButtonStyle}"
             Command="{Binding NavigateToReserveViewCommand}"

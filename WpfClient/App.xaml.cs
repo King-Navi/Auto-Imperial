@@ -50,6 +50,9 @@ namespace WpfClient
             services.AddTransient<ISupplierPaymentRepository, SupplierPaymentRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IReserveRepository, ReserveRepository>();
+            services.AddTransient<IVersionRepository, VersionRepository>();
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
 
 
             //Navigation

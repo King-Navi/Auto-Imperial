@@ -22,7 +22,7 @@
 
         <!-- Row 0: Image -->
         <Grid d:Background="Pink" Grid.Row="0" HorizontalAlignment="Center" Margin="10">
-            <Image Source="{Binding VehicleImage}" Width="200" Height="200"/>
+            <Image Source="{Binding Model.VehicleImage}" Width="200" Height="200"/>
         </Grid>
 
         <!-- Row 1: Labels and bindings -->
@@ -36,17 +36,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Vehicle:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-            <Label Content="{Binding Vehicle}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <Label Content="{Binding Model.Vehicle}" Grid.Row="0" Grid.Column="1" Margin="5"/>
             <Label Content="Reservation Status:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-            <Label Content="{Binding ReservationStatus}" Grid.Row="1" Grid.Column="1" Margin="5"/>
+            <Label Content="{Binding Model.ReservationStatus}" Grid.Row="1" Grid.Column="1" Margin="5"/>
         </Grid>
 
-        <!-- Row 2: Buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Buy Vehicle" Width="150" Margin="5" 
-                    Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"/>
-            <Button Content="Cancel Reservation" Width="150" Margin="5"
-                    Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <Button Content="Buy Vehicle" Width="150" Margin="5" 
+                Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                Command="{Binding BuyVehicleCommand}"/>
+                <Button Content="Cancel Reservation" Width="150" Margin="5"
+                Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                Command="{Binding CancelReservationCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

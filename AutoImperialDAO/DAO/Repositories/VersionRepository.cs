@@ -31,6 +31,26 @@ namespace AutoImperialDAO.DAO.Repositories
             return new List<Version> { new Version { idVersion = -1 } };
         }
 
+        public string GetNombreCompletoVehiculo(int idVersion)
+        {
+            try
+            {
+                    var nombreCompleto = _context.Version
+                        .Where(v => v.idVersion == idVersion)
+                        .Select(v => 
+                            v.idModeloNavigation.idMarcaNavigation.nombre + " " +
+                            v.idModeloNavigation.nombre + " " + 
+                            v.nombre + " " + v.motor)
+                        .FirstOrDefault();
+
+                    return nombreCompleto ?? "Vehículo no encontrado";
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 
     }
 }

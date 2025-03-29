@@ -40,7 +40,7 @@ namespace AutoImperialDAO.DAO.Repositories
             }
             catch (Exception)
             {
-                return new List<Reserva>();
+                return new List<Reserva>() { new Reserva() {idReserva = -1 } };
             }
         }
     }
