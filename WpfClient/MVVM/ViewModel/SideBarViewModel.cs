@@ -56,7 +56,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToSellView = new RelayCommand(
                 o =>
                 {
-                    Navigation.NavigateTo<SearchSellViewModel>();
+                    //Navigation.NavigateTo<SearchReservationViewModel>(); TODO
                 },
                 o => true);
 

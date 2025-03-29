@@ -4,46 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+                          xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+             xmlns:viewcards="clr-namespace:WpfClient.Resources.ViewCards"
              mc:Ignorable="d" 
-             xmlns:viewmodel="clr-namespace:WpfClient.MVVM.ViewModel"
-             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
-             d:DesignHeight="850" d:DesignWidth="1445" >
+             d:DesignHeight="850" d:DesignWidth="1445">
+
     <Viewbox Stretch="Fill">
-        <Grid Background="Blue" Margin="0,0,0,0">
+        <Grid x:Name="animatedGrid" Background="{StaticResource BackgroundyColor2}" >
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <StaticResource ResourceKey="FastSlideInFromTopAnimation"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+            <Grid.RenderTransform>
+                <TranslateTransform Y="-1000" />
+            </Grid.RenderTransform>
+
+            <Label Content="Buscar venta" Margin="534,40,533,706" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
-                        PlaceholderText="Ingrese su correo electrónico"
-                        Style="{StaticResource SynthwaveTextBoxStyle}"                          
-                        Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                        FontSizeValue="20" Margin="255,29,696,766" RenderTransformOrigin="0.5,0.5">
-                <controls:PlaceholderTextBoxControl.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </controls:PlaceholderTextBoxControl.RenderTransform>
-            </controls:PlaceholderTextBoxControl>
-            <Button Command="{Binding SearchCommand}" Content="Buscar" HorizontalAlignment="Left" Margin="632,29,0,0" VerticalAlignment="Top" Height="32" Width="90"/>
-            <Label Content="Buscar" HorizontalAlignment="Left" Margin="188,43,0,0" VerticalAlignment="Top" Width="67"/>
-            <Button Content="Registrar cliente" HorizontalAlignment="Left" Margin="749,29,0,0" VerticalAlignment="Top" Height="32" Width="90" Command="{Binding NavegateToRegisterClientViewCommand}"/>
+                PaddingValue="40,0,0,0"
+                PlaceholderText="Ingrese el nombre del cliente o el VIM del vehículo"
+                Style="{StaticResource SynthwaveTextBoxStyle}"                          
+                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="25"  Height="100" Width="850"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Left" Margin="172,158,0,0"
+                />
+            <Button Content="Buscar" FontSize="30" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SearchCommand}" Margin="1069,169,176,568" />
 
-            <Button Content="Elimianr cliente" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="32" Width="90" Command="{Binding DeleteClientCommand}" Margin="1104,735,0,0"/>
-            <Button Content="Editar cliente" HorizontalAlignment="Left" Margin="904,735,0,0" VerticalAlignment="Top" Height="32" Width="90" Command="{Binding EditClientCommand}"/>
+            <ListBox ItemsSource="{Binding SellsList}" Height="450" Width="850"
+                 Background="Transparent"
+                 Foreground="White"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="147,309,374,64">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <viewcards:SellCardView/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-            <Grid Background="Aqua" Width="600" Height="300" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListBox ItemsSource="{Binding ClientsList}" 
-                         SelectedItem="{Binding Selected, Mode=TwoWay}" >
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <local:ClientCardView />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-            </Grid>
+            <TextBlock Text="{Binding ErrorMessage}"
+               Foreground="Red"
+               FontWeight="Bold"
+               FontSize="20"
+               Margin="1066,444,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" Width="284" Height="180"
+               TextWrapping="Wrap"
+               TextAlignment="Center"
+              />
+
         </Grid>
     </Viewbox>
-</UserControl>
 
+</UserControl>

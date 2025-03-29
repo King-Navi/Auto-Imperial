@@ -110,7 +110,7 @@ namespace WpfClient.MVVM.ViewModel
                     else
                     {
                         ErrorMessage = string.Empty;
-                        return ConvertToEmployeeList(result);
+                        return ConvertToSupplierList(result);
                     }
                 }
             }
@@ -121,7 +121,7 @@ namespace WpfClient.MVVM.ViewModel
             return new List<Supplier>();
         }
 
-        private List<Supplier> ConvertToEmployeeList(List<Proveedor> list)
+        private List<Supplier> ConvertToSupplierList(List<Proveedor> list)
         {
             List<Supplier> suppliers = new List<Supplier>();
 
