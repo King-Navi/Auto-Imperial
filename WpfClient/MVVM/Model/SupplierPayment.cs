@@ -54,8 +54,8 @@ namespace WpfClient.MVVM.Model
 
         public new ICollection<Vehiculo> Vehiculos
         {
-            get => base.Vehiculos;
-            set { base.Vehiculos = value; OnPropertyChanged(); }
+            get => base.Vehiculo;
+            set { base.Vehiculo = value; OnPropertyChanged(); }
         }
 
         public object Clone()

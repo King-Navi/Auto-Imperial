@@ -19,8 +19,8 @@ namespace WpfClient.MVVM.ViewModel
 {
     class InfoEmployeeViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
-        private Employee _actualEmployee = new Employee();
-        private Employee? _originalEmployee;
+        private SellerEmployee _actualEmployee = new SellerEmployee();
+        private SellerEmployee? _originalEmployee;
 
         public string EmployeeName { get; set; }
         public string Street { get; set; }
@@ -39,7 +39,7 @@ namespace WpfClient.MVVM.ViewModel
 
 
 
-        public Employee ActualEmployee
+        public SellerEmployee ActualEmployee
         {
             get => _actualEmployee;
             set
@@ -79,10 +79,10 @@ namespace WpfClient.MVVM.ViewModel
         }
         public void ReceiveParameter(object parameter)
         {
-            if (parameter is Employee employee)
+            if (parameter is SellerEmployee employee)
             {
                 ActualEmployee = employee;
-                _originalEmployee = (Employee)employee.Clone();
+                _originalEmployee = (SellerEmployee)employee.Clone();
 
                 InitProperties();
             }

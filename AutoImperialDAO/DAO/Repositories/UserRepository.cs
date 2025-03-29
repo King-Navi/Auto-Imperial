@@ -20,7 +20,7 @@ namespace AutoImperialDAO.DAO.Repositories
         {
             try
             {
-                var admin = _context.Administradores
+                var admin = _context.Administrador
                     .FirstOrDefault(a => a.nombreUsuario.ToLower() == username.ToLower()
                                       && a.password == password);
                 if (admin != null)
@@ -34,7 +34,7 @@ namespace AutoImperialDAO.DAO.Repositories
                     };
                 }
 
-                var vendedor = _context.Vendedores
+                var vendedor = _context.Vendedor
                     .FirstOrDefault(v => v.nombreUsuario.ToLower() == username.ToLower()
                                       && v.password == password);
                 if (vendedor != null)

@@ -17,7 +17,7 @@ public partial class CompraProveedor
 
     public int idProveedor { get; set; }
 
-    public virtual ICollection<Vehiculo> Vehiculos { get; set; } = new List<Vehiculo>();
+    public virtual ICollection<Vehiculo> Vehiculo { get; set; } = new List<Vehiculo>();
 
     public virtual Administrador idAdministradorNavigation { get; set; } = null!;
 

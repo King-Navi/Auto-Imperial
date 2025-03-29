@@ -24,7 +24,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 Validator.IsIdValid(nuevaCompra.idAdministrador);
                 nuevaCompra.fechaCompra = DateOnly.FromDateTime(DateTime.Now);
 
-                await _context.CompraProveedores.AddAsync(nuevaCompra);
+                await _context.CompraProveedor.AddAsync(nuevaCompra);
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -43,7 +43,7 @@ namespace AutoImperialDAO.DAO.Repositories
             {
                 Validator.IsIdValid(supplierId);
 
-                var purchases = await _context.CompraProveedores
+                var purchases = await _context.CompraProveedor
                     .Where(c => c.idProveedor == supplierId)
                     .ToListAsync();
 

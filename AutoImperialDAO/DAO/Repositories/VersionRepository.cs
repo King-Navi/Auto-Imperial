@@ -1,0 +1,36 @@
+﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Version = AutoImperialDAO.Models.Version;
+
+namespace AutoImperialDAO.DAO.Repositories
+{
+    public class VersionRepository : BaseRepository<Version>, IVersionRepository
+    {
+        public VersionRepository(AutoImperialContext context) : base(context)
+        {
+        }
+        public List<Version> GetAllVersionsWithModelAndBrand()
+        {
+            try
+            {
+                return _context.Version
+                    .Include(v => v.idModeloNavigation)
+                        .ThenInclude(m => m.idMarcaNavigation)
+                    .ToList();
+            }
+            catch (Exception)
+            {
+            }
+
+            return new List<Version> { new Version { idVersion = -1 } };
+        }
+
+
+    }
+}

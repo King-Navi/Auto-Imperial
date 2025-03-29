@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WpfClient.MVVM.Model
 {
-    class Employee : AutoImperialDAO.Models.Vendedor , INotifyPropertyChanged
+    public class SellerEmployee : AutoImperialDAO.Models.Vendedor , INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,6 +19,29 @@ namespace WpfClient.MVVM.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         //TODO add more atributes
+        public SellerEmployee(Vendedor vendedor)
+        {
+            this.idVendedor = vendedor.idVendedor;
+            this.nombre = vendedor.nombre;
+            this.apellidoPaterno = vendedor.apellidoPaterno;
+            this.apellidoMaterno = vendedor.apellidoMaterno;
+            this.telefono = vendedor.telefono;
+            this.correo = vendedor.correo;
+            this.calle = vendedor.calle;
+            this.numero = vendedor.numero;
+            this.codigoPostal = vendedor.codigoPostal;
+            this.ciudad = vendedor.ciudad;
+            this.RFC = vendedor.RFC;
+            this.CURP = vendedor.CURP;
+            this.estadoCuenta = vendedor.estadoCuenta;
+            this.puestoVendedor = vendedor.puestoVendedor;
+            this.numeroEmpleado = vendedor.numeroEmpleado;
+            this.sucursal = vendedor.sucursal;
+            this.nombreUsuario = vendedor.nombreUsuario;
+        }
+        public SellerEmployee()
+        {
+        }
 
         public new int IdEmployee
         {
@@ -132,11 +155,16 @@ namespace WpfClient.MVVM.Model
         public ICollection<Reserva> Reservas;
 
 
+        public override string? ToString()
+        {
+            return Name + " " + PaternalSurname + " " + MaternalSurname;
+        }
+
         public object Clone()
         {
-            var clone = (Employee)Activator.CreateInstance(typeof(Employee));
+            var clone = (SellerEmployee)Activator.CreateInstance(typeof(SellerEmployee));
 
-            foreach (PropertyInfo prop in typeof(Employee).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (PropertyInfo prop in typeof(SellerEmployee).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (prop.CanRead && prop.CanWrite)
                 {

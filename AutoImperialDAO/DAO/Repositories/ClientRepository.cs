@@ -25,13 +25,13 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(id);
-                var client = _context.Clientes.Find(id);
+                var client = _context.Cliente.Find(id);
                 if (client == null)
                 {
                     throw new ArgumentNullException("Client not found");
                 }
                 client.estado = AccountStatusEnum.Eliminado.ToString();
-                _context.Clientes.Update(client);
+                _context.Cliente.Update(client);
                 _context.SaveChanges();
                 result = true;
             }
@@ -47,7 +47,7 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(client.idCliente);
-                var searchedClient = _context.Clientes.Find(client.idCliente);
+                var searchedClient = _context.Cliente.Find(client.idCliente);
                 if (searchedClient == null)
                 {
                     throw new ArgumentNullException("Client not found");
@@ -77,7 +77,7 @@ namespace AutoImperialDAO.DAO.Repositories
                     throw new ArgumentException("Client is not valid");
                 }
                 client.estado = AccountStatusEnum.Activo.ToString();
-                _context.Clientes.Add(client);
+                _context.Cliente.Add(client);
                 _context.SaveChanges();
                 result = true;
             }
@@ -98,7 +98,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("CURP null");
                 }
-                result = await _context.Clientes.FirstOrDefaultAsync(
+                result = await _context.Cliente.FirstOrDefaultAsync(
                     c => c.CURP.ToLower() == CURP.ToLower() 
                     && c.estado == statusEnum.ToString());
                 if (result == null)
@@ -125,7 +125,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("parameter null");
                 }
-                result = await _context.Clientes
+                result = await _context.Cliente
                                     .Where(c =>
                                         c.estado.ToUpper() == estadoStr.ToUpper() &&
                                         (
@@ -153,7 +153,7 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(id);
-                result = await _context.Clientes.FirstOrDefaultAsync(c => c.idCliente == id && c.estado == statusEnum.ToString());
+                result = await _context.Cliente.FirstOrDefaultAsync(c => c.idCliente == id && c.estado == statusEnum.ToString());
 
                 if (result == null)
                 {
@@ -185,7 +185,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 for (int i = 0; i < totalPages; i++)
                 {
                     int currentPage = startPage + i;
-                    var clientes = await _context.Clientes
+                    var clientes = await _context.Cliente
                         .Where(c => c.estado.ToLower() == status.ToString().ToLower())
                         .Skip((currentPage - 1) * pageSize)
                         .Take(pageSize)
@@ -232,14 +232,14 @@ namespace AutoImperialDAO.DAO.Repositories
         {
             return !String.IsNullOrEmpty(client.CURP)
                 && !String.IsNullOrWhiteSpace(client.CURP)
-                && !_context.Clientes.Any(c => c.CURP == client.CURP && c.idCliente != client.idCliente);
+                && !_context.Cliente.Any(c => c.CURP == client.CURP && c.idCliente != client.idCliente);
         }
 
         private bool ValidateRFC(Cliente client)
         {
             return !String.IsNullOrEmpty(client.RFC)
                 && !String.IsNullOrWhiteSpace(client.RFC)
-                && !_context.Clientes.Any(c => c.RFC == client.RFC && c.idCliente != client.idCliente);
+                && !_context.Cliente.Any(c => c.RFC == client.RFC && c.idCliente != client.idCliente);
         }
     }
 }

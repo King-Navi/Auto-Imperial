@@ -118,6 +118,13 @@ namespace WpfClient.MVVM.Model
             set { base.estado = value; OnPropertyChanged(); }
         }
 
+        public override string? ToString()
+        {
+            return Name + " " + PaternalSurname + " " + MaternalSurname;
+        }
+
+
+
         /// <summary>
         /// Implementation of the Prototype pattern to clone the object.
         /// </summary>

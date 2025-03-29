@@ -106,7 +106,7 @@ namespace TestProject.DAO
             // 3. Realizar operaciones de lectura/consulta y validar resultados.
             using (var context = new AutoImperialContext(options))
             {
-                var entidad = await context.Clientes.FirstOrDefaultAsync();
+                var entidad = await context.Cliente.FirstOrDefaultAsync();
                 Assert.IsNotNull(entidad);
             }
         }
@@ -119,7 +119,7 @@ namespace TestProject.DAO
 
             using (var context = new AutoImperialContext(options))
             {
-                var entidad = context.Administradores.Where(admin => admin.nombreUsuario.Equals("a1", StringComparison.OrdinalIgnoreCase));
+                var entidad = context.Administrador.Where(admin => admin.nombreUsuario.Equals("a1", StringComparison.OrdinalIgnoreCase));
                 Assert.IsNotNull(entidad);
             }
         }

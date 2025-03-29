@@ -97,7 +97,7 @@ namespace WpfClient.MVVM.ViewModel
             Navigation.NavigateTo<RegisterEmployeeViewModel>();
         }
 
-        private async Task<List<Employee>> SearchEmployeesAsync()
+        private async Task<List<SellerEmployee>> SearchEmployeesAsync()
         {
             try
             {
@@ -120,16 +120,16 @@ namespace WpfClient.MVVM.ViewModel
             {
                 Console.WriteLine($"Error en la búsqueda de empleados: {ex.Message}");
             }
-            return new List<Employee>();
+            return new List<SellerEmployee>();
         }
 
-        private List<Employee> ConvertToEmployeeList(List<Vendedor> list)
+        private List<SellerEmployee> ConvertToEmployeeList(List<Vendedor> list)
         {
-            List<Employee> employees = new List<Employee>();
+            List<SellerEmployee> employees = new List<SellerEmployee>();
 
             foreach (var emp in list)
             {
-                Employee newEmployee = new Employee();
+                SellerEmployee newEmployee = new SellerEmployee();
                 newEmployee.IdEmployee = emp.idVendedor;
                 newEmployee.CURP = emp.CURP;
                 newEmployee.CP = emp.codigoPostal;
@@ -148,7 +148,7 @@ namespace WpfClient.MVVM.ViewModel
                 newEmployee.Username = emp.nombreUsuario;
                 newEmployee.EmployeeNumber = emp.numeroEmpleado;
                 newEmployee.Branch = emp.sucursal;
-                newEmployee.Reservas = emp.Reservas;
+                newEmployee.Reservas = emp.Reserva;
 
                 employees.Add(newEmployee);
             }
