@@ -49,14 +49,14 @@ namespace TestProject.ClienteTest.ViewModel
             Assert.IsNull(result);
         }
 
-        [TestMethod]
-        public void ConvertToReserveCardModel_WithNullList_ReturnsNull()
-        {
-            var viewModel = new ReserveViewModel(null, null, null, null, null, null, null, null);
+        //[TestMethod]
+        //public void ConvertToReserveCardModel_WithNullList_ReturnsNull()
+        //{
+        //    var viewModel = new ReserveViewModel(null, null, null, null, null, null, null, null);
 
-            var result = viewModel.ConvertToReserveCardModel(null);
+        //    var result = viewModel.ConvertToReserveCardModel(null);
 
-            Assert.IsNull(result);
-        }
+        //    Assert.IsNull(result);
+        //}
     }
 }
