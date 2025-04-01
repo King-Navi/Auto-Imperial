@@ -21,7 +21,6 @@ namespace WpfClient.MVVM.ViewModel
 
         public DateOnly Date { get; set; }
         public string SellPrice { get; set; }
-        public string Number { get; set; }
         public string Seller { get; set; }
         public string ClientName { get; set; }
         public string ClientPhone { get; set; }
@@ -93,18 +92,18 @@ namespace WpfClient.MVVM.ViewModel
 
         private void EditSell()
         {
-            Navigation.NavigateTo<EditEmployeeViewModel>(ActualSell);
+            Navigation.NavigateTo<EditSellViewModel>(ActualSell);
         }
 
         void DeleteSell()
         {
-            //var confirmationVM = new ConfirmationViewModel("Confimracion de eliminación", $"¿Desea eliminar este empleado?", Utilities.Enum.ConfirmationIconType.WarningIcon);
-            //var result = _dialogService.ShowDialog(confirmationVM);
-            //if (false == result)
-            //{
-            //    return;
-            //}
-            //DeleteEmployeeOnDB(ActualSell.IdEmployee);
+            var confirmationVM = new ConfirmationViewModel("Confirmación de eliminación", $"¿Desea eliminar este empleado?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var result = _dialogService.ShowDialog(confirmationVM);
+            if (false == result)
+            {
+                return;
+            }
+            DeleteSellOnDB(ActualSell.idVenta);
         }
 
 
@@ -131,7 +130,7 @@ namespace WpfClient.MVVM.ViewModel
             
             var cliente = ActualSell.idReservaNavigation.idClienteNavigation;
             ClientName = $"{cliente.nombre} {cliente.apellidoPaterno} {cliente.apellidoMaterno}";
-            ClientPhone = cliente.telefono; // Asegúrate de que la propiedad exista en tu modelo
+            ClientPhone = cliente.telefono; 
             ClientAddress = $"{cliente.calle} {cliente.numero}, CP {cliente.codigoPostal}, {cliente.ciudad}";
         }
 
@@ -139,12 +138,12 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (_sellRepository.DeleteById(sellId))
             {
-                MessageBox.Show("Empleado eliminado correctamente");
-                Navigation.NavigateTo<SearchEmployeeViewModel>();
+                MessageBox.Show("Venta eliminada correctamente");
+                Navigation.NavigateTo<SearchSellViewModel>();
             }
             else
             {
-                MessageBox.Show("Error al eliminar el empleado");
+                MessageBox.Show("Error al eliminar la venta");
             }
         }
     }
