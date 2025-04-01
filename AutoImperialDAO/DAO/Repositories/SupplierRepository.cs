@@ -1,6 +1,7 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
+using AutoImperialDAO.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace AutoImperialDAO.DAO.Repositories
 
             try
             {
-                bool exists = _context.Proveedores
+                bool exists = _context.Proveedor
                     .Any(p => p.nombreProveedor.ToLower() == proveedor.nombreProveedor.Trim().ToLower());
                 if (exists)
                     throw new InvalidOperationException($"El proveedor '{proveedor.nombreProveedor}' ya existe.");
@@ -31,7 +32,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 proveedor.nombreProveedor = proveedor.nombreProveedor.Trim();
                 proveedor.estado = proveedor.estado ?? AccountStatusEnum.Activo.ToString();
 
-                _context.Proveedores.Add(proveedor);
+                _context.Proveedor.Add(proveedor);
                 int rows = _context.SaveChanges();
 
                 return rows > 0;
@@ -52,7 +53,7 @@ namespace AutoImperialDAO.DAO.Repositories
 
             try
             {
-                var result = await _context.Proveedores
+                var result = await _context.Proveedor
                     .Where(p =>
                         (p.estado ?? string.Empty).ToLower() == statusEnum.ToString().ToLower() &&
                         (
@@ -74,9 +75,26 @@ namespace AutoImperialDAO.DAO.Repositories
             }
         }
 
-        public Task<Proveedor> SearchByIdAsync(int id, AccountStatusEnum statusEnum)
+        public async Task<Proveedor> SearchByIdAsync(int id, AccountStatusEnum statusEnum)
         {
-            throw new NotImplementedException();
+            Proveedor? result = new Proveedor();
+            try
+            {
+                Validator.IsIdValid(id);
+                result = await _context.Proveedor.FirstOrDefaultAsync(c => c.idProveedor == id && c.estado == statusEnum.ToString());
+
+                if (result == null)
+                {
+                    throw new KeyNotFoundException($"No se encontró un empleado con ID {id}");
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                result = new Proveedor { idProveedor = -1 };
+            }
+            return result;
         }
     }
 }

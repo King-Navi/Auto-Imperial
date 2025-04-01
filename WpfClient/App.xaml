@@ -49,6 +49,12 @@
             <DataTemplate DataType="{x:Type viewModel:RegisterSellViewModel}">
                 <view:RegisterSellView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InfoSellViewModel}">
+                <view:InfoSellView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EditSellViewModel}">
+                <view:EditSellView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:EditEmployeeViewModel}">
                 <view:EditEmployeeView/>
             </DataTemplate>
@@ -63,6 +69,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:RegisterSupplierPaymentViewModel}">
                 <view:RegisterSupplierPaymentView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SearchSupplierPaymentViewModel}">
+                <view:SearchSupplierPaymentView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:InfoSupplierPaymentViewModel}">
+                <view:InfoSupplierPaymentView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:SearchVehicleViewModel}">
                 <view:SearchVehicleView/>

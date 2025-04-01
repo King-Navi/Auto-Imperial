@@ -49,6 +49,11 @@ INSERT INTO Proveedor
   (nombreProveedor, calle, numero, codigoPostal, correo, telefono, contactoPrincipal, estado)
 VALUES 
   ('Proveedor Ejemplo', 'Av Principal', 100, '11111', 'proveedor@example.com', '5566778899', 'Contacto Principal', 'Activo');
+INSERT INTO Proveedor 
+  (nombreProveedor, calle, numero, codigoPostal, correo, telefono, contactoPrincipal, estado)
+VALUES 
+  ('Aston Elite Motors', 'Boulevard Prestige', 777, '11223', 'contact@astonelite.com', '5599001122', 'Richard Langston', 'Activo');
+
 
 -- 7. Insertar en CompraProveedor (requiere idAdministrador = 1 y idProveedor = 1)
 INSERT INTO CompraProveedor 
@@ -674,6 +679,15 @@ INSERT INTO Version (nombre, transmision, puertas, motor, idModelo) VALUES
 ('Base', 'Manual', 4, '1.4L I4', 150),
 ('Sport', 'Automática', 4, '1.6L I4 Turbo', 150),
 ('Premium', 'CVT', 4, '2.0L I4', 150);
+
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (15000.50, 'CP-20250301', '2025-03-01', 1, 2);
+
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (8450.75, 'CP-20250315', '2025-03-15', 1, 2);
+
+INSERT INTO AutoImperial.dbo.CompraProveedor (montoTotal, folio, fechaCompra, idAdministrador, idProveedor)
+VALUES (23000.00, 'CP-20250320', '2025-03-20', 1, 2);
 
 
 

@@ -38,8 +38,9 @@ namespace WpfClient.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private readonly IDialogService _dialogService;
         private readonly IClientRepository _clientRepository;
+
+        private readonly IDialogService _dialogService;
 
         public ICommand RegisterClientCommand { get; set; }
 
@@ -189,6 +190,11 @@ namespace WpfClient.MVVM.ViewModel
             {
                 DisposeData();
             }
+        }
+
+        public bool? ShowDialog(object viewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

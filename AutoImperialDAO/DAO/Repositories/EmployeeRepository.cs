@@ -25,13 +25,13 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(id);
-                var employee = _context.Vendedores.Find(id);
+                var employee = _context.Vendedor.Find(id);
                 if (employee == null)
                 {
                     throw new ArgumentNullException("Employee not found");
                 }
                 employee.estadoCuenta = AccountStatusEnum.Eliminado.ToString();
-                _context.Vendedores.Update(employee);
+                _context.Vendedor.Update(employee);
                 _context.SaveChanges();
                 result = true;
             }
@@ -47,7 +47,7 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(employee.idVendedor);
-                var searchedEmployee = _context.Vendedores.Find(employee.idVendedor);
+                var searchedEmployee = _context.Vendedor.Find(employee.idVendedor);
                 if (searchedEmployee == null)
                 {
                     throw new ArgumentNullException("Employee not found");
@@ -81,7 +81,7 @@ namespace AutoImperialDAO.DAO.Repositories
                     throw new ArgumentException("Employee is not valid");
                 }
                 employee.estadoCuenta = AccountStatusEnum.Activo.ToString();
-                _context.Vendedores.Add(employee);
+                _context.Vendedor.Add(employee);
                 _context.SaveChanges();
                 result = true;
             }
@@ -102,7 +102,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentException("CURP null");
                 }
-                result = await _context.Vendedores.FirstOrDefaultAsync(
+                result = await _context.Vendedor.FirstOrDefaultAsync(
                     c => c.CURP.ToLower() == CURP.ToLower()
                     && c.estadoCuenta == statusEnum.ToString());
                 if (result == null)
@@ -130,7 +130,7 @@ namespace AutoImperialDAO.DAO.Repositories
 
                 parameter = parameter.ToLower();
 
-                result = await _context.Vendedores
+                result = await _context.Vendedor
                     .Where(c =>
                         c.estadoCuenta == statusEnum.ToString() &&
                         (
@@ -160,7 +160,7 @@ namespace AutoImperialDAO.DAO.Repositories
             try
             {
                 Validator.IsIdValid(id);
-                result = await _context.Vendedores.FirstOrDefaultAsync(c => c.idVendedor == id && c.estadoCuenta == statusEnum.ToString());
+                result = await _context.Vendedor.FirstOrDefaultAsync(c => c.idVendedor == id && c.estadoCuenta == statusEnum.ToString());
 
                 if (result == null)
                 {
@@ -192,7 +192,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 for (int i = 0; i < totalPages; i++)
                 {
                     int currentPage = startPage + i;
-                    var employees = await _context.Vendedores
+                    var employees = await _context.Vendedor
                         .Where(c => c.estadoCuenta.ToLower() == status.ToString().ToLower())
                         .Skip((currentPage - 1) * pageSize)
                         .Take(pageSize)
@@ -239,14 +239,14 @@ namespace AutoImperialDAO.DAO.Repositories
         {
             return !String.IsNullOrEmpty(employee.CURP)
                 && !String.IsNullOrWhiteSpace(employee.CURP)
-                && !_context.Vendedores.Any(c => c.CURP == employee.CURP && c.idVendedor != employee.idVendedor);
+                && !_context.Vendedor.Any(c => c.CURP == employee.CURP && c.idVendedor != employee.idVendedor);
         }
 
         private bool ValidateRFC(Vendedor employee)
         {
             return !String.IsNullOrEmpty(employee.RFC)
                 && !String.IsNullOrWhiteSpace(employee.RFC)
-                && !_context.Vendedores.Any(c => c.RFC == employee.RFC && c.idVendedor != employee.idVendedor);
+                && !_context.Vendedor.Any(c => c.RFC == employee.RFC && c.idVendedor != employee.idVendedor);
         }
     }
 }

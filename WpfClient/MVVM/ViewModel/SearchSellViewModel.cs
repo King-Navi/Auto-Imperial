@@ -1,5 +1,6 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.DAO.Repositories;
+using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Services.Navigation;
@@ -12,15 +13,17 @@ using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
+using WpfClient.Resources.ViewCards;
 using WpfClient.Utilities;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    internal class SearchSellViewModel : Services.Navigation.ViewModel
+    class SearchSellViewModel : Services.Navigation.ViewModel
     {
-        private const int FIRST_SEARCH_INIT = 1;
-        private const int FIRST_SEARCH_PAGE_SIZE = 5;
-        private const int PAGE_SIZE = 100;
+        private ISellRepository _sellRepository;
+        public ObservableCollection<SellCardViewModel> SellsList { get; set; } = new ObservableCollection<SellCardViewModel>();
+
+
         private INavigationService navigation;
         public INavigationService Navigation
         {
@@ -31,22 +34,7 @@ namespace WpfClient.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private IClientRepository _clientRepository;
-        private ObservableCollection<ClientCardViewModel> clientsList = new ObservableCollection<ClientCardViewModel>();
-        public ObservableCollection<ClientCardViewModel> ClientsList { get => clientsList; set => clientsList = value; }
-        private ClientCardViewModel? _selected;
-        public ClientCardViewModel? Selected
-        {
-            get => _selected;
-            set
-            {
-                if (_selected != value)
-                {
-                    _selected = value;
-                    OnPropertyChanged(nameof(Selected));
-                }
-            }
-        }
+
         private string _searchText;
         public string SearchText
         {
@@ -59,113 +47,93 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        public ICommand NavegateToRegisterClientViewCommand { get; set; }
-        public ICommand DeleteClientCommand { get; set; }
-        public ICommand EditClientCommand { get; set; }
         public IRelayCommand SearchCommand { get; set; }
 
-        public SearchSellViewModel(INavigationService navigationService, IClientRepository clientRepository)
+        private string errorMessage;
+        public string ErrorMessage
         {
-            _clientRepository = clientRepository;
-            _ = InitializeAsync();
-            Navigation = navigationService;
-            NavegateToRegisterClientViewCommand = new RelayCommand(
-                o =>
-                {
-                    Navigation.NavigateTo<RegisterClientViewModel>();
-                },
-                o => true);
-            DeleteClientCommand = new RelayCommand(
-            o =>
+            get => errorMessage;
+            set
             {
-                if (Selected != null)
-                {
-                        _clientRepository.DeleteById(Selected.ClientActual.IdClient);
-                        ClientsList.Remove(Selected);
-                        Selected = null;
-                    }
-            },
-                o => Selected != null);
-            EditClientCommand = new RelayCommand(
-            o =>
-            {
-                    if (Selected != null)
-                {
-                        Navigation.NavigateTo<RegisterClientViewModel>(Selected.ClientActual);
-                        Selected = null;
-                    }
-                },
-                o => Selected != null);
-            //SearchCommand = new RelayCommand(
-            //    async o =>
-            //    {
-            //        if (!String.IsNullOrWhiteSpace(SearchText))
-            //        {
-            //            var clientes = await SearchClientCurpRfcNameAsync();
-            //            FillList(ConvertToClientCardViewModel(clientes));
-            //            Selected = null;
-            //        }
-            //    },
-            //    o => !String.IsNullOrWhiteSpace(SearchText));
+                errorMessage = value;
+                OnPropertyChanged();
+            }
         }
-        private async Task<List<Cliente>> SearchClientCurpRfcNameAsync()
+
+        public ICommand NavigateToRegisterSupplierView { get; set; }
+
+        public SearchSellViewModel(INavigationService navigationService, UserService currentUser, ISellRepository sellRepository)
         {
-            Selected = null;
+            _sellRepository = sellRepository;
+            Navigation = navigationService;
+
+            SearchCommand = new RelayCommand(
+                async o =>
+                {
+                    SellsList.Clear();
+                    if (!String.IsNullOrWhiteSpace(SearchText))
+                    {
+                        var sells = await SearchSellsAsync();
+
+                        foreach (var newSell in sells)
+                        {
+                            SellsList.Add(new SellCardViewModel(navigationService, newSell));
+                        }
+                    }
+                },
+                o => !String.IsNullOrWhiteSpace(SearchText));
+        }
+
+
+        private async Task<List<Sell>> SearchSellsAsync()
+        {
             try
             {
                 if (!String.IsNullOrWhiteSpace(SearchText))
                 {
-                    var result = await _clientRepository.SearchByCurpRfcNameAsync(
-                        SearchText, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
-                    return result;
+                    var result = await _sellRepository.SearchByVINClientAsync(SearchText);
+                    if (result.Count() == 0)
+                    {
+                        ErrorMessage = "No se encontraron empleados con los datos proporcionados";
+                    }
+                    else
+                    {
+                        ErrorMessage = string.Empty;
+                        return ConvertToSellList(result);
+                    }
                 }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            return new List<Cliente>();
-        }
-        private async Task InitializeAsync()
-        {
-            try
-            {
-                var resultado = await SearchClientsAsync(FIRST_SEARCH_INIT, FIRST_SEARCH_PAGE_SIZE, AutoImperialDAO.Enums.AccountStatusEnum.Activo);
-                FillList(ConvertToClientCardViewModel(resultado));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching clients: {ex.Message}");
+                Console.WriteLine($"Error en la búsqueda de empleados: {ex.Message}");
             }
+            return new List<Sell>();
         }
 
-        public async Task<List<Cliente>> SearchClientsAsync(int startPage, int totalPage, AutoImperialDAO.Enums.AccountStatusEnum status)
+        private List<Sell> ConvertToSellList(List<Venta> list)
         {
-            try
-            {
-                return await _clientRepository.SearchByPagesAsync(startPage, totalPage, status, PAGE_SIZE);
-            }
-            catch (Exception)
-            {
+            List<Sell> sells = new List<Sell>();
 
-                throw;
-            }
-        }
-        private ObservableCollection<ClientCardViewModel> ConvertToClientCardViewModel(List<Cliente> list)
-        {
-            ClientsList.Clear();
-            foreach (var clientedbModel in list)
+            foreach (var venta in list)
             {
-                //ClientsList.Add(new ClientCardViewModel(Navigation, new Client(clientedbModel)));
+                Sell newSell = new Sell
+                {
+                    SellId = venta.idVenta,
+                    SellDate = venta.fechaVenta,
+                    VehiclePrice = venta.precioVehiculo,
+                    PaymentMethod = venta.formaPago,
+                    AdditionalNotes = venta.notasAdicionales,
+                    ReservationId = venta.idReserva,
+                    VehicleId = venta.idVehiculo,
+                    Reservation = venta.idReservaNavigation,
+                    Vehicle = venta.idVehiculoNavigation
+                };
+
+                sells.Add(newSell);
             }
 
-            return ClientsList;
+            return sells;
         }
-        public void FillList(ObservableCollection<ClientCardViewModel> clientCardViews)
-        {
-            //TODO: No client found message   (list.count == 0)
-            ClientsList = clientCardViews;
-        }
+
     }
 }

@@ -14,13 +14,13 @@ namespace WpfClient.Resources.ViewCards
 {
     class EmployeeCardViewModel : Services.Navigation.ViewModel
     {
-        private Employee _employee = new Employee();
+        private SellerEmployee _employee = new SellerEmployee();
 
         public string EmployeeName { get; set; }
         public string EmployeeNumber { get; set; }
         public string EmployeePosition { get; set; }
 
-        public Employee Employee
+        public SellerEmployee Employee
     {
         get => _employee;
         set
@@ -42,7 +42,7 @@ namespace WpfClient.Resources.ViewCards
         }
     }
 
-    public EmployeeCardViewModel(INavigationService navigationService, Employee employee)
+    public EmployeeCardViewModel(INavigationService navigationService, SellerEmployee employee)
     {
         Employee = employee;
         EmployeeName = employee.Name + " " + employee.PaternalSurname + " " + employee.MaternalSurname;

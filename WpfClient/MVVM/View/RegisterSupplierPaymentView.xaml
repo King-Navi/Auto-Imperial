@@ -4,9 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="1445">
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Registrar compra a proveedor: " Height="36" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="240,10,240,0"></Label>
+
+
+            <Label Content="Nombre del proveedor: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,83,491,0"/>
+            <TextBlock
+                Margin="327,86,190,330"
+                Text="{Binding SupplierName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+            <Label Content="Nombre del administrador:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,125,481,0" RenderTransformOrigin="1.709,0.731"/>
+
+            <Label Content="Monto total de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,258,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Monto total"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="366,255,220,161"/>
+
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar compra" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierPaymentCommand}" Margin="592,383,25,25" />
+            <Label Content="Fecha de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="116,191,517,0"/>
+            <DatePicker  HorizontalAlignment="Left" Margin="303,199,0,0" VerticalAlignment="Top" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBlock
+                Margin="327,128,190,288"
+                Text="{Binding AdminName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Número total de vehículos:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,301,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Número de vehículos"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VehiclesNumber, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="366,298,220,118"/>
+        </Grid>
+    </Viewbox>
 </UserControl>
+

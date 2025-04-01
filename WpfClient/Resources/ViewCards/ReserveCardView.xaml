@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="WpfClient.Resources.ViewCards.ReserveCardView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfClient.Resources.ViewCards"
+      xmlns:utils="clr-namespace:WpfClient.Resources.Coverter"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="300"
+      >
+
+    <UserControl.Resources>
+        <utils:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: Image -->
+        <Grid d:Background="Pink" Grid.Row="0" HorizontalAlignment="Center" Margin="10">
+            <Image Source="{Binding Model.VehicleImage}" Width="200" Height="200"/>
+        </Grid>
+
+        <!-- Row 1: Labels and bindings -->
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Vehicle:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+            <Label Content="{Binding Model.Vehicle}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <Label Content="Reservation Status:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+            <Label Content="{Binding Model.ReservationStatus}" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Buy Vehicle" Width="150" Margin="5" 
+                Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                Command="{Binding BuyVehicleCommand}"/>
+                <Button Content="Cancel Reservation" Width="150" Margin="5"
+                Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
+                Command="{Binding CancelReservationCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

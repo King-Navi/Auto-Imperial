@@ -19,6 +19,8 @@ public partial class Reserva
 
     public int idVersion { get; set; }
 
+    public string estado { get; set; } = null!;
+
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 
     public virtual Cliente idClienteNavigation { get; set; } = null!;

@@ -31,5 +31,5 @@ public partial class Cliente
 
     public string estado { get; set; } = null!;
 
-    public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
+    public virtual ICollection<Reserva> Reserva { get; set; } = new List<Reserva>();
 }

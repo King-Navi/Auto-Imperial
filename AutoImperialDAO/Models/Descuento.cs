@@ -13,5 +13,5 @@ public partial class Descuento
 
     public int descuentoPorcentaje { get; set; }
 
-    public virtual ICollection<Vehiculo> idVehiculos { get; set; } = new List<Vehiculo>();
+    public virtual ICollection<Vehiculo> idVehiculo { get; set; } = new List<Vehiculo>();
 }

@@ -17,6 +17,7 @@ namespace WpfClient.Utilities
         {
             Register<ConfirmationViewModel, ConfirmationView>();
             Register<AlertViewModel, AlertView>();
+            Register<RegisterReserveViewModel, RegisterReserveView>();
         }
 
         public void Register<TViewModel, TView>()

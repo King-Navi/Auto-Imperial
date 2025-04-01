@@ -37,5 +37,9 @@ public partial class Administrador
 
     public string password { get; set; } = null!;
 
-    public virtual ICollection<CompraProveedor> CompraProveedors { get; set; } = new List<CompraProveedor>();
+    public string numeroEmpleado { get; set; } = null!;
+
+    public string? sucursal { get; set; }
+
+    public virtual ICollection<CompraProveedor> CompraProveedor { get; set; } = new List<CompraProveedor>();
 }

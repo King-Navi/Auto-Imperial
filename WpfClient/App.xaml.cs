@@ -47,7 +47,12 @@ namespace WpfClient
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<ISupplierPaymentRepository, SupplierPaymentRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IReserveRepository, ReserveRepository>();
+            services.AddTransient<IVersionRepository, VersionRepository>();
             services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
 
 
             //Navigation
@@ -61,9 +66,12 @@ namespace WpfClient
 
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
+
             services.AddSingleton<SearchSellViewModel>();
             services.AddSingleton<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
+            services.AddTransient<InfoSellViewModel>();
+            services.AddTransient<EditSellViewModel>();
 
             services.AddTransient<SideBarViewModel>();
             services.AddTransient<AdminSideBarViewModel>();
@@ -73,10 +81,13 @@ namespace WpfClient
             services.AddTransient<RegisterEmployeeViewModel>();
             services.AddTransient<EditEmployeeViewModel>();
 
+            services.AddTransient<RegisterSupplierViewModel>();
             services.AddTransient<SearchSupplierViewModel>();
             services.AddTransient<InfoSupplierViewModel>();
-            services.AddTransient<RegisterSupplierViewModel>();
+
             services.AddTransient<RegisterSupplierPaymentViewModel>();
+            services.AddTransient<SearchSupplierPaymentViewModel>();
+            services.AddTransient<InfoSupplierPaymentViewModel>();
 
             services.AddTransient<SearchVehicleViewModel>();
             services.AddTransient<InfoVehicleViewModel>();

@@ -11,7 +11,7 @@ public partial class Modelo
 
     public int idMarca { get; set; }
 
-    public virtual ICollection<Version> Versions { get; set; } = new List<Version>();
+    public virtual ICollection<Version> Version { get; set; } = new List<Version>();
 
     public virtual Marca idMarcaNavigation { get; set; } = null!;
 }

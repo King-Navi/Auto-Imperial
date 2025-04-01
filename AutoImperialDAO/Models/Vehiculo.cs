@@ -29,7 +29,7 @@ public partial class Vehiculo
 
     public int idVersion { get; set; }
 
-    public virtual ICollection<Foto> Fotos { get; set; } = new List<Foto>();
+    public virtual ICollection<Fotos> Fotos { get; set; } = new List<Fotos>();
 
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 
@@ -37,5 +37,5 @@ public partial class Vehiculo
 
     public virtual Version idVersionNavigation { get; set; } = null!;
 
-    public virtual ICollection<Descuento> idDescuentos { get; set; } = new List<Descuento>();
+    public virtual ICollection<Descuento> idDescuento { get; set; } = new List<Descuento>();
 }

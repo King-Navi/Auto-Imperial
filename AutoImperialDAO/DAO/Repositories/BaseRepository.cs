@@ -26,13 +26,13 @@ namespace AutoImperialDAO.DAO.Repositories
         }
 
         // Obtiene todos los registros de la entidad
-        public virtual IEnumerable<T> GetAll()
+        protected virtual IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
         }
 
         // Obtiene un registro por su ID
-        public virtual T GetById(int id)
+        protected virtual T GetById(int id)
         {
             #pragma warning disable CS8603 // Possible null reference return.
             return _dbSet.Find(id);
@@ -71,7 +71,7 @@ namespace AutoImperialDAO.DAO.Repositories
         //}
 
         // Guarda los cambios en la base de datos
-        public virtual bool Save()
+        protected virtual bool Save()
         {
             return _context.SaveChanges() > NO_CHANGES;
         }

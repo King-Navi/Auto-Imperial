@@ -27,7 +27,7 @@
             <Label Content="Buscar proveedor" Margin="416,26,593,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
             <controls:PlaceholderTextBoxControl x:Name="TextBoxMail"
                 PaddingValue="40,0,0,0"
-                PlaceholderText="Ingrese el nombre o la clave del empleado"
+                PlaceholderText="Ingrese el nombre o la ciudad del proveedor"
                 Style="{StaticResource SynthwaveTextBoxStyle}"                          
                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                 FontSizeValue="25"  Height="100" Width="850"

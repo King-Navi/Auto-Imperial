@@ -126,9 +126,9 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
-        private Employee _actualEmployee = new Employee();
-        private Employee? _originalEmployee;
-        public Employee ActualEmployee
+        private SellerEmployee _actualEmployee = new SellerEmployee();
+        private SellerEmployee? _originalEmployee;
+        public SellerEmployee ActualEmployee
         {
             get => _actualEmployee;
             set
@@ -169,10 +169,10 @@ namespace WpfClient.MVVM.ViewModel
 
         public void ReceiveParameter(object parameter)
         {
-            if (parameter is Employee employee)
+            if (parameter is SellerEmployee employee)
             {
                 ActualEmployee = employee;
-                _originalEmployee = (Employee)employee.Clone();
+                _originalEmployee = (SellerEmployee)employee.Clone();
 
                 InitProperties();
             }
@@ -307,7 +307,7 @@ namespace WpfClient.MVVM.ViewModel
                     nombreUsuario = this.Username,
                     puestoVendedor = this.SelectedOption,
                     idVendedor = ActualEmployee.IdEmployee,
-                    Reservas = ActualEmployee.Reservas
+                    Reserva = ActualEmployee.Reservas
                 };
 
 

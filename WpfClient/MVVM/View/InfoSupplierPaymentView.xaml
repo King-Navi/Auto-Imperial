@@ -5,8 +5,74 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+                          d:DesignHeight="450" d:DesignWidth="800">
+
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Ver información de la compra a proveedor: " Height="60" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#fffff7" Margin="86,20,86,0"></Label>
+            <Label Content="Folio: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="79,102,626,0"></Label>
+            <TextBlock
+                Margin="198,104,386,312"
+                Text="{Binding Folio}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Ciudad: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="488,247,206,0"></Label>
+            <TextBlock
+                Margin="588,248,0,168"
+                Text="{Binding SupplierCity}" 
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Nombre: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="77,248,609,0"></Label>
+            <TextBlock
+                Margin="194,253,337,163"
+                Text="{Binding SupplierName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Correo: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="77,306,609,0"></Label>
+            <TextBlock
+                Margin="188,308,316,108"
+                Text="{Binding SupplierEmail}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Monto total: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="433,95,234,0" RenderTransformOrigin="0.474,0.35"></Label>
+            <TextBlock
+                Margin="625,99,6,317"
+                Text="{Binding TotalAmount}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+            <Label Content="Fecha: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="433,146,219,0"></Label>
+            <TextBlock
+                Margin="625,149,6,267"
+                Text="{Binding Date}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+            <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="488,306,189,0"></Label>
+            <TextBlock
+                Margin="625,308,0,108"
+                Text="{Binding SupplierPhone}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="353,385,353,23" />
+            <Label Content="Información del proveedor:" Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="109,198,409,0"/>
+        </Grid>
+    </Viewbox>
+
 </UserControl>
+
