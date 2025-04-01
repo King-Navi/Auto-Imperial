@@ -81,8 +81,9 @@ CREATE TABLE [Venta] (
   [formaPago] varchar(40),
   [notasAdicionales] varchar(100),
   [idReserva] int NOT NULL,
-  [idVehiculo] int NOT NULL
-)
+  [idVehiculo] int NOT NULL,
+  [estadoVenta] varchar(20) NOT NULL CONSTRAINT DF_Venta_estadoVenta DEFAULT 'Activa'
+);
 
 
 CREATE TABLE [Vehiculo] (
