@@ -66,9 +66,12 @@ namespace WpfClient
 
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
+
             services.AddSingleton<SearchSellViewModel>();
             services.AddSingleton<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
+            services.AddTransient<InfoSellViewModel>();
+            services.AddTransient<EditSellViewModel>();
 
             services.AddTransient<SideBarViewModel>();
             services.AddTransient<AdminSideBarViewModel>();

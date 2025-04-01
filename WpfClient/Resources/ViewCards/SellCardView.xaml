@@ -8,14 +8,14 @@
              Height="182" Width="738">
     <Grid Background="{StaticResource BackgroundyColor1}" Height="180" VerticalAlignment="Center" Margin="0,0,-163,0" >
         <TextBlock
-            Margin="26,19,175,119"
+            Margin="25,71,176,67"
             Text="{Binding Vehicle}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
             FontSize="27"
         />
         <TextBlock
-            Margin="22,75,168,63"
+            Margin="14,10,176,128"
             Text="{Binding DateText}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
             Foreground="White"
@@ -30,9 +30,10 @@
         />
 
         <TextBlock
-            Margin="645,131,56,7"
-            Text="{Binding VehicleVIN}"
+            Margin="615,128,86,10"
+            Text="{Binding VehiclePrice}"
             Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+            TextAlignment="Center"
             Foreground="White"
             FontSize="27"
         />
@@ -40,8 +41,8 @@
 
         <Button Content="Ver" 
             Style="{StaticResource PrimaryButtonStyle}"
-            Margin="645,28,60,57"
-            Command="{Binding NavigateToViewSupplierViewCommand}"
+            Margin="617,28,88,57"
+            Command="{Binding NavigateToViewSellViewCommand}"
         />
     </Grid>
 </UserControl>

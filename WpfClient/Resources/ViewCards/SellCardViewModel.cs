@@ -16,7 +16,7 @@ namespace WpfClient.Resources.ViewCards
         private Sell _sell = new Sell();
 
         public string Vehicle { get; set; }
-        public string VehicleVIN => Sell.Vehicle.VIN;
+        public string VehiclePrice => "$" + Sell.VehiclePrice;
         public string DateText => Sell.SellDate.ToString("dd/MM/yyyy");
         public string Client { get; set; }
 

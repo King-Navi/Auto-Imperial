@@ -20,13 +20,13 @@ namespace AutoImperialDAO.DAO.Repositories
             throw new NotImplementedException();
         }
 
-        public bool Edit(Cliente client)
+        public bool Edit(Venta venta)
         {
             //TODO
             throw new NotImplementedException();
         }
 
-        public bool Register(Cliente client)
+        public bool Register(Venta venta)
         {
             //TODO
             throw new NotImplementedException();
@@ -43,6 +43,8 @@ namespace AutoImperialDAO.DAO.Repositories
                             .ThenInclude(mod => mod.idMarcaNavigation)
                 .Include(v => v.idReservaNavigation)
                     .ThenInclude(r => r.idClienteNavigation)
+                .Include(v => v.idReservaNavigation)
+                    .ThenInclude(r => r.idVendedorNavigation)
                 .Where(v =>
                     v.idVehiculoNavigation.VIN.ToLower().Contains(parameter) ||
                     (

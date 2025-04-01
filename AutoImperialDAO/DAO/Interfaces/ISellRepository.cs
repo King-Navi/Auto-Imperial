@@ -10,9 +10,9 @@ namespace AutoImperialDAO.DAO.Interfaces
 {
     public interface ISellRepository
     {
-        bool Register(Cliente client);
+        bool Register(Venta venta);
         bool DeleteById(int id);
-        bool Edit(Cliente client);
+        bool Edit(Venta venta);
         Task<List<Venta>> SearchByVINClientAsync(string parameter);
     }
 }
