@@ -1,6 +1,8 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Services.Dialogs;
 using Services.Navigation;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
+using WpfClient.MVVM.View;
 using WpfClient.Resources.ViewCards;
 using WpfClient.Utilities;
 
@@ -17,7 +20,7 @@ namespace WpfClient.MVVM.ViewModel
 {
     class SearchVehicleViewModel : Services.Navigation.ViewModel
     {
-        //private IEmployeeRepository _employeeRepository;
+        //private IVehicleRepository _vehicleRepository;
         public ObservableCollection<VehicleCardViewModel> VehiclesList { get; set; } = new ObservableCollection<VehicleCardViewModel>();
 
 
@@ -59,9 +62,9 @@ namespace WpfClient.MVVM.ViewModel
         }
 
 
-        public SearchVehicleViewModel(INavigationService navigationService, UserService currentUser)//, IEmployeeRepository employeeRepository)
+        public SearchVehicleViewModel(INavigationService navigationService, UserService currentUser)//, IVehicleRepository vehicleRepository)
         {
-            //_employeeRepository = employeeRepository;
+            //_vehicleRepository = vehicleRepository;
             Navigation = navigationService;
 
             SearchCommand = new RelayCommand(
@@ -81,15 +84,34 @@ namespace WpfClient.MVVM.ViewModel
                 o => !String.IsNullOrWhiteSpace(SearchText));
 
             //TODO add filter command
+            
 
+            AdvancedFilterCommand = new RelayCommand(NavigateToRegisterVehicle);
+                
 
-            Navigation = navigationService;
+        }
+
+        private void NavigateToRegisterVehicle()
+        {
+            Supplier supplier = new Supplier();
+
+            RegisterVehicleViewModel viewModel = new RegisterVehicleViewModel(
+                App.ServiceProvider.GetRequiredService<INavigationService>(),
+                App.ServiceProvider.GetRequiredService<UserService>(),
+                App.ServiceProvider.GetRequiredService<IDialogService>(),
+                App.ServiceProvider.GetRequiredService<IVehicleRepository>(),
+                supplier // ← tu parámetro externo
+            );
+
+            var window = new RegisterVehicleView(viewModel);
+            window.ShowDialog();
         }
 
         private async Task<List<Vehicle>> SearchVehiclesAsync()
         {
             try
             {
+                List<Vehicle> vehicles = new List<Vehicle>();
                 //if (!String.IsNullOrWhiteSpace(SearchText))
                 //{
                 //    var result = await _vehiclesRepository.SearchByCurpRfcNameAsync(
@@ -104,6 +126,52 @@ namespace WpfClient.MVVM.ViewModel
                 //        return ConvertToEmployeeList(result);
                 //    }
                 //}
+                var vehicle1 = new Vehicle
+                {
+                    VehicleId = 1,
+                    Branch = "Toyoya",
+                    Model = "Rav4",
+                    Version = "XLE AWD",
+                    VehicleType = "SUV",
+                    VehicleStatus = "Available",
+                    SupplierPrice = 420000.00m,
+                    SellPrice = 459999.99m,
+                    Year = 2023,
+                    Color = "Pearl White",
+                    VIN = "JTMBFREV6JJ123456",
+                    ChassisNumber = "CHS2023RAV4XLE01",
+                    EngineNumber = "ENGR4XLE2023T",
+                    SupplierPurchaseName = 1001,
+                    Transmission = "Automatic",
+                    Doors = "5",
+                    Engine = "2.5L 4-Cylinder"
+                };
+
+                var vehicle2 = new Vehicle
+                {
+                    VehicleId = 2,
+                    Branch = "Mazda",
+                    Model = "3",
+                    Version = "Touring",
+                    VehicleType = "Sedan",
+                    VehicleStatus = "Sold",
+                    SupplierPrice = 320000.00m,
+                    SellPrice = 349999.00m,
+                    Year = 2021,
+                    Color = "Soul Red",
+                    VIN = "3MZBPADL0MM123456",
+                    ChassisNumber = "CHS2021MZ3TRG02",
+                    EngineNumber = "ENGM3TRG2021Z",
+                    SupplierPurchaseName = 1002,
+                    Transmission = "Manual",
+                    Doors = "4",
+                    Engine = "2.0L Skyactiv-G"
+                };
+
+                vehicles.Add(vehicle1);
+                vehicles.Add(vehicle2);
+                return vehicles;
+
             }
             catch (Exception ex)
             {

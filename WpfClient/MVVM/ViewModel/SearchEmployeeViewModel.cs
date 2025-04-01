@@ -92,11 +92,6 @@ namespace WpfClient.MVVM.ViewModel
                 o => true);
         }
 
-        private void NavigateToRegisterEmployee()
-        {
-            Navigation.NavigateTo<RegisterEmployeeViewModel>();
-        }
-
         private async Task<List<Employee>> SearchEmployeesAsync()
         {
             try

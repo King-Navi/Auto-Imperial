@@ -70,6 +70,9 @@
             <DataTemplate DataType="{x:Type viewModel:InfoVehicleViewModel}">
                 <view:InfoVehicleView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EditVehicleViewModel}">
+                <view:EditVehicleView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

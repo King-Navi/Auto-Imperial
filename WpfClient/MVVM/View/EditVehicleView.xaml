@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.EditVehicleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+             mc:Ignorable="d" 
+                         d:DesignHeight="450" d:DesignWidth="800">
+
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Editar información del vehículo: " Height="42" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="232,10,242,0"></Label>
+
+            <Label Content="Marca: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,79,623,0"></Label>
+            <ComboBox ItemsSource="{Binding BranchesList}"
+                SelectedItem="{Binding SelectedBranch}"
+                Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,84,0,0" FontSize="10" 
+            />
+            <Label Content="Modelo: " Height="29" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,112,613,0"></Label>
+            <ComboBox ItemsSource="{Binding ModelsList}"
+                SelectedItem="{Binding SelectedModel}"
+                Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,117,0,0" FontSize="10" 
+            />
+
+
+            <Label Content="Versión: " Height="27" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,147,623,0"></Label>
+            <ComboBox ItemsSource="{Binding VersionsList}"
+                SelectedItem="{Binding SelectedVersion}"
+                Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,151,0,0" FontSize="10" 
+            />
+            <Label Content="Año: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="636,203,116,0" ></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="678,203,10,213"/>
+
+            <Label Content="Color: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,185,640,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="154,183,437,233"/>
+            <Label Content="Precio de compra: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="374,202,281,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding PurchasePrice, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="511,201,173,215"/>
+
+
+            <Label Content="Precio de venta: " Height="27" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="374,235,298,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding SellPrice, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="511,235,173,181"/>
+
+            <Label Content="Tipo: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="377,277,377,0" ></Label>
+            <ComboBox ItemsSource="{Binding TypesList}"
+                SelectedItem="{Binding SelectedType}"
+                Width="156" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,282,0,0" FontSize="10" 
+            />
+
+            
+
+            <Label Content="Número de chasis: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,76,280,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding ChassisNumber, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="506,74,26,342"/>
+            <Label Content="Numero de motor: " Height="30" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,110,291,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding EngineNumber, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="507,110,25,306"/>
+
+
+            <Label Content="VIN: " Height="26" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="371,159,380,0"></Label>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VIN, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="420,158,25,258"/>
+
+
+
+            <Label Content="Foto: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,252,632,0"></Label>
+
+
+
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Guardar cambios" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditVehicleCommand}" Margin="606,383,25,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Subir foto" FontSize="12" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding UploadPhotoCommand}" Margin="95,312,615,101" />
+
+        </Grid>
+    </Viewbox>
+</UserControl>

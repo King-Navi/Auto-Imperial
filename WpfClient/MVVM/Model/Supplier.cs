@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WpfClient.MVVM.Model
 {
-    class Supplier : AutoImperialDAO.Models.Proveedor, INotifyPropertyChanged
+   public  class Supplier : AutoImperialDAO.Models.Proveedor, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -44,9 +44,9 @@ namespace WpfClient.Resources.ViewCards
         public VehicleCardViewModel(INavigationService navigationService, Vehicle vehicle)
         {
             Vehicle = vehicle;
-            //VehicleName = vehicle.name;
-            //VehicleColor = "Color: " + vehicle.Color;
-            //VehicleYear = "Año: " + vehicle.Year;
+            VehicleName = vehicle.Branch + " " + vehicle.Model + " " + vehicle.Version;
+            VehicleColor = "Color: " + vehicle.Color;
+            VehicleYear = "Año: " + vehicle.Year;
             Navigation = navigationService;
             NavigateToViewVehicleViewCommand = new RelayCommand(
                 o =>

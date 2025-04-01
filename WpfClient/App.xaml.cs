@@ -47,6 +47,7 @@ namespace WpfClient
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
 
 
             //Navigation
@@ -79,6 +80,9 @@ namespace WpfClient
 
             services.AddTransient<SearchVehicleViewModel>();
             services.AddTransient<InfoVehicleViewModel>();
+            services.AddTransient<EditVehicleViewModel>();
+
+
 
             services.AddTransient<IDialogService, DialogService>();
 

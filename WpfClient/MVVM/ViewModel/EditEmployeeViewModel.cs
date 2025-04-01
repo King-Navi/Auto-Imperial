@@ -212,7 +212,7 @@ namespace WpfClient.MVVM.ViewModel
         }
         private void NavigateToSearchEmployee()
         {
-            var confirmationVM = new ConfirmationViewModel("Cancerlar edición", $"¿Esta seguro que desea cancelar la edición? Se perderán todos los cambios no guardados", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var confirmationVM = new ConfirmationViewModel("Cancelar edición", $"¿Esta seguro que desea cancelar la edición? Se perderán todos los cambios no guardados", Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
             {

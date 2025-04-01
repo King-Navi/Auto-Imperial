@@ -18,21 +18,21 @@ namespace WpfClient.MVVM.ViewModel
         private Vehicle _actualVehicle = new Vehicle();
         private Vehicle? _originalVehicle;
 
-        //public string EmployeeName { get; set; }
-        //public string Street { get; set; }
-        //public string Number { get; set; }
-        //public string CP { get; set; }
-        //public string City { get; set; }
-        //public string Phone { get; set; }
-        //public string Mail { get; set; }
-        //public string Curp { get; set; }
-        //public string RFC { get; set; }
-        //public string Position { get; set; }
-        //public string EmployeeNumber { get; set; }
-        //public string Branch { get; set; }
-
-
-
+        public string Branch { get; set; }
+        public string Model { get; set; }
+        public string Version { get; set; }
+        public string Color { get; set; }
+        public string Transmission { get; set; }
+        public string ChassisNumber { get; set; }
+        public string EngineNumber { get; set; }
+        public string VIN { get; set; }
+        public string Discount { get; set; }
+        public string Year { get; set; }
+        public string PurchasePrice { get; set; }
+        public string SellPrice { get; set; }
+        public string Type { get; set; }
+        public string Doors { get; set; }
+        public string Engine { get; set; }
 
 
         public Vehicle ActualVehicle
@@ -56,16 +56,16 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
         private readonly IDialogService _dialogService;
-        //private readonly IEmployeeRepository _employeeRepository;
+        //private readonly IVehicleRepository _vehicleRepository;
 
 
         public ICommand NavigateToSearchVehicleView { get; set; }
         public ICommand DeleteVehicleCommand { get; set; }
         public ICommand EditVehicleCommand { get; set; }
-        public InfoVehicleViewModel(INavigationService navigationService, IDialogService dialogService) //, IEmployeeRepository employeeRepository)
+        public InfoVehicleViewModel(INavigationService navigationService, IDialogService dialogService) //, IVehicleRepository vehicleRepository)
         {
             _dialogService = dialogService;
-            //_employeeRepository = employeeRepository;
+            //_vehicleRepository = vehicleRepository;
             Navigation = navigationService;
 
 
@@ -80,7 +80,7 @@ namespace WpfClient.MVVM.ViewModel
                 ActualVehicle = vehicle;
                 //_originalVehicle = (Vehicle)vehicle.Clone();
 
-                //InitProperties();
+                InitProperties();
             }
             else
             {
@@ -95,7 +95,7 @@ namespace WpfClient.MVVM.ViewModel
 
         private void EditVehicle()
         {
-            //Navigation.NavigateTo<EditEmployeeViewModel>(ActualEmployee);
+            Navigation.NavigateTo<EditVehicleViewModel>(ActualVehicle);
         }
 
         void DeleteVehicle() //TODO all method
@@ -110,21 +110,24 @@ namespace WpfClient.MVVM.ViewModel
         }
 
 
-        //private void InitProperties()
-        //{
-        //    EmployeeName = ActualEmployee.Name + " " + ActualEmployee.PaternalSurname + " " + ActualEmployee.MaternalSurname;
-        //    Street = ActualEmployee.Street;
-        //    Number = ActualEmployee.Number.ToString();
-        //    CP = ActualEmployee.CP;
-        //    City = ActualEmployee.City;
-        //    Phone = ActualEmployee.Phone;
-        //    Mail = ActualEmployee.Email;
-        //    Curp = ActualEmployee.CURP;
-        //    RFC = ActualEmployee.RFC;
-        //    Position = ActualEmployee.PositionVendor;
-        //    EmployeeNumber = ActualEmployee.EmployeeNumber;
-        //    Branch = ActualEmployee.Branch;
-        //}
+        private void InitProperties()
+        {
+            Branch = ActualVehicle.Branch;
+            Model = ActualVehicle.Model;
+            Version = ActualVehicle.Version;
+            Color = ActualVehicle.Color;
+            Transmission = ActualVehicle.Transmission;
+            ChassisNumber = ActualVehicle.ChassisNumber;
+            EngineNumber = ActualVehicle.EngineNumber;
+            VIN = ActualVehicle.VIN;
+            Discount = ActualVehicle.Discounts.FirstOrDefault();
+            Year = ActualVehicle.Year.ToString();
+            PurchasePrice = ActualVehicle.SupplierPrice.ToString();
+            SellPrice = ActualVehicle.SellPrice.ToString();
+            Type = ActualVehicle.VehicleType;
+            Doors = ActualVehicle.Doors;
+            Engine = ActualVehicle.Engine;
+        }
 
         //private void DeleteEmployeeOnDB(int IdEmployee)
         //{
