@@ -92,7 +92,7 @@ namespace WpfClient.MVVM.ViewModel
                 o => true);
         }
 
-        private async Task<List<Employee>> SearchEmployeesAsync()
+        private async Task<List<SellerEmployee>> SearchEmployeesAsync()
         {
             try
             {

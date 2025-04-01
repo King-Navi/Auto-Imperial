@@ -180,37 +180,36 @@ namespace WpfClient.MVVM.ViewModel
             return new List<Vehicle>();
         }
 
-        private List<Employee> ConvertToEmployeeList(List<Vendedor> list)
-        {
-            List<Employee> employees = new List<Employee>();
+        //private List<SellerEmployee> ConvertToEmployeeList(List<Vendedor> list)
+        //{
+        //    List<SellerEmployee> employees = new List<SellerEmployee>();
 
-            foreach (var emp in list)
-            {
-                Employee newEmployee = new Employee();
-                newEmployee.IdEmployee = emp.idVendedor;
-                newEmployee.CURP = emp.CURP;
-                newEmployee.CP = emp.codigoPostal;
-                newEmployee.City = emp.ciudad;
-                newEmployee.Password = emp.password;
-                newEmployee.State = emp.estadoCuenta;
-                newEmployee.Name = emp.nombre;
-                newEmployee.PaternalSurname = emp.apellidoPaterno;
-                newEmployee.MaternalSurname = emp.apellidoMaterno;
-                newEmployee.Phone = emp.telefono;
-                newEmployee.Email = emp.correo;
-                newEmployee.Street = emp.calle;
-                newEmployee.Number = emp.numero;
-                newEmployee.RFC = emp.RFC;
-                newEmployee.PositionVendor = emp.puestoVendedor;
-                newEmployee.Username = emp.nombreUsuario;
-                newEmployee.EmployeeNumber = emp.numeroEmpleado;
-                newEmployee.Branch = emp.sucursal;
-                newEmployee.Reservas = emp.Reservas;
+        //    foreach (var emp in list)
+        //    {
+        //        SellerEmployee newEmployee = new SellerEmployee();
+        //        newEmployee.IdEmployee = emp.idVendedor;
+        //        newEmployee.CURP = emp.CURP;
+        //        newEmployee.CP = emp.codigoPostal;
+        //        newEmployee.City = emp.ciudad;
+        //        newEmployee.Password = emp.password;
+        //        newEmployee.State = emp.estadoCuenta;
+        //        newEmployee.Name = emp.nombre;
+        //        newEmployee.PaternalSurname = emp.apellidoPaterno;
+        //        newEmployee.MaternalSurname = emp.apellidoMaterno;
+        //        newEmployee.Phone = emp.telefono;
+        //        newEmployee.Email = emp.correo;
+        //        newEmployee.Street = emp.calle;
+        //        newEmployee.Number = emp.numero;
+        //        newEmployee.RFC = emp.RFC;
+        //        newEmployee.PositionVendor = emp.puestoVendedor;
+        //        newEmployee.Username = emp.nombreUsuario;
+        //        newEmployee.EmployeeNumber = emp.numeroEmpleado;
+        //        newEmployee.Branch = emp.sucursal;
 
-                employees.Add(newEmployee);
-            }
-            return employees;
-        }
+        //        employees.Add(newEmployee);
+        //    }
+        //    return employees;
+        //}
 
     }
 }

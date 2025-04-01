@@ -20,7 +20,7 @@ namespace AutoImperialDAO.DAO.Repositories
             List<Marca> result = new();
             try
             {
-                result = await _context.Marcas.ToListAsync(); 
+                result = await _context.Marca.ToListAsync(); 
                 
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace AutoImperialDAO.DAO.Repositories
             List<Modelo> result = new();
             try
             {
-                result = await _context.Modelos
+                result = await _context.Modelo
                     .Where(m => m.idMarca == idMarca)
                     .ToListAsync();
             }
@@ -55,7 +55,7 @@ namespace AutoImperialDAO.DAO.Repositories
             List<AutoImperialDAO.Models.Version> result = new();
             try
             {
-                result = await _context.Versiones
+                result = await _context.Version
                     .Where(v => v.idModelo == idModelo)
                     .ToListAsync();
             }
