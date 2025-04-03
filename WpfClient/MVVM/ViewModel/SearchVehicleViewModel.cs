@@ -100,22 +100,7 @@ namespace WpfClient.MVVM.ViewModel
 
         }
 
-        private void RegisterVehicle()
-        {
-            Supplier supplier = new Supplier();
-            supplier.idProveedor = 1;
 
-            RegisterVehicleViewModel viewModel = new RegisterVehicleViewModel(
-                App.ServiceProvider.GetRequiredService<INavigationService>(),
-                App.ServiceProvider.GetRequiredService<UserService>(),
-                App.ServiceProvider.GetRequiredService<IDialogService>(),
-                App.ServiceProvider.GetRequiredService<IVehicleRepository>(),
-                supplier
-            );
-
-            var window = new RegisterVehicleView(viewModel);
-            window.ShowDialog();
-        }
 
         private void NavigateToRegisterVehicle()
         {

@@ -61,15 +61,24 @@
 
             <Label Content="Teléfono: " Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="488,306,189,0"></Label>
             <TextBlock
-                Margin="625,308,0,108"
+                Margin="606,308,18,108"
                 Text="{Binding SupplierPhone}"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Foreground="White"
                 FontSize="20"
             />
 
+            <Label Content="Registros: " Height="34" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="377,386,337,0"></Label>
+            <TextBlock
+                Margin="462,388,243,28"
+                Text="{Binding NumberRegisterVehicles}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
 
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="353,385,353,23" />
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="85,380,621,28" />
+            <Button Content="Registrar vehículos" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterVehiclesCommand}" Margin="572,368,42,30" />
             <Label Content="Información del proveedor:" Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="109,198,409,0"/>
         </Grid>
     </Viewbox>

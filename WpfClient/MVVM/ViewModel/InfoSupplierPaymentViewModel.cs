@@ -11,6 +11,8 @@ using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 using AutoImperialDAO.Enums;
+using Microsoft.Extensions.DependencyInjection;
+using WpfClient.MVVM.View;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -98,6 +100,17 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
 
+        private string? numberRegisterVehicles;
+        public string? NumberRegisterVehicles
+        {
+            get => numberRegisterVehicles;
+            set
+            {
+                numberRegisterVehicles = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         public SupplierPayment ActualSupplierPayment
@@ -134,6 +147,7 @@ namespace WpfClient.MVVM.ViewModel
 
 
         public ICommand NavigateToSearchSupplierPaymentCommand { get; set; }
+        public ICommand RegisterVehiclesCommand { get; set; }
         public InfoSupplierPaymentViewModel(INavigationService navigationService, IDialogService dialogService, ISupplierRepository supplierRepository)
         {
             _dialogService = dialogService;
@@ -141,6 +155,7 @@ namespace WpfClient.MVVM.ViewModel
             Navigation = navigationService;
 
             NavigateToSearchSupplierPaymentCommand = new RelayCommand(NavigateToSearchSupplierPayment);
+            RegisterVehiclesCommand = new RelayCommand(RegisterVehicle);
         }
 
         public void ReceiveParameter(object parameter)
@@ -161,6 +176,24 @@ namespace WpfClient.MVVM.ViewModel
         private void NavigateToSearchSupplierPayment()
         {
             Navigation.NavigateTo<SearchSupplierPaymentViewModel>(ActualSupplier);
+        }
+
+        private void RegisterVehicle()
+        {
+            int supplierPaymentId = ActualSupplierPayment.SupplierPaymentId;
+
+            MessageBox.Show("" + supplierPaymentId);
+
+            RegisterVehicleViewModel viewModel = new RegisterVehicleViewModel(
+                App.ServiceProvider.GetRequiredService<INavigationService>(),
+                App.ServiceProvider.GetRequiredService<UserService>(),
+                App.ServiceProvider.GetRequiredService<IDialogService>(),
+                App.ServiceProvider.GetRequiredService<IVehicleRepository>(),
+                supplierPaymentId
+            );
+
+            var window = new RegisterVehicleView(viewModel);
+            window.ShowDialog();
         }
 
         private async Task InitPropertiesAsync(int supplierId)

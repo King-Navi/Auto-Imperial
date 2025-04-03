@@ -192,13 +192,13 @@ namespace WpfClient.MVVM.ViewModel
 
 
 
-        private Supplier _actualSupplier = new Supplier();
-        public Supplier ActualSupplier
+        private int _actualIdSupplierPayment;
+        public int ActualIdSupplierPayment
         {
-            get => _actualSupplier;
+            get => _actualIdSupplierPayment;
             set
             {
-                _actualSupplier = value;
+                _actualIdSupplierPayment = value;
                 OnPropertyChanged();
             }
         }
@@ -223,16 +223,18 @@ namespace WpfClient.MVVM.ViewModel
         private readonly IDialogService _dialogService;
 
 
-        public RegisterVehicleViewModel(INavigationService navigationService, UserService currentUser, IDialogService dialogService, IVehicleRepository vehicleRepository, Supplier supplier)
+        public RegisterVehicleViewModel(INavigationService navigationService, UserService currentUser, IDialogService dialogService, IVehicleRepository vehicleRepository, int idSupplierPayment)
         {
             _dialogService = dialogService;
             Navigation = navigationService;
             _vehicleRepository = vehicleRepository;
-            ActualSupplier = supplier;
+            ActualIdSupplierPayment = idSupplierPayment;
             _ = InicializateBranchesAsync();
             InicializateTypes();
             RegisterVehicleCommand = new RelayCommand(RegisterVehicle);
             UploadPhotoCommand = new RelayCommand(UploadPhoto);
+
+            MessageBox.Show(ActualIdSupplierPayment + "");
         }
 
 
@@ -380,7 +382,7 @@ namespace WpfClient.MVVM.ViewModel
                 numeroChasis = ChassisNumber,
                 numeroMotor = EngineNumber,
                 idVersion = SelectedVersion.idVersion,
-                idCompraProveedor = ActualSupplier.idProveedor
+                idCompraProveedor = _actualIdSupplierPayment
             };
 
             if (VehiclePhoto != null)
