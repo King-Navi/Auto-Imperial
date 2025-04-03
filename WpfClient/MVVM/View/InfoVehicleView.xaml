@@ -152,7 +152,7 @@ Stretch="UniformToFill" />
 
 
 
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
+            <Button Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource NegativeButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
             <Button Background="{StaticResource SecondaryColor1}" Content="Editar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditVehicleCommand}" Margin="606,383,25,25" />
             <Button Background="DarkRed" Content="Eliminar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding DeleteVehicleCommand}" Margin="413,382,217,26" />
         </Grid>
