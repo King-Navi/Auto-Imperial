@@ -1,4 +1,5 @@
-﻿using Services.Navigation;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,8 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToVehiclesView = new RelayCommand(
                 o =>
                 {
+                    var searchVM = App.ServiceProvider.GetRequiredService<SearchVehicleViewModel>();
+                    searchVM.ResetSearch();
                     Navigation.NavigateTo<SearchVehicleViewModel>();
                 },
                 o => true);

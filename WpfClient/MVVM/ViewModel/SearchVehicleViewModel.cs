@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using WpfClient.MVVM.Model;
 using WpfClient.MVVM.View;
 using WpfClient.Resources.ViewCards;
@@ -20,7 +21,7 @@ namespace WpfClient.MVVM.ViewModel
 {
     class SearchVehicleViewModel : Services.Navigation.ViewModel
     {
-        //private IVehicleRepository _vehicleRepository;
+        private IVehicleRepository _vehicleRepository;
         public ObservableCollection<VehicleCardViewModel> VehiclesList { get; set; } = new ObservableCollection<VehicleCardViewModel>();
 
 
@@ -62,9 +63,9 @@ namespace WpfClient.MVVM.ViewModel
         }
 
 
-        public SearchVehicleViewModel(INavigationService navigationService, UserService currentUser)//, IVehicleRepository vehicleRepository)
+        public SearchVehicleViewModel(INavigationService navigationService, UserService currentUser, IVehicleRepository vehicleRepository)
         {
-            //_vehicleRepository = vehicleRepository;
+            _vehicleRepository = vehicleRepository;
             Navigation = navigationService;
 
             SearchCommand = new RelayCommand(
@@ -83,133 +84,160 @@ namespace WpfClient.MVVM.ViewModel
                 },
                 o => !String.IsNullOrWhiteSpace(SearchText));
 
+            Mediator.Register(MediatorKeys.ADVANCED_VEHICLE_SEARCH, args =>
+            {
+                if (args is AutoImperialDAO.Utilities.VehicleSearch search)
+                {
+                    AdvancedSearch(search);
+                }
+            });
+
             //TODO add filter command
-            
+
 
             AdvancedFilterCommand = new RelayCommand(NavigateToRegisterVehicle);
                 
 
         }
 
-        private void NavigateToRegisterVehicle()
+        private void RegisterVehicle()
         {
             Supplier supplier = new Supplier();
+            supplier.idProveedor = 1;
 
             RegisterVehicleViewModel viewModel = new RegisterVehicleViewModel(
                 App.ServiceProvider.GetRequiredService<INavigationService>(),
                 App.ServiceProvider.GetRequiredService<UserService>(),
                 App.ServiceProvider.GetRequiredService<IDialogService>(),
                 App.ServiceProvider.GetRequiredService<IVehicleRepository>(),
-                supplier // ← tu parámetro externo
+                supplier
             );
 
             var window = new RegisterVehicleView(viewModel);
             window.ShowDialog();
         }
 
+        private void NavigateToRegisterVehicle()
+        {
+            var viewModel = new AdvancedVehicleSearhViewModel();
+            var window = new AdvancedVehicleSearhView
+            {
+                DataContext = viewModel
+            };
+            window.Show(); 
+        }
+
         private async Task<List<Vehicle>> SearchVehiclesAsync()
         {
             try
             {
-                List<Vehicle> vehicles = new List<Vehicle>();
-                //if (!String.IsNullOrWhiteSpace(SearchText))
-                //{
-                //    var result = await _vehiclesRepository.SearchByCurpRfcNameAsync(
-                //        SearchText, AccountStatusEnum.Activo);
-                //    if (result.FirstOrDefault().idVendedor == -1)
-                //    {
-                //        ErrorMessage = "No se encontraron empleados con los datos proporcionados";
-                //    }
-                //    else
-                //    {
-                //        ErrorMessage = string.Empty;
-                //        return ConvertToEmployeeList(result);
-                //    }
-                //}
-                var vehicle1 = new Vehicle
+                var result = await _vehicleRepository.SearchVehicleAsync(SearchText, VehicleStatus.Disponible);
+                if (result == null || result.Count == 0)
                 {
-                    VehicleId = 1,
-                    Branch = "Toyoya",
-                    Model = "Rav4",
-                    Version = "XLE AWD",
-                    VehicleType = "SUV",
-                    VehicleStatus = "Available",
-                    SupplierPrice = 420000.00m,
-                    SellPrice = 459999.99m,
-                    Year = 2023,
-                    Color = "Pearl White",
-                    VIN = "JTMBFREV6JJ123456",
-                    ChassisNumber = "CHS2023RAV4XLE01",
-                    EngineNumber = "ENGR4XLE2023T",
-                    SupplierPurchaseName = 1001,
-                    Transmission = "Automatic",
-                    Doors = "5",
-                    Engine = "2.5L 4-Cylinder"
-                };
+                    ErrorMessage = "No se encontraron vehículos con los datos proporcionados.";
+                    return new List<Vehicle>();
+                }
 
-                var vehicle2 = new Vehicle
+                ErrorMessage = string.Empty;
+                return result.Select(vehiculo => new Vehicle
                 {
-                    VehicleId = 2,
-                    Branch = "Mazda",
-                    Model = "3",
-                    Version = "Touring",
-                    VehicleType = "Sedan",
-                    VehicleStatus = "Sold",
-                    SupplierPrice = 320000.00m,
-                    SellPrice = 349999.00m,
-                    Year = 2021,
-                    Color = "Soul Red",
-                    VIN = "3MZBPADL0MM123456",
-                    ChassisNumber = "CHS2021MZ3TRG02",
-                    EngineNumber = "ENGM3TRG2021Z",
-                    SupplierPurchaseName = 1002,
-                    Transmission = "Manual",
-                    Doors = "4",
-                    Engine = "2.0L Skyactiv-G"
-                };
+                    VehicleId = vehiculo.idVehiculo,
+                    Branch = vehiculo.idVersionNavigation.idModeloNavigation.idMarcaNavigation.nombre,
+                    Model = vehiculo.idVersionNavigation.idModeloNavigation.nombre,
+                    Version = vehiculo.idVersionNavigation.nombre,
+                    IdBranch = vehiculo.idVersionNavigation.idModeloNavigation.idMarcaNavigation.idMarca,
+                    IdModel = vehiculo.idVersionNavigation.idModeloNavigation.idModelo,
+                    IdVersion = vehiculo.idVersionNavigation.idVersion,
+                    VehicleType = vehiculo.tipoVehiculo,
+                    VehicleStatus = vehiculo.estadoVehiculo,
+                    SupplierPrice = vehiculo.precioProveedor ?? 0,
+                    SellPrice = vehiculo.precioVehiculo ?? 0,
+                    Year = vehiculo.anio ?? 0,
+                    Color = vehiculo.color,
+                    VIN = vehiculo.VIN,
+                    ChassisNumber = vehiculo.numeroChasis,
+                    EngineNumber = vehiculo.numeroMotor,
+                    SupplierPurchaseName = vehiculo.idCompraProveedor,
+                    Transmission = vehiculo.idVersionNavigation.transmision,
+                    Doors = vehiculo.idVersionNavigation.puertas?.ToString(),
+                    Engine = vehiculo.idVersionNavigation.motor,
 
-                vehicles.Add(vehicle1);
-                vehicles.Add(vehicle2);
-                return vehicles;
+                    Photos = vehiculo.Fotos.Select(f => new Foto { foto = f.foto }).ToList()
 
+                }).ToList();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error en la búsqueda de vehículos: {ex.Message}");
+                return new List<Vehicle>();
             }
-            return new List<Vehicle>();
         }
 
-        //private List<SellerEmployee> ConvertToEmployeeList(List<Vendedor> list)
-        //{
-        //    List<SellerEmployee> employees = new List<SellerEmployee>();
+        private void AdvancedSearch(AutoImperialDAO.Utilities.VehicleSearch search)
+        {
+            VehiclesList.Clear();
+            var vehicles = AdvancedSearchVehicles(search);
+                foreach (var newVehicle in vehicles)
+                {
+                    VehiclesList.Add(new VehicleCardViewModel(Navigation, newVehicle));
+                }
+        }
 
-        //    foreach (var emp in list)
-        //    {
-        //        SellerEmployee newEmployee = new SellerEmployee();
-        //        newEmployee.IdEmployee = emp.idVendedor;
-        //        newEmployee.CURP = emp.CURP;
-        //        newEmployee.CP = emp.codigoPostal;
-        //        newEmployee.City = emp.ciudad;
-        //        newEmployee.Password = emp.password;
-        //        newEmployee.State = emp.estadoCuenta;
-        //        newEmployee.Name = emp.nombre;
-        //        newEmployee.PaternalSurname = emp.apellidoPaterno;
-        //        newEmployee.MaternalSurname = emp.apellidoMaterno;
-        //        newEmployee.Phone = emp.telefono;
-        //        newEmployee.Email = emp.correo;
-        //        newEmployee.Street = emp.calle;
-        //        newEmployee.Number = emp.numero;
-        //        newEmployee.RFC = emp.RFC;
-        //        newEmployee.PositionVendor = emp.puestoVendedor;
-        //        newEmployee.Username = emp.nombreUsuario;
-        //        newEmployee.EmployeeNumber = emp.numeroEmpleado;
-        //        newEmployee.Branch = emp.sucursal;
+        private List<Vehicle> AdvancedSearchVehicles(AutoImperialDAO.Utilities.VehicleSearch search)
+        {
+            search.SearchTerm = SearchText;
+            
 
-        //        employees.Add(newEmployee);
-        //    }
-        //    return employees;
-        //}
+            try
+            {
+                var result = _vehicleRepository.AdvancedSearchVehicle(search, VehicleStatus.Disponible);
+                if (result == null || result.Count == 0)
+                {
+                    ErrorMessage = "No se encontraron vehículos con los datos proporcionados.";
+                    return new List<Vehicle>();
+                }
+
+                ErrorMessage = string.Empty;
+                return result.Select(vehiculo => new Vehicle
+                {
+                    VehicleId = vehiculo.idVehiculo,
+                    Branch = vehiculo.idVersionNavigation.idModeloNavigation.idMarcaNavigation.nombre,
+                    Model = vehiculo.idVersionNavigation.idModeloNavigation.nombre,
+                    Version = vehiculo.idVersionNavigation.nombre,
+                    IdBranch = vehiculo.idVersionNavigation.idModeloNavigation.idMarcaNavigation.idMarca,
+                    IdModel = vehiculo.idVersionNavigation.idModeloNavigation.idModelo,
+                    IdVersion = vehiculo.idVersionNavigation.idVersion,
+                    VehicleType = vehiculo.tipoVehiculo,
+                    VehicleStatus = vehiculo.estadoVehiculo,
+                    SupplierPrice = vehiculo.precioProveedor ?? 0,
+                    SellPrice = vehiculo.precioVehiculo ?? 0,
+                    Year = vehiculo.anio ?? 0,
+                    Color = vehiculo.color,
+                    VIN = vehiculo.VIN,
+                    ChassisNumber = vehiculo.numeroChasis,
+                    EngineNumber = vehiculo.numeroMotor,
+                    SupplierPurchaseName = vehiculo.idCompraProveedor,
+                    Transmission = vehiculo.idVersionNavigation.transmision,
+                    Doors = vehiculo.idVersionNavigation.puertas?.ToString(),
+                    Engine = vehiculo.idVersionNavigation.motor,
+
+                    Photos = vehiculo.Fotos.Select(f => new Foto { foto = f.foto }).ToList()
+
+                }).ToList(); 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en la búsqueda avanzada de vehículos: {ex.Message}");
+                return new List<Vehicle>();
+            }
+        }
+
+        public void ResetSearch()
+        {
+            SearchText = string.Empty;
+            ErrorMessage = string.Empty;
+            VehiclesList.Clear();
+        }
 
     }
 }

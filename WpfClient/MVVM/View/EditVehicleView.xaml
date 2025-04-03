@@ -15,11 +15,14 @@
             <Label Content="Marca: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,79,623,0"></Label>
             <ComboBox ItemsSource="{Binding BranchesList}"
                 SelectedItem="{Binding SelectedBranch}"
+                      IsEnabled="{Binding IsModelEnabled}"
+                      DisplayMemberPath="nombre"
                 Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,84,0,0" FontSize="10" 
             />
             <Label Content="Modelo: " Height="29" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,112,613,0"></Label>
             <ComboBox ItemsSource="{Binding ModelsList}"
                 SelectedItem="{Binding SelectedModel}"
+                      DisplayMemberPath="nombre"
                 Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,117,0,0" FontSize="10" 
             />
 
@@ -27,6 +30,8 @@
             <Label Content="Versión: " Height="27" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,147,623,0"></Label>
             <ComboBox ItemsSource="{Binding VersionsList}"
                 SelectedItem="{Binding SelectedVersion}"
+                      IsEnabled="{Binding IsVersionEnabled}"
+                      DisplayMemberPath="nombre"
                 Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,151,0,0" FontSize="10" 
             />
             <Label Content="Año: " Height="32" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="636,203,116,0" ></Label>
@@ -55,7 +60,7 @@
                 Width="156" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,282,0,0" FontSize="10" 
             />
 
-            
+
 
             <Label Content="Número de chasis: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,76,280,0"></Label>
             <controls:PlaceholderTextBoxControl PlaceholderText=""
@@ -75,6 +80,12 @@
 
 
             <Label Content="Foto: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,252,632,0"></Label>
+
+            <Image Source="{Binding PreviewImage}" 
+                Height="114" 
+                Margin="206,248,450,0"
+                VerticalAlignment="Top" 
+                Stretch="UniformToFill" />
 
 
 

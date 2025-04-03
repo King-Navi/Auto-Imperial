@@ -10,6 +10,10 @@ using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
+using System.Windows.Media.Imaging;
+using System.IO;
+using WpfClient.Utilities.Enum;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -34,6 +38,28 @@ namespace WpfClient.MVVM.ViewModel
         public string Doors { get; set; }
         public string Engine { get; set; }
 
+        private byte[]? vehiclePhoto;
+        public byte[]? VehiclePhoto
+        {
+            get => vehiclePhoto;
+            set
+            {
+                vehiclePhoto = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private BitmapImage? previewImage;
+        public BitmapImage? PreviewImage
+        {
+            get => previewImage;
+            set
+            {
+                previewImage = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public Vehicle ActualVehicle
         {
@@ -56,16 +82,16 @@ namespace WpfClient.MVVM.ViewModel
             }
         }
         private readonly IDialogService _dialogService;
-        //private readonly IVehicleRepository _vehicleRepository;
+        private readonly IVehicleRepository _vehicleRepository;
 
 
         public ICommand NavigateToSearchVehicleView { get; set; }
         public ICommand DeleteVehicleCommand { get; set; }
         public ICommand EditVehicleCommand { get; set; }
-        public InfoVehicleViewModel(INavigationService navigationService, IDialogService dialogService) //, IVehicleRepository vehicleRepository)
+        public InfoVehicleViewModel(INavigationService navigationService, IDialogService dialogService, IVehicleRepository vehicleRepository)
         {
             _dialogService = dialogService;
-            //_vehicleRepository = vehicleRepository;
+            _vehicleRepository = vehicleRepository;
             Navigation = navigationService;
 
 
@@ -78,7 +104,6 @@ namespace WpfClient.MVVM.ViewModel
             if (parameter is Vehicle vehicle)
             {
                 ActualVehicle = vehicle;
-                //_originalVehicle = (Vehicle)vehicle.Clone();
 
                 InitProperties();
             }
@@ -90,6 +115,8 @@ namespace WpfClient.MVVM.ViewModel
 
         private void NavigateToSearchVehicle()
         {
+            var searchVM = App.ServiceProvider.GetRequiredService<SearchVehicleViewModel>();
+            searchVM.ResetSearch();
             Navigation.NavigateTo<SearchVehicleViewModel>();
         }
 
@@ -98,15 +125,15 @@ namespace WpfClient.MVVM.ViewModel
             Navigation.NavigateTo<EditVehicleViewModel>(ActualVehicle);
         }
 
-        void DeleteVehicle() //TODO all method
+        void DeleteVehicle() 
         {
-            var confirmationVM = new ConfirmationViewModel("Confimracion de eliminación", $"¿Desea eliminar este empleado?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var confirmationVM = new ConfirmationViewModel("Confimracion de eliminación", $"¿Desea eliminar este vehículo?", Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (false == result)
             {
                 return;
             }
-            //DeleteEmployeeOnDB(ActualVehicle.IdEmployee);
+            DeleteVehicleOnDB(ActualVehicle.VehicleId);
         }
 
 
@@ -127,20 +154,41 @@ namespace WpfClient.MVVM.ViewModel
             Type = ActualVehicle.VehicleType;
             Doors = ActualVehicle.Doors;
             Engine = ActualVehicle.Engine;
+            VehiclePhoto = ActualVehicle.Photos.FirstOrDefault().foto;
+            LoadPhoto();
         }
 
-        //private void DeleteEmployeeOnDB(int IdEmployee)
-        //{
-        //    if (_employeeRepository.DeleteById(IdEmployee))
-        //    {
-        //        MessageBox.Show("Empleado eliminado correctamente");
-        //        Navigation.NavigateTo<SearchEmployeeViewModel>();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Error al eliminar el empleado");
-        //    }
-        //}
+        private void LoadPhoto()
+        {
+            if(VehiclePhoto == null)
+            {
+                return;
+            }
+
+            using var stream = new MemoryStream(VehiclePhoto);
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.StreamSource = stream;
+            image.EndInit();
+
+            PreviewImage = image;
+        }
+
+        private void DeleteVehicleOnDB(int IdVehicle)
+        {
+            if (_vehicleRepository.DeleteById(IdVehicle))
+            {
+                MessageBox.Show("Vehículo eliminado correctamente");
+                var searchVM = App.ServiceProvider.GetRequiredService<SearchVehicleViewModel>();
+                searchVM.ResetSearch();
+                Navigation.NavigateTo<SearchVehicleViewModel>();
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar el vehículo");
+            }
+        }
 
 
 

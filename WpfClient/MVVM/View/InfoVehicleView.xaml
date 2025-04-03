@@ -144,12 +144,17 @@
 />
 
             <Label Content="Foto: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="97,266,638,0"></Label>
+            <Image Source="{Binding PreviewImage}" 
+Height="95" 
+Margin="217,280,460,0"
+VerticalAlignment="Top" 
+Stretch="UniformToFill" />
 
 
 
             <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
             <Button Background="{StaticResource SecondaryColor1}" Content="Editar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding EditVehicleCommand}" Margin="606,383,25,25" />
-            <Button Background="DarkRed" Content="Eliminar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding DeleteVehicleeCommand}" Margin="413,382,217,26" />
+            <Button Background="DarkRed" Content="Eliminar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding DeleteVehicleCommand}" Margin="413,382,217,26" />
         </Grid>
     </Viewbox>
 </UserControl>

@@ -16,6 +16,7 @@
             <Label Content="Marca: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,79,623,0"></Label>
             <ComboBox ItemsSource="{Binding BranchesList}"
                       DisplayMemberPath="nombre"
+                      
         SelectedItem="{Binding SelectedBranch}"
         Width="181" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="173,84,0,0" FontSize="10" 
     />
@@ -61,7 +62,7 @@
         Width="156" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="428,282,0,0" FontSize="10" 
     />
 
-           
+
 
             <Label Content="Número de chasis: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="367,76,280,0"></Label>
             <controls:PlaceholderTextBoxControl PlaceholderText=""
@@ -78,15 +79,18 @@
         Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VIN, UpdateSourceTrigger=PropertyChanged}"
         FontSizeValue="12" Margin="420,158,25,258"/>
 
-            
+
 
 
             <Label Content="Foto: " Height="28" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="103,254,632,0"></Label>
 
+            <Image Source="{Binding PreviewImage}" 
+       Height="130" 
+       Margin="203,237,441,0"
+       VerticalAlignment="Top" 
+       Stretch="UniformToFill" />
 
-
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchVehicleView}" Margin="101,383,605,25" />
-            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegsterVehicleCommand}" Margin="606,383,25,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterVehicleCommand}" Margin="606,383,25,25" />
             <Button Background="{StaticResource SecondaryColor1}" Content="Subir foto" FontSize="12" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding UploadPhotoCommand}" Margin="95,295,615,118" />
 
         </Grid>

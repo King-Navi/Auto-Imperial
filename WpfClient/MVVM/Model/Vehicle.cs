@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoImperialDAO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ namespace WpfClient.MVVM.Model
         public string? Branch { get; set; }
         public string? Model { get; set; }         
         public string? Version { get; set; } 
+
+        public int IdBranch { get; set; }
+        public int IdModel { get; set; }
+        public int IdVersion { get; set; }
 
         public string? VehicleType { get; set; }          
 
@@ -36,7 +41,7 @@ namespace WpfClient.MVVM.Model
         public string? Doors { get; set; }           
         public string? Engine { get; set; } 
 
-        public List<string> Photos { get; set; } = new();   
+        public List<Foto> Photos { get; set; } = new();   
 
         public List<string> Discounts { get; set; } = new(); 
     }

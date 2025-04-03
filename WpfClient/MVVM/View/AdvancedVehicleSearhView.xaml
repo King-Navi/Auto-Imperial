@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfClient.MVVM.View.AdvancedVehicleSearhView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfClient.MVVM.View"
+        Height="450" Width="800"         
+        xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
+        mc:Ignorable="d" >
+
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Ingrese los parámetros a buscar: " Height="53" VerticalAlignment="Top" FontSize="30" FontWeight="Bold" Foreground="#fffff7" Margin="159,10,120,0"></Label>
+
+            <Label Content="Año:" Margin="53,93,662,0" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Bold" Foreground="#fffff7"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Ingrese el año de fabricación"
+                   Style="{StaticResource SynthwaveTextBoxStyle}" 
+                   Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}"
+                   FontSizeValue="20" Margin="168,87,118,0" Height="56" VerticalAlignment="Top" PaddingValue="15"/>
+
+            <Label Content="Versión:" Margin="46,228,632,0" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Bold" Foreground="#fffff7"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Ingrese la versión a buscar"
+                   Style="{StaticResource SynthwaveTextBoxStyle}" 
+                   Text="{Binding Version, UpdateSourceTrigger=PropertyChanged}"
+                   FontSizeValue="20" Margin="173,228,118,0" Height="56" VerticalAlignment="Top" PaddingValue="15"/>
+
+            <Label Content="Color:" Margin="48,165,667,0" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Bold" Foreground="#fffff7"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Ingrese el color"
+                   Style="{StaticResource SynthwaveTextBoxStyle}" 
+                   Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}"
+                   FontSizeValue="20" Margin="168,159,118,0" Height="56" VerticalAlignment="Top" PaddingValue="15"/>
+
+            <Label Content="Precio mínimo:" Margin="17,309,591,0" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Bold" Foreground="#fffff7"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Min precio"
+                   Style="{StaticResource SynthwaveTextBoxStyle}" 
+                   Text="{Binding PriceMin, UpdateSourceTrigger=PropertyChanged}"
+                   FontSizeValue="20" Margin="220,299,405,0" Height="56" VerticalAlignment="Top" PaddingValue="15"/>
+
+            <Label Content="Precio máximo:" Margin="400,309,194,0" VerticalAlignment="Top" 
+                   FontSize="25" FontWeight="Bold" Foreground="#fffff7"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Max precio"
+                   Style="{StaticResource SynthwaveTextBoxStyle}" 
+                   Text="{Binding PriceMax, UpdateSourceTrigger=PropertyChanged}"
+                   FontSizeValue="20" Margin="595,303,30,0" Height="56" VerticalAlignment="Top" PaddingValue="15"/>
+
+            <Button Background="{StaticResource SecondaryColor1}" 
+                    Content="Buscar" 
+                    FontSize="16" FontWeight="Bold" 
+                    Style="{StaticResource PrimaryButtonStyle}" 
+                    Command="{Binding SearchCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Margin="566,389,68,19" />
+        </Grid>
+    </Viewbox>
+</Window>

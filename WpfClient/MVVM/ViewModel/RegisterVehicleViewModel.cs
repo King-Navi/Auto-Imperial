@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
+using System.IO;
+using WpfClient.Utilities.Enum;
+using System.Windows.Media.Imaging;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -76,6 +79,27 @@ namespace WpfClient.MVVM.ViewModel
         {
             get => engine;
             set { engine = value; OnPropertyChanged(); }
+        }
+        private byte[]? vehiclePhoto;
+        public byte[]? VehiclePhoto
+        {
+            get => vehiclePhoto;
+            set
+            {
+                vehiclePhoto = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private BitmapImage? previewImage;
+        public BitmapImage? PreviewImage
+        {
+            get => previewImage;
+            set
+            {
+                previewImage = value;
+                OnPropertyChanged();
+            }
         }
 
         private bool isModelEnabled;
@@ -206,8 +230,6 @@ namespace WpfClient.MVVM.ViewModel
             _vehicleRepository = vehicleRepository;
             ActualSupplier = supplier;
             _ = InicializateBranchesAsync();
-            //InicializateModels();
-            //InicializateVersions();
             InicializateTypes();
             RegisterVehicleCommand = new RelayCommand(RegisterVehicle);
             UploadPhotoCommand = new RelayCommand(UploadPhoto);
@@ -219,6 +241,7 @@ namespace WpfClient.MVVM.ViewModel
             try
             {
                 var marcas = await _vehicleRepository.GetAllBranchAsync();
+                marcas = marcas.OrderBy(m => m.nombre).ToList();
                 BranchesList = new ObservableCollection<Marca>();
                 OnPropertyChanged(nameof(BranchesList));
                 BranchesList.Clear();
@@ -237,10 +260,10 @@ namespace WpfClient.MVVM.ViewModel
         private async Task LoadModelsAsync(Marca branch)
         {
             ModelsList = new ObservableCollection<Modelo>();
+            
             OnPropertyChanged(nameof(ModelsList));
             IsModelEnabled = false;
 
-            // Limpia las versiones al cambiar de marca
             VersionsList = new ObservableCollection<AutoImperialDAO.Models.Version>();
             OnPropertyChanged(nameof(VersionsList));
             SelectedVersion = null;
@@ -251,6 +274,7 @@ namespace WpfClient.MVVM.ViewModel
             try
             {
                 var modelos = await _vehicleRepository.GetModelsByBrandIdAsync(branch.idMarca);
+                modelos = modelos.OrderBy(m => m.nombre).ToList();
                 if (modelos?.Any() == true)
                 {
                     foreach (var modelo in modelos)
@@ -277,6 +301,7 @@ namespace WpfClient.MVVM.ViewModel
             try
             {
                 var versiones = await _vehicleRepository.GetVersionsByModelIdAsync(modelo.idModelo);
+                versiones = versiones.OrderBy(v => v.nombre).ToList();
                 if (versiones?.Any() == true)
                 {
                     foreach (var version in versiones)
@@ -299,134 +324,138 @@ namespace WpfClient.MVVM.ViewModel
                 "Automovil",
                 "SUV",
                 "Caminón",
-                "Motocicleta"
+                "Motocicleta",
+                "Sedan"
             };
         }
 
 
-        //private bool ValidateFields()
-        //{
-        //    if (string.IsNullOrWhiteSpace(EmployeeName) ||
-        //        string.IsNullOrWhiteSpace(PaternalSurname) ||
-        //        string.IsNullOrWhiteSpace(MaternalSurname) ||
-        //        string.IsNullOrWhiteSpace(Street) ||
-        //        string.IsNullOrWhiteSpace(Number) ||
-        //        string.IsNullOrWhiteSpace(CP) ||
-        //        string.IsNullOrWhiteSpace(City) ||
-        //        string.IsNullOrWhiteSpace(Phone) ||
-        //        string.IsNullOrWhiteSpace(Mail) ||
-        //        string.IsNullOrWhiteSpace(Curp) ||
-        //        string.IsNullOrWhiteSpace(RFC) ||
-        //        string.IsNullOrWhiteSpace(EmployeeNumber) ||
-        //        string.IsNullOrWhiteSpace(Branch) ||
-        //        string.IsNullOrWhiteSpace(Username) ||
-        //        string.IsNullOrWhiteSpace(SelectedOption))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Campos vacíos", "Se han dejado campos vacíos, todos los campos son obligatorios.", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!Regex.IsMatch(Mail, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un correo no válido", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!Regex.IsMatch(Curp, @"^[A-Z]{4}\d{6}[A-Z]{6}\d{2}$", RegexOptions.IgnoreCase))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un CURP no válido", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!Regex.IsMatch(RFC, @"^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$", RegexOptions.IgnoreCase))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un RFC no válido", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!Regex.IsMatch(CP, @"^\d{5}$"))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un código postal no válido", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!Regex.IsMatch(Phone, @"^\d{10}$"))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un número de teléfono no válido, debe de tener 10 dígitos", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-        //    if (!int.TryParse(Number, out _))
-        //    {
-        //        _dialogService.ShowDialog(new AlertViewModel("Datos inválidos", "Se ha introducido un número de calle no válido", AlertIconType.AlertIcon));
-        //        return false;
-        //    }
-
-
-        //    return true;
-        //}
-
-        private void RegisterVehicle()
+        private bool ValidateFields()
         {
-            //    if (!ValidateFields())
-            //        return;
+            if (string.IsNullOrWhiteSpace(Color) ||
+                string.IsNullOrWhiteSpace(ChassisNumber) ||
+                string.IsNullOrWhiteSpace(EngineNumber) ||
+                string.IsNullOrWhiteSpace(VIN) ||
+                string.IsNullOrWhiteSpace(PurchasePrice) ||
+                string.IsNullOrWhiteSpace(SellPrice) ||
+                string.IsNullOrWhiteSpace(Year) ||
+                SelectedBranch == null ||
+                SelectedModel == null ||
+                SelectedVersion == null ||
+                string.IsNullOrWhiteSpace(SelectedType))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Campos incompletos", "Por favor, completa todos los campos requeridos.", AlertIconType.AlertIcon));
+                return false;
+            }
 
-            //    var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Esta seguro que desea guardar los cambios de este vehículo?", Utilities.Enum.ConfirmationIconType.RegisterIcon);
-            //    var result = _dialogService.ShowDialog(confirmationVM);
-            //    if (result == true)
-            //    {
-            //        Vendedor employee = new Vendedor
-            //        {
-            //            nombre = this.EmployeeName,
-            //            apellidoPaterno = this.PaternalSurname,
-            //            apellidoMaterno = this.MaternalSurname,
-            //            calle = this.Street,
-            //            numero = int.TryParse(this.Number, out int parsedNumber) ? parsedNumber : 0,
-            //            codigoPostal = this.CP,
-            //            ciudad = this.City,
-            //            telefono = this.Phone,
-            //            correo = this.Mail,
-            //            CURP = this.Curp,
-            //            RFC = this.RFC,
-            //            numeroEmpleado = this.EmployeeNumber,
-            //            sucursal = this.Branch,
-            //            nombreUsuario = this.Username,
-            //            puestoVendedor = this.SelectedOption,
-            //            idVendedor = ActualEmployee.IdEmployee,
-            //            Reservas = ActualEmployee.Reservas
-            //        };
+            if (!decimal.TryParse(PurchasePrice, out _) || !decimal.TryParse(SellPrice, out _))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Precios inválidos", "Introduce precios válidos para proveedor y venta.", AlertIconType.AlertIcon));
+                return false;
+            }
 
+            if (!int.TryParse(Year, out int parsedYear) || parsedYear < 1900 || parsedYear > DateTime.Now.Year + 1)
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Año inválido", "Introduce un año válido.", AlertIconType.AlertIcon));
+                return false;
+            }
 
+            return true;
+        }
 
-            //        try
-            //        {
-            //            if (_vehicleRepository.Edit(vehicle))
-            //            {
-            //                MessageBox.Show("Vehículo editado correctamente");
-            //                Navigation.NavigateTo<SearchVehicleViewModel>();
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Error al editar el vehículo");
+        private async void RegisterVehicle()
+        {
+            if (!ValidateFields())
+                return;
 
-            //            }
-            //        }
-            //        catch (Exception e)
-            //        {
-            //            MessageBox.Show("Error al editar el vehículo: " + e.StackTrace);
-            //        }
-            //    }
+            var nuevoVehiculo = new Vehiculo
+            {
+                tipoVehiculo = SelectedType,
+                estadoVehiculo = "Disponible",
+                precioProveedor = decimal.Parse(PurchasePrice),
+                precioVehiculo = decimal.Parse(SellPrice),
+                anio = int.Parse(Year),
+                color = Color,
+                VIN = VIN,
+                numeroChasis = ChassisNumber,
+                numeroMotor = EngineNumber,
+                idVersion = SelectedVersion.idVersion,
+                idCompraProveedor = ActualSupplier.idProveedor
+            };
+
+            if (VehiclePhoto != null)
+            {
+                var foto = new Fotos
+                {
+                    foto = VehiclePhoto
+                };
+
+                nuevoVehiculo.Fotos.Add(foto);
+            }
+
+            try
+            {
+                bool result = await _vehicleRepository.RegisterVehicleAsync(nuevoVehiculo);
+                if (result)
+                {
+                    MessageBox.Show("Vehículo registrado correctamente");
+                    Navigation.NavigateTo<SearchVehicleViewModel>();
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar el vehículo");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado al registrar el vehículo: {ex.Message}");
+            }
         }
 
         public void UploadPhoto()
         {
-            //var dialog = new OpenFileDialog();
-            //dialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    ActualEmployee.Photo = dialog.FileName;
-            //    OnPropertyChanged(nameof(ActualEmployee));
-            //}
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                FileInfo fileInfo = new FileInfo(filePath);
+                const long MaxSizeBytes = 30 * 1024 * 1024;
+
+                if (fileInfo.Length > MaxSizeBytes)
+                {
+                    _dialogService.ShowDialog(new AlertViewModel(
+                        "Archivo demasiado grande",
+                        "La imagen seleccionada excede los 30MB permitidos.",
+                        AlertIconType.AlertIcon));
+                    return;
+                }
+
+                try
+                {
+                    VehiclePhoto = File.ReadAllBytes(filePath);
+
+                    using var stream = new MemoryStream(VehiclePhoto);
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = stream;
+                    image.EndInit();
+
+                    PreviewImage = image;
+
+                }
+                catch (Exception ex)
+                {
+                    _dialogService.ShowDialog(new AlertViewModel(
+                        "Error",
+                        $"No se pudo cargar la imagen: {ex.Message}",
+                        AlertIconType.AlertIcon));
+                }
+            }
         }
 
     }

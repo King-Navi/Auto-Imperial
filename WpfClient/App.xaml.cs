@@ -89,7 +89,7 @@ namespace WpfClient
             services.AddTransient<SearchSupplierPaymentViewModel>();
             services.AddTransient<InfoSupplierPaymentViewModel>();
 
-            services.AddTransient<SearchVehicleViewModel>();
+            services.AddSingleton<SearchVehicleViewModel>();
             services.AddTransient<InfoVehicleViewModel>();
             services.AddTransient<EditVehicleViewModel>();
 
