@@ -19,6 +19,8 @@ public partial class Venta
 
     public int idVehiculo { get; set; }
 
+    public string estadoVenta { get; set; } = null!;
+
     public virtual Reserva idReservaNavigation { get; set; } = null!;
 
     public virtual Vehiculo idVehiculoNavigation { get; set; } = null!;
