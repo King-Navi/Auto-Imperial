@@ -11,5 +11,6 @@ namespace AutoImperialDAO.DAO.Interfaces
     {
         Task<bool> RegisterSupplierPaymentAsync(CompraProveedor nuevaCompra);
         Task<List<CompraProveedor>> GetPaymentsBySupplierIdAsync(int supplierId);
+        int GetCountVehiclesById(int supplierPaymentId);
     }
 }

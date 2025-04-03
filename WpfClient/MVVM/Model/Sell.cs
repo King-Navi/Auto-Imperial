@@ -58,6 +58,12 @@ namespace WpfClient.MVVM.Model
             set { base.idVehiculo = value; OnPropertyChanged(); }
         }
 
+        public new string SellState
+        {
+            get => base.estadoVenta;
+            set { base.estadoVenta = value; OnPropertyChanged(); }
+        }
+
         public new Reserva Reservation
         {
             get => base.idReservaNavigation;

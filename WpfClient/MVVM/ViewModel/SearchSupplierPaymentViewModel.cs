@@ -107,7 +107,8 @@ namespace WpfClient.MVVM.ViewModel
             TotalAmount = cp.montoTotal,
             Folio = cp.folio,
             PurchaseDate = cp.fechaCompra,
-            AdministratorId = cp.idAdministrador
+            AdministratorId = cp.idAdministrador,
+            VehiclesCount = cp.vehiculosComprados
         };
     }
 }

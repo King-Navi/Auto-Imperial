@@ -56,5 +56,18 @@ namespace AutoImperialDAO.DAO.Repositories
             }
         }
 
+        public int GetCountVehiclesById(int supplierPaymentId)
+        {
+            try
+            {
+                Validator.IsIdValid(supplierPaymentId);
+                return _context.Vehiculo.Count(vehicle => vehicle.idCompraProveedor == supplierPaymentId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en GetCountVehiclesById: {ex.Message}");
+                return -1;
+            }
+        }
     }
 }

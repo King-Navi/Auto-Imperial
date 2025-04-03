@@ -52,6 +52,13 @@ namespace WpfClient.MVVM.Model
             set { base.idProveedor = value; OnPropertyChanged(); }
         }
 
+        public new int VehiclesCount
+        {
+            get => base.vehiculosComprados;
+            set { base.vehiculosComprados = value; OnPropertyChanged(); }
+        }
+
+
         public new ICollection<Vehiculo> Vehiculos
         {
             get => base.Vehiculo;
