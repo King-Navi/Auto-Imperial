@@ -15,6 +15,7 @@ using WpfClient.Utilities;
 using System.IO;
 using WpfClient.Utilities.Enum;
 using System.Windows.Media.Imaging;
+using System.Reflection.Metadata;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -233,8 +234,6 @@ namespace WpfClient.MVVM.ViewModel
             InicializateTypes();
             RegisterVehicleCommand = new RelayCommand(RegisterVehicle);
             UploadPhotoCommand = new RelayCommand(UploadPhoto);
-
-            MessageBox.Show(ActualIdSupplierPayment + "");
         }
 
 
@@ -365,7 +364,7 @@ namespace WpfClient.MVVM.ViewModel
             return true;
         }
 
-        private async void RegisterVehicle()
+        private async void RegisterVehicle(object parameter)
         {
             if (!ValidateFields())
                 return;
@@ -401,7 +400,13 @@ namespace WpfClient.MVVM.ViewModel
                 if (result)
                 {
                     MessageBox.Show("Vehículo registrado correctamente");
-                    Navigation.NavigateTo<SearchVehicleViewModel>();
+
+                    Mediator.Notify(MediatorKeys.UPDATE_VEHICLES_REGISTER, null);
+
+                    if (parameter is Window window)
+                    {
+                        window.Close();
+                    }
                 }
                 else
                 {

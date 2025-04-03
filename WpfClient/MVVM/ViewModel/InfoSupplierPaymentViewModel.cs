@@ -156,6 +156,9 @@ namespace WpfClient.MVVM.ViewModel
 
             NavigateToSearchSupplierPaymentCommand = new RelayCommand(NavigateToSearchSupplierPayment);
             RegisterVehiclesCommand = new RelayCommand(RegisterVehicle);
+
+            Mediator.Register(MediatorKeys.UPDATE_VEHICLES_REGISTER, args => UpdateVehiclesRegisters());
+            UpdateVehiclesRegisters();
         }
 
         public void ReceiveParameter(object parameter)
@@ -182,8 +185,6 @@ namespace WpfClient.MVVM.ViewModel
         {
             int supplierPaymentId = ActualSupplierPayment.SupplierPaymentId;
 
-            MessageBox.Show("" + supplierPaymentId);
-
             RegisterVehicleViewModel viewModel = new RegisterVehicleViewModel(
                 App.ServiceProvider.GetRequiredService<INavigationService>(),
                 App.ServiceProvider.GetRequiredService<UserService>(),
@@ -194,6 +195,19 @@ namespace WpfClient.MVVM.ViewModel
 
             var window = new RegisterVehicleView(viewModel);
             window.ShowDialog();
+        }
+
+        private void UpdateVehiclesRegisters()
+        {
+            MessageBox.Show("Se llamío al metodo");
+            //TODO do a BD consult to get the number of vehicles registered
+
+            int numberOfVehicles = 0;
+            //TODO numberOfVehicles = await _supplierRepository.GetNumberOfVehiclesRegisteredAsync(ActualSupplierPayment.SupplierPaymentId);
+            int numberOfTotalVehicles = 0;
+            //TODO numberOfTotalVehicles = ActualSupplierPayment.VehiclesCount;
+
+            NumberRegisterVehicles = $"{numberOfVehicles} de {numberOfTotalVehicles}";
         }
 
         private async Task InitPropertiesAsync(int supplierId)

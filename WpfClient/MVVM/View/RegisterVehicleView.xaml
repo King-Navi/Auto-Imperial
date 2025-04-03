@@ -90,7 +90,7 @@
        VerticalAlignment="Top" 
        Stretch="UniformToFill" />
 
-            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterVehicleCommand}" Margin="606,383,25,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar vehículo" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterVehicleCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Margin="606,383,25,25" />
             <Button Background="{StaticResource SecondaryColor1}" Content="Subir foto" FontSize="12" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding UploadPhotoCommand}" Margin="95,295,615,118" />
 
         </Grid>
