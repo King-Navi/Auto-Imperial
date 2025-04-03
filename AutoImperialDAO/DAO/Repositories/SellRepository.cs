@@ -16,8 +16,15 @@ namespace AutoImperialDAO.DAO.Repositories
         }
         public bool DeleteById(int id)
         {
-            //TODO
-            throw new NotImplementedException();
+            var venta = _context.Venta.FirstOrDefault(v => v.idVenta == id);
+            if (venta == null)
+            {
+                return false;
+            }
+
+            _context.Venta.Remove(venta);
+
+            return _context.SaveChanges() > 0;
         }
 
         public bool Edit(Venta venta)
