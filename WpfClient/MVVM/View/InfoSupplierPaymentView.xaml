@@ -68,9 +68,9 @@
                 FontSize="20"
             />
 
-            <Label Content="Registros: " Height="34" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="377,386,337,0"></Label>
+            <Label Content="Registros: " Height="34" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="283,382,431,0"></Label>
             <TextBlock
-                Margin="462,388,243,28"
+                Margin="368,384,234,32"
                 Text="{Binding NumberRegisterVehicles}"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Foreground="White"

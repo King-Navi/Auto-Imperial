@@ -139,7 +139,8 @@ namespace WpfClient.MVVM.ViewModel
                         idAdministrador = user.CurrentUser.Id,
                         montoTotal = monto,
                         folio = $"COMP-{DateTime.Now:yyyyMMddHHmmss}",
-                        fechaCompra = DateOnly.FromDateTime(PurchaseDate.Value)
+                        fechaCompra = DateOnly.FromDateTime(PurchaseDate.Value),
+                        vehiculosComprados = numeroVehiculos
                     };
 
                     bool success = await _supplierPaymentRepository.RegisterSupplierPaymentAsync(compra);

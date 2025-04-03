@@ -144,21 +144,22 @@ namespace WpfClient.MVVM.ViewModel
         }
         private readonly IDialogService _dialogService;
         private readonly ISupplierRepository _supplierRepository;
-
+        private readonly ISupplierPaymentRepository _supplierPaymentRepository;
 
         public ICommand NavigateToSearchSupplierPaymentCommand { get; set; }
         public ICommand RegisterVehiclesCommand { get; set; }
-        public InfoSupplierPaymentViewModel(INavigationService navigationService, IDialogService dialogService, ISupplierRepository supplierRepository)
+        public InfoSupplierPaymentViewModel(INavigationService navigationService, IDialogService dialogService, ISupplierRepository supplierRepository, ISupplierPaymentRepository supplierPaymentRepository)
         {
             _dialogService = dialogService;
             _supplierRepository = supplierRepository;
+            _supplierPaymentRepository = supplierPaymentRepository;
             Navigation = navigationService;
 
             NavigateToSearchSupplierPaymentCommand = new RelayCommand(NavigateToSearchSupplierPayment);
             RegisterVehiclesCommand = new RelayCommand(RegisterVehicle);
 
             Mediator.Register(MediatorKeys.UPDATE_VEHICLES_REGISTER, args => UpdateVehiclesRegisters());
-            UpdateVehiclesRegisters();
+            
         }
 
         public void ReceiveParameter(object parameter)
@@ -169,6 +170,7 @@ namespace WpfClient.MVVM.ViewModel
                 _originalSupplierPayment = (SupplierPayment)supplierPayment.Clone();
 
                 _ = InitPropertiesAsync(supplierPayment.SupplierId);
+                UpdateVehiclesRegisters();
             }
             else
             {
@@ -199,15 +201,10 @@ namespace WpfClient.MVVM.ViewModel
 
         private void UpdateVehiclesRegisters()
         {
-            MessageBox.Show("Se llamío al metodo");
-            //TODO do a BD consult to get the number of vehicles registered
+            int numberOfVehicles = _supplierPaymentRepository.GetCountVehiclesById(ActualSupplierPayment.SupplierPaymentId);
+            int numberOfTotalVehicles = ActualSupplierPayment.VehiclesCount;
 
-            int numberOfVehicles = 0;
-            //TODO numberOfVehicles = await _supplierRepository.GetNumberOfVehiclesRegisteredAsync(ActualSupplierPayment.SupplierPaymentId);
-            int numberOfTotalVehicles = 0;
-            //TODO numberOfTotalVehicles = ActualSupplierPayment.VehiclesCount;
-
-            NumberRegisterVehicles = $"{numberOfVehicles} de {numberOfTotalVehicles}";
+            NumberRegisterVehicles = $"{numberOfVehicles} vehículos de {numberOfTotalVehicles}";
         }
 
         private async Task InitPropertiesAsync(int supplierId)
