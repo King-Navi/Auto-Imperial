@@ -102,6 +102,7 @@ namespace WpfClient.MVVM.ViewModel
 
         private SupplierPayment Convert(CompraProveedor cp) => new()
         {
+            SupplierPaymentId = cp.idCompraProveedor,
             SupplierId = cp.idProveedor,
             TotalAmount = cp.montoTotal,
             Folio = cp.folio,

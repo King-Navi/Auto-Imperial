@@ -41,12 +41,12 @@ namespace WpfClient.Resources.ViewCards
             }
         }
 
-        public SupplierPaymentCardViewModel(INavigationService navigationService, SupplierPayment supplier)
+        public SupplierPaymentCardViewModel(INavigationService navigationService, SupplierPayment supplierPayment)
         {
-            SupplierPayment = supplier;
-            SupplierPaymentFolio = "Folio: " + supplier.Folio;
-            SupplierPaymentDate = "Fecha: " + supplier.PurchaseDate.ToString("yyyy‑MM‑dd");
-            SupplierPaymentAmount = "Monto total: " + supplier.TotalAmount?.ToString("N2") ?? "0.00";
+            SupplierPayment = supplierPayment;
+            SupplierPaymentFolio = "Folio: " + supplierPayment.Folio;
+            SupplierPaymentDate = "Fecha: " + supplierPayment.PurchaseDate.ToString("yyyy‑MM‑dd");
+            SupplierPaymentAmount = "Monto total: " + supplierPayment.TotalAmount?.ToString("N2") ?? "0.00";
             Navigation = navigationService;
             NavigateToViewSupplierPaymentViewCommand = new RelayCommand(
                 o =>
