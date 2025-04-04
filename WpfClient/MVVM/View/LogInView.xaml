@@ -62,7 +62,7 @@
                         PlaceholderText="Ingrese su contraseña"
                         Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                         FontSizeValue="30"
-                        CheckBoxFontSize="25"
+                        CheckBoxFontSize="26"
                     />
 
                     <Label Content="{Binding ErrorMessage}"
