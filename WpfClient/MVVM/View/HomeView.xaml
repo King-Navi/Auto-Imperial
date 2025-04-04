@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfClient.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="animatedGrid" Background="{StaticResource BackgroundyColor2}">
+        <!-- Animación que hace que el grid entre desde arriba -->
         <Grid.Triggers>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
@@ -16,13 +16,51 @@
                 </BeginStoryboard>
             </EventTrigger>
         </Grid.Triggers>
+
+        <!-- Efecto de "desplazamiento" inicial -->
         <Grid.RenderTransform>
             <TranslateTransform Y="-500" />
         </Grid.RenderTransform>
 
-        <TextBlock Text="Bienvenido," FontSize="20" FontWeight="Bold" Margin="215,20,0,289" Foreground="White"/>
-        <TextBlock Text="{Binding Username}" FontSize="18" FontWeight="Bold" Margin="340,22,90,338" Foreground="White"/>
+        <!-- Contenido principal -->
+        <Grid>
+            <!-- Imagen de fondo -->
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/WpfClient;component/Resources/Images/autos-back.jpg"
+                            Stretch="UniformToFill" />
+            </Grid.Background>
 
-       
+            <!-- Capa semitransparente para resaltar el texto sobre la imagen -->
+            <Rectangle Fill="#BF000000" />
+
+            <!-- Texto centrado -->
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="AUTOMÓVILES IMPERIALES"
+                    FontSize="48"
+                    FontWeight="Bold"
+                    Foreground="#FFD700">  
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.8"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Text="Bienvenido, "
+                           FontSize="22"
+                           Foreground="White"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Username}"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="Red"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"/>
+                <TextBlock Text="¡Descubre la potencia, el lujo y la innovación de nuestra flota!"
+                           FontSize="16"
+                           Foreground="#FFD700"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0,10,0,0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

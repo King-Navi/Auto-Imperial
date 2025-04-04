@@ -1,5 +1,6 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Models;
+using AutoImperialDAO.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,38 @@ namespace AutoImperialDAO.DAO.Repositories
                 return false;
             }
 
-            _context.Venta.Remove(venta);
+            venta.estadoVenta = "Eliminada";
+            _context.Venta.Update(venta);
 
             return _context.SaveChanges() > 0;
         }
 
         public bool Edit(Venta venta)
         {
-            //TODO
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                Validator.IsIdValid(venta.idVenta);
+                var searchedVenta = _context.Venta.Find(venta.idVenta);
+                if (searchedVenta == null)
+                {
+                    throw new ArgumentNullException("Venta not found");
+                }
+                
+                _context.Entry(searchedVenta).CurrentValues.SetValues(venta);
+                
+                _context.Entry(searchedVenta).Property(x => x.idVenta).IsModified = false;
+                _context.SaveChanges();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Edit Venta: {ex.Message}");
+            }
+
+            return result;
         }
+
 
         public bool Register(Venta venta)
         {
