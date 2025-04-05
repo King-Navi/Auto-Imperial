@@ -17,7 +17,6 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using WpfClient.Idioms;
 using System.Globalization;
-using WpfClient.Utilities.ReportsPDF;
 
 namespace WpfClient
 {
@@ -60,7 +59,7 @@ namespace WpfClient
             services.AddSingleton<RegisterClientViewModel>();
 
             services.AddTransient<SearchSellViewModel>();
-            services.AddSingleton<RegisterSellViewModel>();
+            services.AddTransient<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
             services.AddTransient<InfoSellViewModel>();
             services.AddTransient<EditSellViewModel>();

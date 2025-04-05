@@ -56,13 +56,28 @@ namespace AutoImperialDAO.DAO.Repositories
             return result;
         }
 
-
-
-
         public bool Register(Venta venta)
         {
-            //TODO
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                Validator.IsIdValid(venta.idReserva);
+                Validator.IsIdValid(venta.idVehiculo);
+
+                venta.estadoVenta = "Registrada";
+                venta.fechaVenta = DateOnly.FromDateTime(DateTime.Today);
+
+                _context.Venta.Add(venta);
+                _context.SaveChanges();
+
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in Register Venta: {ex.Message}");
+            }
+
+            return result;
         }
 
         public async Task<List<Venta>> SearchByVINClientAsync(string parameter)
