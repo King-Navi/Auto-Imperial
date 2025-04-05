@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace WpfClient.MVVM.Model
 {
-    class Sell : Venta, INotifyPropertyChanged
+    public class Sell : Venta, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

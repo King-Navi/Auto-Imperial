@@ -40,10 +40,11 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     throw new ArgumentNullException("Venta not found");
                 }
-                
-                _context.Entry(searchedVenta).CurrentValues.SetValues(venta);
-                
-                _context.Entry(searchedVenta).Property(x => x.idVenta).IsModified = false;
+
+                searchedVenta.precioVehiculo = venta.precioVehiculo;
+                searchedVenta.notasAdicionales= venta.notasAdicionales;
+                searchedVenta.formaPago = venta.formaPago;
+
                 _context.SaveChanges();
                 result = true;
             }
@@ -54,6 +55,8 @@ namespace AutoImperialDAO.DAO.Repositories
 
             return result;
         }
+
+
 
 
         public bool Register(Venta venta)
@@ -76,13 +79,13 @@ namespace AutoImperialDAO.DAO.Repositories
                 .Include(v => v.idReservaNavigation)
                     .ThenInclude(r => r.idVendedorNavigation)
                 .Where(v =>
-                    v.idVehiculoNavigation.VIN.ToLower().Contains(parameter) ||
+                    (v.idVehiculoNavigation.VIN.ToLower().Contains(parameter) ||
                     (
                         (v.idReservaNavigation.idClienteNavigation.nombre + " " +
                          v.idReservaNavigation.idClienteNavigation.apellidoPaterno + " " +
                          v.idReservaNavigation.idClienteNavigation.apellidoMaterno)
                         .ToLower().Contains(parameter)
-                    )
+                    )) && v.estadoVenta != "Eliminada"
                 )
                 .ToListAsync();
 
