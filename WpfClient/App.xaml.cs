@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using WpfClient.Idioms;
 using System.Globalization;
+using WpfClient.Utilities.ReportsPDF;
 
 namespace WpfClient
 {
@@ -26,22 +27,13 @@ namespace WpfClient
         public App()
         {
             IServiceCollection services = new ServiceCollection();
-            //Si alguien ve esto esta es la manera de inicializar la conexion a bd
-
-            // Cargar la configuración desde appsettings.json
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
-
             var connectionString = configuration.GetConnectionString("AutoImperialDb");
-
-
-            // inyectar AutoImperialContext con la cadena de conexión
             services.AddDbContext<AutoImperialContext>(options =>
                 options.UseSqlServer(connectionString));
-
-            // Registrar Repositorios
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<ISellRepository, SellRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -92,7 +84,7 @@ namespace WpfClient
             services.AddSingleton<SearchVehicleViewModel>();
             services.AddTransient<InfoVehicleViewModel>();
             services.AddTransient<EditVehicleViewModel>();
-
+            services.AddTransient<ReportsViewModel>();
 
 
             services.AddTransient<IDialogService, DialogService>();

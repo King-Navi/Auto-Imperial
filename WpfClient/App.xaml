@@ -85,6 +85,9 @@
             <DataTemplate DataType="{x:Type viewModel:EditVehicleViewModel}">
                 <view:EditVehicleView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ReportsViewModel}">
+                <view:ReportsView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
