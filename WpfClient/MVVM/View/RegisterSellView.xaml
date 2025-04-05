@@ -6,137 +6,57 @@
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
              xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" 
-             d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1445">
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Registrar venta " Height="52" VerticalAlignment="Top" FontSize="29" FontWeight="Bold" Foreground="#fffff7" Margin="320,10,256,0"></Label>
 
-        <Grid Background="{StaticResource BackgroundyColor2}" 
-                Margin="180,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Vertical" 
-                Grid.Row="0" Grid.Column="0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
-                <Grid HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <!-- Nombre -->
-                    <Label Content="Nombre:" 
-           Grid.Row="0" Grid.Column="0" 
-           VerticalAlignment="Center" Margin="5"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="Name"
-                 Text="{Binding ClienteActual.Name, UpdateSourceTrigger=PropertyChanged}"
-                 Width="225" Height="40"
-                 Grid.Row="0" Grid.Column="1"
-                 Margin="5"/>
+            <Label Content="Cliente" Height="40" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="{StaticResource SecondaryColor1}" Margin="115,55,576,0"/>
+            <TextBlock
+                Margin="258,65,260,351"
+                Text="{Binding SupplierName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
 
-                    <!-- Apellido Paterno -->
-                    <Label Content="Apellido Paterno:" 
-           Grid.Row="1" Grid.Column="0" 
-           VerticalAlignment="Center" Margin="5"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="ParentalSurname"
-                 Text="{Binding ClienteActual.PaternalSurname, UpdateSourceTrigger=PropertyChanged}"
-                 Width="225" Height="40"
-                 Grid.Row="1" Grid.Column="1"
-                 Margin="5"/>
+            <Label Content="Vehículo" Height="40" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="{StaticResource SecondaryColor1}" Margin="115,149,558,0" RenderTransformOrigin="1.709,0.731"/>
 
-                    <!-- Apellido Materno -->
-                    <Label Content="Apellido Materno:" 
-           Grid.Row="2" Grid.Column="0" 
-           VerticalAlignment="Center" Margin="5"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="MaternalSurname"
-                 Text="{Binding ClienteActual.MaternalSurname, UpdateSourceTrigger=PropertyChanged}"
-                 Width="225" Height="40"
-                 Grid.Row="2" Grid.Column="1"
-                 Margin="5"/>
-                </Grid>
+            <Label Content="Precio total de la compra del vehiculo:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,276,400,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Monto total"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="405,275,209,141"/>
 
-                <!-- Phone y Email-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Label Content="Teléfono:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="Phone"
-                         Text="{Binding ClienteActual.Phone, UpdateSourceTrigger=PropertyChanged}"
-                         Width="128" 
-                         Height="22"/>
-
-                    <Label Content="Correo:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="Email"
-                         Text="{Binding ClienteActual.Email, UpdateSourceTrigger=PropertyChanged}"
-                         Width="128" 
-                         Height="22"/>
-                </StackPanel>
-
-                <!-- Adress -->
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Calle:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="Calle"
-                         Text="{Binding ClienteActual.Street, UpdateSourceTrigger=PropertyChanged}"
-                         Width="128" 
-                         Height="22"/>
-
-                    <Label Content="Número:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:NumericIntPlaceHolderTextBox x:Name="Numero"
-                                                       
-                         Text="{Binding ClienteActual.Number, UpdateSourceTrigger=PropertyChanged}"
-                         Width="128" 
-                         Height="22"/>
-
-                    <Label Content="Ciudad:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="Ciudad"
-                         Text="{Binding ClienteActual.City, UpdateSourceTrigger=PropertyChanged}"
-                         Width="64" 
-                         Height="22"/>
-
-                    <Label Content="C.P." HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:NumericIntPlaceHolderTextBox x:Name="CodigoPostal"
-                         Text="{Binding ClienteActual.CP, UpdateSourceTrigger=PropertyChanged}"
-                         Width="72" 
-                         Height="22"/>
-                </StackPanel>
-
-                <!-- RFC y CURP -->
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="RFC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="RFC"
-                         Text="{Binding ClienteActual.RFC, UpdateSourceTrigger=PropertyChanged}"
-                         Width="72" 
-                         Height="22"/>
-
-                    <Label Content="CURP" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <controls:SimplePlaceHolderTextBox x:Name="CURP"
-                         Text="{Binding ClienteActual.CURP, UpdateSourceTrigger=PropertyChanged}"
-                         Width="166" 
-                         Height="73"/>
-                </StackPanel>
-
-            </StackPanel>
-
-            <!-- Buttons -->
-            <Button Content="Registrar cliente" 
-                Height="25" 
-                Width="84" 
-                Margin="651,378,50,47"  
-                Command="{Binding RegisterClientCommand}" />
-
-            <Button Content="Cancelar" 
-                HorizontalAlignment="Left"  
-                VerticalAlignment="Top" 
-                Command="{Binding NavigateToSearchClientView}" 
-                Height="25" 
-                Width="84" 
-                Margin="485,378,0,0"/>
-
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar venta" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierPaymentCommand}" Margin="624,383,25,25" />
+            <Label Content="Fecha de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="116,233,517,0"/>
+            <DatePicker  HorizontalAlignment="Left" Margin="289,237,0,0" VerticalAlignment="Top" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBlock
+                Margin="257,152,56,264"
+                Text="{Binding AdminName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="20"
+            />
+            <Label Content="Notas adicionales: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,319,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText="Número de vehículos"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VehiclesNumber, UpdateSourceTrigger=PropertyChanged}"
+                FontSizeValue="12" Margin="400,318,72,98"/>
+            <Label Content="Método de pago: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="479,233,190,0" RenderTransformOrigin="1.709,0.731"/>
+            <ComboBox HorizontalAlignment="Left" Margin="624,238,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Nombre" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="353,99,376,0"/>
+            <Label Content="Teléfono" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="648,99,80,0"/>
+            <TextBlock
+                Margin="601,65,33,351"
+                Text="{Binding AdminName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="20"
+            />
         </Grid>
-    </UserControl>
+    </Viewbox>
+</UserControl>
+

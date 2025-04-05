@@ -2,11 +2,12 @@
 using AutoImperialDAO.Models;
 using AutoImperialDAO.Utilities;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AutoImperialDAO.DAO.Repositories
 {
@@ -66,7 +67,7 @@ namespace AutoImperialDAO.DAO.Repositories
             catch (Exception ex)
             {
                 Console.WriteLine($"Error en GetCountVehiclesById: {ex.Message}");
-                return -1;
+                throw;
             }
         }
     }

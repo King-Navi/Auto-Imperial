@@ -83,7 +83,7 @@
 
             <!-- Línea divisoria entre "Venta" y "Cliente" -->
             <Line X1="70" Y1="150"
-                  X2="730" Y2="150"
+                  X2="810" Y2="150"
                   Stroke="White"
                   StrokeThickness="2" Margin="0,8,0,-8" />
 
@@ -139,7 +139,7 @@
 
             <!-- Línea divisoria entre "Cliente" y "Vehículo" -->
             <Line X1="70" Y1="300"
-                  X2="730" Y2="300"
+                  X2="810" Y2="300"
                   Stroke="White"
                   StrokeThickness="2" />
 

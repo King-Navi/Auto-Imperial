@@ -4,9 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             xmlns:controls="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="1445">
+    <Viewbox Stretch="Fill">
+        <Grid Background="{StaticResource BackgroundyColor1}" Height="450" Width="800">
+            <Label Content="Editar venta " Height="52" VerticalAlignment="Top" FontSize="29" FontWeight="Bold" Foreground="#fffff7" Margin="367,0,209,0"></Label>
+
+
+            <Label Content="Cliente" Height="40" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="{StaticResource SecondaryColor1}" Margin="107,55,584,0"/>
+            <TextBlock
+                Margin="258,65,260,351"
+                Text="{Binding ClientName}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                FontSize="20"
+            />
+
+            <Label Content="Vehículo" Height="40" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="{StaticResource SecondaryColor1}" Margin="107,149,566,0" RenderTransformOrigin="1.709,0.731"/>
+
+            <Label Content="Precio total de la compra del vehiculo:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,276,400,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                 Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
+                 FontSizeValue="12" Margin="409,275,120,141"/>  
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSellView}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Editar venta" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierPaymentCommand}" Margin="624,383,25,25" />
+            <Label Content="Fecha de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="116,233,517,0"/>
+            <TextBlock
+                Margin="233,152,80,264"
+                Text="{Binding Vehicle}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                TextAlignment="Left"
+                FontSize="20"
+            />
+            <Label Content="Notas adicionales: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,319,431,0"/>
+            <controls:PlaceholderTextBoxControl PlaceholderText=""
+                 Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding AditionalNotes, UpdateSourceTrigger=PropertyChanged}"
+                 FontSizeValue="12" Margin="409,318,120,98"/>
+            <Label Content="Método de pago: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="479,233,190,0" RenderTransformOrigin="1.709,0.731"/>
+            <ComboBox ItemsSource="{Binding PaymentMethods}"
+                  SelectedItem="{Binding PaymentMethod, Mode=TwoWay}"
+                  HorizontalAlignment="Left" Margin="624,238,0,0" VerticalAlignment="Top" Width="151"/> 
+            <Label Content="Nombre" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="351,85,378,0"/>
+            <Label Content="Teléfono" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="648,83,80,0"/>
+            <TextBlock
+                Margin="601,65,33,351"
+                Text="{Binding ClientPhone}"
+                Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="20"
+            />
+            <Label Height="29" VerticalAlignment="Top"  FontSize="15" FontWeight="Bold" Content="{Binding PurchaseDate}" HorizontalContentAlignment="Center" Foreground="{StaticResource SecondaryColor1}" Margin="283,238,376,0"/>
+            <Label Content="Marca, modelo y versión" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="314,185,300,0"/>
+        </Grid>
+    </Viewbox>
 </UserControl>
+

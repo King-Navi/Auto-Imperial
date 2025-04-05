@@ -77,7 +77,7 @@
                 FontSize="20"
             />
 
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="85,380,621,28" />
+            <Button Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource NegativeButtonStyle}" Command="{Binding NavigateToSearchSupplierPaymentCommand}" Margin="85,380,621,28" />
             <Button Content="Registrar vehículos" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterVehiclesCommand}" Margin="572,368,42,30" />
             <Label Content="Información del proveedor:" Height="40" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="#fffff7" Margin="109,198,409,0"/>
         </Grid>

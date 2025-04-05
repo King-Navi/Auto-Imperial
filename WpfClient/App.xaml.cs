@@ -59,7 +59,7 @@ namespace WpfClient
             services.AddSingleton<SearchClientViewModel>();
             services.AddSingleton<RegisterClientViewModel>();
 
-            services.AddSingleton<SearchSellViewModel>();
+            services.AddTransient<SearchSellViewModel>();
             services.AddSingleton<RegisterSellViewModel>();
             services.AddSingleton<ReserveViewModel>();
             services.AddTransient<InfoSellViewModel>();
@@ -79,7 +79,7 @@ namespace WpfClient
 
             services.AddTransient<RegisterSupplierPaymentViewModel>();
             services.AddTransient<SearchSupplierPaymentViewModel>();
-            services.AddTransient<InfoSupplierPaymentViewModel>();
+            services.AddSingleton<InfoSupplierPaymentViewModel>();
 
             services.AddSingleton<SearchVehicleViewModel>();
             services.AddTransient<InfoVehicleViewModel>();

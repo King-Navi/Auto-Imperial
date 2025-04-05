@@ -20,8 +20,10 @@ namespace WpfClient.MVVM.ViewModel
     {
         private SupplierPayment _actualSupplierPayment = new SupplierPayment();
         private SupplierPayment? _originalSupplierPayment;
+        private int NumberOfRegisterVehicules = int.MaxValue;
 
         private Supplier _actualSupplier = new Supplier();
+
 
         private string? folio;
         public string? Folio
@@ -147,7 +149,7 @@ namespace WpfClient.MVVM.ViewModel
         private readonly ISupplierPaymentRepository _supplierPaymentRepository;
 
         public ICommand NavigateToSearchSupplierPaymentCommand { get; set; }
-        public ICommand RegisterVehiclesCommand { get; set; }
+        public IRelayCommand RegisterVehiclesCommand { get; set; }
         public InfoSupplierPaymentViewModel(INavigationService navigationService, IDialogService dialogService, ISupplierRepository supplierRepository, ISupplierPaymentRepository supplierPaymentRepository)
         {
             _dialogService = dialogService;
@@ -156,7 +158,10 @@ namespace WpfClient.MVVM.ViewModel
             Navigation = navigationService;
 
             NavigateToSearchSupplierPaymentCommand = new RelayCommand(NavigateToSearchSupplierPayment);
-            RegisterVehiclesCommand = new RelayCommand(RegisterVehicle);
+            RegisterVehiclesCommand = new RelayCommand(
+                execute: o => RegisterVehicle(),
+                canExecute: o => NumberOfRegisterVehicules < ActualSupplierPayment.VehiclesCount
+            );
 
             Mediator.Register(MediatorKeys.UPDATE_VEHICLES_REGISTER, args => UpdateVehiclesRegisters());
             
@@ -201,10 +206,27 @@ namespace WpfClient.MVVM.ViewModel
 
         private void UpdateVehiclesRegisters()
         {
-            int numberOfVehicles = _supplierPaymentRepository.GetCountVehiclesById(ActualSupplierPayment.SupplierPaymentId);
-            int numberOfTotalVehicles = ActualSupplierPayment.VehiclesCount;
+            NumberOfRegisterVehicules = int.MaxValue;
+            RegisterVehiclesCommand.RaiseCanExecuteChanged();
 
-            NumberRegisterVehicles = $"{numberOfVehicles} vehículos de {numberOfTotalVehicles}";
+            NumberRegisterVehicles = "Cargando...";
+            App.Current.Dispatcher.InvokeAsync(async () =>
+            {
+                await Task.Delay(1000);
+                try
+                {
+                    NumberOfRegisterVehicules = _supplierPaymentRepository.GetCountVehiclesById(ActualSupplierPayment.SupplierPaymentId);
+
+                    NumberRegisterVehicles = $"{NumberOfRegisterVehicules} vehículos de {ActualSupplierPayment.VehiclesCount}";
+                    RegisterVehiclesCommand.RaiseCanExecuteChanged();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cargar los vehículos registrados" + ex);
+                    NumberRegisterVehicles = $"Error en la carga";
+                }
+            });
+                
         }
 
         private async Task InitPropertiesAsync(int supplierId)
