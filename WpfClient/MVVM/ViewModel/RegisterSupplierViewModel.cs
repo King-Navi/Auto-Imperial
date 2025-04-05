@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
+using System.Text.RegularExpressions;
+using WpfClient.Utilities.Enum;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -97,7 +99,7 @@ namespace WpfClient.MVVM.ViewModel
             Navigation = navigationService;
             _supplierRepository = supplierRepository;
             NavigateToSearchSupplierView = new RelayCommand(NavigateToSearchSupplier);
-            RegisterSupplierCommand = new RelayCommand(RegisterEmployee);
+            RegisterSupplierCommand = new RelayCommand(RegisterSupplier);
 
         }
         
@@ -112,11 +114,16 @@ namespace WpfClient.MVVM.ViewModel
         }
         private void RegisterEmployee()
         {
-            var confirmationVM = new ConfirmationViewModel("Confimracion de registro", $"¿Esta seguro que desea registrar a este nuevo empleado?", Utilities.Enum.ConfirmationIconType.RegisterIcon);
+            if (!ValidateFields())
+                return;
+
+            var confirmationVM = new ConfirmationViewModel("Confirmación de registro",
+                "¿Está seguro que desea registrar a este nuevo proveedor?",
+                ConfirmationIconType.RegisterIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
             {
-                Proveedor employee = new Proveedor
+                Proveedor supplier = new Proveedor
                 {
                     nombreProveedor = this.SupplierName,
                     calle = this.Street,
@@ -130,8 +137,7 @@ namespace WpfClient.MVVM.ViewModel
 
                 try
                 {
-
-                    if (_supplierRepository.Register(employee))
+                    if (_supplierRepository.Register(supplier))
                     {
                         MessageBox.Show("Proveedor registrado correctamente");
                         Navigation.NavigateTo<SearchSupplierViewModel>();
@@ -139,7 +145,6 @@ namespace WpfClient.MVVM.ViewModel
                     else
                     {
                         MessageBox.Show("Error al registrar el proveedor");
-
                     }
                 }
                 catch (Exception e)
@@ -147,6 +152,59 @@ namespace WpfClient.MVVM.ViewModel
                     MessageBox.Show("Error al registrar el proveedor: " + e.StackTrace);
                 }
             }
+        }
+
+        private bool ValidateFields()
+        {
+            // Verificar que ningún campo esté vacío
+            if (string.IsNullOrWhiteSpace(SupplierName) ||
+                string.IsNullOrWhiteSpace(Street) ||
+                string.IsNullOrWhiteSpace(Number) ||
+                string.IsNullOrWhiteSpace(ZipCode) ||
+                string.IsNullOrWhiteSpace(City) ||
+                string.IsNullOrWhiteSpace(Phone) ||
+                string.IsNullOrWhiteSpace(Email) ||
+                string.IsNullOrWhiteSpace(PrimaryContact))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Campos vacíos",
+                    "Todos los campos son obligatorios.",
+                    AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!int.TryParse(Number, out _))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Número inválido",
+                    "El número debe ser un valor entero.",
+                    AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(ZipCode, @"^\d{5}$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Código Postal inválido",
+                    "El código postal debe contener 5 dígitos.",
+                    AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Phone, @"^\d{10}$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Teléfono inválido",
+                    "El número de teléfono debe contener 10 dígitos.",
+                    AlertIconType.AlertIcon));
+                return false;
+            }
+
+            if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                _dialogService.ShowDialog(new AlertViewModel("Correo inválido",
+                    "El correo electrónico no es válido.",
+                    AlertIconType.AlertIcon));
+                return false;
+            }
+
+            return true;
         }
     }
 }
