@@ -17,6 +17,7 @@ namespace WpfClient.MVVM.Model
         private string _vehicle;
         private ImageSource _vehicleImage = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
         private ReserveStatusEnum _reservationStatus;
+        private int idReserve;
 
         public string Vehicle
         {
@@ -36,6 +37,12 @@ namespace WpfClient.MVVM.Model
             set { _reservationStatus = value; OnPropertyChanged(); }
         }
 
+        public int IdReserve
+        {
+            get => idReserve;
+            set { idReserve = value; OnPropertyChanged(); }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -45,8 +52,9 @@ namespace WpfClient.MVVM.Model
 
         public ReserveCardModel() { }
 
-        public ReserveCardModel(string vehicle, ReserveStatusEnum status, ImageSource image)
+        public ReserveCardModel(int id ,string vehicle, ReserveStatusEnum status, ImageSource image)
         {
+            idReserve = id;
             Vehicle = vehicle;
             ReservationStatus = status;
             VehicleImage = image;

@@ -120,6 +120,7 @@ namespace WpfClient.MVVM.ViewModel
             {
                 var imageDefault = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
                 var reserveCardModel = new ReserveCardModel(
+                    id: reserve.idReserva,
                     vehicle: _version.GetNombreCompletoVehiculo(reserve.idVersion),
                     status: (ReserveStatusEnum)Enum.Parse(typeof(ReserveStatusEnum), reserve.estado),
                     image: ImageManager.ByteArrayToImageSource(_photo.GetPhotoByIdVehicle(reserve.idVersion)) ?? imageDefault
