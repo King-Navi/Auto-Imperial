@@ -112,7 +112,7 @@ namespace WpfClient.MVVM.ViewModel
                 Navigation.NavigateTo<SearchSupplierViewModel>();
             }
         }
-        private void RegisterEmployee()
+        private void RegisterSupplier()
         {
             if (!ValidateFields())
                 return;
@@ -156,7 +156,6 @@ namespace WpfClient.MVVM.ViewModel
 
         private bool ValidateFields()
         {
-            // Verificar que ningún campo esté vacío
             if (string.IsNullOrWhiteSpace(SupplierName) ||
                 string.IsNullOrWhiteSpace(Street) ||
                 string.IsNullOrWhiteSpace(Number) ||
