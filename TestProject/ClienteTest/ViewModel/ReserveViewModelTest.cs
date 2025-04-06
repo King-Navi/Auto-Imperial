@@ -35,7 +35,7 @@ namespace TestProject.ClienteTest.ViewModel
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("Toyota Corolla 2020", result[0].Vehicle);
+            Assert.AreEqual("Toyota Corolla 2020", result[0].VehicleName);
             Assert.AreEqual(ReserveStatusEnum.Interesado, result[0].ReservationStatus);
         }
 

@@ -30,8 +30,9 @@ namespace WpfClient.Resources.ViewCards
         public ICommand BuyVehicleCommand { get; }
         public ICommand CancelReservationCommand { get; }
         
-        public ReserveCardViewModel(ReserveCardModel model)
+        public ReserveCardViewModel(INavigationService navigationService, ReserveCardModel model)
         {
+            Navigation = navigationService;
             Model = model;
 
             BuyVehicleCommand = new RelayCommand(

@@ -125,6 +125,10 @@ namespace WpfClient.MVVM.ViewModel
                     var imageDefault = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
                     var vehicleImage = ImageManager.ByteArrayToImageSource(_photo.GetPhotoByIdVehicle(reserve.idVersion)) ?? imageDefault;
 
+                    var vehicleName = _version.GetFullVehicleName(reserve.idVersion);
+                    if (string.IsNullOrEmpty(vehicleName))
+                        throw new ArgumentNullException(nameof(vehicleName), $"Nombre del vehículo con ID {reserve.idVersion} es null o vacío.");
+
                     var reservaData = _reserve.GetReserveById(reserve.idReserva);
                     if (reservaData == null)
                         throw new ArgumentNullException(nameof(reservaData), $"Reserva con ID {reserve.idReserva} es null.");
@@ -142,6 +146,7 @@ namespace WpfClient.MVVM.ViewModel
 
                     var reserveCardModel = new ReserveCardModel
                     {
+                        VehicleName = vehicleName,
                         VehicleImage = vehicleImage,
                         ReservationStatus = (ReserveStatusEnum)Enum.Parse(typeof(ReserveStatusEnum), reserve.estado),
                         Reserve = new Reserve(reservaData),
@@ -174,16 +179,16 @@ namespace WpfClient.MVVM.ViewModel
 
             foreach (var reserve in listInterested)
             {
-                ReserveCards.Add(new ReserveCardViewModel(reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
             }
             foreach (var reserve in listBooked)
             {
-                ReserveCards.Add(new ReserveCardViewModel(reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
             }
 
             foreach (var reserve in listSelled)
             {
-                ReserveCards.Add(new ReserveCardViewModel(reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
             }
         }
     }

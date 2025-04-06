@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Vehicle:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-            <Label Content="{Binding Model.Vehicle}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <Label Content="{Binding Model.VehicleName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
             <Label Content="Reservation Status:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
             <Label Content="{Binding Model.ReservationStatus}" Grid.Row="1" Grid.Column="1" Margin="5"/>
         </Grid>

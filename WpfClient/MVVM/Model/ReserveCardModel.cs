@@ -22,7 +22,7 @@ namespace WpfClient.MVVM.Model
         private  VersionModel _version;
         private Client _client;
         private Reserve _reserve;
-        public string Vehicle
+        public required string VehicleName
         {
             get => _vehicleName;
             set { _vehicleName = value; OnPropertyChanged(); }
