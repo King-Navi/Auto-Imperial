@@ -21,6 +21,7 @@ namespace AutoImperialDAO.DAO.Interfaces
         /// Returns "Vehicle not found" if the version does not exist.
         /// Returns <c>null</c> in case of an error.
         /// </returns>
-        string GetNombreCompletoVehiculo(int idVersion);
+        string GetFullVehicleName(int idVersion);
+        Version? GetVersionById(int id);
     }
 }

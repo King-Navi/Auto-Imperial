@@ -76,6 +76,22 @@ namespace WpfClient.MVVM.Model
             set { base.idVehiculoNavigation = value; OnPropertyChanged(); }
         }
 
+        public Sell() { }
+        public Sell(Venta venta)
+        {
+            this.idVenta = venta.idVenta;
+            this.fechaVenta = venta.fechaVenta;
+            this.precioVehiculo = venta.precioVehiculo;
+            this.formaPago = venta.formaPago;
+            this.notasAdicionales = venta.notasAdicionales;
+            this.idReserva = venta.idReserva;
+            this.idVehiculo = venta.idVehiculo;
+            this.estadoVenta = venta.estadoVenta;
+            this.idReservaNavigation = venta.idReservaNavigation;
+            this.idVehiculoNavigation = venta.idVehiculoNavigation;
+        }
+
+
         public object Clone()
         {
             var clone = (Sell)Activator.CreateInstance(typeof(Sell));

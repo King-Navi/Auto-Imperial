@@ -1,4 +1,5 @@
 ﻿using AutoImperialDAO.Enums;
+using AutoImperialDAO.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,15 +15,17 @@ namespace WpfClient.MVVM.Model
 {
     public class ReserveCardModel : INotifyPropertyChanged
     {
-        private string _vehicle;
+        private string _vehicleName;
         private ImageSource _vehicleImage = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
         private ReserveStatusEnum _reservationStatus;
-        private int idReserve;
-
+        private Sell? _Sell = null;
+        private  VersionModel _version;
+        private Client _client;
+        private Reserve _reserve;
         public string Vehicle
         {
-            get => _vehicle;
-            set { _vehicle = value; OnPropertyChanged(); }
+            get => _vehicleName;
+            set { _vehicleName = value; OnPropertyChanged(); }
         }
 
         public ImageSource VehicleImage
@@ -37,10 +40,28 @@ namespace WpfClient.MVVM.Model
             set { _reservationStatus = value; OnPropertyChanged(); }
         }
 
-        public int IdReserve
+        public required Reserve Reserve
         {
-            get => idReserve;
-            set { idReserve = value; OnPropertyChanged(); }
+            get => _reserve;
+            set { _reserve = value; OnPropertyChanged(); }
+        }
+
+        public required Client Client
+        {
+            get => _client;
+            set { _client = value; OnPropertyChanged(); }
+        }
+
+        public required VersionModel Version
+        {
+            get => _version;
+            set { _version = value; OnPropertyChanged(); }
+        }
+
+        public Sell? Sell
+        {
+            get => _Sell;
+            set { _Sell = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,14 +71,5 @@ namespace WpfClient.MVVM.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ReserveCardModel() { }
-
-        public ReserveCardModel(int id ,string vehicle, ReserveStatusEnum status, ImageSource image)
-        {
-            idReserve = id;
-            Vehicle = vehicle;
-            ReservationStatus = status;
-            VehicleImage = image;
-        }
     }
 }

@@ -48,12 +48,15 @@ namespace WpfClient.MVVM.ViewModel
         private readonly IReserveRepository _reserve;
         private readonly IVersionRepository _version;
         private readonly IPhotoRepository _photo;
+        private readonly ISellRepository _sell;
         public ICommand NavigateToSearchCommand { get; set; }
         public ICommand RegisterReserveCommand { get; set; }
 
-        public ReserveViewModel(INavigationService navigation, IDialogService dialogService , IEmployeeRepository employeeRepository, 
-            IBrandRepository brand, IReserveRepository reserve , IVersionRepository version, IPhotoRepository photo, UserService employee)
+        public ReserveViewModel(INavigationService navigation, IDialogService dialogService , IEmployeeRepository employeeRepository,
+            IBrandRepository brand, IReserveRepository reserve, IVersionRepository version, IPhotoRepository photo, UserService employee, 
+            ISellRepository sell)
         {
+            _sell = sell;
             _photo = photo;
             _version = version;
             _reserve = reserve;
@@ -68,7 +71,7 @@ namespace WpfClient.MVVM.ViewModel
                     Navigation.NavigateTo<SearchClientViewModel>();
                 },
                 o => true);
-            RegisterReserveCommand = new RelayCommand( GoRegisterAsync);
+            RegisterReserveCommand = new RelayCommand(GoRegisterAsync);
             UpdateCollection();
         }
 
@@ -76,8 +79,7 @@ namespace WpfClient.MVVM.ViewModel
 
         public async void GoRegisterAsync()
         {
-            //var window = new RegisterReserveViewModel(await RecoverEmployee(user.CurrentUser.Id), _brand, _reserve , _dialogService, this);  
-            var window = new RegisterReserveViewModel(await RecoverEmployee(1), _brand, _reserve , _dialogService , this);  //FIXME: Erase me when the above line is uncommented
+            var window = new RegisterReserveViewModel(await RecoverEmployee(user.CurrentUser.Id), _brand, _reserve , _dialogService , this);
             window.ReceiveParameter(CurrentClient);
             _dialogService.ShowDialog(window);
         }
@@ -113,31 +115,58 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (reserves == null)
             {
-                return null;
+                return new List<ReserveCardModel>() { };
             }
             List<ReserveCardModel> reserveCardModels = new();
             foreach (var reserve in reserves)
             {
-                var imageDefault = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
-                var reserveCardModel = new ReserveCardModel(
-                    id: reserve.idReserva,
-                    vehicle: _version.GetNombreCompletoVehiculo(reserve.idVersion),
-                    status: (ReserveStatusEnum)Enum.Parse(typeof(ReserveStatusEnum), reserve.estado),
-                    image: ImageManager.ByteArrayToImageSource(_photo.GetPhotoByIdVehicle(reserve.idVersion)) ?? imageDefault
-                );
-                reserveCardModels.Add(reserveCardModel);
+                try
+                {
+                    var imageDefault = new BitmapImage(new Uri(PathsIcons.DEFAULT_CAR));
+                    var vehicleImage = ImageManager.ByteArrayToImageSource(_photo.GetPhotoByIdVehicle(reserve.idVersion)) ?? imageDefault;
+
+                    var reservaData = _reserve.GetReserveById(reserve.idReserva);
+                    if (reservaData == null)
+                        throw new ArgumentNullException(nameof(reservaData), $"Reserva con ID {reserve.idReserva} es null.");
+
+                    var versionData = _version.GetVersionById(reserve.idVersion);
+                    if (versionData == null)
+                        throw new ArgumentNullException(nameof(versionData), $"Versión con ID {reserve.idVersion} es null.");
+
+                    Sell? sellModel = null;
+                    var ventaData = _sell.GetSellByIdReserve(reserve.idReserva);
+                    if (ventaData != null)
+                    {
+                        sellModel = new Sell(ventaData);
+                    }
+
+                    var reserveCardModel = new ReserveCardModel
+                    {
+                        VehicleImage = vehicleImage,
+                        ReservationStatus = (ReserveStatusEnum)Enum.Parse(typeof(ReserveStatusEnum), reserve.estado),
+                        Reserve = new Reserve(reservaData),
+                        Client = CurrentClient,
+                        Version = new VersionModel(versionData),
+                        Sell = sellModel
+                    };
+
+                    reserveCardModels.Add(reserveCardModel);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error en la reserva con ID {reserve.idReserva}: {ex.Message}");
+                    throw; // O continuás sin lanzar si no querés que reviente
+                }
             }
             return reserveCardModels;
         }
 
         public void UpdateCollection()
         {
-            //var interested = RecoverReservesSeller(user.CurrentUser.Id , AutoImperialDAO.Enums.ReserveStatusEnum.Interesado);
-            //var booked = RecoverReservesSeller(user.CurrentUser.Id , AutoImperialDAO.Enums.ReserveStatusEnum.Apartado);
-            //var selled = RecoverReservesSeller(user.CurrentUser.Id , AutoImperialDAO.Enums.ReserveStatusEnum.Vendido);
-            List<Reserva> interested = RecoverReservesSeller(1 , AutoImperialDAO.Enums.ReserveStatusEnum.Interesado); //FIXME: Erase me when the above line is uncommented
-            List<Reserva> booked = RecoverReservesSeller(1 , AutoImperialDAO.Enums.ReserveStatusEnum.Apartado); //FIXME: Erase me when the above line is uncommented
-            List<Reserva> selled = RecoverReservesSeller(1 , AutoImperialDAO.Enums.ReserveStatusEnum.Vendido); //FIXME: Erase me when the above line is uncommented
+            ReserveCards.Clear();
+            List<Reserva> interested = RecoverReservesSeller(user.CurrentUser.Id, AutoImperialDAO.Enums.ReserveStatusEnum.Interesado); 
+            List<Reserva> booked = RecoverReservesSeller(user.CurrentUser.Id, AutoImperialDAO.Enums.ReserveStatusEnum.Apartado); 
+            List<Reserva> selled = RecoverReservesSeller(user.CurrentUser.Id, AutoImperialDAO.Enums.ReserveStatusEnum.Vendido); 
             
             var listInterested = ConvertToReserveCardModel(interested);
             var listBooked = ConvertToReserveCardModel(booked);

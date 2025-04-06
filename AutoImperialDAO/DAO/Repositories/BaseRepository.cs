@@ -32,12 +32,12 @@ namespace AutoImperialDAO.DAO.Repositories
         }
 
         // Obtiene un registro por su ID
-        protected virtual T GetById(int id)
-        {
-            #pragma warning disable CS8603 // Possible null reference return.
-            return _dbSet.Find(id);
-            #pragma warning restore CS8603 // Possible null reference return.
-        }
+        //protected virtual T GetById(int id)
+        //{
+        //    #pragma warning disable CS8603 // Possible null reference return.
+        //    return _dbSet.Find(id);
+        //    #pragma warning restore CS8603 // Possible null reference return.
+        //}
 
         // Agrega una nueva entidad
         //public virtual void Add(T entity)
