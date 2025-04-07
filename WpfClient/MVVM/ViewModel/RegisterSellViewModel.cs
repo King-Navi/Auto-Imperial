@@ -8,10 +8,11 @@ using System.Windows;
 using WpfClient.Utilities;
 using System.Text.RegularExpressions;
 using WpfClient.Utilities.Enum;
+using WpfClient.MVVM.Model;
 
 namespace WpfClient.MVVM.ViewModel
 {
-    public class RegisterSellViewModel : Services.Navigation.ViewModel
+    public class RegisterSellViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
         private string clientName;
         public string ClientName
@@ -76,7 +77,6 @@ namespace WpfClient.MVVM.ViewModel
             set { navigation = value; OnPropertyChanged(); }
         }
 
-
         public ICommand NavigateToPreviousViewCommand { get; set; }
         public ICommand RegisterSellCommand { get; set; }
 
@@ -91,6 +91,16 @@ namespace WpfClient.MVVM.ViewModel
 
             NavigateToPreviousViewCommand = new RelayCommand(NavigateToPreviousView);
             RegisterSellCommand = new RelayCommand(RegisterSell);
+        }
+
+        public void ReceiveParameter(object parameter)
+        {
+            if (parameter is ReserveCardModel reserveCard)
+            {
+                ClientName = $"{reserveCard.Client.nombre} {reserveCard.Client.apellidoPaterno} {reserveCard.Client.apellidoMaterno}";
+                ReservationId = reserveCard.Reserve.idReserva;
+                //VehicleId = reserveCard.Reserve;
+            }
         }
 
         private void NavigateToPreviousView(object obj)
@@ -152,7 +162,7 @@ namespace WpfClient.MVVM.ViewModel
                     if (_sellRepository.Register(sale))
                     {
                         MessageBox.Show("Venta registrada correctamente");
-                        //Navigation.NavigateTo<SomeNextViewModel>();
+                        Navigation.NavigateTo<SearchClientViewModel>();
                     }
                     else
                     {

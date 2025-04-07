@@ -160,7 +160,7 @@ namespace WpfClient.MVVM.ViewModel
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error en la reserva con ID {reserve.idReserva}: {ex.Message}");
-                    throw; // O continuás sin lanzar si no querés que reviente
+                    throw;
                 }
             }
             return reserveCardModels;

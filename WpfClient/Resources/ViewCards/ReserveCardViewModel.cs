@@ -48,7 +48,7 @@ namespace WpfClient.Resources.ViewCards
 
         private void BuyVehicle(object obj)
         {
-            Navigation.NavigateTo<RegisterSellViewModel>();
+            Navigation.NavigateTo<RegisterSellViewModel>(Model);
         }
 
         private void CancelReservation(object obj)
