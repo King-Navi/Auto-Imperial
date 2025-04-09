@@ -61,7 +61,7 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToReportsView = new RelayCommand(
                 o =>
                 {
-                    //Navigation.NavigateTo<SearchReportViewModel>(); TODO Change page
+                    Navigation.NavigateTo<ReportsViewModel>();
                 },
                 o => true);
 

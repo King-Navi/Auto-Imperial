@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WpfClient.Utilities;
 using WpfClient.MVVM.Model;
 using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.Models;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -65,16 +66,19 @@ namespace WpfClient.MVVM.ViewModel
                 o =>
                 {
                 ErrorMessage = string.Empty;
-                //TODO quitar esto
-                Username = "vendedorCarlos";
-                Password = "vendedor123";
-                if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+                    //TODO ENCRYP PASSWORD
+                    //TODO quitar esto
+                    //Username = "adminJuan";
+                    //Password = "admin123";
+                    Username = "vendedorCarlos";
+                    Password = "vendedor123";
+                    if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
                 {
                     ErrorMessage = "Por favor, ingresa usuario y contraseña.";
                     return;
                 }
 
-                    var authenticatedUser = _userRepository.Authenticate(Username, Password);
+                    User authenticatedUser = _userRepository.Authenticate(Username, Password);
 
                     if (authenticatedUser == null)
                     {

@@ -27,7 +27,7 @@
             <Label Content="Ver compras al proveedor" Margin="416,26,381,720" FontSize="50" Foreground="{StaticResource ForegroundWhiteColor}" FontWeight="Bold"/>
 
             <Button Background="Red" Content="Salir" FontSize="19" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="638,726,604,49" />
-            
+
             <ListBox ItemsSource="{Binding SupplierPaymentsList}" Height="450" Width="850"
                  Background="Transparent"
                  Foreground="White"
@@ -43,9 +43,9 @@
                Foreground="Red"
                FontWeight="Bold"
                FontSize="20"
-               Margin="1038,354,0,0"
+               Margin="1163,354,0,0"
                HorizontalAlignment="Left"
-               VerticalAlignment="Top" Width="284" Height="180"
+               VerticalAlignment="Top" Width="257" Height="180"
                TextWrapping="Wrap"
                TextAlignment="Center"
               />

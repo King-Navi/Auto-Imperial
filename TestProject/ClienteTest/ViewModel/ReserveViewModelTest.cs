@@ -21,7 +21,7 @@ namespace TestProject.ClienteTest.ViewModel
             var photoRepoMock = new Mock<IPhotoRepository>();
             var reserveRepoMock = new Mock<IReserveRepository>();
 
-            versionRepoMock.Setup(v => v.GetNombreCompletoVehiculo(1)).Returns("Toyota Corolla 2020");
+            versionRepoMock.Setup(v => v.GetFullVehicleName(1)).Returns("Toyota Corolla 2020");
             photoRepoMock.Setup(p => p.GetPhotoByIdVehicle(1)).Returns(new byte[0]);
 
             var viewModel = new ReserveViewModel(null, null, null, null, reserveRepoMock.Object, versionRepoMock.Object, photoRepoMock.Object, null);
@@ -35,7 +35,7 @@ namespace TestProject.ClienteTest.ViewModel
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual("Toyota Corolla 2020", result[0].Vehicle);
+            Assert.AreEqual("Toyota Corolla 2020", result[0].VehicleName);
             Assert.AreEqual(ReserveStatusEnum.Interesado, result[0].ReservationStatus);
         }
 

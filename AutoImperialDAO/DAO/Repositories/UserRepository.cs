@@ -41,6 +41,7 @@ namespace AutoImperialDAO.DAO.Repositories
                 {
                     return new User
                     {
+                        Id = vendedor.idVendedor,
                         Username = vendedor.nombreUsuario,
                         Password = vendedor.password,
                         Role = "Vendedor",

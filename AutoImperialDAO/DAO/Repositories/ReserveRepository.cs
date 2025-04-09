@@ -43,5 +43,17 @@ namespace AutoImperialDAO.DAO.Repositories
                 return new List<Reserva>() { new Reserva() {idReserva = -1 } };
             }
         }
+
+        public Reserva? GetReserveById(int id)
+        {
+            try
+            {
+                return _context.Reserva.FirstOrDefault(r => r.idReserva == id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

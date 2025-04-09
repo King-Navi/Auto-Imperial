@@ -10,6 +10,7 @@ namespace AutoImperialDAO.DAO.Interfaces
 {
     public interface ISellRepository
     {
+        Venta? GetSellByIdReserve(int idReserve);
         bool Register(Venta venta);
         bool DeleteById(int id);
         bool Edit(Venta venta);

@@ -13,7 +13,7 @@
         <utils:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
 
-    <Grid Background="Gray">
+    <Grid Background="{StaticResource PrimaryColor2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -36,16 +36,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Vehicle:" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-            <Label Content="{Binding Model.Vehicle}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+            <Label Content="{Binding Model.VehicleName}" Grid.Row="0" Grid.Column="1" Margin="5"/>
             <Label Content="Reservation Status:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
             <Label Content="{Binding Model.ReservationStatus}" Grid.Row="1" Grid.Column="1" Margin="5"/>
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Buy Vehicle" Width="150" Margin="5" 
+            <Button Content="Buy Vehicle" FontSize="10" Width="129" Margin="5" Style="{StaticResource PrimaryButtonStyle}"
                 Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
                 Command="{Binding BuyVehicleCommand}"/>
-                <Button Content="Cancel Reservation" Width="150" Margin="5"
+            <Button Content="Cancel" FontSize="10" Width="112" Margin="5" Style="{StaticResource PrimaryButtonStyle}"
                 Visibility="{Binding ShowButtons, Converter={StaticResource BoolToVisibilityConverter}}"
                 Command="{Binding CancelReservationCommand}"/>
         </StackPanel>

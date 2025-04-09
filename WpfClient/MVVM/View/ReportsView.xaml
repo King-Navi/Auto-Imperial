@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WpfClient.MVVM.View.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfClient.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="1445">
+    <Grid Background="{StaticResource BackgroundyColor2}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Reportes del sistema"
+                   FontSize="36"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="0,28,0,2"
+                   HorizontalAlignment="Center"
+                   Grid.Row="0"/>
+
+        <Border CornerRadius="10" Background="{StaticResource BackgroundyColor1}" Padding="20" Grid.Row="1" Margin="215,44,100,623" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Margin="10">
+                    <TextBlock Foreground="White" Text="Fecha Inicio" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="datePickerInicio" Width="150"/>
+                </StackPanel>
+
+                <StackPanel Margin="10">
+                    <TextBlock Foreground="White" Text="Fecha Fin" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="datePickerFin" Width="150"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,214,0,0" >
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
+                    Content="Generar reporte de venta por periodo" Margin="0,10"/>
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
+                    Content="Generar reporte de inventario" Margin="0,10"/>
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
+                    Content="Generar reporte financiero" Margin="0,10"/>
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
+                    Content="Generar reporte de venta por producto" Margin="0,10"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
