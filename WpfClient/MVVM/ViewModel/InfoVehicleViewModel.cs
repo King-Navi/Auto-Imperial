@@ -154,6 +154,7 @@ namespace WpfClient.MVVM.ViewModel
             Type = ActualVehicle.VehicleType;
             Doors = ActualVehicle.Doors;
             Engine = ActualVehicle.Engine;
+            if(ActualVehicle.Photos.FirstOrDefault() != null)
             VehiclePhoto = ActualVehicle.Photos.FirstOrDefault().foto;
             LoadPhoto();
         }
