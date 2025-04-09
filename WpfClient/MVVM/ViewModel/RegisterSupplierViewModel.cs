@@ -112,7 +112,7 @@ namespace WpfClient.MVVM.ViewModel
                 Navigation.NavigateTo<SearchSupplierViewModel>();
             }
         }
-        private void RegisterEmployee()
+        private void RegisterSupplier()
         {
             if (!ValidateFields())
                 return;
