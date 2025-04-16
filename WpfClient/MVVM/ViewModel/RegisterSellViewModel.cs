@@ -99,7 +99,7 @@ namespace WpfClient.MVVM.ViewModel
             {
                 ClientName = $"{reserveCard.Client.nombre} {reserveCard.Client.apellidoPaterno} {reserveCard.Client.apellidoMaterno}";
                 ReservationId = reserveCard.Reserve.idReserva;
-                //VehicleId = reserveCard.Reserve;
+                VehicleId = reserveCard.Reserve.idVersion;
             }
         }
 
@@ -112,7 +112,7 @@ namespace WpfClient.MVVM.ViewModel
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
             {
-                //Navigation.NavigateTo<SomePreviousViewModel>();
+                Navigation.NavigateTo<SearchClientViewModel>();
             }
         }
 
@@ -125,6 +125,7 @@ namespace WpfClient.MVVM.ViewModel
                 "Confirmación de registro",
                 "¿Está seguro que desea registrar esta venta?",
                 ConfirmationIconType.RegisterIcon);
+
             var result = _dialogService.ShowDialog(confirmationVM);
             if (result == true)
             {
@@ -154,19 +155,23 @@ namespace WpfClient.MVVM.ViewModel
                         precioVehiculo = price,
                         formaPago = PaymentMethod,
                         notasAdicionales = AdditionalNotes,
-                        idReserva = ReservationId,
-                        idVehiculo = VehicleId,
-                        estadoVenta = "Registrada"
+                        idReserva = ReservationId
+                        // idVehiculo se asignará automáticamente según disponibilidad
                     };
 
-                    if (_sellRepository.Register(sale))
+                    var idVersion = VehicleId; 
+
+                    if (_sellRepository.RegisterSaleWithStockCheck(sale, idVersion))
                     {
-                        MessageBox.Show("Venta registrada correctamente");
+                        MessageBox.Show("Venta registrada correctamente.");
                         Navigation.NavigateTo<SearchClientViewModel>();
                     }
                     else
                     {
-                        MessageBox.Show("Error al registrar la venta");
+                        _dialogService.ShowDialog(new AlertViewModel(
+                            "Sin stock disponible",
+                            "No hay vehículos disponibles para la versión solicitada.",
+                            AlertIconType.AlertIcon));
                     }
                 }
                 catch (Exception ex)
@@ -175,6 +180,7 @@ namespace WpfClient.MVVM.ViewModel
                 }
             }
         }
+
 
         private bool ValidateFields()
         {

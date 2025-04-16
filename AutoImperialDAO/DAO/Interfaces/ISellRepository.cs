@@ -11,9 +11,10 @@ namespace AutoImperialDAO.DAO.Interfaces
     public interface ISellRepository
     {
         Venta? GetSellByIdReserve(int idReserve);
-        bool Register(Venta venta);
+        bool RegisterSaleWithStockCheck(Venta venta, int idVersion);
         bool DeleteById(int id);
         bool Edit(Venta venta);
         Task<List<Venta>> SearchByVINClientAsync(string parameter);
+        Vehiculo? GetAvailableVehicleByVersion(int idVersion);
     }
 }
