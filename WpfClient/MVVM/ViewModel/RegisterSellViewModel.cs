@@ -14,11 +14,25 @@ namespace WpfClient.MVVM.ViewModel
 {
     public class RegisterSellViewModel : Services.Navigation.ViewModel, IParameterReceiver
     {
+        private string clientPhone;
+        public string ClientPhone
+        {
+            get => clientPhone;
+            set { clientPhone = value; OnPropertyChanged(); }
+        }
+
         private string clientName;
         public string ClientName
         {
             get => clientName;
             set { clientName = value; OnPropertyChanged(); }
+        }
+
+        private string vehicle;
+        public string Vehicle
+        {
+            get => vehicle;
+            set { vehicle = value; OnPropertyChanged(); }
         }
 
         private string totalAmount;
@@ -97,7 +111,9 @@ namespace WpfClient.MVVM.ViewModel
         {
             if (parameter is ReserveCardModel reserveCard)
             {
-                ClientName = $"{reserveCard.Client.nombre} {reserveCard.Client.apellidoPaterno} {reserveCard.Client.apellidoMaterno}";
+                ClientName = reserveCard.Client.Name + " " + reserveCard.Client.PaternalSurname;
+                ClientPhone = reserveCard.Client.Phone;
+                Vehicle = reserveCard.VehicleName;
                 ReservationId = reserveCard.Reserve.idReserva;
                 VehicleId = reserveCard.Reserve.idVersion;
             }

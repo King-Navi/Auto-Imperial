@@ -14,8 +14,8 @@
 
             <Label Content="Cliente" Height="40" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="{StaticResource SecondaryColor1}" Margin="115,55,576,0"/>
             <TextBlock
-                Margin="258,65,260,351"
-                Text="{Binding SupplierName}"
+                Margin="229,65,236,351"
+                Text="{Binding ClientName}"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Foreground="White"
                 FontSize="20"
@@ -28,21 +28,21 @@
                 Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding TotalAmount, UpdateSourceTrigger=PropertyChanged}"
                 FontSizeValue="12" Margin="405,275,209,141"/>
 
-            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToInfoSupplierView}" Margin="101,383,605,25" />
-            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar venta" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSupplierPaymentCommand}" Margin="624,383,25,25" />
+            <Button Background="Red" Content="Salir" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding NavigateToPreviousViewCommand}" Margin="101,383,605,25" />
+            <Button Background="{StaticResource SecondaryColor1}" Content="Registrar venta" FontSize="16" FontWeight="Bold" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RegisterSellCommand}" Margin="624,383,25,25" />
             <Label Content="Fecha de la compra:" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="116,233,517,0"/>
             <DatePicker  HorizontalAlignment="Left" Margin="289,237,0,0" VerticalAlignment="Top" SelectedDate="{Binding PurchaseDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             <TextBlock
                 Margin="257,152,56,264"
-                Text="{Binding AdminName}"
+                Text="{Binding Vehicle}"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Foreground="White"
                 TextAlignment="Center"
                 FontSize="20"
             />
             <Label Content="Notas adicionales: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="115,319,431,0"/>
-            <controls:PlaceholderTextBoxControl PlaceholderText="Número de vehículos"
-                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding VehiclesNumber, UpdateSourceTrigger=PropertyChanged}"
+            <controls:PlaceholderTextBoxControl PlaceholderText="Notas adicionales"
+                Style="{StaticResource SynthwaveTextBoxStyle}" Text="{Binding AdditionalNotes, UpdateSourceTrigger=PropertyChanged}"
                 FontSizeValue="12" Margin="400,318,72,98"/>
             <Label Content="Método de pago: " Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="479,233,190,0" RenderTransformOrigin="1.709,0.731"/>
             <ComboBox HorizontalAlignment="Left" Margin="624,238,0,0" VerticalAlignment="Top" Width="120"/>
@@ -50,7 +50,7 @@
             <Label Content="Teléfono" Height="40" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Foreground="#fffff7" Margin="648,99,80,0"/>
             <TextBlock
                 Margin="601,65,33,351"
-                Text="{Binding AdminName}"
+                Text="{Binding ClientPhone}"
                 Style="{StaticResource ResourceKey=PrimaryTextBlockStyle}"
                 Foreground="White"
                 TextAlignment="Center"
