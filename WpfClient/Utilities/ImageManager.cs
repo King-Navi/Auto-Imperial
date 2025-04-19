@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace WpfClient.Utilities
 {
     public static class ImageManager
     {
+        [DebuggerStepThrough]
         public static ImageSource ByteArrayToImageSource(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0)
@@ -18,6 +20,7 @@ namespace WpfClient.Utilities
 
             try
             {
+                
                 using (var ms = new MemoryStream(imageData))
                 {
                     var image = new BitmapImage();

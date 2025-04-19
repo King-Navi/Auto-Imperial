@@ -7,6 +7,7 @@ using Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -99,6 +100,7 @@ namespace WpfClient.MVVM.ViewModel
             if (parameter is Client client)
             {
                 CurrentClient = client;
+                UpdateCollection();
             }
         }
 
@@ -111,6 +113,7 @@ namespace WpfClient.MVVM.ViewModel
             }
             return consulta;
         }
+        [DebuggerStepThrough]
         public List<ReserveCardModel> ConvertToReserveCardModel(List<Reserva> reserves)
         {
             if (reserves == null)
@@ -165,7 +168,7 @@ namespace WpfClient.MVVM.ViewModel
             }
             return reserveCardModels;
         }
-
+        [DebuggerStepThrough]
         public void UpdateCollection()
         {
             ReserveCards.Clear();

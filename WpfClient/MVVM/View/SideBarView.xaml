@@ -77,18 +77,6 @@
                 Margin="2,431,142,332"/>
 
             <controls:AnimatedImageButton 
-                ImageSource="pack://application:,,,/Resources/Images/Icons/Sell.png"
-                ClickCommand="{Binding NavegateToSellView}" 
-                Margin="347,567,32,194"/>
-
-            <controls:AnimatedLabelButton 
-                LabelText="Vender vehículos"
-                LabelFontSize="32"
-                ForegroundColor="White"
-                ClickCommand="{Binding NavegateToSellView}" 
-                Margin="10,567,134,194"/>
-
-            <controls:AnimatedImageButton 
                 ImageSource="pack://application:,,,/Resources/Images/Icons/Log-Out.png"
                 ClickCommand="{Binding NavegateToLoginView}" 
                 Margin="369,762,54,36"/>

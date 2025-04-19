@@ -9,6 +9,7 @@ using WpfClient.Utilities;
 using System.Text.RegularExpressions;
 using WpfClient.Utilities.Enum;
 using WpfClient.MVVM.Model;
+using System.Collections.ObjectModel;
 
 namespace WpfClient.MVVM.ViewModel
 {
@@ -49,12 +50,6 @@ namespace WpfClient.MVVM.ViewModel
             set { purchaseDate = value; OnPropertyChanged(); }
         }
 
-        private string paymentMethod;
-        public string PaymentMethod
-        {
-            get => paymentMethod;
-            set { paymentMethod = value; OnPropertyChanged(); }
-        }
 
         private string additionalNotes;
         public string AdditionalNotes
@@ -84,6 +79,15 @@ namespace WpfClient.MVVM.ViewModel
             set { adminName = value; OnPropertyChanged(); }
         }
 
+        private string paymentMethod;
+        public string PaymentMethod
+        {
+            get => paymentMethod;
+            set { paymentMethod = value; OnPropertyChanged(); }
+        }
+
+        public ObservableCollection<string> PaymentMethods { get; set; }
+
         private INavigationService navigation;
         public INavigationService Navigation
         {
@@ -102,9 +106,20 @@ namespace WpfClient.MVVM.ViewModel
             _dialogService = dialogService;
             Navigation = navigationService;
             _sellRepository = sellRepository;
+            InicializatePaymentMethods();
 
             NavigateToPreviousViewCommand = new RelayCommand(NavigateToPreviousView);
             RegisterSellCommand = new RelayCommand(RegisterSell);
+        }
+
+        private void InicializatePaymentMethods()
+        {
+            PaymentMethods = new ObservableCollection<string>
+            {
+                "Contado",
+                "Pago a plazos",
+                "Meses sin intereses"
+            };
         }
 
         public void ReceiveParameter(object parameter)
