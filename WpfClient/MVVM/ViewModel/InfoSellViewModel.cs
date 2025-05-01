@@ -75,7 +75,7 @@ namespace WpfClient.MVVM.ViewModel
             }
             else
             {
-                MessageBox.Show("Error al cargar el empleado");
+                MessageBox.Show("Error al cargar la venta");
             }
         }
 
@@ -91,7 +91,7 @@ namespace WpfClient.MVVM.ViewModel
 
         void DeleteSell()
         {
-            var confirmationVM = new ConfirmationViewModel("Confirmación de eliminación", $"¿Desea eliminar este empleado?", Utilities.Enum.ConfirmationIconType.WarningIcon);
+            var confirmationVM = new ConfirmationViewModel("Confirmación de eliminación", $"¿Desea eliminar esta venta?", Utilities.Enum.ConfirmationIconType.WarningIcon);
             var result = _dialogService.ShowDialog(confirmationVM);
             if (false == result)
             {
