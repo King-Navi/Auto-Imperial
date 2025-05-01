@@ -39,7 +39,7 @@ namespace TestProject.DAO
             ForcedConnectionString = builder.ToString();
 
             await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, ConstantsTestDAO.initCatalogdbScriptPath);
-            await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, ConstantsTestDAO.initDataScriptPath);
+            //await SqlScriptExecutor.ExecuteScriptAsync(ForcedConnectionString, ConstantsTestDAO.initDataScriptPath);
 
             await VerifyTableExists();
             Console.WriteLine("AssemblySetup completed.");
