@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfClient.MVVM.View"
+            xmlns:component="clr-namespace:WpfClient.Resources.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1445">
     <Grid Background="{StaticResource BackgroundyColor2}">
@@ -21,29 +22,55 @@
                    HorizontalAlignment="Center"
                    Grid.Row="0"/>
 
-        <Border CornerRadius="10" Background="{StaticResource BackgroundyColor1}" Padding="20" Grid.Row="1" Margin="215,44,100,623" Grid.RowSpan="2">
+        <Border CornerRadius="10" Background="{StaticResource BackgroundyColor1}" Padding="10" Grid.Row="1" Margin="215,44,100,623" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Margin="10">
                     <TextBlock Foreground="White" Text="Fecha Inicio" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <DatePicker x:Name="datePickerInicio" Width="150"/>
+                    <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="18"
+                            Height="40"
+                            MinWidth="200"
+                            Padding="10,0,10,0"
+                            Margin="0,5"/>
+
                 </StackPanel>
 
                 <StackPanel Margin="10">
                     <TextBlock Foreground="White" Text="Fecha Fin" FontWeight="Bold" Margin="0,0,0,5"/>
-                    <DatePicker x:Name="datePickerFin" Width="150"/>
+                    <DatePicker Width="150"
+                        SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        FontSize="18"
+                        Height="40"
+                        MinWidth="200"
+                        Padding="10,0,10,0"
+                        Margin="0,5"/>
+                </StackPanel>
+                <StackPanel Margin="5,0,0,5" Orientation="Horizontal">
+                    <component:SimplePlaceHolderTextBox MaxLength="30" Text="{Binding NameFileOutput}" Margin="5,0,10,0" Placeholder="Nombre archivo" Height="30" MaxWidth="200"></component:SimplePlaceHolderTextBox>
+                    <Button Margin="5,0,0,5" FontSize="15" Height="30"  Foreground="White" Background="{StaticResource LightGreenColor}"
+                            Content="Selecionar carpeta salida" Click="ClickButtonSelectFolder"/>
+                    <Label Foreground="White" Content="Ruta de salida: " FontWeight="Bold" Margin="5,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label x:Name="outputDirectory" Foreground="White" d:Content="Ruta de salida: " Content="{Binding SelectedPath}" FontWeight="Bold" Margin="5,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,214,0,0" >
-            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
-                    Content="Generar reporte de venta por periodo" Margin="0,10"/>
-            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
-                    Content="Generar reporte de inventario" Margin="0,10"/>
-            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
-                    Content="Generar reporte financiero" Margin="0,10"/>
-            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}" 
-                    Content="Generar reporte de venta por producto" Margin="0,10"/>
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}"
+                Content="Generar reporte de venta por periodo" Margin="0,10"
+                Command="{Binding GenerateSellsReportCommand}" />
+
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}"
+                Content="Generar reporte de inventario" Margin="0,10"
+                Command="{Binding GenerateInventoryReportCommand}" />
+
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}"
+                Content="Generar reporte financiero" Margin="0,10"
+                Command="{Binding GenerateFinancialReportCommand}" />
+
+            <Button FontSize="20" Width="500" Height="60" Style="{StaticResource PrimaryButtonStyle}"
+                Content="Generar reporte de venta por producto" Margin="0,10"  Command="{Binding GenerateClientReportCommand}"/>
+            <!--Click="ClickButtonGenerateReportClient"-->
         </StackPanel>
     </Grid>
 </UserControl>

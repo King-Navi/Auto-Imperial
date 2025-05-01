@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AutoImperialDAO.Models;
+﻿namespace AutoImperialDAO.Models;
 
 public partial class Version
 {

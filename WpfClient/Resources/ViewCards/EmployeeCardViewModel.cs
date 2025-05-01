@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Services.Navigation;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.MVVM.ViewModel;

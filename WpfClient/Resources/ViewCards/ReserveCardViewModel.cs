@@ -1,15 +1,5 @@
-﻿using AutoImperialDAO.DAO.Interfaces;
-using AutoImperialDAO.Enums;
-using Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Services.Navigation;
 using System.Windows.Input;
-using System.Windows.Media;
 using WpfClient.MVVM.Model;
 using WpfClient.MVVM.ViewModel;
 using WpfClient.Utilities;

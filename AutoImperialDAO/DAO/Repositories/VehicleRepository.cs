@@ -1,12 +1,8 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.ModelsDTO;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Repositories
 {
@@ -261,6 +257,37 @@ namespace AutoImperialDAO.DAO.Repositories
             {
                 Console.WriteLine($"Error en AdvancedSearchVehicle: {ex.Message}");
                 return new List<Vehiculo>();
+            }
+        }
+
+        public List<InventoryItem> GetCurrentInventory(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var start = DateOnly.FromDateTime(startDate);
+                var end = DateOnly.FromDateTime(endDate);
+                var inventory = from vehiculo in _context.Vehiculo
+                                join compra in _context.CompraProveedor on vehiculo.idCompraProveedor equals compra.idCompraProveedor
+                                join version in _context.Version on vehiculo.idVersion equals version.idVersion
+                                join modelo in _context.Modelo on version.idModelo equals modelo.idModelo
+                                join marca in _context.Marca on modelo.idMarca equals marca.idMarca
+                                where (vehiculo.estadoVehiculo == VehicleStatus.Disponible.ToString() ||
+                                       vehiculo.estadoVehiculo == VehicleStatus.Reservado.ToString())
+                                      && compra.fechaCompra >= start
+                                      && compra.fechaCompra <= end
+                                select new InventoryItem
+                                {
+                                    Model = modelo.nombre,
+                                    Version = version.nombre,
+                                    Brand = marca.nombre
+                                };
+
+                return inventory.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

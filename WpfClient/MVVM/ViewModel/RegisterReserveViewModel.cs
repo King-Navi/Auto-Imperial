@@ -1,13 +1,7 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 using WpfClient.Idioms;
 using WpfClient.MVVM.Model;

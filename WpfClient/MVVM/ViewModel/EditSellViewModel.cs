@@ -1,8 +1,6 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
-using AutoImperialDAO.Models;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;

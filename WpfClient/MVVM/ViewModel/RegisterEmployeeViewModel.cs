@@ -2,17 +2,10 @@
 using AutoImperialDAO.Models;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using WpfClient.Idioms;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 using WpfClient.Utilities.Enum;

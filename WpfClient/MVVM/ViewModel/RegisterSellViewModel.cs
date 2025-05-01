@@ -2,11 +2,9 @@
 using AutoImperialDAO.Models;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
 using System.Windows.Input;
 using System.Windows;
 using WpfClient.Utilities;
-using System.Text.RegularExpressions;
 using WpfClient.Utilities.Enum;
 using WpfClient.MVVM.Model;
 using System.Collections.ObjectModel;

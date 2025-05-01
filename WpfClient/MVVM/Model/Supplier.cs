@@ -1,16 +1,11 @@
 ﻿using AutoImperialDAO.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfClient.MVVM.Model
 {
-   public  class Supplier : AutoImperialDAO.Models.Proveedor, INotifyPropertyChanged
+    public  class Supplier : AutoImperialDAO.Models.Proveedor, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

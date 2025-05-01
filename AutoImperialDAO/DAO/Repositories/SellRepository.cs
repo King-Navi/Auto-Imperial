@@ -1,13 +1,9 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.ModelsDTO;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using AutoImperialDAO.Utilities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Repositories
 {
@@ -147,6 +143,73 @@ namespace AutoImperialDAO.DAO.Repositories
 
             return result;
         }
+        public List<SaleData> GetSalesReport(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var start = DateOnly.FromDateTime(startDate);
+                var end = DateOnly.FromDateTime(endDate);
 
+                var sales = from venta in _context.Venta
+                            join reserva in _context.Reserva on venta.idReserva equals reserva.idReserva
+                            join vendedor in _context.Vendedor on reserva.idVendedor equals vendedor.idVendedor
+                            join cliente in _context.Cliente on reserva.idCliente equals cliente.idCliente
+                            join vehiculo in _context.Vehiculo on venta.idVehiculo equals vehiculo.idVehiculo
+                            join version in _context.Version on vehiculo.idVersion equals version.idVersion
+                            join modelo in _context.Modelo on version.idModelo equals modelo.idModelo
+                            join marca in _context.Marca on modelo.idMarca equals marca.idMarca
+                            where venta.estadoVenta != "Eliminada"
+                                  && venta.fechaVenta >= start
+                                  && venta.fechaVenta <= end
+                            select new SaleData
+                            {
+                                Salesperson = vendedor.nombre + " " + vendedor.apellidoPaterno + " " + vendedor.apellidoMaterno,
+                                Customer = cliente.nombre + " " + cliente.apellidoPaterno + " " + cliente.apellidoMaterno,
+                                Vehicle = $"{vehiculo.anio} {vehiculo.color} {marca.nombre} {modelo.nombre} {version.nombre} {version.motor}",
+                                Type = venta.formaPago,
+                                Amount = venta.precioVehiculo
+                            };
+
+                return sales.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<FinancialSaleDTO> GetFinancialSales(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var start = DateOnly.FromDateTime(startDate);
+                var end = DateOnly.FromDateTime(endDate);
+
+                var sales = from venta in _context.Venta
+                            join vehiculo in _context.Vehiculo on venta.idVehiculo equals vehiculo.idVehiculo
+                            join version in _context.Version on vehiculo.idVersion equals version.idVersion
+                            join modelo in _context.Modelo on version.idModelo equals modelo.idModelo
+                            join marca in _context.Marca on modelo.idMarca equals marca.idMarca
+                            where venta.fechaVenta >= start &&
+                                  venta.fechaVenta <= end &&
+                                  venta.estadoVenta != "Eliminada"
+                            select new FinancialSaleDTO
+                            {
+                                Model = modelo.nombre,
+                                Version = version.nombre,
+                                Brand = marca.nombre,
+                                Amount = vehiculo.precioVehiculo ?? 0
+                            };
+
+                return sales.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
+
+   
 }

@@ -46,6 +46,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
     <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -110,6 +111,9 @@
     <None Update="Resources\Images\Icons\register_icon-removebg-preview.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Utilities\PDF_Reports\PythonPdf\pdfCreator.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Utilities\ReportsPDF\crear_pdf.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -149,6 +153,10 @@
     <Page Update="Idioms\strings.es_mx.xaml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utilities\PDF_Reports\PythonPdf\" />
   </ItemGroup>
 
 </Project>

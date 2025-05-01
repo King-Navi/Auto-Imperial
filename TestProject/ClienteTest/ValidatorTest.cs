@@ -1,10 +1,4 @@
-﻿using AutoImperialDAO.Models;
-using FluentValidation.TestHelper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation.TestHelper;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities.Validation;
 

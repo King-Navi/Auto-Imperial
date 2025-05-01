@@ -5,7 +5,6 @@ using Services.Dialogs;
 using System.Windows.Input;
 using WpfClient.Utilities.Validation;
 using AutoImperialDAO.DAO.Interfaces;
-using AutoImperialDAO.Models;
 using WpfClient.Idioms;
 using System.Diagnostics;
 

@@ -1,11 +1,6 @@
-﻿using AutoImperialDAO.Enums;
+﻿using AutoImperialDAO.DAO.ModelsDTO;
+using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Interfaces
 {
@@ -26,5 +21,6 @@ namespace AutoImperialDAO.DAO.Interfaces
         /// <param name="pageSize">The number of clients to retrieve per page (default is 50).</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a list of clients.</returns>
         Task<List<Cliente>> SearchByPagesAsync(int startPage, int totalPages, AccountStatusEnum status, int pageSize = 50);
+        List<ClientPurchaseDTO> GetClientPurchases(int clientId, DateTime startDate, DateTime endDate);
     }
 }

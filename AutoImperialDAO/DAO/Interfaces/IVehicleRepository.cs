@@ -1,10 +1,6 @@
-﻿using AutoImperialDAO.Enums;
+﻿using AutoImperialDAO.DAO.ModelsDTO;
+using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Interfaces
 {
@@ -18,7 +14,7 @@ namespace AutoImperialDAO.DAO.Interfaces
         Task<bool> EditVehicleAsync(Vehiculo vehiculo);
         bool DeleteById(int id);
         List<Vehiculo> AdvancedSearchVehicle(Utilities.VehicleSearch search, VehicleStatus statusEnum);
-
+        List<InventoryItem> GetCurrentInventory(DateTime startDate, DateTime endDate);
 
 
     }

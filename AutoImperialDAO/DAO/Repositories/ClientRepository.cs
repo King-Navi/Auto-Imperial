@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoImperialDAO.DAO.Interfaces;
+﻿using AutoImperialDAO.DAO.Interfaces;
+using AutoImperialDAO.DAO.ModelsDTO;
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using AutoImperialDAO.Utilities;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 namespace AutoImperialDAO.DAO.Repositories
 {
@@ -241,5 +236,38 @@ namespace AutoImperialDAO.DAO.Repositories
                 && !String.IsNullOrWhiteSpace(client.RFC)
                 && !_context.Cliente.Any(c => c.RFC == client.RFC && c.idCliente != client.idCliente);
         }
+        public List<ClientPurchaseDTO> GetClientPurchases(int clientId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var start = DateOnly.FromDateTime(startDate);
+                var end = DateOnly.FromDateTime(endDate);
+
+                var purchases = from venta in _context.Venta
+                                join reserva in _context.Reserva on venta.idReserva equals reserva.idReserva
+                                join vehiculo in _context.Vehiculo on venta.idVehiculo equals vehiculo.idVehiculo
+                                join version in _context.Version on vehiculo.idVersion equals version.idVersion
+                                join modelo in _context.Modelo on version.idModelo equals modelo.idModelo
+                                join marca in _context.Marca on modelo.idMarca equals marca.idMarca
+                                where reserva.idCliente == clientId
+                                      && venta.fechaVenta >= start
+                                      && venta.fechaVenta <= end
+                                      && venta.estadoVenta != "Eliminada"
+                                select new ClientPurchaseDTO
+                                {
+                                    Model = modelo.nombre,
+                                    Version = version.nombre,
+                                    Brand = marca.nombre
+                                };
+
+                return purchases.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
+
 }

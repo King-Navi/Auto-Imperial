@@ -1,10 +1,5 @@
-﻿using AutoImperialDAO.Enums;
+﻿using AutoImperialDAO.DAO.ModelsDTO;
 using AutoImperialDAO.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoImperialDAO.DAO.Interfaces
 {
@@ -16,5 +11,7 @@ namespace AutoImperialDAO.DAO.Interfaces
         bool Edit(Venta venta);
         Task<List<Venta>> SearchByVINClientAsync(string parameter);
         Vehiculo? GetAvailableVehicleByVersion(int idVersion);
+        List<SaleData> GetSalesReport(DateTime startDate, DateTime endDate);
+        List<FinancialSaleDTO> GetFinancialSales(DateTime startDate, DateTime endDate);
     }
 }

@@ -2,11 +2,6 @@
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfClient.MVVM.ViewModel;
 
 namespace TestProject.ClienteTest.ViewModel
@@ -24,7 +19,7 @@ namespace TestProject.ClienteTest.ViewModel
             versionRepoMock.Setup(v => v.GetFullVehicleName(1)).Returns("Toyota Corolla 2020");
             photoRepoMock.Setup(p => p.GetPhotoByIdVehicle(1)).Returns(new byte[0]);
 
-            var viewModel = new ReserveViewModel(null, null, null, null, reserveRepoMock.Object, versionRepoMock.Object, photoRepoMock.Object, null);
+            var viewModel = new ReserveViewModel(null, null, null, null, reserveRepoMock.Object, versionRepoMock.Object, photoRepoMock.Object, null, null);
 
             var reserves = new List<Reserva>
             {
@@ -42,7 +37,7 @@ namespace TestProject.ClienteTest.ViewModel
         [TestMethod]
         public void ConvertToReserveCardModel_WithNullList_ReturnsNull()
         {
-            var viewModel = new ReserveViewModel(null, null, null, null, null, null, null, null);
+            var viewModel = new ReserveViewModel(null, null, null, null, null, null, null, null, null);
 
             var result = viewModel.ConvertToReserveCardModel(null);
 

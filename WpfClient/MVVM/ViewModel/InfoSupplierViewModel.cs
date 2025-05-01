@@ -1,19 +1,10 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
-using AutoImperialDAO.DAO.Repositories;
 
 namespace WpfClient.MVVM.ViewModel
 {

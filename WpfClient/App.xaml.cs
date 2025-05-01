@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Services.Navigation;
-using System.Configuration;
-using System.Data;
 using System.Windows;
-using System.Windows.Navigation;
 using WpfClient.MVVM.View;
 using WpfClient.MVVM.Model;
 using WpfClient.MVVM.ViewModel;
@@ -16,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using WpfClient.Idioms;
-using System.Globalization;
 
 namespace WpfClient
 {
@@ -44,7 +40,7 @@ namespace WpfClient
             services.AddTransient<IVersionRepository, VersionRepository>();
             services.AddTransient<IVehicleRepository, VehicleRepository>();
             services.AddTransient<IPhotoRepository, PhotoRepository>();
-
+            services.AddTransient<IAdministrator, AdministratorRepository>();
 
             //Navigation
             services.AddSingleton<MainWindow>( provider => new MainWindow

@@ -1,9 +1,4 @@
 ﻿using Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfClient.Utilities;
 using WpfClient.MVVM.Model;
 using AutoImperialDAO.DAO.Interfaces;
@@ -65,18 +60,18 @@ namespace WpfClient.MVVM.ViewModel
             NavegateToHomeViewCommand = new RelayCommand(
                 o =>
                 {
-                ErrorMessage = string.Empty;
+                    ErrorMessage = string.Empty;
                     //TODO ENCRYP PASSWORD
                     //TODO quitar esto
                     //Username = "adminJuan";
                     //Password = "admin123";
-                    Username = "vendedorCarlos";
-                    Password = "vendedor123";
+                    //Username = "vendedorCarlos";
+                    //Password = "vendedor123";
                     if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
-                {
-                    ErrorMessage = "Por favor, ingresa usuario y contraseña.";
-                    return;
-                }
+                    {
+                        ErrorMessage = "Por favor, ingresa usuario y contraseña.";
+                        return;
+                    }
 
                     User authenticatedUser = _userRepository.Authenticate(Username, Password);
 

@@ -2,12 +2,7 @@
 using Services.Navigation;
 using AutoImperialDAO.DAO.Interfaces;
 using AutoImperialDAO.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
@@ -15,7 +10,6 @@ using WpfClient.Utilities;
 using System.IO;
 using WpfClient.Utilities.Enum;
 using System.Windows.Media.Imaging;
-using System.Reflection.Metadata;
 
 namespace WpfClient.MVVM.ViewModel
 {

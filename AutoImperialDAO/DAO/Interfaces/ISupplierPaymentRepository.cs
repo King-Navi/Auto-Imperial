@@ -1,9 +1,5 @@
-﻿using AutoImperialDAO.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoImperialDAO.DAO.ModelsDTO;
+using AutoImperialDAO.Models;
 
 namespace AutoImperialDAO.DAO.Interfaces
 {
@@ -12,5 +8,6 @@ namespace AutoImperialDAO.DAO.Interfaces
         Task<bool> RegisterSupplierPaymentAsync(CompraProveedor nuevaCompra);
         Task<List<CompraProveedor>> GetPaymentsBySupplierIdAsync(int supplierId);
         int GetCountVehiclesById(int supplierPaymentId);
+        List<FinancialPurchaseDTO> GetFinancialPurchases(DateTime startDate, DateTime endDate);
     }
 }

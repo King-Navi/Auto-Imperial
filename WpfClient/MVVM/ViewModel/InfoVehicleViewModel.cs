@@ -1,18 +1,12 @@
 ﻿using AutoImperialDAO.DAO.Interfaces;
 using Services.Dialogs;
 using Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using WpfClient.MVVM.Model;
 using WpfClient.Utilities;
 using System.Windows.Media.Imaging;
 using System.IO;
-using WpfClient.Utilities.Enum;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WpfClient.MVVM.ViewModel

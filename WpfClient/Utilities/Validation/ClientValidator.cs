@@ -1,5 +1,4 @@
-﻿using AutoImperialDAO.Models;
-using FluentValidation;
+﻿using FluentValidation;
 using WpfClient.MVVM.Model;
 
 namespace WpfClient.Utilities.Validation

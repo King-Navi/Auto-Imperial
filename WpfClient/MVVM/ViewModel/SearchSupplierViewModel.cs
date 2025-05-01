@@ -2,12 +2,7 @@
 using AutoImperialDAO.Enums;
 using AutoImperialDAO.Models;
 using Services.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfClient.MVVM.Model;
 using WpfClient.Resources.ViewCards;

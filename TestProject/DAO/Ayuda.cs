@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestProject.DAO.Utilities;
+﻿using TestProject.DAO.Utilities;
 using Testcontainers.MsSql;
 using Microsoft.Data.SqlClient;
-using Microsoft.CodeCoverage.Core.Reports.Coverage;
 using AutoImperialDAO.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace TestProject.DAO
 {
