@@ -5,6 +5,7 @@
         Interesado,
         Apartado,
         Vendido,
+        Cancelado,
         Nodisponible
     }
 }

@@ -176,16 +176,16 @@ namespace WpfClient.MVVM.ViewModel
 
             foreach (var reserve in listInterested)
             {
-                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve, this, _reserve));
             }
             foreach (var reserve in listBooked)
             {
-                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve, this, _reserve));
             }
 
             foreach (var reserve in listSelled)
             {
-                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve));
+                ReserveCards.Add(new ReserveCardViewModel(navigation, reserve, this, _reserve));
             }
         }
     }

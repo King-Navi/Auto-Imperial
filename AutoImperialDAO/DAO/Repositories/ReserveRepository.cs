@@ -55,5 +55,23 @@ namespace AutoImperialDAO.DAO.Repositories
                 return null;
             }
         }
+
+        public int DeleteReserve(int idReserva)
+        {
+            try
+            {
+                var reserva = _context.Reserva.Find(idReserva);
+                if (reserva == null)
+                    return ERROR;
+                reserva.estado = ReserveStatusEnum.Cancelado.ToString();
+                _context.SaveChanges();
+                return SUCCESS;
+            }
+            catch (Exception)
+            {
+                return ERROR;
+            }
+        }
     }
+
 }

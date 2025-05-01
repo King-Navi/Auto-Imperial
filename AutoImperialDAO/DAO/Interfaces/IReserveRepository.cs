@@ -8,5 +8,6 @@ namespace AutoImperialDAO.DAO.Interfaces
         Reserva? GetReserveById(int id);
         int CreateReserve(Reserva reserva);
         List<Reserva> GetReservesByIdSeller(int id, ReserveStatusEnum status);
+        int DeleteReserve(int idReserva);
     }
 }
